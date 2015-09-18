@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+<body>
+<div th:fragment="bugsFinished" id="bugsFinished">
+
+  <div class="table-responsive" infinite-scroll="loadMoreFinishedBugs()"
+       infinite-scroll-disabled='busy || !hasNext'
+       infinite-scroll-distance='0'
+       infinite-scroll-container='.bug-list'>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th class="col-sm-1">
+          <a href="" ng-click="predicate='idInProject'; reverse=!reverse">BugId
+            <i class="fa fa-sort" ng-show="predicate != 'id'"></i>
+            <i class="fa fa-sort-desc" ng-show="predicate=='id' &amp;&amp; reverse"></i>
+            <i class="fa fa-sort-asc" ng-show="predicate=='id' &amp;&amp; !reverse"></i></a>
+        </th>
+        <th class="col-sm-1">
+          <a href="" ng-click="predicate='priority'; reverse=!reverse">优先级
+            <i class="fa fa-sort" ng-show="predicate != 'priority'"></i>
+            <i class="fa fa-sort-desc" ng-show="predicate=='priority' &amp;&amp; reverse"></i>
+            <i class="fa fa-sort-asc" ng-show="predicate=='priority' &amp;&amp; !reverse"></i></a>
+        </th>
+        <th>
+          <a href="" ng-click="predicate='title'; reverse=!reverse">Bug 标题
+            <i class="fa fa-sort" ng-show="predicate != 'title'"></i>
+            <i class="fa fa-sort-desc" ng-show="predicate=='title' &amp;&amp; reverse"></i>
+            <i class="fa fa-sort-asc" ng-show="predicate=='title' &amp;&amp; !reverse"></i></a>
+        </th>
+            <th class="col-sm-2">
+              <a href="" ng-click="predicate='dueTime'; reverse=!reverse">截止日期
+                <i class="fa fa-sort" ng-show="predicate != 'dueTime'"></i>
+                <i class="fa fa-sort-desc" ng-show="predicate=='dueTime' &amp;&amp; reverse"></i>
+                <i class="fa fa-sort-asc" ng-show="predicate=='dueTime' &amp;&amp; !reverse"></i></a>
+            </th>
+        <th class="col-sm-1">
+          <a href="" ng-click="predicate='bugAssigneeDTO.name'; reverse=!reverse">责任人
+            <i class="fa fa-sort" ng-show="predicate != 'bugAssigneeDTO.name'"></i>
+            <i class="fa fa-sort-desc" ng-show="predicate=='bugAssigneeDTO.name' &amp;&amp; reverse"></i>
+            <i class="fa fa-sort-asc" ng-show="predicate=='bugAssigneeDTO.name' &amp;&amp; !reverse"></i></a>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="bug in bugFinishedList | filter: filterUser | orderBy:predicate:reverse">
+        <td>{{ bug.idInProject }}</td>
+        <td>{{ priorities[bug.priority-1].desc }}</td>
+        <td class="pointer" ng-click="viewBugDrawer($event,bug)">
+          <a href="" ng-click="viewBugDrawer($event,bug)">{{ bug.title }}</a></td>
+        <td>{{ bug.dueTime | date:'MM-dd' }}</td>
+        <td>{{ bug.bugAssigneeDTO.name }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div ng-show="busy" class="text-center clearfix"><strong><i
+      class="fa fa-spinner fa-spin"></i> 载入数据 ...</strong>
+  </div>
+  <div ng-show="!hasNext &amp;&amp; displayMoreFinishedBugs()" class="text-danger text-center clearfix"><strong>没有更多了...</strong></div>
+
+</div>
+</body>
+
+</html>

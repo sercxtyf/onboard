@@ -1,0 +1,130 @@
+@import "../common/variables";
+// 选择项目
+
+.row{
+  margin-top: 25px;
+}
+
+.panel {
+  .operation a {
+    color: inherit;
+    :first {
+      margin-right: 15px;
+    }
+  }
+}
+
+.archive-list span {
+  margin: 5px;
+}
+
+
+.projects-heading{
+  margin-top: 40px;
+  h2{
+    display: inline;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+
+  hr{
+    margin-top: 20px;
+  }
+
+}
+
+.project-panel{
+  border-radius: 0;
+  border: none;
+  
+
+  .panel-heading{
+    cursor: pointer;
+    border-radius: 0;
+    background: white;
+    border-color: @bluish-border;
+    border-style: solid none none;
+    border-top-width: 4px;
+    font-size: 18px;
+    .panel-title{
+      font-size:20px;
+      font-weight: normal;
+    }
+    .operation{
+      font-size: 16px;
+      vertical-align: middle;
+      line-height: 18px;
+      display: none;
+    }
+
+    &:hover .operation{
+      display: block;
+    }
+
+    &.heading-primary {
+      border-color: @bright-blue;
+    }
+
+    &.heading-warning{
+      border-color: @ob-warning;
+    }
+
+    &.heading-danger{
+      border-color: @ob-danger;
+    }
+
+    &.heading-info{
+      border-color: @dark-blue;
+    }
+
+    &.heading-success{
+      border-color: @green;
+    }
+
+    &.heading-default{
+      border-color: @ob-default;
+    }
+
+  }
+
+  .panel-body{
+    border-top: 1px solid @bluish-border;
+    color: @bluish-text-normal;
+    font-size: 14px;
+  }
+
+  .panel-footer{
+    border-color: @bluish-border;
+    border-radius: 0;
+    background: white;
+    color: #aaa;
+    font-size: 14px;
+  }
+
+  .equal-divider{
+    width: 20%;
+    float: left;
+    cursor: initial;
+    text-align: center;
+
+    &:hover{
+      color: #666;
+    }
+  }
+  
+  .project-description {
+    display: block;
+    padding: 0px;
+    height: 80px;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #4e515e;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 0px;
+    border-radius: 0px;
+  }
+
+}

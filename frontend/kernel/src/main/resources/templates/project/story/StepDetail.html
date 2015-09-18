@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+  <div id="todo-detail" th:fragment="StepDetail" ng-controller="stepCtrl">
+
+    <div name="todoForm" class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <h4 id="title">
+            <div class="row">
+              <a class="todo-recover-link" ng-click="preDelete()">删除</a>
+            </div>
+            <div class="row" title="{{step.content}}">
+              <div class="col-sm-9">
+                <textarea type="text" id="edit_content" name="edit_content" class="form-control" ng-model="step.content" ng-maxlength="200" required="" ng-blur="step.update();edit_content = false" ng-show="edit_content" />
+                <p class="click-link" ng-click="editContent()" ng-show="!edit_content">{{step.content}}</p>
+              </div>
+              <span class="project-todo-id text-muted col-sm-3">#<span ng-bind="step.idInProject"></span></span>
+            </div>
+
+            <div ng-show="todoForm.content.$error.required &amp;&amp; todoForm.content.$dirty" class="alert alert-danger" role="alert">名称不能为空</div>
+            <div ng-show="todoForm.content.$error.maxlength &amp;&amp; todoForm.content.$dirty" class="alert alert-danger" role="alert">最大长度不能超过200</div>
+          </h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="row form-horizontal">
+            <!--状态-->
+            <div class="col-xs-6">
+              <div class="form-group">
+                <span class="col-xs-5 text-muted">状态：</span>
+
+                <div class="col-xs-7 btn-group">
+                  <span class="label label-default dropdown-toggle pointer" data-toggle="dropdown"> {{getStatus(step).name}} </span>
+                  <ul class="dropdown-menu" role="menu">
+                    <li ng-repeat="status in todoStatuses | filter:statusFilter"><a class="pointer" ng-click="step.updateIterationStatus(status.value)"> {{status.name}} </a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- 截止日期 -->
+            <div class="col-xs-6 ob-date">
+              <div class="form-group">
+                <span class="col-xs-5 text-muted">截止日期：</span>
+
+                <div class="col-xs-7">
+                  <input type="hidden" class="form-control" datepicker-popup="yyyy-MM-dd" ng-change="step.update()" ng-model="step.dueDate" is-open="dtpOpened" min-date="todoDueDateMin" show-button-bar="false" /> <span class="pointer" ng-click="openDTP($event)" ng-show="step.status != 'closed'"> <span>{{ step.dueDate | date: 'yyyy-MM-dd'}}</span>
+                  </span> <span ng-show="step.status == 'closed'"> <span>{{ step.dueDate | date: 'yyyy-MM-dd'}}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 执行人 -->
+            <div id="user" class="col-xs-6">
+              <div class="form-group">
+                <span class="col-xs-5 text-muted">执行人：</span>
+
+                <div class="col-xs-7 btn-group">
+                  <span class="pointer todo-user" data-toggle="dropdown" ng-click="getProjectUsers(false, step.projectId, step.companyId)" ng-class="{pointer : step.status != 'closed'}"> <img ng-src="{{step.assignee.avatarUrl}}" /> <span class="username" ng-bind="step.assignee.name"></span>
+                  </span>
+                  <div class="pull-right" style="display:inline-block">
+                    <i class="fa fa-star" style="line-height: 25px; cursor: pointer" title="设置为推荐责任人-{{recommend.name}}" ng-click="step.assignee=recommend;step.assigneeId=recommend.id;step.update()">推荐:{{recommend.name}}</i>
+                  </div>
+
+                  <ul class="dropdown-menu users" role="menu" ng-show="step.status != 'closed'">
+                    <li ng-repeat="user in projectUsers"><a class="pointer" ng-click="step.assignee=user;step.assigneeId=user.id;step.update()"> <img ng-src="{{user.avatarUrl}}" /> {{user.name}}
+                    </a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- 执行人 -->
+            <div id="storyName" class="col-xs-6">
+              <div class="form-group">
+                <span class="col-xs-5 text-muted">所在需求：</span>
+
+                <div class="col-xs-7 btn-group">
+                  <span class="story-content click-link ng-binding ng-isolate-scope" open-drawer="story" open-drawer-type="'story'" open-drawer-params="{id:step.attachId}" open-drawer-data="{projectId:step.projectId,companyId:step.companyId}">{{step.attachName}}</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="tabset" th:replace="tab/TabSet :: tabset('todoTabs')"></div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+</body>
+
+</html>

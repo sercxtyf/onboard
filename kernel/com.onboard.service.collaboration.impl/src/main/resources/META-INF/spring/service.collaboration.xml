@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd http://www.springframework.org/schema/osgi-compendium http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd
+            http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+  <!-- 支持Bean的自动装配 -->
+  <context:component-scan base-package="com.onboard.service.collaboration" />
+
+  <osgix:cm-properties id="osgiProps" persistent-id="onboard"/>
+  <context:property-placeholder properties-ref="osgiProps"/>
+
+  <!-- enable transaction declaration with annotations -->
+  <tx:annotation-driven transaction-manager="transactionManager" order="2"/>
+
+  <task:executor id="executor" pool-size="5" />
+  <task:scheduler id="scheduler" pool-size="10" />
+  <task:annotation-driven executor="executor" scheduler="scheduler" />
+  
+  <!-- turn on declarative caching -->
+  <cache:annotation-driven />
+  <!-- declare Redis Cache Manager -->
+  <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager" c:template-ref="redisTemplate"/>
+  
+</beans>

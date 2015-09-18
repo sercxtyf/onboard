@@ -1,0 +1,37 @@
+
+.content {
+  margin-top: 25px;
+}
+#main-header {
+  margin-bottom: 30px;
+}
+#event-popover {
+  min-width: 250px;
+  .popover-title {
+    input {
+      border: none;
+      background: inherit;
+    }
+  }
+  .popover-content {
+    .description {
+      width: 100%;
+      resize: none;
+      border: none;
+    }
+    .alert {
+      margin-bottom: 0;
+    }
+  }
+}
+#todo-popover {
+  #event-popover;
+  .popover-content {
+    .assignee {
+      width: 100%;
+    }
+    .deadline {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('申请试用')"></head>
+
+<body id="login">
+
+<div id="trialBody" class="container">
+  <div th:replace="fragments/Header :: header"></div>
+
+  <div class="trial-form">
+    <form action="/trial" method="POST" role="form">
+      <fieldset>
+        <input name="contactName" class="form-control" type="text" placeholder="您的名字"
+               required="" pattern=".{1,255}"/>
+        <input name="contactEmail" class="form-control" type="email" placeholder="电子邮件"
+               required="" pattern=".{1,255}"/>
+        <input name="teamName" class="form-control" type="text" placeholder="团队名称"
+               required="" pattern=".{1,255}"/>
+        <div class="select">
+          <select name="teamSize" class="form-control">
+            <option value="">您的团队规模</option>
+            <option value="1-10">10人以下</option>
+            <option value="10-50">10-50人</option>
+            <option value="50-100">50-100人</option>
+            <option value="100-500">100-500人</option>
+            <option value="500 more">500人以上</option>
+          </select>
+        </div>
+      </fieldset>
+      <fieldset>
+        <textarea class="form-control" rows="10" cols="25" name="description"
+                  placeholder="为了获得更好的服务，希望您能介绍自己的团队" maxlength="4000"></textarea>
+      </fieldset>
+      <fieldset>
+        <input class="btn btn-large btn-success" type="submit" value="提交申请"/>
+      </fieldset>
+    </form>
+  </div>
+</div>
+</body>
+</html>

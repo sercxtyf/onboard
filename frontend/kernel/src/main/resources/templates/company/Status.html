@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="${headTemplateName} :: headTag('数据')">
+  <title>数据</title>
+</head>
+
+<body>
+
+  <div th:fragment="status">
+    <div class="container" id="status">
+      <div class="date">
+        <li class="dropdown date-text">
+          <a href="#" class="dropdown-toggle account" data-toggle="dropdown">
+            <h2 title="点击选择时间段">{{dateText}}</h2>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a ng-click="changeDate(0)">今天</a>
+            </li>
+            <li><a ng-click="changeDate(1)">昨天</a>
+            </li>
+            <li><a ng-click="changeDate(2)">前一周</a>
+            </li>
+            <li><a ng-click="changeDate(3)">上个月</a>
+            </li>
+            <li><a ng-click="changeDate(4)">上个季度</a>
+            </li>
+            <li><a ng-click="changeDate(5)">过去半年</a>
+            </li>
+          </ul>
+        </li>
+        <div class="date-range">
+          <a class="click-link" ng-click="updateTimeRangeForm.open = !updateTimeRangeForm.open" dropdown-form-toggle=""> {{startTime |
+              date:'yyyy-MM-dd'}} &nbsp;<span>00:00</span> &nbsp; ~ &nbsp; {{endTime |
+              date:'yyyy-MM-dd'}}&nbsp;<span>23:59</span>&nbsp;<span class="fa fa-pencil"></span>
+           </a>
+
+          <form class="ballon updateTimeRangeForm dropdown-form" name="updateTimeRangeForm" id="updateTimeRangeForm" dropdown-form="" is-open="updateTimeRangeForm.open">
+            <p class="input-group ob-date">
+              <input type="text" class="form-control click-link" datepicker-popup="yyyy-MM-dd" ng-click="startTimeCanlendar = !startTimeCanlendar" ng-model="startTime" is-open="startTimeCanlendar" close-text="关闭" current-text="今天" readonly="" title="选择开始日期" />
+            </p>
+
+            <p class="input-group ob-date">
+              <input type="text" class="form-control click-link" datepicker-popup="yyyy-MM-dd" ng-click="endTimeCanlendar = !endTimeCanlendar" ng-model="endTime" is-open="endTimeCanlendar" close-text="关闭" current-text="今天" readonly="" title="选择截止日期" />
+            </p>
+
+            <div class="submit">
+              <input type="submit" value="确定" class="btn btn-primary" ng-click="updateTimeRange();hideTimeForm();" />
+              <a class="btn btn-default btn-cancel click-link" ng-click="hideTimeForm()">取消</a>
+            </div>
+          </form>
+        </div>
+        <div class="options">
+          <select ng-options="option.id as option.name for option in dataOptions" ng-model="dataType" ng-change="changeType()" />
+          <select ng-options="option.id as option.name for option in projectOptions" ng-model="currentProjectId" ng-change="changeProject()" />
+        </div>
+      </div>
+      <div class="status-body">
+        <div class="charts">
+          <div class="pieChart"></div>
+
+          <div class="selected-name">
+            <h4 class="text-center"><strong>{{currentUserName()}}</strong></h4>
+            <br />
+          </div>
+          <div ng-show="showLine" class="chart lineChart"></div>
+          <brick ng-hide="showLine" class="chart punchcard" values="punchCard" labels="labels"></brick>
+          <p class="text-right">
+            提示：点击数据点，可在右侧显示数据详情
+          </p>
+
+          <i class="changeGraph fa fa-exchange fa-fw" ng-click="changeGraph()" title="切换图表"></i>
+        </div>
+        <div class="details" ng-class="{'blank' : isBlank}">
+          <p class="text-center" ng-show="isBlank">
+            所选数据集为空
+          </p>
+          <div class="detail-wrapper" ng-show="!isBlank">
+            <div class="detail-item" ng-repeat="item in details">
+              <span>{{item.timestamp | date:'MM-dd hh:mm'}}</span>
+              <span class="name" ng-if="dataType==0">{{item.creatorName}}</span>
+              <span class="name" ng-if="dataType==1">{{item.assigneeName}}</span>
+              <span class="name" ng-if="dataType==2 || dataType==3">{{item.userName}}</span> 在
+              <span>{{item.projectName}}</span>中
+              <span ng-if="dataType==0">{{item.subject}}</span>
+              <span ng-if="item.type=='step' || item.type=='todo'">完成了任务</span>
+              <span ng-if="item.type=='bug'">修复了Bug</span>
+              <span ng-if="dataType==2 || dataType==3">提交了代码</span>
+              <span class="content" ng-if="dataType==0">{{item.target}}</span>
+              <span class="content todo" ng-if="item.type=='step' || item.type=='todo'" ng-click="gotoTodo(item)">{{item.content}}</span>
+              <span class="content todo" ng-if="item.type=='bug'" ng-click="gotoTodo(item)">{{item.title}}</span>
+              <a class="content commit btn-default btn-xs" ng-if="dataType==2 || dataType==3" ng-click="gotoCommit(item)">{{item.id | limitTo: 7}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="contribution"></div>
+    </div>
+  </div>
+</body>
+
+</html>

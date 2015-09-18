@@ -1,0 +1,67 @@
+.drawer{
+  display: block;
+  position: absolute;
+  overflow-y: auto;
+  left: auto;
+  height: 100%;
+  width: 0;
+  padding: 0;
+  transition: transform .3s ease-out, width .3s ease-out;;
+  transform: translate3d(100%,0,0); /* go out*/
+}
+
+.drawer.in{
+  display: block;
+  width: 50%;
+  transform: translate3d(0,0,0); /* recover */
+  box-shadow: -0px 0px 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.drawer .modal-dialog{
+  margin:0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  -o-transform: none;
+  -ms-transform: none;
+  -webkit-transform: none;
+  position: absolute;
+}
+
+.drawer .modal-dialog .modal-content{
+  border-radius: 0;
+  overflow: auto;
+  height: 100%;
+}
+
+.drawer .modal-backdrop{
+  top:auto;
+  opacity: 0
+}
+
+.drawer.right .modal-footer{
+  text-align: left;
+}
+.drawer.left .modal-footer{
+  text-align: right;
+}
+
+
+.drawer.in.drawer-fl{
+  width: 100%;
+}
+.drawer.in.drawer-xl{
+  width: 90%;
+}
+.drawer.in.drawer-lg{
+  width: 80%;
+}
+.drawer.in.drawer-md{
+  width: 50%;
+}
+.drawer.in.drawer-sm{
+  width: 30%;
+}
+.drawer.in.drawer-xs{
+  width: 20%;
+}

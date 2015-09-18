@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+  <div class="" data-placement="right" id="newDiscussion" th:fragment="newDiscussion"  ng-controller="discussionEditCtrl">
+     <form name="newDiscussionForm" class="modal-dialog" ng-submit="submitNewDiscussion()">
+       <div class="modal-content">
+        <div class="modal-header clearfix">
+          <h3 class="pull-left text-info" ng-show="edit"><strong>修改讨论</strong></h3>
+          <h3 class="pull-left text-info" ng-hide="edit"><strong>发起新的讨论</strong></h3>
+          <button type="button" class="close pull-right" data-dismiss="drawer"><span aria-hidden="true">
+            <i class="fa fa-close fa-lg"></i>
+          </span><span class="sr-only">Close</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="subject">主题</label> 
+            <input type="text" name="subject" ng-model="newDiscussion.subject" class="form-control" required=""
+              ng-maxlength="100" placeholder="请输入1-100个字"/>
+            <div ng-show="newDiscussionForm.subject.$error.required &amp;&amp; newDiscussionForm.subject.$dirty"
+                    class="alert alert-danger" role="alert">名称不能为空</div>
+            <div ng-show="newDiscussionForm.subject.$error.maxlength &amp;&amp; newDiscussionForm.subject.$dirty"
+                    class="alert alert-danger" role="alert">最大长度不能超过100</div>
+          </div>
+          <div>
+            <label for="content">内容</label> 
+            <div id="discussion-content" name="content" placeholder="请输入讨论内容..." ng-model="newDiscussion.content" class="form-control"></div>
+          </div>
+          <div class="form-group">
+            <div class="file-drop-zone" ng-include="'fileDropZone.html'"></div>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-info" ng-click="toggleSubscribers()">设置提醒</button>
+          </div>
+          <div class="form-group">
+            <div class="subscribers" ng-show="showSubscribers"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" ng-disabled="newDiscussionForm.subject.$error.maxlength || submitted">提交</button>
+          <button type="button" class="btn btn-default" data-dismiss="drawer" ng-click="reset()">取消</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </form>
+    <!-- /.modal-dialog -->
+  </div>
+</body>
+
+</html>

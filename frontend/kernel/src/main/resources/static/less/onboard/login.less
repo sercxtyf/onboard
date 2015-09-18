@@ -1,0 +1,623 @@
+// 登录前的页面：包括登录、注册、忘记密码等
+@import "common/variables";
+@import "common/mixins";
+
+& {
+  background: white;
+}
+
+div.logo {
+  h2 {
+    margin-left: 15px;
+  }
+}
+
+.well {
+  .input-group {
+    margin-bottom: 20px;
+    .input {
+      max-width: 400px;
+    }
+  }
+  .form-reset {
+    max-width: 400px;
+  }
+  .forget-passwd-send-email{
+    color:white;
+  }
+}
+
+#trialBody {
+  .trial-form {
+    margin: 0 auto;
+    width: 600px;
+    form {
+      background-color: #f4f4f5;
+      border-radius: 4px;
+      padding: 40px;
+      margin: 60px 0;
+      font-size: 16px;
+
+      input[type="text"], input[type="email"] {
+        padding: 20px;
+        border: 1px #bbb solid;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        box-shadow: none;
+      }
+
+      input[type="submit"] {
+        padding: 10px 20px;
+        margin-top: 20px;
+      }
+
+      .select {
+        background: #FFFFFF;
+        margin-bottom: 20px;
+        line-height: 42px;
+        height: 42px;
+        overflow: hidden;
+        border: 1px #bbb solid;
+        border-radius: 4px;
+      }
+
+      select {
+        background: transparent;
+        height: 42px;
+        margin-bottom: 30px;
+        padding: 10px 20px;
+        border: none;
+        -webkit-appearance: none;
+      }
+
+      textarea {
+        padding: 10px 20px;
+      }
+    }
+  }
+}
+
+.bg-slideshow,
+.bg-slideshow:after {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 0;
+}
+
+.bg-slideshow:after {
+  content: '';
+  // background: transparent url(../../img/login-bg/pattern.png) repeat top left;
+}
+
+.bg-slideshow li{
+  list-style: none;
+}
+
+.bg-slideshow li span {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  color: transparent;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: none;
+  opacity: 0;
+  z-index: 0;
+  -webkit-backface-visibility: hidden;
+  .animation(imageAnimation 30s linear infinite 0s);
+}
+
+.bg-slideshow li:nth-child(1) span {
+  background-image: url(/static/img/login-bg/sail.jpg)
+}
+.bg-slideshow li:nth-child(2) span {
+  background-image: url(/static/img/login-bg/boarding.jpg);
+  .animation-delay(6s);
+}
+.bg-slideshow li:nth-child(3) span {
+  background-image: url(/static/img/login-bg/tic-tac-toe.jpg);
+  .animation-delay(12s);
+}
+.bg-slideshow li:nth-child(4) span {
+  background-image: url(/static/img/login-bg/jellyfish.jpg);
+  .animation-delay(18s);
+}
+.bg-slideshow li:nth-child(5) span {
+  background-image: url(/static/img/login-bg/city.jpg);
+  .animation-delay(24s);
+}
+
+/* Animation for the slideshow images */
+@-webkit-keyframes imageAnimation {
+  0% { opacity: 0;
+    -webkit-animation-timing-function: ease-in; }
+  8% {
+    opacity: 1;
+    -webkit-transform: scale(1.05);
+    -webkit-animation-timing-function: ease-out; }
+  20% {
+    opacity: 1;
+    -webkit-transform: scale(1.1);}
+  25% {
+    opacity: 0;
+    -webkit-transform: scale(1.1); }
+  100% { opacity: 0 }
+}
+@-moz-keyframes imageAnimation {
+  0% { opacity: 0;
+    -moz-animation-timing-function: ease-in; }
+  8% {
+    opacity: 1;
+    -moz-transform: scale(1.05);
+    -moz-animation-timing-function: ease-out; }
+  20% {
+    opacity: 1;
+    -moz-transform: scale(1.1);}
+  25% {
+    opacity: 0;
+    -moz-transform: scale(1.1); }
+  100% { opacity: 0 }
+}
+@-o-keyframes imageAnimation {
+  0% { opacity: 0;
+    -o-animation-timing-function: ease-in; }
+  8% {
+    opacity: 1;
+    -o-transform: scale(1.05);
+    -o-animation-timing-function: ease-out; }
+  20% {
+    opacity: 1;
+    -o-transform: scale(1.1);}
+  25% {
+    opacity: 0;
+    -o-transform: scale(1.1); }
+  100% { opacity: 0 }
+}
+@-ms-keyframes imageAnimation {
+  0% { opacity: 0;
+    -ms-animation-timing-function: ease-in; }
+  8% {
+    opacity: 1;
+    -ms-transform: scale(1.05);
+    -ms-animation-timing-function: ease-out; }
+  20% {
+    opacity: 1;
+    -ms-transform: scale(1.1);}
+  25% {
+    opacity: 0;
+    -ms-transform: scale(1.1); }
+  100% { opacity: 0 }
+}
+@keyframes imageAnimation {
+  0% { opacity: 0;
+    animation-timing-function: ease-in; }
+  8% {
+    opacity: 1;
+    transform: scale(1.05);
+    animation-timing-function: ease-out; }
+  20% {
+    opacity: 1;
+    transform: scale(1.1);}
+  25% {
+    opacity: 0;
+    transform: scale(1.1); }
+  100% { opacity: 0 }
+}
+
+
+.login-modal{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .login-modal-dialog{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 340px;
+    //height: 320px;
+    margin-top: -160px;
+    margin-left: -170px;
+    border-radius: 7px;
+    background-color: white;
+    padding: 32px 46px 55px 46px;
+    opacity: .9;
+    .box-shadow(0 0 18px rgba(0, 0, 0, .5));
+    .login-modal-dialog-heading{
+      text-align: center;
+      padding-bottom: 30px;
+    }
+    .login-modal-dialog-form{
+
+    }
+
+    .login-third-party{
+      margin-top: 8px;
+      width:100%;
+      .third-href{
+        width:100%;
+        height:100%;
+      }
+
+      .thirdpart-signin-span{
+        padding-left: 118px;
+        font-size: 14px;
+        position: relative;
+        padding-top: 4px;
+        float: left;
+      }
+      a{
+        color:black;
+      }
+    }
+
+    .alert{
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 335px;
+      margin: 0;
+      border: none;
+      border-radius: 7px;
+      background-color: rgba(0, 0, 0, 0.33);
+      color: white;
+      text-align: center;
+      font-size: 14px;
+      padding: 14px 18px;
+      button.close{
+        text-shadow: none;
+        right: 0;
+        color: #FFF;
+      }
+    }
+  }
+}
+
+.signup-modal{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .signup-modal-dialog{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 495px;
+    margin-top: -235px;
+    margin-left: -250px;
+    border-radius: 7px;
+    background-color: white;
+    padding: 32px 46px;
+    opacity: .9;
+    .box-shadow(0 0 18px rgba(0, 0, 0, .5));
+    .signup-modal-dialog-heading{
+      text-align: center;
+      padding-bottom: 30px;
+    }
+    .signup-modal-dialog-form{
+
+    }
+
+    .signup-third-party{
+      margin-top: 8px;
+      width:100%;
+      .signup-third-href{
+        width:100%;
+        height:100%;
+      }
+      .thirdpart-signup-span{
+        padding-left: 270px;
+        font-size: 14px;
+        position: relative;
+        padding-top: 4px;
+        float: left;
+      }
+      a{
+        color:black;
+      }
+    }
+
+    .alert{
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 498px;
+      margin: 0;
+      border: none;
+      border-radius: 7px;
+      background-color: rgba(0, 0, 0, 0.33);
+      color: white;
+      text-align: center;
+      font-size: 14px;
+      padding: 14px 18px;
+      button.close{
+        text-shadow: none;
+        right: 0;
+        color: #FFF;
+      }
+    }
+  }
+}
+
+.thirdpart-signup-modal{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .thirdpart-signup-modal-dialog {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    width: 800px;
+    //height: 495px;
+    margin-top: -235px;
+    margin-left: -250px;
+    border-radius: 7px;
+    background-color: white;
+    padding: 32px 46px;
+    opacity: .9;
+    .box-shadow(0 0 18px rgba(0, 0, 0, .5));
+    .thirdpart-signup-modal-dialog-heading {
+      text-align: center;
+      padding-bottom: 30px;
+    }
+    .thirdpart-signup-modal-dialog-form {
+      width: 50%;
+      border-right: solid 1px black;
+      padding-right: 24px;
+    }
+    .thirdpart-bind-modal-dialog-form {
+      position: relative;
+      float: right;
+      margin-top: -173px;
+      width: 47%;
+      margin-right: -4px;
+    }
+
+    .band-email{
+      margin-top: -45px;
+      margin-bottom: 24px;
+      text-align: center;
+      font-size: 15px;
+      color: limegreen;
+    }
+    .alert{
+      position: absolute;
+      width: 50%;
+      left: 0;
+      top: 380px;
+      margin: 0;
+      border: none;
+      border-radius: 7px;
+      background-color: rgba(0, 0, 0, 0.33);
+      color: white;
+      text-align: center;
+      font-size: 14px;
+      padding: 14px 18px;
+      button.close{
+        text-shadow: none;
+        right: 0;
+        color: #FFF;
+      }
+    }
+  }
+}
+
+.resetPassword-modal{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .resetPassword-modal-dialog{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 310px;
+    margin-top: -160px;
+    margin-left: -200px;
+    border-radius: 7px;
+    background-color: white;
+    padding: 32px 46px;
+    opacity: .9;
+    .box-shadow(0 0 18px rgba(0, 0, 0, .5));
+    .resetPassword-modal-dialog-heading{
+      text-align: center;
+      padding-bottom: 0px;
+    }
+    .resetPassword-modal-dialog-form{
+
+    }
+
+    .alert{
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 325px;
+      margin: 0;
+      border: none;
+      border-radius: 7px;
+      background-color: rgba(0, 0, 0, 0.33);
+      color: white;
+      text-align: center;
+      font-size: 14px;
+      padding: 14px 18px;
+      button.close{
+        text-shadow: none;
+        right: 0;
+        color: #FFF;
+      }
+    }
+  }
+}
+
+input:-webkit-autofill {
+  background-color: white !important;
+  color: #666;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"]{
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #fff;
+  line-height: 20px;
+  padding: 6px 6px;
+  border: 1px solid #ddd;
+  outline: 0;
+  border-radius: 0px;
+  color: #666;
+  font-size: 14px;
+  font-weight: normal;
+  .box-shadow(none);
+  &:focus{
+    border-color: @bright-blue;
+  }
+}
+
+.ob-input-w-icon{
+  input{
+    padding-left: 33px;
+  }
+
+  i{
+    color: #ccc;
+    display: block;
+    position: absolute;
+    z-index: 1;
+    margin: 9px 2px 4px 10px;
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+    text-align: center;
+  }
+}
+
+
+.ob-input-checkbox{
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: white;
+  border: 1px solid #ccc;
+  margin: -2px 0 0 0;
+  padding: 10px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  vertical-align: middle;
+
+  &:hover{
+    border: 1px solid @bright-blue;
+  }
+
+  &:focus{
+    outline:none;
+  }
+
+  &:checked {
+
+    &:active{
+
+    }
+    &:after {
+      content: "";
+      background-image:url(/static/img/ob-input-checkbox.png);
+      position: absolute;
+      top: 0px;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background-position: -1px -1px; //img size: 22x22; container size 20x20(padding 10px, 1px border not included)
+    }
+  }
+
+  &:disabled{
+
+    &:after {
+      content: "";
+      background-image:url(/static/img/ob-input-checkbox.png);
+      position: absolute;
+      top: 0px;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background-position: -25px -1px; // 22 + 2 + 22
+    }
+
+  }
+}
+
+//下次自动登录
+.ob-input-checkbox+label{
+  color: #666;
+  margin: 0;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+//忘记密码
+.ob-input-checkbox+label+a{
+  line-height: 22px;
+  font-weight: bold;
+}
+
+a{
+  color: @bright-blue;
+  &:hover{
+    color: darken(@bright-blue, 10%);
+  }
+}
+//注册页面
+.form-sign{
+  .fa{
+    width:15px;
+    height:18px;
+  }
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:cache="http://www.springframework.org/schema/cache"
+  xmlns:c="http://www.springframework.org/schema/c"
+  xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                                 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                                 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                                http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+  <context:component-scan base-package="com.onboard.web.api">
+    <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+  </context:component-scan>
+  <beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+  <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" p:maxUploadSize="33554432" />
+  
+  <cache:annotation-driven />
+</beans:beans>

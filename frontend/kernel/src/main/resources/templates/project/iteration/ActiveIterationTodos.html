@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+</head>
+<body>
+
+<div th:fragment="activeIterationTodos" id="activeIterationTodos" ng-controller="activeIterationTodosCtrl">
+
+    <div class="todo-panel panel-s panel-fluid-height" ng-repeat="todoStatus in allTodoStatus" ng-show="todoStatus.active">
+      <div class="todo-panel-heading">
+          <h5 class="heading-inline">{{todoStatus.name}}</h5>
+          <strong class="text-muted pull-right">{{getTodosWithFilter(activeIteration.statusTodos[todoStatus.value]).length}} 个任务</strong>
+      </div>
+
+      <div class="todo-panel-body">
+      <!-- ng-class="{'all-completed': todolist.allCompleted(), 'is-empty': todolist.isEmpty()}" -->
+        <!-- <div class="all-finished" ng-show="!todolist.hasOpenTodos()"></div> -->
+        <ul class="todo-list todo-drag-body" ui-sortable="sortableOptions"  ng-controller="todoItemCtrl"
+          ng-model="activeIteration.statusTodos[todoStatus.value]" data-status="{{todoStatus.value}}">
+            <!-- insert todo item here -->
+            <li th:replace="project/common/TodosMini :: todos('activeIteration.statusTodos[todoStatus.value]', 'filterTodo')"></li>
+        </ul>
+      </div>  
+    </div>
+
+<!--         <div class="todo-panel one-status" ng-repeat="todoStatus in allTodoStatus" ng-show="todoStatus.active">
+            <div class="todo-panel-heading">
+                <h5>{{todoStatus.name}}</h5>
+            </div>
+            <div class="todo-panel-body">
+                <ul class="todo-list todo-drag-body" ui-sortable="sortableOptions" ng-model="activeIteration.statusTodos[todoStatus.value]" data-status="{{todoStatus.value}}">
+                    <li class="todo-item todo-active"  open-drawer="todo" open-drawer-params="{id: todo.id}"
+                        ng-repeat="todo in activeIteration.statusTodos[todoStatus.value]"
+                        ng-class="{'todo-completed todo-disabled' : todo.status == 'closed', 
+                                                    'todo-active' : todo.status != 'closed'}">
+                        <button class="todo-checkbox ob-checkbox" ng-click="todo.closeOrOpen();"
+                           ng-class="{'ob-checkbox-normal': todo.status != 'closed', 'ob-checkbox-checked': todo.status == 'closed'}" >
+                        </button>                        
+                        <span class="todo-type-icons">
+                            <i class="fa" ng-class="{'fa-bars': todo.todoType == 'task',
+                                                 'fa-bookmark': todo.todoType == 'story',
+                                                      'fa-bug': todo.todoType == 'bug' }"></i>
+                        </span>
+
+                        <span class="todo-description">
+                            <span class="project-todo-id">#{{todo.projectTodoId}}</span>
+                            {{todo.content}}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+        </div> -->
+
+</div>
+</body>
+</html>

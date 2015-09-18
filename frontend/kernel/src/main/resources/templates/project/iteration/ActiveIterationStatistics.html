@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+</head>
+<body>
+
+<div th:fragment="activeIterationStatistics"  id="activeIterationStatistics" ng-controller="activeIterationStatisticsCtrl">
+
+  <div class="chart-container">
+    <!-- graph heading -->
+    <!-- <div class="graph-heading">
+ 
+      <div class="graph-title">
+        <img ng-src="{{ user.avatarUrl }}" class="img-circle"></img>
+        <h4>
+          {{ user.name }}
+        </h4>
+      </div>
+    </div> -->
+    
+    <div id="burnDownChart" class="d3-chart"></div>
+          
+  </div>
+</div>
+</body>
+</html>

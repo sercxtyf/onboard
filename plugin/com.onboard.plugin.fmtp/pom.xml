@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <groupId>com.onboard</groupId>
+    <artifactId>com.onboard.parent</artifactId>
+    <version>3.0.0-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>com.onboard.plugin.smtp</artifactId>
+  <name>com.onboard.plugin.smtp</name>
+  <description>com.onboard.plugin.smtp</description>
+  <packaging>bundle</packaging>
+
+  <dependencies>
+  
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.beans</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.service.common</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <version>2.5.0</version>
+        <configuration>
+          <manifestLocation>src/main/resources/META-INF</manifestLocation>
+          <instructions>
+            <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
+            <Bundle-Version>${project.version}</Bundle-Version>
+            <Import-Bundle>
+                org.springframework.aop;bundle-version="3.1",
+                com.springsource.org.aopalliance
+            </Import-Bundle>
+            <Import-Package>
+                org.springframework.scheduling.config,
+                org.springframework.scheduling.concurrent,
+                *
+            </Import-Package>
+            <Private-Package>
+                com.onboard.service.email.smtp
+            </Private-Package>
+          </instructions>
+        </configuration>
+      </plugin>  
+    </plugins>
+  </build>
+
+</project>

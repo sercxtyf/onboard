@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="statistics" id="statistics">
+
+  <div class="center-panel-nav">
+    <!-- <div class="center-panel-nav-shadow"></div> -->
+     <!--a class="toggle-sidebar-btn btn btn-primary" href="#" ng-click="toggleSidebar()"><i class="fa fa-bars"></i></a-->
+
+    <h3>
+      <span>统计</span>
+      <small>
+        <span>——对您项目中的各项数据进行统计和分析，挖掘有用的信息。</span>
+      </small>
+    </h3>
+    <ul class="second-nav-bar">
+      <li class="second-nav-item" ui-sref-active="active"><a ui-sref="company.project.statistics.group">活动统计</a></li>
+      <li class="second-nav-item" ui-sref-active="active"><a ui-sref="company.project.statistics.todo">任务统计</a></li>
+    </ul>
+  </div>    
+
+    <div class="gray-bg center-panel-content">
+
+        <div class="stats-tab-bg" ui-view="">
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

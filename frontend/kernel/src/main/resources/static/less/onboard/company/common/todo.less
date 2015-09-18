@@ -1,0 +1,477 @@
+@import "../../common/variables.less";
+@import "../../common/mixins.less";
+
+.todo-panel {
+  border-top: 4px solid @panel-border-color;
+  vertical-align: top;
+  margin: 0px 0px 15px 0px;
+  width: 100%;
+  clear: both;
+  // .box-shadow(0 1px 2px rgba(0,0,0,.1));
+}
+
+
+// for use in iteration kanban
+.todo-panel{
+  &.panel-s{
+    width: 320px;
+  }
+
+  &.panel-fluid-height{
+    height: 100%;
+    position: relative;
+
+    .todo-panel-body{
+      position: absolute;
+      top: 40px;
+      right: 0;
+      left: 0;
+      bottom: 0;
+
+      ul.todo-list{
+        max-height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+    }
+
+  }
+}
+
+// for use in created & completed iterations
+.todo-item.mini-todo{
+  min-height: 40px;
+  .todo-checkbox{
+    top: 9px;
+    left: 16px;
+  }
+
+//  .todo-info{
+//    padding: 0;
+//    //0 10px 0 40px;
+//  }
+  .todo-description{
+    line-height: 25px;
+    margin: 0;
+  }
+  .project-todo-id{
+
+  }
+  .todo-labels{
+    display: none;
+  }
+  .todo-type-icons{
+    display: inline; // put inside todo-description
+  }
+  .todo-title{
+    white-space: normal;
+  }
+  .todo-person{
+    display: none;
+  }
+
+}
+
+
+// add to todo-panel when collapsed
+// 1px solid @panel-border-color
+.border-bottom {
+  border-bottom: solid;
+}
+.border-top {
+  border-top: solid;
+}
+
+.todo-panel-heading, .todo-panel-body{
+  border-width: @panel-border-width;
+  border-color: @panel-border-color;
+}
+.todo-panel-body{
+  // border-style: none solid solid solid;
+}
+.todo-panel-heading{
+  // border-style: none solid solid solid;
+}
+
+.todo-panel-body{
+  position: relative;
+  background: @panel-body-bg;
+  
+  &.is-empty::before, &.all-completed::before{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    text-align: center;
+    line-height: 60px;
+    font-size: 22px;
+    color: #CCCCCC;
+  }
+  
+  &.is-empty::before{
+    content:"该列表为空";
+  }
+
+  &.all-completed::before{
+    content:"所有任务已完成";
+  }  
+
+}
+
+.todo-panel-heading {
+  background: white;
+  position: relative;
+  padding: 10px 15px 10px 20px;
+  height: 40px;
+  border-bottom: 1px solid @panel-border-color;
+
+  &:hover, &:focus, &:active{
+    background: darken(@panel-heading-bg, 5%);
+  }
+
+  &:focus{
+    outline: 5px auto -webkit-focus-ring-color;
+  }
+
+  h5 {
+    // display: inline-block;
+    // vertical-align: middle;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0px;
+    padding: 0 120px 0 0;
+    cursor: pointer;
+    line-height: 20px;
+  }
+
+  &:hover .todo-panel-options{
+    display: block;
+  }
+}
+
+.todo-panel-heading h5.heading-inline{
+  display: inline;
+  padding: 0;
+}
+
+.todo-panel-options {
+  font-size: 16px;
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  a {
+    margin-left: 10px;
+    color: #7C7C7C;
+    &:hover{
+      color: black;
+    }
+
+    .fa{
+      padding: 3px;
+    }
+  }
+
+  .dropdown-menu {
+    min-width: 60px;
+    border-radius: 0;
+    > li > a {
+      padding: 4px 10px;
+      margin: 4px;
+      line-height: 25px;
+      font-size: 12px;
+      color: inherit;
+      font-weight: normal;
+    }
+  }
+}
+
+.todo-list {
+  // font-size: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  min-height: 60px;//very important for sorting betw columns
+  .todo-item:first-child{
+    border-top: none;
+  }
+
+  .todo-item:only-of-type, .todo-item:last-child {
+    border-bottom-style: solid;
+  }
+}
+
+//todo-item; will cause problem in the size of its placeholder if using .todo-item here
+.todo-item {
+  min-height: 60px;
+  position: relative;
+  background: @todo-item-bg;
+  border-style: solid none none none;
+  border-width: @todo-item-border-width;
+  border-color: @todo-item-border-color;
+  padding: 6px 12px;
+  word-wrap: break-word; // in case of long urls in the description
+
+  &:hover::before{
+    border-left: 4px solid @todo-item-border-color;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: ''; //musthave
+    pointer-events: none;
+    // z-index: 1;
+    display: block;
+
+    // background: darken(@todo-item-bg, 5%);
+  }
+
+  //checkbox
+  .todo-checkbox {
+    // color: #387DB8;
+    position: absolute;
+    top: 19px;
+    left: 20px;
+  }
+
+  > .todo-info{
+    // margin: 0px 50px;
+    padding: 0 50px;
+    width: 100%;
+    margin-right: -100px;
+    float: left;
+
+    .todo-description{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 3px;
+      padding-right: 36px;
+    }
+
+    .todo-labels>*{
+      display: inline-block;
+      // float: left;
+    }
+  }
+
+  .todo-person{
+    // position: absolute;
+    // top: 14px;
+    // right: 20px;
+    float: right;
+    line-height: 48px;
+    margin-left: 10px;
+    margin-right: 15px;
+  }
+}
+
+
+.todo-checkbox.disabled{
+  background-position: -96px 0;
+}
+
+.todo-user{
+  img{
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+  }
+  ul.dropdown-menu{
+    max-height: 200px;
+    overflow-y: auto;
+  }
+}
+
+.todo-item-options{
+  display: none;
+  position: absolute;
+  top: 5px;
+  right: 12px;
+//  line-height: 22px;
+  .fa-close, .fa-pencil {
+    font-size: 14px;
+    &:hover{
+      color: black;
+      .scale(1.3);
+      // .transition(all 0.2s ease-in-out);
+    }
+  }
+  .fa-pencil{
+    margin-right: 5px;
+    // right: 30px;
+  }
+
+  .fa-close{
+    // right: 10px;
+  }
+}
+
+//show todo-item-options when todo-active
+.todo-active:hover .todo-item-options{
+  display: block;
+}
+
+
+// Todo type
+.todo-type-icons {
+
+  .fa{
+    // vertical-align: middle;
+  }
+  .fa-bars{
+    color:@task;
+  }
+  .fa-bookmark{
+    color: @requirement;
+  }
+  .fa-bug{
+    color: @bug;
+  }
+}
+
+
+// todo-item completed
+.todo-completed {
+  color: #a8a8a8;
+  .todo-description{
+    text-decoration: line-through;
+  }
+
+  .todo-type-icons *{
+    color: #a8a8a8;
+  }
+
+  .check-link{
+    opacity: 0.5;
+  }
+
+  .label-primary, .label-warning {
+    background-color: #afafaf;
+    color: #FFFFFF;
+  }
+}
+
+
+
+#todolists .todo-item-placeholder{
+  height: 60px;
+}
+
+#iterations .todo-item-placeholder{
+  height: 40px;
+}
+
+// sortable placeholder 
+.todo-item-placeholder{
+  border: 1px dashed #d1d7da !important;
+  background: #e6f2f7 !important;
+}
+
+.todo-panel-placeholder{
+  border: 1px dashed #cecece !important;
+  background: darken(#e7eaec, 7%);
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.todo-item-intheair{
+  border-style: solid;
+  -ms-transform: rotate(2deg); /* IE 9 */
+  -webkit-transform: rotate(2deg); /* Chrome, Safari, Opera */
+  transform: rotate(2deg);
+
+  // bluish glow
+  box-shadow: 0px 0px 5px @ob-primary;
+
+  // darken bg color
+  background: #d0d7e1 !important;
+  opacity: 0.8;
+  // hide todo-item-options
+  .todo-item-options{
+    display: none !important;
+  }
+}
+
+.todo-panel-intheair{
+
+}
+
+.ui-sortable-helper{
+  .ui-sortable-handle{
+    cursor: move;
+  }
+
+  // panel
+  .todo-panel-heading{
+    cursor: move;
+    h5{
+      cursor: move;
+    }
+  }
+
+  // item
+  .todo-description{
+    cursor: move;
+  }
+}
+
+
+
+
+.todo-recover-link {
+    float: right;
+    padding: 0 20px 0 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#todolistCopyModal {
+    .panel {
+        border: 0px;
+    }
+    .panel-heading {
+        //background-color: @ob-primary;
+    }
+    .panel-body {
+        height: 600px;
+        overflow: auto;
+        h3 {
+            margin-bottom: 30px;
+        }
+    }
+    .confirm {
+        margin-right: 20px;
+    }
+    .message {
+        text-align: center;
+        margin-top: 200px;
+    }
+    a.list-group-item {
+        border-top-width: thick;
+        &.heading-primary {
+            border-top-color: @bright-blue;
+        }
+        &.heading-warning {
+            border-top-color: @ob-warning;
+        }
+        &.heading-danger {
+            border-top-color: @ob-danger;
+        }
+        &.heading-info {
+            border-top-color: @dark-blue;
+        }
+        &.heading-success {
+            border-top-color: @green;
+        }
+        &.heading-default {
+            border-top-color: @ob-default;
+        }
+    }
+}

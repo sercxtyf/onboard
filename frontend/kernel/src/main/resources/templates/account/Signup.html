@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('注册')"></head>
+
+
+<body class="account" id="login">
+  <ul class="bg-slideshow">
+    <li>
+      <span>Image 01</span>
+    </li>
+    <li>
+      <span>Image 02</span>
+    </li>
+    <li>
+      <span>Image 03</span>
+    </li>
+    <li>
+      <span>Image 04</span>
+    </li>
+    <li>
+      <span>Image 05</span>
+    </li>
+  </ul>
+  <div class="signup-modal">
+    <div class="signup-modal-dialog">
+      <div class="signup-modal-dialog-heading">
+        <a href="/" title="回到主页"><img src="/static/img/login-logo.png" /></a>
+      </div>
+      <div class="signup-modal-dialog-form"  th:object="${newCommand}">
+        <form class="form-sign" method="POST">
+          <div class="form-group ob-input-w-icon">
+            <i class="fa fa-user"></i>
+            <input type="text" class="form-control" th:field="*{name}" placeholder="您的姓名" required="required" autofocus="autofocus"/>
+          </div>
+          <div class="form-group ob-input-w-icon">
+            <i class="fa fa-users"></i>
+            <input type="text" class="form-control" th:field="*{companyName}" placeholder="团队名称" required="required" autofocus="autofocus"/>
+          </div>
+          <div class="form-group ob-input-w-icon">
+            <i class="fa fa-envelope"></i>
+            <input type="email" class="form-control" th:field="*{email}" placeholder="邮件地址" required="required" autofocus="autofocus"/>
+          </div>
+          <div class="form-group ob-input-w-icon">
+            <i class="fa fa-lock"></i>
+            <input type="password" class="form-control" name="password" placeholder="密码" required="required"/>
+          </div>
+          <div class="form-group ob-input-w-icon">
+            <i class="fa fa-lock"></i>
+            <input type="password" class="form-control" name="repeatPassword" placeholder="确认密码" required="required"/>
+          </div>
+
+          <div class="form-group">
+            <label><input class="ob-input-checkbox" th:field="*{agree}" type="checkbox" required="required"/> 我同意onboard.cn的<a>《使用协议》</a></label>
+            <label class="pull-right">已有账号？<a href="/account/signin">立即登录</a></label>
+          </div>
+
+          <button class="btn btn-primary btn-block" type="submit">注册</button>
+          
+        </form>
+        <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('name')}">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <strong>用户名不合法：</strong> <span th:each="err : ${#fields.errors('name')}" th:text="${err}"></span>
+        </div>
+        <div th:if="!${#fields.hasErrors('name')}">
+          <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('companyName')}">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <strong>团队名不合法：</strong> <span th:each="err : ${#fields.errors('companyName')}" th:text="${err}"></span>
+          </div>
+          <div th:if="!${#fields.hasErrors('companyName')}">
+            <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('email')}">
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <strong>邮箱不合法：</strong> <span th:each="err : ${#fields.errors('email')}" th:text="${err}"></span>
+            </div>
+            <div th:if="!${#fields.hasErrors('email')}">
+              <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('password')}">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <strong>密码不合法：</strong> <span th:each="err : ${#fields.errors('password')}" th:text="${err}"></span>
+              </div>
+              <div th:if="!${#fields.hasErrors('password')}">
+                <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('repeatPassword')}">
+                  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <span th:each="err : ${#fields.errors('repeatPassword')}" th:text="${err}"></span>
+                </div>
+                <div th:if="!${#fields.hasErrors('repeatPassword')}">
+                  <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('global')}">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <span th:each="err : ${#fields.errors('global')}" th:text="${err}"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 
+  <div class="container">
+
+    <form class="form-sign" method="POST" th:object="${newCommand}">
+      <div th:replace="fragments/Header :: header"></div>
+      
+      <div th:class="${#fields.hasErrors('name')} ? 'input-group input-group-lg has-error' : 'input-group input-group-lg'" >
+        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <input type="text" class="form-control" th:field="*{name}" placeholder="您的名字" required="required"  autofocus="autofocus"/>
+      </div>
+      <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('name')}">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>用户名不合法：</strong> <span th:each="err : ${#fields.errors('name')}" th:text="${err}"></span>
+      </div>
+      
+      <div th:class="${#fields.hasErrors('companyName')} ? 'input-group input-group-lg has-error' : 'input-group input-group-lg'" >
+        <span class="input-group-addon"><i class="fa fa-users"></i></span>
+        <input type="text" class="form-control" th:field="*{companyName}" placeholder="团队名称" required="required"/>
+      </div>
+      <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('companyName')}">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>团队名不合法：</strong> <span th:each="err : ${#fields.errors('companyName')}" th:text="${err}"></span>
+      </div>
+      
+      <div th:class="${#fields.hasErrors('email')} ? 'input-group input-group-lg has-error' : 'input-group input-group-lg'" >
+        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+        <input type="email" class="form-control" th:field="*{email}" placeholder="邮箱地址" required="required"/>
+      </div>
+      <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('email')}">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>邮箱不合法：</strong> <span th:each="err : ${#fields.errors('email')}" th:text="${err}"></span>
+      </div>
+      
+      <div th:class="${#fields.hasErrors('password')} ? 'input-group input-group-lg has-error' : 'input-group input-group-lg'" >
+        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+        <input type="password" class="form-control" th:field="*{password}" placeholder="密码" required="required"/>
+      </div>
+      <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('password')}">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>密码不合法：</strong> <span th:each="err : ${#fields.errors('password')}" th:text="${err}"></span>
+      </div>
+      
+      <div th:class="${#fields.hasErrors('repeatPassword')} ? 'input-group input-group-lg has-error' : 'input-group input-group-lg'" >
+        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+        <input type="password" class="form-control" th:field="*{repeatPassword}" placeholder="确认密码" required="required"/>
+      </div>
+      <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('repeatPassword')}">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <span th:each="err : ${#fields.errors('repeatPassword')}" th:text="${err}"></span>
+      </div>
+      
+      <div th:class="${#fields.hasErrors('agree')} ? 'has-error'" >
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" th:field="*{agree}" required="required"/>我同意onboard.cn的<a>《使用协议》</a>
+          </label>
+        </div>
+      </div>
+      <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('agree')}">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <span th:each="err : ${#fields.errors('agree')}" th:text="${err}"></span>
+      </div>
+      
+      <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('global')}">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <span th:each="err : ${#fields.errors('global')}" th:text="${err}"></span>
+      </div>
+      
+      <button class="btn btn-lg btn-primary" type="submit">注册</button>
+      <span class="text-muted">已有账号？<a href="/account/signin">立即登录</a></span>
+    </form>
+  </div> -->
+          
+<div th:replace="fragments/Footer :: footer"></div>
+</body>
+</html>

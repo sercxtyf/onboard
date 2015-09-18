@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('加入 | OnBoard')">
+<title>加入 | OnBoard</title>
+</head>
+
+<body class="account" id="sign">
+<ul class="bg-slideshow">
+    <li>
+        <span>Image 01</span>
+    </li>
+    <li>
+        <span>Image 02</span>
+    </li>
+    <li>
+        <span>Image 03</span>
+    </li>
+    <li>
+        <span>Image 04</span>
+    </li>
+    <li>
+        <span>Image 05</span>
+    </li>
+</ul>
+  <div class="container login-modal" th:object="${registrationCommand}">
+      <div class="login-modal-dialog" >
+          <div class="login-modal-dialog-heading">
+              <a href="/" title="回到主页"><img src="/static/img/login-logo.png" /></a>
+          </div>
+          <div class="login-modal-dialog-form">
+
+              <form method="post" class="form-sign"  action="#"  th:action="@{${postRegistrationUrl}}" >
+                  <!--<div th:replace="fragments/Header :: header"></div>-->
+                  <input type="hidden"  name="email" th:field="${registrationCommand.email}"/>
+
+                  <div class='form-group ob-input-w-icon'>
+                      <i class="fa fa-user"></i>
+                      <input type="text" class="form-control" name="name" placeholder="您的名字"
+                             autofocus="autofocus"/>
+                  </div>
+
+                  <div class='form-group ob-input-w-icon'>
+                      <i class="fa fa-lock"></i>
+                      <input type="password" class="form-control" name="password" placeholder="请输入密码"/>
+                  </div>
+                  <div class='form-group ob-input-w-icon'>
+                      <i class="fa fa-lock"></i>
+                      <input type="password" class="form-control" name="repeatPassword" placeholder="重复密码"/>
+                  </div>
+                  <button class="btn btn-primary btn-block" type="submit">登录</button>
+              </form>
+          </div>
+      </div>
+    </div>
+</body>
+</html>

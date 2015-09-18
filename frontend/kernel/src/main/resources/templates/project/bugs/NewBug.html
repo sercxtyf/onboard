@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+
+<div class="" data-placement="right" id="newBug" th:fragment="newBug" ng-controller="newBugCtrl">
+
+  <form name="newBugForm" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>新建Bug</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <input type="text" name="title" ng-model="title" class="form-control" placeholder="Bug标题" autofocus="true"
+                 tabindex="0" ng-maxlength="100" ng-minlength="1" required=""/>
+
+          <div ng-show="newBugForm.$dirty &amp;&amp; newBugForm.title.$error.required "
+               class="alert alert-danger" role="alert">Bug标题不能为空
+          </div>
+          <div ng-show="newBugForm.title.$error.maxlength || newBugForm.title.$error.minlength"
+               class="alert alert-danger" role="alert">Bug标题长度必须在1-100之间
+          </div>
+        </div>
+
+        <div class="form-horizontal row">
+
+          <!-- 优先级 -->
+          <div class="col-sm-6">
+            <div class="form-group">
+              <span class="col-sm-5 text-muted col-sm-offset-1">优先级：</span>
+
+              <div class="col-sm-6 btn-group">
+                <span data-toggle="dropdown" class="pointer">
+                    <span ng-class="{
+                            'text-danger'   : defaultPriority.value ==1,
+                            'text-warning'  : defaultPriority.value ==2,
+                            'text-primary'  : defaultPriority.value ==3,
+                            'text-info'     : defaultPriority.value ==4,
+                            'text-muted'    : defaultPriority.value ==5}">
+                      <i class="fa fa-circle-o"></i>
+                        {{defaultPriority.desc}}
+                      <span class="caret"></span>
+                    </span>
+                </span>
+
+                <ul class="dropdown-menu" role="menu">
+                  <li ng-repeat="priority in priorities" ng-click="setPriority(priority)">
+                    <a ng-class="{
+                    'text-danger' : priority.value ==1,
+                    'text-warning' : priority.value ==2,
+                    'text-primary' : priority.value ==3,
+                    'text-info' : priority.value ==4,
+                    'text-muted' : priority.value ==5 }">
+                      {{priority.desc}}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!--状态-->
+          <div class="col-sm-6">
+            <div class="form-group">
+              <span class="col-sm-5 col-sm-offset-1 text-muted">状态：</span>
+
+              <div class="col-sm-6 btn-group">
+                <span class="label label-default dropdown-toggle pointer" data-toggle="dropdown">
+                    {{defaultStatus.desc}}
+                </span>
+                <ul class="dropdown-menu" role="menu">
+                  <li ng-repeat="status in statusSets">
+                    <a class="pointer" ng-click="setBugStatus(status)">
+                      {{status.desc}}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 截止日期 -->
+          <div class="col-sm-6 ob-date">
+            <div class="form-group">
+              <span class="col-sm-5 col-sm-offset-1 text-muted">截止日期：</span>
+
+              <div class="col-sm-6">
+                <input type="hidden" class="form-control" datepicker-popup="yyyy-MM-dd"
+                       ng-model="dueTime" is-open="dtpOpened" close-text="关闭" clear-text="不指定" current-text="今天"/>
+                <span class="pointer" ng-click="openDTP($event)">
+                  <span ng-show="dueTime">{{ dueTime | date: 'yyyy-MM-dd'}}</span>
+                  <span ng-hide="dueTime">未设置</span>
+                  <span class="caret"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!--执行人-->
+          <div class="col-sm-6">
+            <div class="form-group">
+              <span class="col-sm-5 col-sm-offset-1 text-muted">执行人：</span>
+
+              <div class="col-sm-6 btn-group">
+                <span class="pointer todo-user" data-toggle="dropdown">
+                  <img ng-src="{{defaultUser.avatarUrl}}"/>
+                  <span class="username">{{defaultUser.name}}</span>
+                  <span class="caret"></span>
+                </span>
+
+                <ul class="dropdown-menu users" role="menu">
+                  <li ng-repeat="user in projectUsers">
+                    <a class="pointer" ng-click="setBugAssignee(user)">
+                      <img ng-src="{{user.avatarUrl}}"/> {{user.name}}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <textarea type="text" name="description" ng-model="description" class="form-control"/>
+        </div>
+
+
+        <div class="footer">
+          <button type="submit" class="btn btn-primary footer" ng-disabled="newBugForm.$invalid"
+                  ng-click="createBug()">新建Bug
+          </button>
+          <button type="button" class="btn btn-default footer" data-dismiss="drawer">取消</button>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </form>
+
+</div>
+
+</body>
+</html>

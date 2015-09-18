@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="todolists" id="todolists">
+  <div class="center-panel-nav">
+    <h3>
+      <span>待办事项</span>
+      <small>
+        <span>——方便的任务管理系统，高效的项目管理方式</span>
+      </small>
+    </h3>
+    <ul class="second-nav-bar">
+      <li class="second-nav-item" ui-sref-active="active"><a ui-sref="company.project.todolists.open">进行中清单</a></li>
+      <li class="second-nav-item" ui-sref-active="active"><a ui-sref="company.project.todolists.archived">归档清单</a></li>
+      <li class="second-nav-button" dropdown-form-toggle="newTodolistForm" ng-click="newTodolistForm.open=!newTodolistForm.open;focusTodolistName()">
+        <i class="fa fa-plus"></i> 新建待办清单</li>
+      <form class="ballon newTodolistForm dropdown-form" name="newTodolistForm" dropdown-form=""
+            is-open="newTodolistForm.open">
+        <p>
+          <input type="text" name="name" ng-model="newTodolist.name" class="form-control" ng-maxlength="50"
+                 placeholder="清单名称" required="" id="new-todolist-name"/>
+        </p>
+
+        <div class="submit">
+          <a type="submit" class="btn btn-primary footer ng-binding" ng-disabled="submitBtn.disable"
+             ng-click="createTodolist();"> 确定</a>
+        </div>
+      </form>
+    </ul>
+  </div>
+
+
+  <div class="gray-bg center-panel-content">
+
+    <div ng-show="todolists.length === 0" class="no-item-exists-create-new-item">
+
+      还没有人新建待办清单<br/>
+      赶快新建项目的第一个待办清单，与小伙伴们开始创建任务吧！！！<br/>
+      <button type="button" class="btn btn-primary btn-sm" ng-click="newTodolistForm.open=!newTodolistForm.open"
+              dropdown-form-toggle="newTodolistForm">
+        <i class="fa fa-plus"></i> 新建待办清单
+      </button>
+    </div>
+
+    <div ng-hide="todolists.length === 0">
+      <div ui-view=""></div>
+    </div>
+
+  </div>
+
+</div>
+<div th:fragment="opentodolists" ng-controller="openTodolistsCtrl" class="opentodolists">
+  
+  <div class="todo-search-panel pull-right col-md-1" style="right:20px">
+    <div class="btn-group btn btn-primary btn-sm" ng-click="expandAll()" style="width:120px">
+        <div class="click-link" ng-show="!allExpanded">展开任务列表</div>
+        <div class="click-link" ng-show="allExpanded">收起任务列表</div>
+    </div>
+    <div class="btn-group todo-filter-title">任务筛选</div>
+    <div class="btn-group">
+      <input type="text" ng-model="searchTodo.key" class="todo-filter" placeholder="关键字"/>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"
+              aria-expanded="false">
+        <span ng-bind="filterMap(searchTodo.todoType)"></span>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" id="filters">
+        <li ng-class="{active: searchTodo.todoType == ''}">
+          <a ng-click="searchTodo.todoType=undefined">{{filterMap(undefined)}}</a>
+        </li>
+        <li class="divider"></li>
+        <li ng-class="{active: (searchTodo.todoType == 'story')}">
+          <a ng-click="searchTodo.todoType='story'">{{filterMap('story')}}</a>
+        </li>
+        <li ng-class="{active: (searchTodo.todoType == 'task')}">
+          <a ng-click="searchTodo.todoType='task'">{{filterMap('task')}}</a>
+        </li>
+        <li ng-class="{active: searchTodo.todoType == 'bug'}">
+          <a ng-click="searchTodo.todoType='bug'">{{filterMap('bug')}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"
+              aria-expanded="false">
+        <span ng-bind="getUserName(searchTodo.assigneeId)"></span>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" id="filters">
+        <li ng-class="{active: !searchTodo.assigneeId}">
+          <a ng-click="searchTodo.assigneeId = undefined">所有人</a>
+        </li>
+        <li ng-class="{active: searchTodo.assigneeId === user.id}" ng-repeat="user in projectUsers">
+          <a ng-click="searchTodo.assigneeId = user.id">{{user.name}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"
+              aria-expanded="false">
+        <span ng-bind="getStatusName(searchTodo.status)"></span>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" id="filters">
+        <li ng-class="{active: searchTodo.status === '!closed'}">
+          <a ng-click="searchTodo.status = '!closed'">所有状态</a>
+        </li>
+        <li ng-class="{active: searchTodo.status === status.value}" ng-repeat="status in todoStatuses | filter: {active: true}">
+          <a ng-click="searchTodo.status = status.value">{{status.name}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="todo-panels todolists-content todolist-drag-body col-md-10" ui-sortable="todolistSortableOptions" ng-model="todolists">
+    <div class="todo-panel" ng-repeat="todolist in todolists | filter:todolistFilter" ng-if="canShow(todolist)">
+      <div class="todo-panel-heading">
+        <!-- ng-class="{'border-bottom': !todolist.openTodos.length}" -->
+        <h5 open-drawer="todolist" open-drawer-params="{id: todolist.id}">{{todolist.name}}</h5>
+
+        <div class="todo-panel-options">
+
+          <a class="click-link new-todo" open-drawer="new-todo"
+             open-drawer-data="{todolistId : todolist.id, searchTodo : searchTodo}">
+            <i class="fa fa-plus"></i></a>
+
+          <a href="#" class="collapse-link" ng-click="collapseTodolist($event);">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <span class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-ellipsis-v"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+              <li><a class="click-link" ng-click="copyTodolist(todolist)">复制</a>
+              </li>
+              <li><a class="click-link" ng-click="archiveTodolist(todolist)">归档</a>
+              </li>
+              <li><a class="click-link" ng-click="deleteTodolist(todolist)">删除</a>
+              </li>
+            </ul>
+          </span>
+        </div>
+      </div>
+      <div class="todo-panel-body" ng-class="{'is-empty': isEmpty(todolist)}">
+        <!-- ng-class="{'all-completed': todolist.allCompleted(), 'is-empty': todolist.isEmpty()}" -->
+        <!-- <div class="all-finished" ng-show="!todolist.hasOpenTodos()"></div> -->
+        <ul class="todo-list todo-drag-body" ui-sortable="todosSortableOptions" ng-model="todolist.todos"
+            data-id="{{todolist.id}}" ng-controller="todoItemCtrl">
+          <!-- insert todo item here -->
+          <li th:replace="project/common/Todos :: todos('todolist.todos', 'filterTodo')"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="todo-panels todolists-content todolist-drag-body" ui-sortable="todolistSortableOptions" ng-model="todolists"
+     th:fragment="archivedtodolists" ng-controller="attriveTtodolistsCtrl">
+  <div class="todo-panel" ng-repeat="todolist in todolists">
+    <div class="todo-panel-heading">
+      <!-- ng-class="{'border-bottom': !todolist.openTodos.length}" -->
+      <h5 open-drawer="todolist" open-drawer-params="{id: todolist.id}">{{todolist.name}}</h5>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>

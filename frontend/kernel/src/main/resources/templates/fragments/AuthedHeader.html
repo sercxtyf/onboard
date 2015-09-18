@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>选择团队</title>
+</head>
+
+<body>
+
+
+  <!-- different from fragments/Header whose company is specified -->
+  <nav th:fragment="header" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Onboard</a>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span th:text="${ session.currentUser.name }"></span> <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/account">账户设置</a>
+            </li>
+            <li><a href="/home?redirect=0">切换团队</a>
+            </li>
+            <li class="divider"></li>
+            <li><a href="/account/signout">退出</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+
+</body>
+
+</html>

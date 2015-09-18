@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.onboard</groupId>
+  <artifactId>com.onboard.parent</artifactId>
+  <version>3.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>com.onboard.parent</name>
+  <description>com.onboard.parent</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <bundle.symbolicName>${project.artifactId}</bundle.symbolicName>
+    <bundle.namespace>${project.artifactId}</bundle.namespace>
+    <bundle.Export-Package>${bundle.namespace}</bundle.Export-Package>
+    <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+  </properties>
+
+  <modules>
+    <module>kernel/com.onboard.osgi.dependencies</module>
+    <module>kernel/com.onboard.domain.mapper.model</module>
+    <module>kernel/com.onboard.domain.model</module>
+    <module>kernel/com.onboard.domain.index</module>
+    <module>kernel/com.onboard.domain.index.impl</module>
+    <module>kernel/com.onboard.domain.dto</module>
+    <module>kernel/com.onboard.domain.transform</module>
+    <module>kernel/com.onboard.domain.mapper</module>
+    <module>test/com.onboard.test.utils</module>
+    <module>kernel/com.onboard.service.common</module>
+    <module>kernel/com.onboard.service.common.impl</module>
+    <module>kernel/com.onboard.service.web</module>
+    <module>kernel/com.onboard.service.web.impl</module>
+    <module>kernel/com.onboard.service.account</module>
+    <module>kernel/com.onboard.service.account.impl</module>
+    <module>kernel/com.onboard.service.security</module>
+    <module>kernel/com.onboard.service.security.impl</module>
+    <module>kernel/com.onboard.service.websocket</module>
+    <module>kernel/com.onboard.service.websocket.impl</module>
+    <module>kernel/com.onboard.service.collaboration</module>
+    <module>kernel/com.onboard.service.collaboration.impl</module>
+    <module>kernel/com.onboard.service.activity</module>
+    <module>kernel/com.onboard.service.activity.impl</module>
+    <module>kernel/com.onboard.service.notification</module>
+    <module>kernel/com.onboard.service.notification.impl</module>
+    <module>kernel/com.onboard.service.upload</module>
+    <module>kernel/com.onboard.service.upload.impl</module>
+    <module>kernel/com.onboard.service.sampleProject</module>
+    <module>kernel/com.onboard.service.sampleProject.impl</module>
+    <module>kernel/com.onboard.service.help</module>
+    <module>kernel/com.onboard.service.help.impl</module>
+    <module>kernel/com.onboard.web.api</module>
+  </modules>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.onboard</groupId>
+        <artifactId>com.onboard.dependencies</artifactId>
+        <version>2.1.3-SNAPSHOT</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.gemini</groupId>
+      <artifactId>org.eclipse.gemini.blueprint.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.test</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+    </dependency>
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>com.springsource.repository.bundles.release</id>
+      <name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+      <url>http://repository.springsource.com/maven/bundles/release</url>
+    </repository>
+
+    <repository>
+      <id>com.springsource.repository.bundles.external</id>
+      <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+      <url>http://repository.springsource.com/maven/bundles/external</url>
+    </repository>
+  </repositories>
+</project>

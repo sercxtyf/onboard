@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>选择团队</title>
+</head>
+<body>
+
+<nav th:fragment="header(tab)" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Onboard</a>
+    </div>
+
+      <ul class="nav navbar-nav">
+        <li th:class="${tab =='project'} ? active"><a th:href="'/'+${ companyId }">项目</a></li>
+        <li th:class="${tab =='calendar'} ? active"><a th:href="'/'+${ companyId }+'/calendar'">日历</a></li>
+        <li th:class="${tab =='everything'} ? active"><a th:href="'/'+${ companyId }+'/activities'">回顾</a></li>
+        <li th:class="${tab =='everyone'} ? active"><a th:href="'/'+${ companyId }+'/users'">团队</a></li>
+        <li th:class="${tab =='me'} ? active"><a th:href="'/'+${ companyId }+'/users/'+${ session.currentUser.id }+'/#/activities/'">Me</a></li>
+      </ul>
+    
+      <form class="navbar-form navbar-right" role="search" method="get" th:action="'/'+${companyId}+'/search'">
+        <div class="form-group">
+          <input type="text" name="key" class="form-control" placeholder="搜索..." />
+        </div>
+      </form>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li><a th:href="'/'+${ companyId }+'/projects/new'">创建项目</a></li>
+        <li><a id="createSuggestion" href="#" data-toggle="modal" data-target="#suggestion-form">反馈意见</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span th:text="${ session.currentUser.name }"></span> <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/account">账户设置</a></li>
+            <li><a href="/home?redirect=0">切换团队</a></li>
+            <li class="divider"></li>
+            <li><a href="/account/signout">退出</a></li>
+          </ul>
+        </li>
+      </ul>
+  </div><!-- /.container-fluid -->
+</nav>
+
+</body>
+</html>

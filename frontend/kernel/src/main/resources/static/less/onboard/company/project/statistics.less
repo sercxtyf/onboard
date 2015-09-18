@@ -1,0 +1,211 @@
+@import "../../common/variables";
+.stats-tab-bg {
+    background-color: white;
+}
+.stats-tab-content {
+    padding: 20px 40px;
+}
+.graph-switcher {
+    text-align: center;
+    padding-bottom: 20px;
+    .btn {
+        padding: 2px 6px;
+    }
+}
+.graph-filter {
+    font-size: 24px;
+    .input-group {
+        display: inline-block;
+        vertical-align: middle;
+        input.date {
+            cursor: pointer;
+            border: none;
+            background: none;
+            box-shadow: none;
+            font-size: 24px;
+            padding: 0;
+            width: 128px;
+            font-weight: 300;
+            border-radius: 0;
+        }
+    }
+    .refresh-btn, .stepback-btn {
+        padding: 1px 5px;
+        background: none;
+        color: #777;
+        border: none;
+        font-size: 16px;
+        box-shadow: none;
+        &:hover {
+            color: inherit;
+        }
+    }
+    .info {
+        color: #666;
+        font-size: 13px;
+        margin: 0;
+        margin-top: 2px;
+        //margin-bottom: 20px;
+    }
+}
+.chart-container {
+    min-width: 800px;
+    //border-radius: 6px;
+    position: relative;
+    background-color: #F3F3F4;
+    //overflow: hidden;
+    .svg-chart {
+        min-height: 300px;
+        @media screen and (max-height: 800px) {
+            min-width: 600px;
+            //min-height: 450px;
+            margin: 0 auto;
+        }
+        @media screen and (min-height: 800px) {
+            min-width: 800px;
+            //min-height: 600px;
+            margin: 0 auto;
+        }
+    }
+    .todo-chart {
+        @media screen and (max-height: 800px) {
+            min-width: 600px;
+            margin: 0 auto;
+        }
+        @media screen and (min-height: 800px) {
+            min-width: 800px;
+            margin: 0 auto;
+        }
+    }
+}
+.graph-heading {
+    padding: 20px 30px 10px 30px;
+    line-height: 40px;
+    .graph-title {
+        img {
+            width: 40px;
+        }
+        h4 {
+            font-size: 20px;
+            margin: 0;
+            display: inline;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+    }
+    .userMenu {
+        vertical-align: bottom;
+        .btn {
+            padding: 4px 10px;
+            color: #78797f;
+        }
+    }
+}
+.highcharts-background {
+    fill: #F3F3F4;
+}
+.graph-loading-mask {
+    background-color: rgba(197, 198, 203, 0.670588);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1999;
+}
+.commits-trend path {
+    stroke: green;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+}
+.commits-trend .axis path, .commits-trend .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 3;
+    shape-rendering: crispEdges;
+}
+.commits-trend .grid .tick, #activityChart .grid .tick, .commits-punchCard .grid .tick {
+    stroke: lightgrey;
+    opacity: 0.7;
+}
+.commits-trend .grid path, #activityChart .grid path, .commits-punchCard .grid path {
+    stroke-width: 0;
+}
+.commits-trend .tooltip, #activityChart .tooltip, .commits-punchCard .tooltip {
+    position: absolute;
+    text-align: center;
+    width: 80px;
+    height: 28px;
+    padding: 2px;
+    /*font: 12px sans-serif;*/
+    
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    /*pointer-events: none;*/
+}
+.loading {
+    font-family: "Open Sans";
+    font-size: 20px;
+}
+#activityChart .axis path, #activityChart .axis line, .commits-punchCard .axis path, .commits-punchCard .axis line {
+    fill: none;
+    stroke: #eee;
+    shape-rendering: crispEdges;
+}
+#activityChart .axis text, .commits-punchCard .axis text {
+    //font-family: sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+#activityChart .loading, .commits-punchCard .loading {
+    font-family: sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+.commits-punchCard .circle {
+    fill: #222;
+}
+#activityChart, #commitsPunchCard, #LocChart, #commitsChart {
+    .circle {
+        fill: #13AC31;
+    }
+    .tooltip {
+        height: auto;
+        padding: 6px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    //min-height: 600px;
+}
+// .arrow {
+//     margin-top: 5px;
+// }
+.date {
+    min-width: 100px;
+}
+.date:hover {
+    cursor: pointer;
+}
+#activityChart .tooltip {
+    width: 120px;
+}
+.commits-trend .tooltip, .commits-punchCard .tooltip {
+    width: 300px;
+    height: auto;
+}
+.tooltip ul, .tooltip li {
+    text-align: left;
+    padding: 0px;
+    margin: 0px;
+}
+.tooltip ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.pie-parallel {
+    display: inline-block;
+    width: 33%;
+}

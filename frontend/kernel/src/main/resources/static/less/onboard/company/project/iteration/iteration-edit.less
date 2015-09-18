@@ -1,0 +1,91 @@
+.tools {
+  position: relative;
+  z-index: 3;
+  .nav-pills a {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .return {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background: #428bca;
+    height: 38px;
+    font-size: 13px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: none;
+  }
+}
+
+.tab-content {
+  margin-top: 10px;
+}
+
+.story, .bug {
+  position: relative;
+  min-height: 38px;
+  background: #fff;
+  border-top: 1px solid #b3b6b8;
+  margin: 0px;
+  .story-info, .bug-info {
+    margin-left: 38px;
+    .title {
+      min-height: 38px;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .info {
+      position: relative;
+      display: none;
+      padding-left: 10px;
+      padding-top: 0px;
+      .info-key {
+      	position: absolute;
+      	margin-bottom: 0px;
+      	font-weight: bold;
+      }
+      .info-value {
+      	min-height: 38px;
+        margin-left: 60px;
+        margin-bottom: 0px;
+      }
+    }
+    hr {
+    	margin-top: 0px;
+    }
+  }
+  hr {
+    border-top: 1px solid #b3b6b8;
+  }
+
+}
+
+.story:last-child, .bug:last-child {
+  border-bottom: 1px solid #b3b6b8;
+}
+
+.iteration-checkbox{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.iteration-bug-checkbox{
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+.chosen {
+  background: #eaeaea;
+}
+
+#add-step-modal {
+  input.date {
+    cursor: pointer;
+  }
+  .text-muted {
+    cursor: default;
+  }
+}

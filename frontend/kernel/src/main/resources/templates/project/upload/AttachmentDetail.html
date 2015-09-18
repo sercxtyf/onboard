@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div th:fragment="attachmentDetail" id="attachmentDetail">
+  <div class="attachment-modal" id="attachment-detail">
+        <div class="attachment-content">
+          <div class="row">
+            <!--attachment content-->
+            <div class="col-md-9 col-sm-7 upload-content">
+              <div class="img-position"><img class="img-pic" ng-src="{{getAttachmentUrl}}" ng-show="isImage"/></div>
+              <div class="text-position">
+                <pre id="textContents" ng-show="isText">{{textContene}}</pre>
+              </div>
+              <div class="text-position">
+                <pre id="pdfContents" ng-show="isPdf"></pre>
+              </div>
+              <div class="default-position"><img class="img-def" ng-src="{{getAttachmentUrl}}" ng-show="others"/></div>
+            </div>
+            <!--attachment info-->
+            <div class="col-md-3 col-sm-5 upload-info">
+              <button type="button" class="close close-position" ng-click="hideAttachmentInfo()">
+                <span>&times;</span>
+                <span class="sr-only">Close</span></button>
+              <div class="attachment-info">
+                <h3>{{currentAttachment.name}}</h3>
+                                    <span>{{currentAttachment.creatorName}}&nbsp;
+                                        {{currentAttachment.created | date: 'yyyy-MM-dd HH:mm'}} &nbsp;上传
+                                        &nbsp;{{currentAttachment.size | fileSize}}</span>
+                <hr/>
+              </div>
+              <div class="attachment-oprations">
+                <nav>
+                  <ul class="pager">
+                    <li class="previous">
+                      <a class="btn btn-default " ng-href="{{downloadLink}}" target="_blank">
+                        <i class="fa fa-lg fa-download"></i>下载
+                      </a>
+                    </li>
+                    <li class="next">
+                      <a class="btn btn-default" ng-click="deleteAttachment(currentAttachment)">
+                        <i class="fa fa-lg fa-trash "></i>删除
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <hr/>
+              <div class="create-tags" ng-init="updateData()">
+                <h3>标签 &nbsp;<span class=" add-tab label label-default" ng-click="showCreateTag()">添加标签</span></h3>
+
+                <form class="ballon newTagForm" name="newTagForm" ng-submit="createTag()">
+                  <input type="text" name="name" ng-model="name" class="form-control" required=""
+                         ng-maxlength="50"/>
+
+                  <div class="submit">
+                    <input type="submit" value="确定" class="btn btn btn-primary"/>
+                    <a class="btn-cancle" ng-click="hideCreateTag()">取消</a>
+                  </div>
+                </form>
+                <ul class="nav nav-pills" role="tablist">
+                  <li class="tag" role="presentation" ng-repeat="tag in tagList">
+                    <a ui-sref="company.project.tags({tagId:tag.id})" ng-click="hideAttachmentInfo()">{{tag.tagname}}
+                    </a>
+                    <span class="badge" ng-click="deleteTag(tag)">X</span>
+                  </li>
+                </ul>
+                <hr/>
+              </div>
+
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+
+</body>
+
+</html>

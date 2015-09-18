@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+  <div th:fragment="iterationTodoStats" id="iterationTodoStats" class="stats-tab-content fade active in">
+    
+    <div class="graph-switcher">
+      <div class="btn-group">
+        <button type="button" class="btn btn-xs btn-default" 
+                ng-class="{ active:isSet(1) }" ng-click="setTab(1, $event)">已完成任务</button>
+        <button type="button" class="btn btn-xs btn-default" 
+                ng-class="{ active:isSet(2) }" ng-click="setTab(2, $event)">未完成任务</button>
+      </div>
+    </div>    
+
+    <div class="graph-filter">
+      <p class="info">      
+        <!-- 解释一下该图表 -->
+        {{ graphInfo() }}
+        <!-- refresh btn -->
+        <button class="btn btn-default refresh-btn" type="button" id="refresh" ng-disabled="busy" ng-click="refresh()">
+          <i class="fa fa-refresh"></i>
+        </button>
+      </p>      
+    </div>
+
+    <div >
+      <div class="chart-container">
+        <!-- graph heading -->
+        <!-- <div class="graph-heading">
+
+          <div class="graph-title">
+            <img ng-src="{{ user.avatarUrl }}" class="img-circle"></img>
+            <h4>
+              {{ user.name }}
+            </h4>
+          </div>
+
+        </div> -->
+
+        <div ng-show="isSet(1)">
+            <div id="todoChart" class="todo-chart"></div>
+            <p> </p>
+            <p> </p>
+            <!-- pie chart -->
+            <div id="pie-todo" class="svg-chart" ng-show="hasData" style="height: 600px;"></div>
+        </div>
+ 
+        <div ng-show="isSet(2)">          
+            <div id="uncompleted-todoChart" class="todo-chart"></div>
+            <p> </p>
+            <p> </p>
+            <!-- pie chart -->
+            <div id="uncompleted-pie-todo" class="svg-chart" ng-show="uncompleted_hasData" style="height: 600px;"></div>
+        </div>
+
+      </div>
+    </div>
+    
+    <div class="graph-loading-mask" ng-show="busy"></div>
+  </div>
+
+</body>
+
+</html>

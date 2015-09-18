@@ -1,0 +1,95 @@
+// 团队页面
+// imported by onboard/onboard
+
+& {
+  margin-top: @nav-height + 30px;
+  margin-bottom: 50px;
+  .title {
+    .main {
+      font-size: 40px;
+    }
+    .sub {
+      font-size: 17px;
+      color: grey;
+      margin-left: 15px;
+    }
+  }
+  .filter {
+    i {
+      width: 20px;
+      text-align: center;
+      font-size: 13px;
+    }
+    span {
+      margin-left: 10px;
+      font-size: 13px;
+    }
+  }
+  .sub-page {
+    .title {
+      height: 50px;
+      vertical-align: middle;
+      .content {
+        margin-top: 8px;
+        display: inline-block;
+        font-weight: bold;
+      }
+      .button {
+        display: inline-block;
+        float: right;
+        font-size: 12px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+@import "common/index";
+
+#project-edit {
+  @import "project-edit";
+}
+
+#calendar {
+  @import "calendar";
+}
+
+#invite {
+  @import "invite";
+}
+
+#users {
+  @import "users";
+}
+
+#activities {
+  @import "activities";
+}
+
+#projects{
+  @import "projects";
+}
+
+#project {
+  @import "project/index";
+}
+
+#search {
+  @import "search";
+}
+
+#me {
+  @import "me";
+}
+
+#retrospect {
+  @import "retrospect";
+}
+
+#status {
+  @import "status";
+}
+
+#collection {
+  @import "collection";
+}

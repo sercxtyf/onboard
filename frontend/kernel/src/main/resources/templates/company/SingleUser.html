@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>单个用户</head>
+<body>
+
+  <div th:fragment="singleUser" class="thumbnail">
+	<a th:href="@{|/${ companyId }/users/${user.id}|}">
+      
+      <img th:src="${@avatarUtils.getAvatarById(user.id, 'avatar110')}" alt="avatar" class="img-thumbnail img-circle"/>
+    </a>
+    <div class="caption">
+      <h4 th:text="${ user.name }" data-toggle="tooltip" th:title="${ user.name }"></h4>
+      
+      <p th:text="${user.email}"></p>
+      <button th:if="${ canDelete }" class="btn btn-danger btn-sm">删除该成员</button>
+    </div>
+  </div> 
+  
+  <div th:fragment="invitedUser" class="thumbnail">
+	<a th:href="@{|/${ companyId }/invitations/${ invitation.id }|}">
+  
+      <!-- Fixme: 得到默认的用户头像，现在的写法会运行错 -->
+      <img src="http://teamforge.b0.upaiyun.com/avatar/default.png!avatar110" alt="avatar" class="img-thumbnail img-circle"/>
+    </a>
+    <div class="caption">
+      <h4 th:text="${ invitation.email }" data-toggle="tooltip" th:title="${ invitation.email }"></h4>
+      <p>已邀请</p>
+    </div>
+  </div> 
+  
+</body>
+</html>

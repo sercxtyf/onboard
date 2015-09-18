@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('404')">
+</head>
+<body>
+<div class="content">
+  <div class="container700 container">
+    <h1><a href="/">OnBoard.im</a></h1>
+  </div>
+  <div class="container700 container sheet account">
+    <h3 class="page-header">邀请链接无效</h3>
+    <div class="page-content">
+      <p>请勿重复完成邀请，<a href="/account/signin">登录</a>试试</p>
+      <p>如果这确实是第一次激活，请确保此链接与邮件中的链接一致</p>
+      <p>联系邀请您的朋友，他可以告诉您正确的链接</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('账户')"></head>
+<body>
+
+<div id="account" th:fragment="account">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-sm-3">
+        <div class="list-group">
+          <a ui-sref="account.profile" ui-sref-active="active" class="list-group-item">用户资料</a>
+          <a ui-sref="account.password" ui-sref-active="active" class="list-group-item">更改密码</a>
+          <a ng-repeat="plugin in accountPlugins" ui-sref="{{plugin['ui-sref']}}" ui-sref-active="active" class="list-group-item">{{plugin.title}}</a>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title" ng-bind="subpageTitle"></h3>
+          </div>
+          <div class="panel-body" ui-view=""></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

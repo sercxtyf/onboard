@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+  <config>
+    <pointcut id="copyItem"
+      expression="execution(* com.onboard.service.collaboration.*.copy*(com.onboard.domain..*.BaseItem+, java.lang.Integer,..)) and args(item,..)" />
+    <pointcut id="createItem"
+      expression="execution(* com.onboard.service.collaboration.*.create*(com.onboard.domain..*.BaseItem+)) and args(item)" />
+    <pointcut id="updateItem"
+      expression="execution(* com.onboard.service.collaboration.*.update*(com.onboard.domain..*.BaseItem+))" />
+    <pointcut id="discardItem"
+      expression="execution(* com.onboard.service.collaboration.*.discard*(com.onboard.domain..*.BaseItem+))" />
+    <pointcut id="moveItem" expression="execution(* com.onboard.service.collaboration.*.move*(..)) and args(identifiable,projectId)" />
+    <pointcut id="deleteItem" expression="execution(* com.onboard.service.collaboration.*.delete*(int))" />
+
+    <aspect ref="activityRecorder" order="1">
+      <after pointcut-ref="copyItem" method="recordCreationActivity" arg-names="item" />
+      <after pointcut-ref="createItem" method="recordCreationActivity" arg-names="item" />
+      <around pointcut-ref="updateItem" method="recordUpdateActivity" />
+      <around pointcut-ref="discardItem" method="recordUpdateActivity" />
+      <around pointcut-ref="deleteItem" method="deleteActivity" />
+    </aspect>
+    <aspect ref="moveHook">
+      <after pointcut-ref="moveItem" method="afterMove" arg-names="identifiable,projectId" />
+    </aspect>
+
+  </config>
+
+</beans:beans>

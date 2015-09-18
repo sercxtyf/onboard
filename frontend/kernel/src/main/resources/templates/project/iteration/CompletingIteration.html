@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+  <div th:fragment="completingIteration" id="completingIteration" ng-controller="completingIterationCtrl">
+    <div class="completing-panel">
+      <h3>
+        完成迭代中 <small>{{startDateStr}} ~ {{endDateStr}}</small>
+      </h3>
+      <div class="tips">
+        <p>在迭代完成之前，您可以：</p>
+        <p>
+          - 对迭代计划完成的<a href="#section-story">需求</a>和<a href="#section-bug">缺陷</a>进行浏览和审阅，来确认迭代完成的质量。
+        </p>
+        <p>
+          - 对迭代的各项<a href="#section-stats">统计数据</a>进行浏览，来了解团队成员的工作状态。
+        </p>
+        <p>
+          - 对迭代进行<a href="#section-summary">总结</a>，列出您认为这次迭代中做的好与不好之处，并且在下次迭代中进行改进。
+        </p>
+      </div>
+      <div style="margin-top: 30px">
+        <div class="dropdown userMenu pull-right" ng-include="'user-menu-with-all-users.html'"></div>
+      </div>
+      <h5 class="subtitle" id="section-story">
+        <i class="fa fa-circle-thin icon"></i> <span class="title">计划完成的需求</span> <span ng-show="stories.length > 0"> <span class="redStatus" ng-show="storyStatus == 0">{{completedStoryCount}} / {{stories.length}} 已完成</span> <span class="yellowStatus" ng-show="storyStatus == 1">{{completedStoryCount}} / {{stories.length}} 已完成</span> <span class="greenStatus" ng-show="storyStatus == 2">{{completedStoryCount}} / {{stories.length}} 已完成</span>
+        </span>
+      </h5>
+      <div class="list">
+        <div class="single" ng-repeat="story in stories" >
+          <div class="info">
+            <div class="title" ng-click="openStory($event, story.id)">
+              <i class="status fa fa-check" ng-show="story.completed" style="color: green;"></i> <i class="status fa fa-times" ng-show="!story.completed" style="color: red; padding-left: 1.5px"></i> <span>{{story.description}}</span>
+            </div>
+            <div class="steps">
+              <div class="story-step" ng-repeat="step in getSteps(story)" ng-hide="step.deleted" open-drawer="step"
+                   open-drawer-type="'step'" open-drawer-params="{id: step.id}">
+                <i class="status fa fa-check" ng-show="step.iterationStatus === 'closed'" style="color: green;"></i> <i
+                  class="status fa fa-times" ng-show="step.iterationStatus !== 'closed'" style="color: red; padding-left: 1.5px"></i> <span
+                  class="text-muted">#<span ng-bind="step.idInProject"></span></span> <span
+                  ng-bind-html="step.content"></span>
+                <div class="todo-description" style="display: inline;">
+                  <span class="label label-primary" ng-show="step.assignee">{{step.assignee.name}}</span> <span class="label label-warning" ng-hide="step.completedTime">{{ step.dueDate | date: 'yyyy-MM-dd'}}</span> <span class="label label-default" ng-show="step.completedTime">{{ step.completedTime | date: 'yyyy-MM-dd'}}</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h5 class="subtitle" id="section-bug">
+        <i class="fa fa-circle-thin icon"></i> <span class="title">计划修复的缺陷</span> <span ng-show="bugs.length > 0"> <span class="redStatus" ng-show="bugStatus == 0">{{completedBugCount}} / {{bugs.length}} 已修复</span> <span class="yellowStatus" ng-show="bugStatus == 1">{{completedBugCount}} / {{bugs.length}} 已修复</span> <span class="greenStatus" ng-show="bugStatus == 2">{{completedBugCount}} / {{bugs.length}} 已修复</span>
+        </span>
+      </h5>
+      <div class="list">
+        <div class="single" ng-repeat="bug in bugs">
+          <div class="info">
+            <div class="title" ng-click="openBug($event, bug.id)">
+              <i class="status fa fa-check" ng-show="bug.iterationStatus == 'closed'" style="color: green;"></i> <i class="status fa fa-times" ng-show="bug.iterationStatus != 'closed'" style="color: red; padding-left: 1.5px"></i> <span>{{bug.title}}</span>
+
+              <div class="todo-description" style="display: inline;">
+                <span class="label label-primary" ng-show="bug.bugAssigneeDTO">{{bug.bugAssigneeDTO.name}}</span> <span class="label label-warning" ng-hide="bug.completedTime">{{ bug.dueTime | date: 'yyyy-MM-dd'}}</span> <span class="label label-default" ng-show="bug.completedTime">{{ bug.completedTime | date: 'yyyy-MM-dd'}}</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <h5 class="subtitle" id="section-stats">
+        <i class="fa fa-circle-thin icon"></i> <span class="title">统计数据</span>
+      </h5>
+      <!-- code statistics -->
+      
+      <div>
+        <div class="chart-container">
+          <div class="pie-parallel">
+            <div id="pie-closedStepsChart" style="height: 300px;"></div>
+          </div>
+          <div class="pie-parallel">
+            <div id="pie-openStepsChart" style="height: 300px;"></div>
+          </div>
+          <div class="pie-parallel">
+            <div id="pie-bugsChart" style="height: 300px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="section-summary">
+        <h5 class="subtitle" id="section-summary">
+          <i class="fa fa-circle-thin icon"></i> <span class="title">迭代总结</span>
+        </h5>
+        <textarea id="iterationSummaryEditor"></textarea>
+        <div>
+            <div class="tabset" th:replace="tab/TabSet :: tabset('tabs')">
+            </div>
+        </div>
+        <div style="margin: 30px 0px 20px 0px" ng-show="activeIteration.status != 'completed'">
+          <button type="button" class="btn btn-success" ng-click="completeIteration()">完成迭代</button>
+          <button type="button" class="btn btn-default" ng-click="cancelOperation()">返回迭代</button>
+        </div>
+        <div style="margin: 30px 0px 20px 0px" ng-show="activeIteration.status == 'completed'">
+          <button type="button" class="btn btn-default" ng-click="saveOperation()">保存</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+.page-header {
+  margin: 0px;
+}
+
+.folder {
+  position: relative;
+}
+
+.folder i{
+  margin: 0px 2px;
+}
+
+.folder:before {
+}
+
+.folder-content {
+  position: relative;
+  margin-left: 41px;
+}
+
+.folder-content:before {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 20px;
+  left: -20px;
+  border: 1px solid #ADADAD;
+  border-width: 0 0 0 1px;
+}
+
+.folder:last-child:after {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 21px;
+  bottom: 0;
+  left: -20px;
+  border-left: 1px solid #f3f3f4;
+}
+
+.folder-project > .folder-name {
+  color: #333333;
+  background-color: #E7F3FF;
+  border-color: #ADADAD;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.folder-package > .folder-name {
+  color: #333333;
+  background-color: #E7F3FF;
+  border-color: #ADADAD;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.folder-class > .folder-name {
+  color: #333333;
+  background-color: #E7F3FF;
+  border-color: #ADADAD;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+//.folder-project  .folder-package , .folder-class, .folder-function, {
+//  display: none;
+//}
+
+.folder-function > .folder-name {
+  margin-bottom: 0px;
+  color: #333333;
+  background-color: #E7F3FF;
+  border-color: #ADADAD;
+}
+
+.folder-text {
+  cursor: default;
+  margin: 0px;
+  padding: 15px;
+  background-color: #fff;
+  border-right: 1px solid #ADADAD;
+  border-left: 1px solid #ADADAD;
+  border-bottom: 1px solid #ADADAD;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.folder-name {
+  cursor: pointer;
+  padding: 10px 15px;
+  height: 41px;
+  margin: 4px 0px 0px 0px;
+  border: 1px solid #fff;
+}
+
+.folder-class .folder-name:before, .folder-project  .folder-package .folder-name:before, .folder-function .folder-name:before{
+  display: inline-block;
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: -20px;
+  height: 0;
+  width: 16px;
+  border-bottom: 1px solid #ADADAD;
+  z-index: 1;
+}
+
+.defCur {
+  cursor: default;
+}
+.num {
+  text-align: center;
+  float: right;
+}
+.num-skipped {
+  color: #5bc0de;
+}
+
+.num-passed {
+  color: #5cb85c;
+}
+
+.num-failed {
+  color: #d9534f;
+}

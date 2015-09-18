@@ -1,0 +1,42 @@
+// overall css for project work panel
+// imported by /onboard/onboard.less
+
+
+
+    // sidebar content panel
+    .content-wrapper {
+
+//      #todolists {
+//        @import "todolists";
+//      }
+      #iterations {
+        @import "../onboard/company/project/iteration/index";
+      }
+      #versions {
+        @import "../onboard/company/project/version/index";
+      }
+      #repository {
+        @import "../onboard/company/project/repository/index";
+      }
+      #discussions {
+        @import "../onboard/company/project/discussion/index";
+      }
+      #uploads {
+        @import "../onboard/company/project/uploads/index";
+      }
+
+
+      .subnav {
+        padding: 10px 30px 15px;
+        border-bottom: 1px solid #e1e1e1;
+        box-shadow: 1px 0 3px #eee, inset 0 0 3px #fff;
+        -webkit-box-shadow: 1px 0 3px #eee, inset 0 0 3px #fff;
+      }
+    }
+
+
+  .modal-backdrop.in {
+    opacity: 0.5;
+  }
+
+//}

@@ -1,0 +1,40 @@
+#ciProjectDetail{
+  .center-panel-content{
+    table{
+      tr#builds-title{
+        font-family: "Courier New", Courier, monospace;
+        font-size: 14px;
+        th{
+          padding-left: 25px;
+        }
+      }
+      tr#builds-info{
+        font-size: 14px;
+        td{
+          padding-left:25px;
+          span#build-success{
+            color: green;
+          }
+          span#build-unstable{
+            color:yellow;
+          }
+          span#build-failure{
+            color:red;
+          }
+          span#build-default{
+            color:blue;
+          }
+        }
+      }
+
+    }
+  }
+}
+
+#ciTestReport{
+  @import "testReport";
+}
+
+#buildDetail{
+  @import "buildDetail";
+}

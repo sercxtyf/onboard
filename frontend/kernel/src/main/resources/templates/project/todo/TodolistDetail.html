@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+  <div class="todo_body" data-placement="right" id="todolist" th:fragment="todolistDetail" ng-controller="todolistCtrl">
+     <div name="todolistDetailForm" class="modal-dialog" id="todolist-detail">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!--<div class="tool">-->
+              <!--<button type="button" class="close" data-dismiss="drawer"><span aria-hidden="true">&times;</span><span-->
+                        <!--class="sr-only">Close</span>-->
+              <!--</button>-->
+          <!--</div>-->
+          <h4 class="modal-title"><input type="text" name="name" ng-model="currentTodolist.name" required=""
+            class="input-invisible todolist_name" ng-blur="updateTodolist($event, currentTodolist)" resize="" ng-maxlength="200"/>
+          <div ng-show="todoForm.content.$error.required &amp;&amp; todoForm.content.$dirty"
+                  class="alert alert-danger" role="alert">名称不能为空</div>
+          <div ng-show="todoForm.content.$error.maxlength &amp;&amp; todoForm.content.$dirty"
+                  class="alert alert-danger" role="alert">最大长度不能超过200</div></h4>
+        </div>
+        <div class="modal-body">
+          <div class="panel-body">
+            <ul class="list-group todo-list" ng-controller="todoItemCtrl">
+              <li th:replace="project/common/Todos :: todos('currentTodolist.todos', 'openTodosFiletr')"></li>
+            </ul>
+
+            <a class="list-group-item click-link new-in-list"  open-drawer="new-todo" ng-show="!currentTodolist.archived"
+                       open-drawer-data="{todolistId : currentTodolist.id, projectId : currentTodolist.projectId, companyId: currentTodolist.companyId}">
+              <i class="fa fa-plus" style=""></i> 添加
+            </a>
+          </div>
+          <div class="tabset" th:replace="tab/TabSet :: tabset('todolistTabs')"></div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+</body>
+
+</html>

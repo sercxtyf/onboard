@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('登录失败 | Onboard')">
+  <style type="text/css"> 
+    .container {margin-top: 300px}
+  </style> 
+</head>
+<body>
+  <div class="container">
+    <div class="alert alert-danger alert-dismissible form-sign">
+      <h1>您的老师还未注册，请等待老师注册后再登录</h1> 
+    </div>
+  </div>
+
+</body>
+</html>

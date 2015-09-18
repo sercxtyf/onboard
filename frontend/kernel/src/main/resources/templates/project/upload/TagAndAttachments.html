@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="tagAndAttachments" id="tagAndAttachments">
+
+    <div class="subnav">
+        <form name="tagForm">
+            <div>
+                <input type="text" name="edit_content" class=" editTag pointer" ng-model="currentTag.tagname"
+                       ng-maxlength="50"
+                       required="" ng-blur="updateByName();"/>
+            </div>
+            <div ng-show="tagForm.content.$error.required &amp;&amp; todoForm.content.$dirty"
+                 class="alert alert-danger" role="alert">标签名称不能为空
+            </div>
+            <div ng-show="tagForm.content.$error.maxlength &amp;&amp; todoForm.content.$dirty"
+                 class="alert alert-danger" role="alert">最大长度不能超过50
+            </div>
+        </form>
+
+    </div>
+    <div class="panel panel-info" infinite-scroll='pager.nextPage()' infinite-scroll-disabled='pager.busy' infinite-scroll-distance='1' infinite-scroll-container="#subview">
+        <table class="table table-hover file-content-header" >
+            <tbody class="row tag_attacments">
+            <tr ng-repeat="attachment in pager.items">
+                <td class="col-sm-6"  ng-switch="attachment.contentType">
+                    <img ng-src='/static/img/attachment-icon/word.png' ng-switch-when="application/msword"/>
+                    <img ng-src='/static/img/attachment-icon/word.png'
+                         ng-switch-when="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+                    <img ng-src='/static/img/attachment-icon/file_extension_rar.png'
+                         ng-switch-when="application/x-rar-compressed"/>
+                    <img ng-src='/static/img/attachment-icon/zip.png' ng-switch-when="application/zip"/>
+                    <img ng-src='/static/img/attachment-icon/file_extension_txt.png' ng-switch-when='text/plain'/>
+                    <img ng-src='/static/img/attachment-icon/css.png' ng-switch-when="text/css"/>
+                    <img ng-src='/static/img/attachment-icon/html.png' ng-switch-when="text/html"/>
+                    <img ng-src='/static/img/attachment-icon/txt.png' ng-switch-when="text/xml"/>
+                    <img ng-src='/static/img/attachment-icon/excel.png'
+                         ng-switch-when="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                    <img ng-src='/static/img/attachment-icon/ppt.png'
+                         ng-switch-when="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
+                    <img ng-src='/static/img/attachment-icon/file_extension_js.png' ng-switch-when="application/javascript"/>
+                    <img ng-src='/static/img/attachment-icon/ppt.png' ng-switch-when="application/vnd.ms-powerpoint"/>
+                    <img ng-src='/static/img/attachment-icon/excel.png' ng-switch-when="application/vnd.ms-excel"/>
+                    <img ng-src='/static/img/attachment-icon/pdf.png' ng-switch-when="application/pdf"/>
+                    <img ng-src="{{getProjectUri}}attachments/image/{{attachment.id}}" ng-switch-when="image"/>
+                    <img ng-src='/static/img/attachment-icon/file_extension_others.png' ng-switch-default=""/>
+                    &nbsp;&nbsp;{{attachment.name}}
+                </td>
+                <td class="col-sm-4">{{attachment.creatorName}}&nbsp;&nbsp;上传于&nbsp;&nbsp;{{attachment.created | date:'yyyy-MM-dd HH:mm'}}</td>
+                <td class="col-sm-2"><a class="pointer" open-drawer="{{ attachment.targetType }}" open-drawer-params="{id: attachment.targetId}"
+                                        open-drawer-data="{projectId: attachment.projectId, companyId : attachment.companyId}">讨论</a>&nbsp;&nbsp;&nbsp;
+                    <a ng-href="{{getProjectUri + 'attachments/' + attachment.id +'/download'}}" target="_blank">下载</a>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+        <div ng-show='pager.busy'>正在载入...</div>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+<body>
+<div th:fragment="bugs" id="bugs">
+
+  <div class="center-panel-nav">
+    <!--a class="toggle-sidebar-btn btn btn-primary" href="#" ng-click="toggleSidebar()"><i class="fa fa-bars"></i></a>
+-->
+    <h3>
+      <span>缺陷</span>
+      <small>
+        <span>——管理您产品中各类缺陷的发现、修复和检阅，帮助您提高产品的质量和安全性能。</span>
+      </small>
+    </h3>
+    <ul class="second-nav-bar">
+      <li class="second-nav-item" ui-sref-active="active"><a ui-sref="company.project.bugs.opened">待修复的缺陷</a></li>
+      <li class="second-nav-item" ui-sref-active="active"><a ui-sref="company.project.bugs.finished">已修复的缺陷</a></li>
+      <li class="second-nav-item" ui-sref-active="active"><a ui-sref="company.project.bugs.stats">缺陷统计</a></li>
+      <li class="second-nav-button" ng-click="openNewBugDrawer($event)"><i class="fa fa-plus"></i> 新建缺陷</li>
+    </ul>
+
+
+    
+    <div class="pull-right" ng-hide="memberFilterHide">
+      <div class="btn-group select-bug-list">
+        <div class="dropdown userMenu" ng-include="'user-menu-with-all-users.html'"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="center-panel-content bug-list">
+
+
+    <div class="bug-content-wrapper">
+      <div ui-view="">
+
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+</body>
+
+</html>

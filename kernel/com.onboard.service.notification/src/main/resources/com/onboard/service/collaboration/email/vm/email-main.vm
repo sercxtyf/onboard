@@ -1,0 +1,56 @@
+<table id="teamforge_email" style="background:#ffffff;margin:0;padding:0;border:0;width:100%;text-align:left;border-collapse:collapse;border-spacing:0" id="msg">
+	<tbody>
+		<tr>
+			<td> 
+				<p style="font-family:&quot;Helvetica Neue&quot;,helvetica,arial,sans-serif;margin:0 0 19px;color:grey;font-size:12px;line-height:16px">
+				   请在此行上方进行回复
+				</p>
+				#if ($msg)
+					<p style="font-size:16px;line-height:40px;font-family:'Helvetica Neue',helvetica,sans-serif;color:#822e14">
+						${msg}
+					</p>
+				#end
+				#if ($belongtos)
+					<span style="font-size:12px;line-height:18px;font-family:'Helvetica Neue',helvetica,sans-serif;color:#999999">
+						#foreach ($belongto in $belongtos)
+							${belongto}<br>
+					    #end
+					</span>	    
+				#end
+			</td>
+		</tr>
+		<tr>
+			<td> 
+				<p style="font-size:20px;color:#000000;font-weight:bold;font-family:'Helvetica Neue',helvetica,sans-serif">
+					${itemname}
+				</p>
+				#if ($body)
+				<p style="margin:19px 0;padding:15px 0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;background:#ffffff;width:100%">
+					${body}
+				</p>
+				#end
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p style="line-height:19px;font-size:14px;margin:19px 0 9px;font-family:&quot;Helvetica Neue&quot;,helvetica,arial,sans-serif">
+					<a href="http://${teamforgeurl}" target="_blank"> 在onboard上查看该信息</a>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td> 
+				<p style="font-family:&quot;Helvetica Neue&quot;,helvetica,arial,sans-serif;margin:0 0 19px;line-height:16px;color:grey;font-size:12px;margin-bottom:8px">
+					该邮件已发送至: 
+						#foreach ($email in $emailList)
+							<a href="mailto:${email}" target="_blank">${email}</a>  
+						#end
+					
+						#foreach ($user in $userList)
+							${user.name}   
+						#end
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>

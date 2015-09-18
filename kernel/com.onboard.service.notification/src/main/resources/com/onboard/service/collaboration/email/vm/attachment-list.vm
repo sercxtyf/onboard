@@ -1,0 +1,10 @@
+<ul style="margin: 5px 0;border-bottom:1px solid #ccc;background:#ffffff;width:100%">
+  #foreach ($attachment in $attachmentList)
+    <li style="margin-left:10px;">
+          <a 
+            href="http://${host}/${companyId}/projects/${projectId}/attachments/${attachment.id}/download" 
+            title="下载" style="font-size: 14px;">
+            ${attachment.name}</a>
+    </li>
+  #end
+</ul>

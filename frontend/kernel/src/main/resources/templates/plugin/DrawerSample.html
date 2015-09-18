@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<script th:fragment="plugin" type="text/ng-template" id="drawerSample.html">
+  <div id="drawerSample" ng-controller="drawerSampleCtrl">
+
+      <div name="todoForm" class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h4 id="title">
+                      Drawer标题
+                  </h4>
+              </div>
+              <div class="modal-body">
+                  Drawer标题主体内容
+              </div>
+              <div class="tabset" th:replace="tab/TabSet :: tabset('drawerSampleTabs')"></div>
+          </div>
+          <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+  </div>
+</script>
+</body>
+
+</html>

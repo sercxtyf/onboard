@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title th:remove="all">Templates for Thymeleaf Email Support</title>
+</head>
+<body>
+
+<table id="teamforge_email" style="background:#ffffff;margin:0;padding:0;border:0;width:100%;text-align:left;border-collapse:collapse;border-spacing:0">
+    <tbody>
+        <tr>
+            <td> 
+                <p style="font-family:&quot;Helvetica Neue&quot;,helvetica,arial,sans-serif;margin:0 0 19px;color:grey;font-size:12px;line-height:16px">
+                   请在此行上方进行回复
+                </p>
+                <span style="font-size:12px;line-height:18px;font-family:'Helvetica Neue',helvetica,sans-serif;color:#999999">
+                    项目：<span th:text="${projectName}"></span>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td> 
+                <p style="font-size:14px;line-height:19px;font-family:&quot;Helvetica Neue&quot;,helvetica,arial,sans-serif;color:brown;margin:0 0 10px">
+                    <span th:text="${userName}"></span>对<span th:utext="${subject}"></span>进行了评论:
+                </p>
+                <p style="margin:19px 0;padding:15px 0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;background:#ffffff;width:100%">
+                    <span th:utext="${content}"></span>
+                </p>
+                <div th:utext="${attachmentList}"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p style="line-height:19px;font-size:14px;margin:19px 0 9px;font-family:&quot;Helvetica Neue&quot;,helvetica,arial,sans-serif">
+                    <a th:href="@{|${host}/${url}|}" target="_blank"> 在onboard上查看该信息</a>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td> 
+                <p style="font-family:&quot;Helvetica Neue&quot;,helvetica,arial,sans-serif;margin:0 0 19px;line-height:16px;color:grey;font-size:12px;margin-bottom:8px">
+                    该邮件已发送至: 
+                  <span style="margin:0 5px" th:each="subscriber : ${subscribers}" th:text="${subscriber.name}"></span>  
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

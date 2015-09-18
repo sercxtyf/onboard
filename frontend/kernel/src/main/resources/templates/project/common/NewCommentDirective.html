@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+</head>
+<body>
+<div th:fragment="newCommentDirective" id="newCommentDirective">
+
+  <div class="media new-comment">
+    <div ng-show="stat =='error'" class="alert alert-danger" role="alert">{{msg}}</div>
+    <a class="media-left" href="#">
+      <img class="avatar" ng-src="{{avatarUrlInComment(currentUser.avatar)}}"> </img>
+    </a>
+
+    <div class="media-body" style="width:100%">
+      <form class="newCommentForm" role="form">
+        <div class="form-group">
+          <input type="text" class="form-control fake-input-content" name="content" placeholder="点击发表评论"
+                 ng-click="showCommentEditor($event)"> </input>
+        </div>
+
+        <div class="attachments-buttons" style="display: none;">
+
+          <p class="description">
+            <i class="fa fa-paperclip"></i>将附件拖动到以下区域或
+            <span data-multiple="true" class="btn btn-default btn-xs" ng-file-select="onFileSelect($files)">
+              点此上传
+            </span>
+          </p>
+
+          <div class="comment-attachments file-upload-area" ng-file-drop="onFileSelect($files)"
+               ng-file-drag-over-class="file-upload-area-on">
+
+            <div ng-repeat="file in uploadedFiles" ng-show="file != null" class="attachment-item">
+              <input class="hidden" data-id="{{file.id}}"> </input>
+
+              <preview content-type="file.contentType" class="preview"></preview>
+
+              <span class="name">{{file.name}}</span>
+
+              <span class="size">{{file.size | fileSize}}</span>
+
+              <i class="fa fa-times-circle pull-right delete pointer" ng-click="remove(file)"></i>
+
+              <div class="attach-Progress" style="display: none">
+                <progressbar class="progress-striped active" value="dynamic" type="success"/>
+              </div>
+            </div>
+          </div>
+
+          <i class="fa fa-at"></i>发送通知给：
+          <button type="button" class="btn btn-default btn-xs" ng-click="toggleCommentSubscribers($event)">选择用户</button>
+          <div id="commentSubscribers" class="hide">
+            <memberselector memberselector-user-list="projectUsers" memberselector-option="memberselectorOptions"
+                            memberselector-return="selectedUsers"></memberselector>
+          </div>
+
+
+          <div class="buttons">
+            <button type="submit save" class="btn btn-primary" ng-click="saveComment($event)">发表评论</button>
+            <button type="button cancel" class="btn btn-default" ng-click="cancelCommentEdit($event)">取消</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+
+</div>
+</body>
+</html>

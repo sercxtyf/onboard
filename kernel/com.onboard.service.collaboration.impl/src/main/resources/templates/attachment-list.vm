@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title th:remove="all">Templates for Thymeleaf Email Support</title>
+</head>
+<body>
+
+<ul style="margin: 5px 0;border-bottom:1px solid #ccc;background:#ffffff;width:100%" th:fragment="attachments">
+    <li style="margin-left:10px;" th:each="attachment : ${attachmentList}">
+          <a th:href="@{|${host}/api/${companyId}/projects/${projectId}/attachments/${attachment.id}/download|}"
+            title="下载" style="font-size: 14px;" th:text="${attachment.name}"></a>
+    </li>
+</ul>
+
+</body>
+</html>

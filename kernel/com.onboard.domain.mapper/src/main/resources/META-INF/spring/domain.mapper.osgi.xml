@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/osgi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                                 http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+  <!-- 引入 IndexWriterAspect 服务 -->
+  <reference id="indexWriterAspect" interface="com.onboard.service.index.IndexAspect" />
+
+  <!-- PlatformTransactionManager 服务 -->
+  <service id="transactionManagerService" interface="org.springframework.transaction.PlatformTransactionManager" ref="transactionManager" />
+
+  <!-- SqlSessionFactory 服务 -->
+  <service id="sqlSessionFactoryService" ref="sqlSessionFactory" interface="org.apache.ibatis.session.SqlSessionFactory" />
+
+  <!-- mapper 服务 -->
+  <service id="activityDao" interface="com.onboard.domain.mapper.ActivityMapper" ref="activityMapperBean" />
+  <service id="attachmentDao" interface="com.onboard.domain.mapper.AttachmentMapper" ref="attachmentMapperBean" />
+  <service id="commentDao" interface="com.onboard.domain.mapper.CommentMapper" ref="commentMapperBean" />
+  <service id="companyDao" interface="com.onboard.domain.mapper.CompanyMapper" ref="companyMapperBean" />
+  <service id="discussionDao" interface="com.onboard.domain.mapper.DiscussionMapper" ref="discussionMapperBean" />
+  <service id="projectDao" interface="com.onboard.domain.mapper.ProjectMapper" ref="projectMapperBean" />
+  <service id="subscriberDao" interface="com.onboard.domain.mapper.SubscriberMapper" ref="subscriberMapperBean" />
+  <service id="todolistDao" interface="com.onboard.domain.mapper.TodolistMapper" ref="todolistMapperBean" />
+  <service id="todoDao" interface="com.onboard.domain.mapper.TodoMapper" ref="todoMapperBean" />
+  <service id="topicDao" interface="com.onboard.domain.mapper.TopicMapper" ref="topicMapperBean" />
+  <service id="userCompanyDao" interface="com.onboard.domain.mapper.UserCompanyMapper" ref="userCompanyMapperBean" />
+  <service id="userDao" interface="com.onboard.domain.mapper.UserMapper" ref="userMapperBean" />
+  <service id="userProjectDao" interface="com.onboard.domain.mapper.UserProjectMapper" ref="userProjectMapperBean" />
+  <service id="invitationDao" interface="com.onboard.domain.mapper.InvitationMapper" ref="invitationMapperBean" />
+  <service id="invitationProjectsDao" interface="com.onboard.domain.mapper.InvitationProjectsMapper" ref="invitationProjectsMapperBean" />
+  <service id="departmentDao" interface="com.onboard.domain.mapper.DepartmentMapper" ref="departmentMapperBean" />
+  <service id="companyPrivilegeDao" interface="com.onboard.domain.mapper.CompanyPrivilegeMapper" ref="companyPrivilegeMapperBean" />
+  <service id="projectPrivilegeDao" interface="com.onboard.domain.mapper.ProjectPrivilegeMapper" ref="projectPrivilegeMapperBean" />
+  <service id="notificationDao" interface="com.onboard.domain.mapper.NotificationMapper" ref="notificationMapperBean" />
+  <service id="tagDao" interface="com.onboard.domain.mapper.TagMapper" ref="tagMapperBean" />
+  <service id="tagAttachDao" interface="com.onboard.domain.mapper.TagAttachMapper" ref="tagAttachMapperBean" />
+  <service id="iterationDao" interface="com.onboard.domain.mapper.IterationMapper" ref="iterationMapperBean" />
+  <service id="projectTodoIdDao" interface="com.onboard.domain.mapper.ProjectTodoIdMapper" ref="projectTodoIdMapperBean" />
+  <service id="attachTodoDao" interface="com.onboard.domain.mapper.AttachTodoMapper" ref="attachTodoMapperBean" />
+  <service id="projectTodoStatusDao" interface="com.onboard.domain.mapper.ProjectTodoStatusMapper" ref="projectTodoStatusMapperBean" />
+  <service id="companyApplicationDao" interface="com.onboard.domain.mapper.CompanyApplicationMapper" ref="companyApplicationMapperBean" />
+  <service id="bugDao" interface="com.onboard.domain.mapper.BugMapper" ref="bugMapperBean" />
+  <service id="storyMapperDao" interface="com.onboard.domain.mapper.StoryMapper" ref="storyMapperBean" />
+  <service id="iterationAttachMapperDao" interface="com.onboard.domain.mapper.IterationAttachMapper" ref="iterationAttachMapperBean" />
+  <service id="stepMapperDao" interface="com.onboard.domain.mapper.StepMapper" ref="stepMapperBean" />
+  <service id="keywordMapperDao" interface="com.onboard.domain.mapper.KeywordMapper" ref="keywordMapperBean" />
+  <service id="collectionMapperDao" interface="com.onboard.domain.mapper.CollectionMapper" ref="collectionMapperBean" />
+  <service id="trashMapperDao" interface="com.onboard.domain.mapper.TrashMapper" ref="trashMapperBean" />
+  <service id="uploadMapperDao" interface="com.onboard.domain.mapper.UploadMapper" ref="uploadMapperBean" />
+  <service id="helpTipMapperDao" interface="com.onboard.domain.mapper.HelpTipMapper" ref="helpTipMapperBean" />
+</beans:beans>

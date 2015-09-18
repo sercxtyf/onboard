@@ -1,0 +1,374 @@
+.jumbotron {
+  margin-top: 30px;
+  padding: 20px 60px;
+  thumbnail{
+    float: left;
+    margin-right: 15px;
+  }
+  h2{  
+    font-size: 28px;
+    margin-top: 15px;
+  }
+  p{
+    font-size: 20px;
+  }
+  p.toggle-word-cloud{
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 15px;
+  }
+  #word-cloud {
+    text {
+      cursor: pointer;
+    }
+  }
+}
+
+#meAttachments{
+  .attachments{
+    margin-bottom:20px;
+
+    .img-set{
+      cursor:pointer;
+    }
+    .showAttachmentName a{
+      cursor:pointer;
+    }
+  }
+}
+//
+//#meCompletedTodos{
+//  .projectName{
+//    font-size: 13px;
+//    font-weight: normal;
+//    color: #999;
+//    .completedHref{
+//      cursor:pointer;
+//      color:#999;
+//    }
+//    .completedHref:hover{
+//      text-decoration: underline;
+//    }
+//  }
+// .todoInfo{
+//   margin-top: 5px;
+//   .todoName{
+//     color:#000000;
+//     cursor:pointer;
+//   }
+//   .todoName:hover{
+//     color: #477B96;
+//     text-decoration: underline;
+//   }
+//   .todoDone{
+//     color: #999;
+//     font-size: 13px;
+//   }
+// }
+//}
+#meUncompletedTodos, #meCompletedTodos{
+  padding-bottom: 15px;
+  .projectName{
+    cursor:pointer;
+    font-weight: bold;
+    font-size: 16px;
+    color: #3d7489;
+  }
+  .projectName:hover{
+    text-decoration: underline;
+  }
+  .uncompletedHref:hover{
+    color: #477B96;
+    text-decoration: underline;
+  }
+  .uncompletedHref{
+    font-weight: bold;
+    font-size: 14px;
+    cursor:pointer;
+    color: #3d7489;
+  }
+
+  .untodoInfo{
+    margin-top: 8px;
+    .todoName{
+      color:#000000;
+      margin-left: 10px;
+      cursor:pointer;
+    }
+    .todoName:hover{
+      color: #477B96;
+      text-decoration: underline;
+    }
+    .todoDone{
+      color: #999;
+      font-size: 13px;
+    }
+    .pill{
+      cursor:pointer;
+    }
+    .assign{
+      font-size: 12px;
+      line-height: 16px;
+      padding: 0 6px;
+      background: #eee;
+      border: 1px solid transparent;
+      color: #666;
+      white-space: nowrap;
+      display: inline-block;
+      -webkit-border-radius: 12px;
+      -moz-border-radius: 12px;
+      border-radius: 12px;
+    }
+  }
+  .uncompletedTodo{
+    padding: 15px;
+    .line{
+      border-radius: 5px;
+      color: #3d7489;
+      text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.6);
+    }
+  }
+}
+
+#meWorkTime {
+
+  .ui-slider-range { background: #007fff; }
+  .ui-slider-handle { border-color: #007fff; }
+
+  .panel-body {
+    position: relative;
+  }
+  table {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    td {
+      padding: 5px;
+    }
+    .name {
+      width: 100px;
+      font-size: 20px;
+      color: #007fff;
+    }
+    .value {
+      font-size: 15px;
+      line-height: 20px;
+      width: 100px;
+    }
+  }
+
+  #addTime {
+    float: right;
+  }
+
+  #workBoard {
+    td {
+      padding: 0px;
+      border: 1px dashed #949494;
+      text-align: center;
+    }
+
+    .worked {
+      background: #007fff;
+      border: none;
+      color: #fff;
+      text-align: left;
+    }
+    .date-tag {
+      td {
+        border: none;
+        color: #007fff;
+        font-size: 15px;
+        padding-bottom: 5px;
+      }
+    }
+
+    .time-tag {
+      border: none;
+      text-align: right;
+      padding-right: 20px;
+      width: 60px;
+      font-size: 10px;
+    }
+  }
+
+}
+
+#pageList {
+  .page-item{
+    display: block;
+    padding-left: 18px;
+    font-weight: 700;
+    color: #898989;
+    opacity: 0.7;
+
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+  }
+
+  .page-item:hover {
+    color: #007fff;
+    opacity: 0.7;
+  }
+
+  .active {
+    color: #007fff;
+    opacity: 1;
+  }
+
+  .active:hover {
+    opacity: 1;
+  }
+}
+
+.panel-me {
+  .panel-heading {
+    font-size: 20px;
+    color: #000;
+    border-left: 3px solid #007fff;
+  }
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.avatarCard {
+  :before {
+    display: table;
+    content: " ";
+  }
+  :after {
+    display: table;
+    content: " ";
+    clear:both;
+  }
+  img {
+    float: left;
+  }
+  .info {
+    float: left;
+  }
+}
+
+#meUncompletedBugs, #meCompletedBugs{
+  padding-bottom: 15px;
+  .projectName{
+    cursor:pointer;
+    font-weight: bold;
+    font-size: 16px;
+    color: #3d7489;
+  }
+  .projectName:hover{
+    text-decoration: underline;
+  }
+  .uncompletedHref:hover{
+    color: #477B96;
+    text-decoration: underline;
+  }
+  .uncompletedHref{
+    font-weight: bold;
+    font-size: 14px;
+    cursor:pointer;
+    color: #3d7489;
+  }
+
+  .bugInfo{
+    margin-top: 8px;
+    .bugName{
+      color:#000000;
+      margin-left: 10px;
+      cursor:pointer;
+    }
+    .bugName:hover{
+      color: #477B96;
+      text-decoration: underline;
+    }
+    .bugDone{
+      color: #999;
+      font-size: 13px;
+    }
+    .assign{
+      font-size: 12px;
+      line-height: 16px;
+      padding: 0 6px;
+      background: #eee;
+      border: 1px solid transparent;
+      color: #666;
+      white-space: nowrap;
+      display: inline-block;
+      -webkit-border-radius: 12px;
+      -moz-border-radius: 12px;
+      border-radius: 12px;
+    }
+  }
+  .uncompletedBug, .completedBug{
+    padding: 15px;
+    .line{
+      border-radius: 5px;
+      color: #3d7489;
+      text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.6);
+    }
+  }
+}
+#meUncompletedSteps, #meCompletedSteps{
+  padding-bottom: 15px;
+  .projectName{
+    cursor:pointer;
+    font-weight: bold;
+    font-size: 16px;
+    color: #3d7489;
+  }
+  .projectName:hover{
+    text-decoration: underline;
+  }
+  .uncompletedHref:hover{
+    color: #477B96;
+    text-decoration: underline;
+  }
+  .uncompletedHref{
+    font-weight: bold;
+    font-size: 14px;
+    cursor:pointer;
+    color: #3d7489;
+  }
+
+  .stepInfo{
+    margin-top: 8px;
+    .stepName{
+      color:#000000;
+      margin-left: 10px;
+      cursor:pointer;
+    }
+    .stepName:hover{
+      color: #477B96;
+      text-decoration: underline;
+    }
+    .stepDone{
+      color: #999;
+      font-size: 13px;
+    }
+    .assign{
+      font-size: 12px;
+      line-height: 16px;
+      padding: 0 6px;
+      background: #eee;
+      border: 1px solid transparent;
+      color: #666;
+      white-space: nowrap;
+      display: inline-block;
+      -webkit-border-radius: 12px;
+      -moz-border-radius: 12px;
+      border-radius: 12px;
+    }
+  }
+  .uncompletedStep, .completedStep{
+    padding: 15px;
+    .line{
+      border-radius: 5px;
+      color: #3d7489;
+      text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.6);
+    }
+  }
+}

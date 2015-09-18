@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="me" id="me">
+  <div class="container">
+
+    <div class="jumbotron">
+      <div class="row">
+        <div class="col-md-10">
+          <div class="media">
+            <a class="media-left thumnail"><img ng-src="{{avatarUrlInMe(me.avatar)}}"/></a>
+
+            <div class="media-body">
+              <h2 class="media-heading">{{ me.name }}</h2>
+
+              <p>{{ me.email }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div>
+            <label class="checkbox"><input type="checkbox" ng-model="isMemberCompanyAdmin"
+                                           ng-disabled="!isCurrentUserCompanyOwner"
+                                           ng-change="setUserCompanyPrivilege(userId,isMemberCompanyAdmin)"/>
+              团队管理员</label>
+          </div>
+        </div>
+
+      </div>
+      <div class="word-cloud">
+        <p class="toggle-word-cloud" ng-show="showWordCloud" ng-click="showWordCloud = !showWordCloud">收起个人关键词</p>
+        <p class="toggle-word-cloud" ng-show="!showWordCloud" ng-click="showWordCloud = !showWordCloud">显示个人关键词</p>
+        <div id="word-cloud" ng-show="showWordCloud"></div>
+      </div>
+    </div>
+
+
+    <div class="row" style="margin-top: 50px">
+      <div class="col-sm-2">
+        <div id="pageList">
+          <a ui-sref=".meActivities" class="page-item" ui-sref-active="active">用户活动</a>
+          <a ui-sref=".meUncompletedTodos" class="page-item" ui-sref-active="active">未完成任务</a>
+          <a ui-sref=".meCompletedTodos" class="page-item" ui-sref-active="active">已完成任务</a>
+          <!--<a ui-sref=".meWorkTime" class="page-item" ui-sref-active="active">工作记录</a>-->
+          <a ui-sref=".meUncompletedBugs" class="page-item" ui-sref-active="active">未完成Bug</a>
+          <a ui-sref=".meCompletedBugs" class="page-item" ui-sref-active="active">已完成Bug</a>
+          <a ui-sref=".meUncompletedSteps" class="page-item" ui-sref-active="active">未完成Step</a>
+          <a ui-sref=".meCompletedSteps" class="page-item" ui-sref-active="active">已完成Step</a>
+          <a ui-sref=".meAttachments" class="page-item" ui-sref-active="active">共享的文件</a>
+        </div>
+      </div>
+
+
+      <div class="col-sm-10">
+        <div ui-view=""></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

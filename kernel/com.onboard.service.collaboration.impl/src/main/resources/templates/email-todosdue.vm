@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title th:remove="all">Templates for Thymeleaf Email Support</title>
+</head>
+<body>
+
+<table id="teamforge_email" style="background:#ffffff;margin:0;padding:0;border:0;width:100%;text-align:left;border-collapse:collapse;border-spacing:0">
+    <tbody>
+        <tr>
+            <td> 
+                <p style="font-size:16px;line-height:40px;font-family:'Helvetica Neue',helvetica,sans-serif;color:#822e14">
+                    您的下列任务今天将过期：
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td> 
+                <div th:each="todo : ${todos}">
+                    <span style="font-size:12px;line-height:18px;font-family:'Helvetica Neue',helvetica,sans-serif;color:#999999"
+                        th:text="${todo.getBelongtos()}"></span>
+                    <p style="font-size:20px;color:#000000;font-weight:bold;font-family:'Helvetica Neue',helvetica,sans-serif;border-bottom:1px solid #ccc;">
+                        <a th:href="@{|${todo.getUrl()}|}"  target="_blank" th:text="${todo.getContent()}"></a>
+                    </p>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

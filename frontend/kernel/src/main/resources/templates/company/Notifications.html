@@ -1,0 +1,65 @@
+<!-- Created by 胡天翔 on 2015-06-23. -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+
+<div th:fragment="notifications">
+  <div class="container">
+    <p class="title">
+      <span class="main">通知中心</span>
+      <small class="sub">在这里可以看到当前团队中所有与您有关的通知。</small>
+    </p>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="list-group">
+          <a href="#" ng-click="filterAsUnread()" ng-class="{'active': selectPanel == 0}" class="list-group-item filter">
+            <i class="fa fa-envelope"></i>
+            <span>未读通知</span>
+          </a>
+          <a href="#" ng-click="filterAsAll()" ng-class="{'active': selectPanel == 1}" class="list-group-item filter">
+            <i class="fa fa-inbox"></i>
+            <span>所有通知</span>
+          </a>
+          <!--<a ui-sref="account.mentioned" ui-sref-active="active" class="list-group-item">-->
+            <!--<i class="fa fa-at"></i>-->
+            <!--<span>提到我的</span>-->
+          <!--</a>-->
+          <!--<a ui-sref="account.system" ui-sref-active="active" class="list-group-item">-->
+            <!--<i class="fa fa-signal"></i>-->
+            <!--<span>系统通知</span>-->
+          <!--</a>-->
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="panel panel-default sub-page">
+          <div class="panel-heading title">
+            <h2 class="panel-title content" ng-bind="subpageTitle"></h2>
+            <button type="button" class="btn btn-warning button">标记全部为已读</button>
+          </div>
+          <div class="panel-body">
+            <div ng-repeat="notification in notifications">
+              <div style="float: right">
+                <i class="fa fa-clock-o"></i>
+                <span am-time-ago="notification.created/1000"></span>
+              </div>
+              <a ui-sref="company.me({userId: notification.activity.creatorId})">{{notification.activity.creatorName}}</a>
+              <span>在</span>
+              <a ui-sref="company.project.iteration.activeIteration.todos({projectId: notification.activity.projectId})">{{notification.activity.projectName}}</a>
+              <span>中{{notification.activity.subject}}</span>
+              <a href="" open-drawer=""
+                 open-drawer-type="notification.activity.attachType"
+                 open-drawer-params="{id:notification.activity.attachId}"
+                 open-drawer-data="{projectId:notification.activity.projectId,companyId:notification.activity.companyId}">
+                {{ notification.activity.target }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

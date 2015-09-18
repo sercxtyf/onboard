@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('团队成员')">
+<title>团队成员</title>
+</head>
+
+<body>
+
+<div th:fragment="users">
+<ui-view></ui-view>
+  <div class="container" id="users">
+    <div class="jumbotron">
+      <h1 ng-cloak="">{{ company.name }}</h1>
+      <p ng-cloak="">{{ company.description }}</p>
+      
+      <div class="pull-right" id="companyEditButton" ng-show="isAdmin">
+        <button class="btn btn-warning btn-sm" role="button" data-toggle="modal" data-target="#editCompanyModal" ng-click="resetEditModel()">更改名称</button>
+        <button class="btn btn-danger btn-sm" role="button" data-toggle="modal" data-target="#deleteCompanyModal">删除团队</button>
+        <button class="btn btn-success btn-sm" role="button" data-toggle="modal" data-target="#invite">添加成员</button>
+      </div>
+      
+    </div>
+
+    <!-- Active User & Invitations -->
+
+    <div class="page-header">
+      <h2>
+        团队成员
+        <!--<a class="btn btn-success pull-right" -->
+           <!--ng-href="/{{ company.id }}/invitations/new">添加新成员</a>-->
+      </h2>
+    </div>
+
+    <div class="row">
+      <div ui-sortable="sortableOptions" id="unGroupUsers" ng-model="groups.unGrouped" class="row dropBody">
+        <div single-user="" ng-repeat="user in groups.unGrouped" class="col-sm-3 col-md-2"
+             id="{{ user.id }}">
+        </div>
+      </div>
+
+      <!--<div ng-repeat="user in unGroupUsers" class="btn btn-primary user_thumbnail">{{user.name}}</div>-->
+      <div invited-user="" ng-repeat="invitation in groups.invitations" class="col-sm-3 col-md-2"
+           id="{{ invitation.id }}">
+      </div>
+    </div>
+
+    <!-- User Groups -->
+    <div ng-repeat="entry in groups track by $index" class="user_group">
+      <div class="page-header" data-groupid="{{entry.id}}">
+        <h3 id="{{entry.id}}">
+          <span>{{ entry.name }}</span>
+          <small ng-show="isAdmin" class="pull-right operations">
+            <a class="edit-group" data-toggle="modal" data-target="#editModal" ng-click="editGroup()">
+              <i class="fa fa-pencil" title="编辑"></i>
+            </a>
+            <a class="delete-group" ng-click="deleteGroup(entry)">
+              <i class="fa fa-trash" title="删除"></i>
+            </a>
+          </small>
+        </h3>
+      </div>
+
+      <div class="row dropBody" ui-sortable="sortableOptions" data-groupid="{{entry.id}}" ng-model="entry.users">
+        <div single-user="" ng-repeat="user in entry.users" class="col-sm-3 col-md-2" id="{{ user.id }}">
+        </div>
+        <!--<div ng-repeat="user in entry.users" class="btn btn-primary user_thumbnail">{{user.name}}</div>-->
+      </div>
+
+    </div>
+    <!-- group entry -->
+
+    <div ng-show="isAdmin">
+      <hr />
+      <!-- TODO: 新建分组表单，与后台交互 -->
+      <form class="form-horizontal" name="createGroupForm" role="form" ng-submit="createNewGroup()">
+        <div class="form-group">
+          <label for="group_name"
+            class="col-sm-2 col-sm-offset-5 control-label">分组名称</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="group_name"
+              name="group_name" ng-model="new_group_name" required=""
+              ng-pattern="/^.{0,20}$/" placeholder="在这里输入" />
+          </div>
+          <input type="submit" value="新建分组" class="col-sm-1 btn btn-primary"/>
+        </div>
+      </form>
+    </div>
+
+  </div>
+  <!-- .container -->
+
+
+  <div class="modal fade" id="editCompanyModal"
+    ng-show="isAdmin">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <form role="form" ng-submit="editCompanyName()">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">&times;</span><span
+                class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">更改团队名称</h4>
+          </div>
+          <div class="modal-body">
+            <input
+              type="text" name="name" ng-model="newCompanyName" class="form-control"
+              placeholder="输入新的团队名称" />
+          </div>
+          <div class="modal-footer">
+            <input type="submit" value="确定" class="btn btn-primary"/>
+            <!--<button type="submit" class="btn btn-primary">确定</button>-->
+            <button type="button" class="btn btn-default"
+              data-dismiss="modal">关闭</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+
+  <div class="modal fade" id="deleteCompanyModal" ng-show="isAdmin">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <form role="form" ng-submit="deleteCompany()">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">&times;</span><span
+                class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">删除团队</h4>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" name="_method" value="put" />
+            <input type="hidden" name="deleted" value="true" />
+            确认删除该团队吗？
+          </div>
+          <div class="modal-footer">
+            <input type="submit" value="确定" class="btn btn-primary"/>
+            <button type="button" class="btn btn-default"
+              data-dismiss="modal">取消</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+
+  <div class="modal fade" id="editModal" ng-show="isAdmin">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- TODO: 编辑分组表单，与后台交互 -->
+        <form role="form" method="post" name="editGroupForm">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">&times;</span><span
+                class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">编辑分组</h4>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" name="group_id" /> <input type="text"
+              name="subgroup_name" ng-model="group_name" class="form-control" id="subgroup_name"
+              placeholder="输入新的分组名称" />
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" ng-click="renameGroup()">确定</button>
+            <button type="button" class="btn btn-default"
+              data-dismiss="modal">取消</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+  <div class="modal fade" id="invite" ng-show="isAdmin">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <form role="form" ng-submit="sendInvitation()">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">&times;</span><span
+                    class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">添加成员</h4>
+          </div>
+          <div class="modal-body">
+              <div ng-repeat="emailAddr in emailAddrs track by $index">
+                  <div class="input-group add-by-email" ng-class="{'has-error': itemForm.email.$invalid}">
+                  <span class="input-group-addon">
+                      <i class="fa fa-envelope"></i>
+                  </span>
+                      <input type="email" data-provide="typeahead" autocomplete="off" ng-model="emailAddr.email" class="form-control email" placeholder="邮箱" />
+                  <span class="input-group-btn">
+                      <button class="btn btn-warning" type="button" ng-click="emailAddrs.splice($index,1)">移除</button>
+                  </span>
+
+                  </div>
+              </div>
+              <a id="add-email" href="javascript:;" class="pull-right" ng-click="addEmail()">
+                  <i class="fa fa-plus-circle"></i>
+                  添加更多
+              </a>
+              <div class="clearfix"></div>
+             <hr/>
+              <div class="" id="projects">
+                <h4 class="modal-title">新成员参与的项目</h4>
+
+                <div class="checkbox" ng-repeat="project in projects" >
+                  <label >
+                    <input type="checkbox" checklist-model="newUserProjectIdList"
+                           checklist-value="project.id" /> {{project.name}}
+                  </label>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" value="确定" class="btn btn-primary"/>
+            <button type="button" class="btn btn-default"
+                    data-dismiss="modal">取消</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+</div>
+</body>
+</html>

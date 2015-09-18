@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/osgi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+  <reference id="notificationMapper" interface="com.onboard.domain.mapper.NotificationMapper"/>
+  <reference id="projectService" interface="com.onboard.service.collaboration.ProjectService"/>
+  <reference id="subscriberService" interface="com.onboard.service.common.subscrible.SubscriberService"/>
+  <reference id="activityService" interface="com.onboard.service.activity.ActivityService"/>
+
+  <service id="notificationService" interface="com.onboard.service.notification.NotificationService"
+           ref="notificationServiceBean"/>
+  <service id="notificationManager" interface="com.onboard.service.activity.ActivityHook"
+           ref="notificationManagerBean"/>
+  <service id="messageNotification" interface="com.onboard.service.notification.NotificationMethod"
+           ref="messageNotificationBean"/>
+
+  <list id="notificationMethods" cardinality="0..N" interface="com.onboard.service.notification.NotificationMethod">
+    <listener bind-method="addNotificationMethod" unbind-method="removeNotificationMethod"
+              ref="notificationManagerBean"/>
+  </list>
+
+  <list id="notificationRules" cardinality="0..N" interface="com.onboard.service.notification.NotificationRule">
+    <listener bind-method="addNotificationRule" unbind-method="removeNotificationRule" ref="allNotificationRuleBean"/>
+  </list>
+
+</beans:beans>

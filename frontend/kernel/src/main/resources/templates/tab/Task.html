@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head lang="en"></head>
+<body>
+  <div th:fragment="task" ng-controller="todoTabCtrl" class="task-tab" ng-init="initTodoTab('task')" id="todolists">
+
+    <!--     <div ng-repeat="todolist in linkedTodolists">
+ -->
+    <div>
+      <!--         <h4>{{todolist.name}}</h4>
+ -->
+      <ul class="list-group todo-list">
+        <!--         <li th:replace="project/common/TodosMini :: todos('linkedTodos', 'filterTodo')"></li>
+        <li th:replace="project/common/Todos :: todos('linkedTodos', 'searchTodo')"></li>
+ -->
+        <li ng-repeat="boardable in linkedTodos" class="todo-item mini-todo todo-active">
+          <div class="todo-description">
+            <span class="project-todo-id text-muted">#{{boardable.idInProject}}</span>
+            <div class="todo-type-icons">
+              <i class="fa" ng-class="{'fa-bars':     boardable.type == 'step',
+                                                     'fa-bookmark': boardable.type == 'story',
+                                                     'fa-bug':      boardable.type == 'bug' }"></i>
+            </div>
+
+            <span class="label label-primary" ng-show="boardable.assigneeDTO">{{boardable.assigneeDTO.name}}</span> <span class="label label-warning" ng-show="boardable.dueDate">{{ boardable.dueDate | date: 'yyyy-MM-dd'}}</span>
+            <!-- assignee and duedate -->
+            <div ng-if="boardable.type == 'bug'" class="todo-title pointer" title="{{boardable.content}}" ng-bind-html="boardable.content" open-drawer="bug" open-drawer-type="'bug'" open-drawer-params="{id: boardable.id}"></div>
+            <div ng-if="boardable.type == 'step'" class="todo-title pointer" title="{{boardable.content}}" ng-bind-html="boardable.content" open-drawer="step" open-drawer-type="'step'" open-drawer-params="{id: boardable.id}"></div>
+          </div> 
+        </li>
+      </ul>
+    </div>
+    <!--     <div class="add-link-scope"><a class="click-link" ng-click="addLinkedTask()">添加关联任务</a></div>
+ -->
+  </div>
+</body>
+</html>

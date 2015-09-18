@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="discussions" id="discussions" ng-controller="discussionsCtrl">
+
+  <div class="subnav container-fluid" id="discussion-nav">
+    <h2 class="pull-left">
+      <button type="button" class="btn btn-primary" ng-click="createNewDiscussion()" data-target="newDiscussion">
+        <i class="fa fa-plus"></i> 发起讨论
+      </button>
+    </h2>
+    <form class="form-inline pull-right search-box">
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-addon">筛选</div>
+          <input type="text" class="form-control" placeholder="筛选当前页面内容" ng-model="search"></input>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="table-responsive container-fluid">
+    <table id="topics" class="table table-hover table-condensed">
+      <thead>
+      <tr>
+        <th class="col-sm-1"></th>
+        <th class="col-sm-1">发言人</th>
+        <th class="col-sm-6 text-center">话题</th>
+        <th class="col-sm-2">发言时间</th>
+        <th class="col-sm-1">累计发言</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="topic in topics | filter: search" ng-animate="'slide'">
+        <td class="col-sm-1">
+          <img class="img-circle speaker pull-right link" ng-src="{{ imageStore + topic.updator.avatar + '!avatar110'}}" alt="avatar" ng-click="gotoMePage(topic.updator.id)" />          
+        </td>
+        <td class="col-sm-1">
+          <strong>{{ topic.updator.name }}</strong>
+        </td>        
+        <td class="col-sm-6 link" redirect="" data-target-type="{{topic.refType}}"  data-target-id="{{topic.refId}}">
+          <span ng-switch="topic.refType">
+            <i class="fa fa-microphone" ng-switch-when="discussion"></i>
+            <i class="fa fa-file-text-o" ng-switch-when="document"></i>
+            <i class="fa fa-check-square-o" ng-switch-when="todo"></i>
+            <i class="fa fa-code-fork" ng-switch-when="pull-request"></i>
+            <i class="fa fa-list-ul" ng-switch-when="todolist"></i>
+            <i class="fa fa-folder" ng-switch-when="upload"></i>
+            <i class="fa fa-calendar" ng-switch-when="calendarevent"></i>
+            <i class="fa fa-comment" ng-switch-default=""></i>
+          </span>
+          <strong data-target="{{ getDataTarget(topic) }}">{{ topic.title }}</strong>
+          <p data-target="{{ getDataTarget(topic) }}"></p>
+          <blockquote data-target="{{ getDataTarget(topic) }}">{{topic.excerpt | limitTo:140 }}
+          </blockquote>
+        </td>
+        <td class="col-sm-2">{{ topic.updated | date:'yyyy/MM/dd @ h:mma'}}</td>
+        <td class="col-sm-1">
+          <strong>
+            <i class="fa fa-comments-o fa-2x"></i> {{ topic.numOfComment }}
+          </strong>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div ng-show="!noMorePages()" class="row text-center">
+    <button type="submit" class="btn btn-primary" ng-disabled="busy" ng-click="addMoreTopics()">
+      载入更多</button>
+  </div>
+  <div ng-show="noMorePages()" class="text-danger text-center"><strong>没有更多的信息了...</strong></div>
+  <!-- <div th:replace="project/NewDiscussion :: newDiscussion"></div>
+  <div th:replace="project/DiscussionDetail :: discussionDetail"></div>  -->
+
+</div>
+
+</body>
+
+</html>

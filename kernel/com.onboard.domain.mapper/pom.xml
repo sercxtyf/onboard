@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.onboard</groupId>
+    <artifactId>com.onboard.parent</artifactId>
+    <version>3.0.0-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>com.onboard.domain.mapper</artifactId>
+  <packaging>bundle</packaging>
+  <name>com.onboard.domain.mapper</name>
+  <description>com.onboard.domain.mapper</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.domain.model</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <version>2.5.0</version>
+        <configuration>
+          <manifestLocation>src/main/resources/META-INF</manifestLocation>
+          <instructions>
+            <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
+            <Bundle-Version>${project.version}</Bundle-Version>
+            <Export-Package>
+                com.onboard.domain.mapper,
+                com.onboard.domain.mapper.base
+            </Export-Package>
+            <Import-Bundle>
+                com.springsource.com.mysql.jdbc;bundle-version="5.1.6"
+            </Import-Bundle>
+            <Import-Package>
+                <!-- aop -->
+                org.springframework.aop,
+                org.springframework.aop.framework,
+                org.springframework.aop.aspectj.autoproxy,
+                org.aopalliance.aop,
+                net.sf.cglib.proxy,
+                net.sf.cglib.core,
+                net.sf.cglib.reflect,
+                *
+            </Import-Package>
+          </instructions>
+        </configuration>
+      </plugin>  
+    </plugins>
+  </build>
+</project>

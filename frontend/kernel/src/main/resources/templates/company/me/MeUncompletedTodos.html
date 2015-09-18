@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="meUncompletedTodos" id="meUncompletedTodos">
+  <div class="panel panel-me">
+    <div class="panel-heading">未完成任务列表</div>
+    <div class="panel-body">
+      <div class="uncompletedTodo" ng-repeat="uncompletedTodoList in uncompletesTodoLists">
+
+        <span class="projectName uncompletedHref">
+          <a ui-sref="company.project.todolists({projectId: uncompletedTodoList.projectId, companyId:uncompletedTodoList.companyId})">
+            {{projectsName[uncompletedTodoList.projectId]}}
+          </a>
+        </span>
+        <span class="line">&nbsp;——&nbsp;</span>
+        <a class="uncompletedHref" open-drawer="todolist" open-drawer-params="{id: uncompletedTodoList.id}"
+           open-drawer-data="{projectId: uncompletedTodoList.projectId, companyId: uncompletedTodoList.companyId}">
+          {{uncompletedTodoList.name}}
+        </a>
+        <br/>
+
+        <div ng-repeat="todo in uncompletedTodoList.todos" data-id="{{todo.id}}">
+          <div class="untodoInfo">
+            <span>
+              <a class="todoName" open-drawer="todo" open-drawer-params="{id: todo.id}"
+                 open-drawer-data="{projectId: todo.projectId, companyId: todo.companyId}">
+                #{{ todo.projectTodoId }}&nbsp; {{todo.content}}
+              </a>
+            </span>
+            <span class="pill" ng-show="0" redirect="" data-target-type="comment"
+                  data-company-id="{{todo.companyId}}" data-project-id="{{todo.projectId}}"
+                  data-target-id="{{todo.id}}">{{todo.comments.length}}评论</span>
+            <span class="assign">{{user.name}}</span><span class="assign">{{todo.dueDate| date:'yyyy-MM-dd'}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+</body>
+
+</html>

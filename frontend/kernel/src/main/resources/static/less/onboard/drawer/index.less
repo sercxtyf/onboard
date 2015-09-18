@@ -1,0 +1,244 @@
+@import "../common/variables";
+
+// imported by project.less
+// all drawer styles should be declared or imported here
+&.in {
+    position: fixed;
+    box-shadow: none;
+    overflow: visible;
+}
+
+.toggle {
+    @toggle-height: 150px;
+
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    margin-top: -@toggle-height/2;
+    z-index: 100;
+    height: @toggle-height;
+    background: #EAEAEA;
+    border-radius: 0 100px 100px 0;
+    cursor: pointer;
+    border-left: none;
+    i {
+        line-height: @toggle-height;
+        margin: 0 2px 0 1px;
+        color: black;
+    }
+    &:hover {
+        background: @bright-blue;
+        i {
+            color: #ffffff;
+        }
+    }
+}
+
+
+.colle_label {
+    cursor: default;
+    display: none;
+    position: absolute;
+    left: -24px;
+    top: 26px;
+    z-index: 1050;
+    .colle_label_body {
+        height: 40px;
+        width: 40px;
+        background: #007fff;
+        .colle_star {
+            cursor: pointer;
+            color: #fff;
+            line-height: 40px;
+            width: 40px;
+            text-align: center;
+            font-size: 20px;
+        }
+    }
+    .colle_label_fold {
+        width: 0px;
+        height: 0px;
+        border-top: 25px solid #66ccff;
+        border-left: 25px solid transparent;
+    }
+}
+
+.colle_commit {
+    position: absolute;
+    right: 0px;
+    top: 8px;
+    .colle_star {
+        cursor: pointer;
+        color: #007fff;
+        line-height: 40px;
+        width: 40px;
+        text-align: center;
+        font-size: 20px;
+    }
+}
+
+&.in {
+    .colle_label {
+        display: block;
+    }
+}
+
+#uploadDetail {
+    @import "uploaddetail";
+}
+
+#todo-detail {
+    @import "todo-detail";
+}
+
+#todolist-detail {
+    .modal-body {
+        padding: 0;
+    }
+
+    .panel-body {
+        padding: 0;
+        margin-bottom: 30px;
+    }
+
+    .new-in-list {
+        color: @bluish-text-muted;
+        font-size: 16px;
+        border-style: solid none;
+        padding: 18px 22px;
+        border-color: @bluish-border;
+        i.fa {
+            margin-right: 10px;
+        }
+
+        &:hover {
+            color: @bluish-text-normal;
+        }
+    }
+
+}
+
+.tool {
+    width: 50px;
+    display: block;
+    float: right;
+    clear: both;
+    border-bottom: 1px solid #e5e5e5;
+    margin-top: -1px;
+    padding-right: 20px;
+    min-height: 21px;
+    overflow: hidden;
+    a {
+        color: #08c;
+        cursor: pointer;
+    }
+}
+
+.drawer#commit-drawer {
+}
+
+.drawer#todo {
+    .todo_content {
+        overflow-y: hidden;
+        width: 90%;
+        min-height: 28px;
+    }
+}
+
+.drawer#pullrequests-drawer {
+    .drawer-row {
+        margin: 10px;
+        padding-bottom: 9px;
+        .title {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        .commit-img {
+            height: 34px;
+            width: 34px;
+        }
+        td {
+            vertical-align: middle;
+        }
+    }
+}
+
+#discussionDetail {
+    h3 {
+        max-width: 500px;
+    }
+    .panel-body {
+        min-height: 200px;
+    }
+    .warning {
+        background-color: gold;
+        padding-top: 15px;
+        p {
+            text-align: center;
+        }
+    }
+    .operation {
+        margin-left: 10px;
+    }
+    .uploads {
+        img {
+            height: 45px;
+        }
+    }
+    .speaker {
+        height: 48px;
+    }
+    .link:hover {
+        cursor: pointer;
+    }
+    .panel-body {
+        font-size: small;
+    }
+    .modal-header {
+        padding-left: 30px;
+        .tool {
+            width: 115px;
+            padding: 5px 20px 4px 0;
+            min-height: 21px;
+        }
+    }
+}
+
+#newDiscussion {
+    .file-drop-zone {
+        margin-left: 0px;
+        margin-top: 10px;
+        .attachment-list {
+            width: auto;
+        }
+    }
+    .note-editable {
+        height: 200px;
+    }
+    .modal-content {
+        padding: 10px;
+    }
+    .click:hover {
+        cursor: pointer;
+    }    
+    .note-editor .note-dropzone {
+        opacity: 0 !important;
+    }
+    .attachment-list.file-upload-area-on {
+        border: 3px dashed #BB2B2B;
+    }
+}
+
+#todo-detail-fields .todolist-dropdown-list {
+    left: 0;
+}
+
+#todolist .todolist_name {
+    width: 100%;
+}
+
+#storyDetail{
+    @import "story-detail";
+}
+
+

@@ -1,0 +1,170 @@
+@import "../../../common/variables";
+
+@center-panel-nav-first-height: 50px;
+@center-panel-nav-second-height: 30px;
+@center-panel-nav-height: @center-panel-nav-first-height + @center-panel-nav-second-height;
+
+.center-panel-nav {
+    height: @center-panel-nav-height;
+    position: absolute;
+    z-index: 101;
+    width: 100%;
+    background-color: @dark-blue;
+    padding: 0 20px;
+    border-bottom: 1px solid @bluish-border;
+
+    .second-nav-bar {
+        height: @center-panel-nav-second-height;
+        vertical-align: top;
+        padding: 0px;
+        .second-nav-item {
+            display: inline;
+            font-size: 13px;
+            font-weight: 600;
+            margin-right: 10px;
+            > a {
+                color: #8a94a5;
+            }
+        }
+        .second-nav-button {
+            .second-nav-item;
+            color: #428bca;
+            cursor: pointer;
+        }
+        .active {
+            > a {
+                color: #428bca;
+            }
+        }
+        .current {
+            display: inline-block;
+            padding: 0px 5px;
+            background-color: #428bca;
+            border-radius: 3px;
+            > a {
+                color: white;
+            }
+        }
+    }
+
+    > div {
+        position: relative;
+        height: 50px;
+    }
+
+    div.pull-right {
+        > .btn {
+            padding: 5px 15px;
+        }
+
+        form {
+            right: 0;
+        }
+
+    }
+
+    .toggle-sidebar-btn {
+        padding: 4px 12px;
+        font-size: 14px;
+    }
+    .title {
+        margin-left: 20px;
+        font-size: 20px;
+        line-height: 30px
+    }
+
+    h3 {
+        line-height: @center-panel-nav-first-height;
+        display: inline;
+        vertical-align: middle;
+        margin: 0;
+        font-size: 20px;
+    }
+
+    .new-todo-row {
+        .btn {
+            margin-bottom: 15px;
+        }
+    }
+
+    .center-panel-nav-shadow {
+        position: absolute;
+        left: 0px;
+        bottom: -6px;
+        height: 6px;
+        width: 100%;
+        background-image: url("/static/img/center-panel-nav-shadow.png");
+    }
+
+}
+
+.center-panel-nav::before {
+    content: '';
+    // z-index: -11111111;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: white;
+    border-top-left-radius: 4px;
+    z-index: -1;
+}
+
+.center-panel-content {
+    position: absolute;
+    // top: 60px;
+    top: @center-panel-nav-height;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    overflow-y: auto;
+    overflow-x: auto;
+
+    .no-item-exists-create-new-item {
+        font-size: 40px;
+        color: #ccc;
+        text-align: center;
+        border-bottom: 1px solid;
+        padding: 50px 0;
+        background-color: white;
+    }
+}
+
+//iterations page
+.center-panel-nav {
+    .iteration-filter, .statistics-tabs, .repository-tabs {
+        display: inline-block;
+        vertical-align: bottom;
+        // line-height: 60px;
+        // height: 60px;
+        margin-left: 6px;
+        li {
+
+            > a {
+                font-weight: 600;
+                margin: 0 2px;
+                line-height: 15px;
+                padding: 10px 4px 12px 4px;
+                border-radius: 0;
+                background: none;
+                color: @bluish-text-muted;
+                &:hover, &:focus {
+                    color: @bright-blue;
+                }
+            }
+
+            &.active > a,
+            &.active > a:hover,
+            &.active > a:focus {
+                color: @bright-blue;
+                // background-color: #428bca;
+            }
+        }
+    }
+}
+
+.center-panel-nav.ng-hide + .center-panel-content {
+    top: 0 !important;
+}

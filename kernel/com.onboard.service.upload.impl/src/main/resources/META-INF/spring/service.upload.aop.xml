@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                                 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+  <config>
+    <!-- activity相关的point cut -->
+    <pointcut id="createItem"
+              expression="execution(* com.onboard.service.upload.*.create*(com.onboard.domain..*.BaseProjectItem+)) and args(item)"/>
+    <pointcut id="updateItem"
+              expression="execution(* com.onboard.service.upload.*.update*(com.onboard.domain..*.BaseProjectItem+)) and !execution(* com..mapper.*.update(..))"/>
+
+    <!-- activity相关的aspect -->
+    <aspect ref="activityRecorder" order="1">
+      <after pointcut-ref="createItem" method="recordCreationActivity" arg-names="item"/>
+      <around pointcut-ref="updateItem" method="recordUpdateActivity"/>
+    </aspect>
+
+  </config>
+</beans:beans>

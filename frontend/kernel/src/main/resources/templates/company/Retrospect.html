@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+  <div th:fragment="retrospect" data-libs="activities" id="retrospect">
+    <div class="content container">
+
+      <div class="page-header row">
+        <h2>水手日记</h2>
+        <div class="options pull-right">
+          <select id="type-filter" class="form-control" ng-options="option.id as option.name for option in typeOptions" ng-model="selectedType" ng-change="changeType()" ng-disabled="busy" />
+          <select id="project-filter" class="form-control" ng-options="option.id as option.name for option in projectOptions" ng-model="selectedProject" ng-change="changeProject()" ng-disabled="busy" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="user-filter-wrapper">
+            <ul id="user-filter">
+              <li ng-click="filterUser(0)" ng-class="{'selected': isSelected(0), 'disabled': busy}">
+                <div class="media">
+                  <div class="media">
+                    <div class="media-left">
+                      <img class="media-object avatar" ng-src="{{defaultAvatar}}" alt="所有人员" />
+                    </div>
+                    <div class="media-body">
+                      <span>所有人员</span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li ng-repeat="user in users" ng-click="filterUser(user.id)" ng-class="{'selected': isSelected(user.id), 'disabled': busy}">
+                <div class="media">
+                  <div class="media">
+                    <div class="media-left">
+                      <img class="media-object avatar" ng-src="{{user.avatarUrl}}" alt="{{user.name}}" />
+                    </div>
+                    <div class="media-body">
+                      <span>{{user.name}}</span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="timeline" infinite-scroll='nextPage()' infinite-scroll-disabled='busy || !hasNext' infinite-scroll-distance='0' infinite-scroll-immediate-check="false">
+            <div class="row activity" ng-repeat="activity in activities">
+              <div class="col-sm-2">
+                <p class="time text-center">
+                  <strong>
+                    <i class="fa fa-clock-o"></i>
+                    <span am-time-ago="activity.created/1000"></span>
+                  </strong>
+                </p>
+                <p class="project text-center">
+                  <span>
+                    <a ui-sref="company.project.todolists({projectId: activity.projectId})">
+                      {{ activity.projectName }}
+                    </a>
+                  </span>
+                </p>
+              </div>
+
+              <div class="col-sm-2">
+                <div class="users-image">
+                  <span ng-repeat="user in activity.involvedUsers">
+                    <a ui-sref="company.me({userId: user.id})"><img ng-src="{{user.avatarUrl}}" alt="{{user.username}}" class="avatar" /></a>
+                  </span>
+                </div>
+                <!--                 <p class="users-name text-center">
+                  <a ui-sref="company.me({userId: user.id})" ng-repeat="user in activity.involvedUsers">{{user.name}}</a>
+                </p> -->
+              </div>
+
+              <div class="col-sm-8">
+                <div class="content">
+                  <div class="record" ng-if="activity.attachType != 'comment'" ng-repeat="ele in activity.mergedActivities" ng-class="{'merged-record': ele.id != activity.id}">
+                    <p ng-if="ele.id == activity.id" class="users-name">
+                      <a ui-sref="company.me({userId: ele.creatorId})">{{ele.creatorName}}</a>
+                    </p>
+                    <p class="record-title">
+                      <span ng-if="ele.attachType == 'todo'">在
+                        <a href="" open-drawer=""
+                         open-drawer-type="'todolist'"
+                         open-drawer-params="{id:ele.todolist.id}"
+                         open-drawer-data="{projectId:ele.projectId,companyId:ele.companyId}">
+                        {{ ele.todolist.name }}</a>中
+                      </span>
+                      <span ng-if="ele.attachType == 'pullrequest-push'">在<strong>{{ ele.target }}</strong>分支中</span>
+                      <span>{{ele.subject}}</span>
+                      <span ng-if="ele.attachType != 'pullrequest-push'">
+                          <a href="" open-drawer=""
+                           open-drawer-type="ele.attachType"
+                           open-drawer-params="{id:ele.attachId}"
+                           open-drawer-data="{projectId:ele.projectId,companyId:ele.companyId}">
+                          {{ ele.target }}</a>
+                      </span>
+                    </p>
+                    <!-- <p class="record-content" ng-if="ele.attachType == 'pullrequest-push'" data-project-id="{{ele.projectId}}" ng-bind-html="ele.content | wrapCommitTodoLink: ''">
+                    </p> -->
+                    <p class="record-content" ng-if="ele.attachType == 'pullrequest-push'" commit-code="" content="ele.content" project-id="ele.projectId">
+                    </p>
+                  </div>
+                  <div class="record" ng-if="activity.attachType == 'comment'">
+                    <div class="reply-title">回复了
+                      <span>
+                        <a href="" open-drawer=""
+                         open-drawer-type="activity.attachType"
+                         open-drawer-params="{id:activity.attachId}"
+                         open-drawer-data="{projectId:activity.projectId,companyId:activity.companyId}">
+                        {{ activity.target }}</a>:
+                      </span>
+                    </div>
+                    <p class="record-content" ng-repeat="ele in activity.mergedActivities">
+                      <span class="users-name">
+                        <a ui-sref="company.me({userId: ele.creatorId})">{{ele.creatorName}}:</a>
+                      </span>
+                      <span>{{ele.content}}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div ng-hide='hasNext' class="text-center text-danger">
+              <strong>没有更多的信息了...</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.onboard</groupId>
+    <artifactId>com.onboard.parent</artifactId>
+    <version>3.0.0-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+  <artifactId>com.onboard.web.api</artifactId>
+  <packaging>bundle</packaging>
+  <name>com.onboard.web.api</name>
+  <description>com.onboard.web.api</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+    </dependency>
+    <!-- web mvc -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.web.servlet</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.eclipse.jetty.orbit</groupId>
+        <artifactId>javax.servlet</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>com.springsource.javax.validation</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>com.springsource.org.hibernate.validator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.osgi.dependencies</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.service.security</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.service.help</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.service.activity</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.service.notification</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.service.collaboration</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.service.upload</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.domain.transform</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.onboard</groupId>
+      <artifactId>com.onboard.service.sampleProject</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <version>2.5.0</version>
+        <configuration>
+          <manifestLocation>src/main/resources/META-INF</manifestLocation>
+          <instructions>
+            <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
+            <Bundle-Version>${project.version}</Bundle-Version>
+            <Private-Package>
+                com.onboard.web.api,
+                com.onboard.web.api.*,
+                com.onboard.web.exception.handler
+            </Private-Package>
+            <Export-Package>
+                com.onboard.web.api
+            </Export-Package>
+            <Import-Bundle>
+                <!-- web context -->
+                org.springframework.beans;version="[3.0.5.RELEASE,3.1.0.RELEASE]",
+                org.springframework.context;version="[3.0.5.RELEASE,3.1.0.RELEASE]",
+                org.springframework.security.config;version="[3.0.5.RELEASE,3.1.0.RELEASE]",
+                org.springframework.security.core;version="[3.0.5.RELEASE,3.1.0.RELEASE]",
+                org.springframework.security.web;version="[3.0.5.RELEASE,3.1.0.RELEASE]",
+                org.springframework.web;version="[3.0.5.RELEASE,3.1.0.RELEASE]",
+                org.springframework.web.servlet;version="[3.0.5.RELEASE,3.1.0.RELEASE]",
+                org.eclipse.virgo.web.dm;version="[3.0.2.RELEASE,4)",
+                com.onboard.osgi.dependencies;version="[3.0.0.SNAPSHOT,4)"
+            </Import-Bundle>
+            <Import-Package>
+                <!-- dependency in configuration -->
+                com.onboard.service.security.auth,
+                com.onboard.domain.mapper.model.common,
+                <!-- object mapper to conver json -->
+                org.codehaus.jackson,
+                org.codehaus.jackson.map,
+                <!-- validator -->
+                org.hibernate.validator,
+                <!-- aop -->
+                org.springframework.aop,
+                org.springframework.aop.framework,
+                org.aopalliance.aop,
+                net.sf.cglib.proxy,
+                net.sf.cglib.core,
+                net.sf.cglib.reflect,
+                <!-- fix conflict between org.springsource.joda and jodo-time -->
+                org.joda.time;version="[1.6,2)",
+                org.joda.time.format;version="[1.6,2)",
+                *
+            </Import-Package>
+            <Web-ContextPath>/api</Web-ContextPath>
+          </instructions> 
+        </configuration>
+      </plugin>  
+    </plugins>
+  </build>
+</project>

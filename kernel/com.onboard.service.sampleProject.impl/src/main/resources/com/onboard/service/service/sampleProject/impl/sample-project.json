@@ -1,0 +1,77 @@
+{
+    "sampleProject": {
+        "name": "Time to be Onboard",
+        "description": "享受协作的乐趣",
+        "colorId": 3,
+        "deleted": false
+    },
+    "sampleDiscussions": [
+        {
+            "subject": "超级方便的代码管理和协作",
+            "deleted": false,
+            "content": "<ul><li>代码托管<i></i>：一次点击就能够建立自己的代码仓库<div><div></div></div></li><li>代码协作：基于Git的Code Branching/Merging和 Code Review从未如此惬意<br></li><li>超级方便的代码管理和协作：轻轻松松完成代码仓库操作，代码Review，代码分支与合并，还能和任务和讨论无缝集成在一起</li></ul>"
+        },
+        {
+            "subject": "高效率的知识管理功能",
+            "deleted": false,
+            "content": "<ul><li>在线文档：&nbsp;通过在线文档， 建立团队知识库<div><div></div></div></li><li>文件管理：文件共享只需一次拖动，文件分类只需一个标签<br></li><li>搜索无处不在：我们会为项目的所有关键信息建立全文索引，找不到东西了？ No problem，你只需要一个关键字</li><li>过程信息全记录：项目中发生的任何活动都会在Onboard中留下永久的痕迹，每天的项目进展也可以随时回顾</li></ul>"
+        },
+        {
+            "subject": "随时掌握项目的进展",
+            "deleted": false,
+            "content": "<ul><li>团队日历: &nbsp;&nbsp;有效地组织里程碑节点，灵活地安排团队 重要事件</li><li>任务管理: &nbsp;&nbsp;通过清晰的任务分解进行敏捷项目管理<div><div></div></div></li><li>在线讨论: &nbsp;&nbsp;沟通从Onboard开始，随时随地参与团队讨论</li><li>团队管理: &nbsp;&nbsp;简单的权限管理和方便的团队分组</li><li>自动提醒: &nbsp;&nbsp;通过站内消息和邮件把任何和你相关的状态变化第一时间推送给你，你随时随地和你的团队在一起</li></ul>"
+        }
+    ],
+    "sampleTodolists": [
+        {
+            "name": "赶快寻找自己的小伙伴~参与项目吧~",
+            "position": 200,
+            "deleted": false,
+            "todos": [
+                {
+                    "content": "新建一个项目，并邀请你的小伙伴加入Onboard吧",
+                    "position": 0,
+                    "status": "todo",
+                    "completed": false
+                }
+            ]
+        },
+        {
+            "name": "熟悉Onboard的各类功能",
+            "position": 100,
+            "deleted": false,
+            "todos": [
+                {
+                    "content": "试试给小伙伴分派任务把，点击下方的未分配按钮来分配任务",
+                    "position": 0,
+                    "status": "todo",
+                    "completed": false
+                },
+                {
+                    "content": "← 勾选左边的checkbox，可以完成这条任务",
+                    "position": 100,
+                    "status": "todo",
+                    "completed": false
+                },
+                {
+                    "content": "试着用邮件回复onboard发给你的讨论通知",
+                    "position": 300,
+                    "status": "todo",
+                    "completed": false
+                },
+                {
+                    "content": "试着改变任务和任务列表的位置",
+                    "position": 400,
+                    "status": "todo",
+                    "completed": false
+                }
+            ]
+        }
+    ],
+    "sampleFiles": [
+        {
+            "name": "logo.jpg",
+            "contentType": "image/jpeg"
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+  <div th:fragment="duration" ng-controller="durationTabCtrl" class="activity-tab">
+    <div ng-repeat="activity in activities" class="media activity">
+      <a class="media-left"> 
+        <img class="media-object creator" ng-src="{{activity.creator.avatarUrl}}" />
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">
+          <a ui-sref="company.me({userId:activity.creatorId})">{{activity.creatorName}}</a> <small class="text-mute" am-time-ago="activity.created/1000"></small>
+        </h4>
+        <p ng-if="!activity.content">{{activity.subject}}</p>
+        <p ng-if="activity.content">{{activity.subject}},  {{activity.content}}</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xmlns:cache="http://www.springframework.org/schema/cache"
+             xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+  <context:component-scan base-package="com.onboard.web.api">
+    <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+  </context:component-scan>
+  <beans:bean id="handlerMapping" class="org.elevenframework.web.handler.IntercepterAnnotationHandlerMapping">
+    <beans:property name="interceptors">
+      <beans:list>
+        <beans:bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+          <beans:property name="cacheSeconds" value="0"/>
+          <beans:property name="useExpiresHeader" value="false"/>
+          <beans:property name="useCacheControlHeader" value="true"/>
+          <beans:property name="useCacheControlNoStore" value="false"/>
+        </beans:bean>
+      </beans:list>
+    </beans:property>
+  </beans:bean>
+  <beans:bean id="handlerAdapter"
+              class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+    <beans:property name="ignoreDefaultModelOnRedirect" value="true"/>
+    <beans:property name="webBindingInitializer">
+      <beans:bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+        <beans:property name="conversionService">
+          <beans:bean class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
+        </beans:property>
+        <beans:property name="validator" ref="validator"/>
+      </beans:bean>
+    </beans:property>
+    <beans:property name="messageConverters">
+      <beans:list>
+        <beans:bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+        <beans:bean class="org.springframework.http.converter.StringHttpMessageConverter" />  
+        <!-- Jackson converter for HTTP messages -->
+        <beans:bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+          <beans:property name="supportedMediaTypes" value="application/json"/>
+          <beans:property name="objectMapper" ref="jacksonObjectMapper"/>
+        </beans:bean>
+      </beans:list>
+    </beans:property>
+  </beans:bean>
+  
+    <beans:bean id="defaultExceptionResolver"
+              class="org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver"/>
+  <beans:bean id="exceptionResolver" class="com.onboard.web.exception.handler.ExceptionHandler">
+    <beans:property name="defaultStatusCode" value="500"/>
+    <beans:property name="defaultErrorView" value="error/500"/>
+  </beans:bean>
+  
+  
+  <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+              p:maxUploadSize="33554432" />
+  <cache:annotation-driven />
+</beans:beans>

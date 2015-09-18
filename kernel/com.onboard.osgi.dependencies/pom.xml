@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <groupId>com.onboard</groupId>
+    <artifactId>com.onboard.parent</artifactId>
+    <version>3.0.0-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>com.onboard.osgi.dependencies</artifactId>
+  <name>com.onboard.osgi.dependencies</name>
+  <packaging>bundle</packaging>
+  <description>com.onboard.osgi.dependencies</description>
+
+  <properties>
+    <jackson.version>1.4.3</jackson.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.web.servlet</artifactId>
+    </dependency>
+
+   <!--  <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet</artifactId>
+      <version>2.6</version>
+    </dependency> -->
+
+    <dependency>
+      <groupId>org.eclipse.jetty.orbit</groupId>
+      <artifactId>javax.servlet.jsp</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>com.springsource.org.codehaus.jackson</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>com.springsource.org.codehaus.jackson.mapper</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+
+    <!-- <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>com.springsource.slf4j.log4j</artifactId>
+      <version>1.6</version>
+    </dependency> -->
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <version>2.5.0</version>
+        <configuration>
+          <manifestLocation>src/main/resources/META-INF</manifestLocation>
+          <instructions>
+            <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
+            <Bundle-Version>${project.version}</Bundle-Version>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

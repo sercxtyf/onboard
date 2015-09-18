@@ -1,0 +1,109 @@
+@list-separator-line-color: #6a6c6a;
+@info-separator-line-color: #b3b6b8;
+
+
+.completing-panel {
+  padding: 0px 25px;
+}
+
+.tips {
+  border: 1px dotted #0f0f0f;
+  border-radius: 5px;
+  margin-top: 20px;
+  padding: 10px 10px 0px 10px;
+  color: grey;
+}
+
+.subtitle {
+  margin: 40px 0px 20px 0px;
+  .icon {
+    margin-right: 10px;
+  }
+  .title {
+    font-weight: bold;
+  }
+  .status {
+    margin-left: 15px;
+    font-size: 10px;
+    color: white;
+    background-color: grey;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .redStatus {
+    .status;
+    background-color: red;
+  }
+  .yellowStatus {
+    .status;
+    background-color: orange;
+  }
+  .greenStatus {
+    .status;
+    background-color: green;
+  }
+}
+
+#section-summary {
+  margin-bottom: 20px;
+  .note-editor {
+    min-height: 150px;
+  }
+}
+
+.list {
+  border-top: 1px solid @list-separator-line-color;
+  .single {
+    position: relative;
+    background: #fff;
+    border-bottom: 1px solid @list-separator-line-color;
+    .info {
+      .title {
+        .status {
+          padding-right: 10px;
+          width: 25px;
+        }
+        .structure {
+          padding-right: 10px;
+        }
+        padding: 10px;
+        padding-left: 15px;
+        cursor: pointer;
+      }
+      .content {
+        display: none;
+        .key-value-pair {
+          position: relative;
+          .key {
+            position: absolute;
+            font-weight: bold;
+            left: 15px;
+          }
+          .value {
+            padding-left: 85px;
+            .todo {
+              .title {
+                padding: 0px;
+              }
+              .title:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+      .story-step{
+        padding: 2px;
+        padding-left: 40px;
+        cursor: pointer;
+      }
+    }
+    hr {
+      padding-left: 10px;
+      border-top: 1px solid @info-separator-line-color;
+    }
+  }
+  .single:first-child .info .content {
+    display: block;
+  }
+}

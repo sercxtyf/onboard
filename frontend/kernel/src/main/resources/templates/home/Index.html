@@ -1,0 +1,192 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Onboard</title>
+
+<link rel="stylesheet" href="/static/lib/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/static/lib/homepage/css/main.css" />
+<link rel="stylesheet" href="/static/lib/homepage/css/icomoon.css" />
+<link rel="stylesheet" href="/static/lib/homepage/css/animate-custom.css" />
+<link rel="stylesheet" href="/static/lib/homepage/css/styles.css" />
+<link rel="icon" type="image/x-icon" href="/static/img/favicon.png"/>
+
+<script src="/static/lib/jquery/jquery.min.js"></script>
+<script src="/static/lib/jquery/jquery.easing.js"></script>
+<script src="/static/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/lib/smoothscroll.js"></script>
+</head>
+
+
+<body data-spy="scroll" data-offset="0" data-target="#navbar-main">
+
+  <div id="navbar-main">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
+            <!-- logo mobile -->
+            <span class="ob ob-logo" style="font-size: 30px; color: #3498db;"></span>
+          </button>
+
+          <a class="navbar-brand hidden-xs hidden-sm" href="#home"> <!-- <span class="icon icon-shield" style="font-size:18px; color:#3498db;"></span> --> <span class="ob ob-logo" style="font-size: 18px; color: #3498db;"></span>
+          </a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#home" class="smoothScroll">首页</a></li>
+            <li><a href="#services" class="smoothScroll"> 客户端</a></li>
+            <li><a href="#contact" class="smoothScroll"> 联系</a></li>
+            <li><a href="/help" class="smoothScroll"> 帮助中心</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <a href="/account/signin" class="btn btn-primary">登录</a>
+            <a href="/account/signup" class="btn btn-success">注册</a>
+          </form>
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==== HEADERWRAP ==== -->
+  <div class="headerwrap" id="home">
+    <header class="clearfix">
+      <h1>
+        <span class="ob ob-logo"></span>
+      </h1>
+
+      <p>Onboard.cn</p>
+
+      <p>做最专业的敏捷软件开发协同工具</p>
+    </header>
+  </div>
+  <!-- /headerwrap -->
+
+  <!-- ==== GREYWRAP ==== -->
+  <div class="greywrap">
+    <div class="row">
+      <div class="col-lg-4 callout">
+        <span class="icon icon-stack"></span>
+
+        <h2>项目管理</h2>
+
+        <p>项目所有相关活动都能够清晰自动记录，项目进展情况一目了然，通过简单好看的日历管理里程碑和事件</p>
+      </div>
+      <!-- col-lg-4 -->
+
+      <div class="col-lg-4 callout">
+        <span class="icon icon-users"></span>
+
+        <h2>团队协作</h2>
+
+        <p>基于Onboard，团队可以进行在线讨论、任务协同、文档合作编辑、文件共享、以及贯穿项目生命周期的开发协作。</p>
+      </div>
+      <!-- col-lg-4 -->
+
+      <div class="col-lg-4 callout">
+        <span class="icon icon-signup"></span>
+
+        <h2>快速开发</h2>
+        <p>基于Git的代码托管，一键生成代码仓库，提供专业的代码review功能，基于Forking/Branching/Merging的快速开发。</p>
+      </div>
+      <!-- col-lg-4 -->
+    </div>
+    <!-- row -->
+    <div class="row learn-more">
+      <a class="btn btn-primary" href="/features" role="button">了解更多</a>
+    </div>
+  </div>
+  <!-- greywrap -->
+
+  <!-- ==== GREYWRAP ==== -->
+  <div id="test">
+    <div class="container">
+      <br /> <br />
+
+      <div class="row">
+        <div class="col-lg-8 centered">
+          <img class="img-responsive" src="/static/img/index/onboard-web.png" align="" />
+        </div>
+        <div class="col-lg-4">
+          <h2>加入Onboard!</h2>
+
+          <p>你们是中小型软件开发企业？还是互联网和移动互联网创业技术团队？是IT培训机构？还是开设软件工程专业的高校？... 有项目管理和协作需求？快来体验一下吧！</p>
+
+          <div style="text-align: center; margin-top: 65px;">
+            <a href="/account/signup"  class="btn btn-primary btn-lg">马上加入</a>
+          </div>
+        </div>
+      </div>
+      <!-- row -->
+    </div>
+    <br /> <br />
+  </div>
+  <!-- greywrap -->
+
+  <!-- ==== Mobile App ==== -->
+  <div class="greywrap mobile-qr">
+    <div class="container" id="services">
+      <br /> <br />
+
+      <div class="row">
+        <h2 class="centered">iOS, Android 客户端</h2>
+        <hr />
+        <br />
+
+        <div class="col-lg-12">
+          <img class="img-responsive" src="/static/img/index/onboard-mobile.png" alt="" />
+        </div>
+        <!-- col -->
+      </div>
+      <!-- row -->
+    </div>
+    <!-- container -->
+  </div>
+  <div class="container" id="contact">
+    <div class="row">
+      <h1 class="centered">感谢访问 Onboard.cn</h1>
+      <hr />
+      <br /> <br />
+
+      <!-- col -->
+
+    </div>
+    <!-- col -->
+
+    <!-- col -->
+
+    <div class="col-lg-12 centered">
+      <h3>关于我们</h3>
+
+      <p style="padding: 5px">我们是一群来自北京大学软件工程专业的研究生和本科生，帮助千千万万软件开发人员提高效率降低成本是我们的梦想，也是我们的使命。我们希望学以致用，通过不懈的努力将专业研究与最佳实践完美结合，做最专业的敏捷软件开发协同工具与服务。</p>
+    </div>
+    <div class="col-lg-12 centered">
+      <h3>联系方式</h3>
+
+      <p>
+        <span class="icon icon-home"></span> 北京市颐和园路5号北京大学<br />
+        <!-- <span class="icon icon-phone"></span> 13811472698 <br/> -->
+        <span class="icon icon-envelop"></span> <a href="mailto:wye@pku.edu.cn"> wye@pku.edu.cn</a> <br />
+      </p>
+    </div>
+
+    <!-- row -->
+
+  </div>
+  <!-- container -->
+
+  <div id="footerwrap">
+    <div class="container">
+      <h4>© 2014 Onboard小组, 北大软件工程国家工程中心 保留所有权利</h4>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript
+================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+
+</body>
+</html>
+

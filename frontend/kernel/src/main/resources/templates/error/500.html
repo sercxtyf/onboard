@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('500')">
+  <title>Onboard - 500</title>
+</head>
+<body>
+<div class="content" style="margin-top: 45px;">
+  <div th:if="${@environment.acceptsProfiles('production')}" class="container" style="width: 625px;padding-top: 94px;">
+    <img alt="404" src="/static/img/500.png" />
+
+    <div>
+      <h2 style="margin: auto;width: 344px; font-family: SimSun; font-size: 16px;">
+        船舱漏水了，快叫人来抢修！ 或者
+      <a href="javascript:(history.back())">返回</a></h2>
+    </div>
+  </div>
+  <div th:unless="${@environment.acceptsProfiles('production')}"
+       class="container"
+       style="width: 625px;padding-top: 94px;">
+    <p th:text="${exception}">
+
+    </p>
+    <ul>
+      <li th:each="st : ${exception.getStackTrace()}"
+          th:text="${st}">
+      </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

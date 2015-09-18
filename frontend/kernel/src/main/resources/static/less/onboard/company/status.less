@@ -1,0 +1,168 @@
+/**
+ * Created by Nettle on 2015/5/10.
+ */
+
+.date {
+    position: relative;
+    margin-top: 20px;
+    .date-text {
+        display: inline-block;
+        cursor: pointer;
+        a {
+            color: #000;
+        }
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    .date-range {
+        margin-left: 10px;
+        display: inline-block;
+        cursor: pointer;
+        font-size: 16px;
+        vertical-align: middle;
+        a {
+            color: @bluish-text-muted; //#777;
+        }
+        .fa {
+            display: none;
+            font-size: 15px;
+            color: @bluish-text-muted;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+        &:hover .fa {
+            display: inline;
+        }
+    }
+    .date-value {
+        display: inline-block;
+        cursor: pointer;
+        margin: 0 10px;
+        color: #777;
+        input {
+            border: none;
+            padding: 0;
+            background: transparent;
+            width: 110px;
+            cursor: pointer;
+        }
+        span.static {
+            cursor: default;
+        }
+    }
+}
+.date:before, .status-body:before {
+    display: table;
+    content: " ";
+}
+.date:after, .status-body:after {
+    display: table;
+    content: " ";
+    clear: both;
+}
+.options {
+    select {
+        width: 120px;
+        &:first-child {
+            margin-right: 15px;
+        }
+    }
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+}
+.status-body {
+    display: table;
+    position: relative;
+    margin-top: 20px;
+    .charts {
+        display: table-cell;
+        position: relative;
+        width: 700px;
+        padding: 0 50px;
+        padding-left: 0;
+        border-right: 1px solid black;
+    }
+    .details {
+        display: table-cell;
+        width: 100%;
+        padding-left: 50px;
+        vertical-align: top;
+        .detail-wrapper {
+            max-height: 700px;
+            overflow: auto;
+        }
+        .detail-item {
+            padding: 10px;
+            margin-bottom: 5px;
+            border: 1px solid #ddd;
+            cursor: default;
+            .content, .name {
+                font-weight: bold;
+            }
+            .commit:hover, .todo:hover {
+                cursor: pointer;
+            }
+            .commit {
+                border: 1px solid #ddd;
+            }
+        }
+        &.blank {
+            vertical-align: middle;
+        }
+    }
+    .pieChart {
+        //float: left;
+        width: 650px;
+        height: 350px;
+        .highcharts-background {
+            fill: #f3f3f4!important;
+        }
+        margin-bottom: 50px;
+    }
+    .chart {
+        //float: left;
+        width: 650px;
+        height: 250px;
+        &.punchcard {
+            margin-top: 50px;
+            padding-left: 60px;
+            float: left;
+            height: 200px;
+        }
+    }
+    .brick:hover {
+        cursor: pointer;
+    }
+    .changeGraph {
+        position: absolute;
+        font-size: 17px;
+        text-align: center;
+        cursor: pointer;
+        color: #888888;
+        top: 400px;
+        right: 55px;
+    }
+    .highcharts-title {
+        font-weight: bold;
+    }
+}
+#contribution {
+    .highcharts-title {
+        font-weight: bold;
+        font-family: "Microsoft Yahei"!important;
+        font-size: 18px;
+    }
+    .highcharts-container {
+        margin: 0 auto;
+        margin-top: 50px;
+    }
+}
+
+form.updateTimeRangeForm {
+    button.btn-danger {
+        display: none!important;
+    }
+}

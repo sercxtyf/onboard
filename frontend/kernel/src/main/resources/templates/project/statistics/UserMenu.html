@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+
+<head></head>
+
+<body>
+    <div th:fragment="userMenu" ng-controller="userMenuCtrl">
+        <button class="btn btn-default dropdown-toggle" type="button" id="userMenu" data-toggle="dropdown">
+            {{ user.name }}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="userMenu">
+            <span ng-repeat="group in groups">
+              <li role="presentation" class="dropdown-header text-right">
+                <b> {{ group.key }} </b><i class="fa fa-caret-square-o-down"></i>
+              </li>
+              <li role="presentation" ng-repeat="user in group.values">
+                <a role="menuitem" tabindex="-1" href="" ng-click="chooseUser(user, $event)">{{ user.name }}</a>
+              </li>              
+              <hr></hr>
+            </span>
+        </ul>
+    </div>
+</body>
+
+</html>

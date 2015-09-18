@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="stories" id="stories">
+    <div class="center-panel-nav">
+        <!-- <div class="center-panel-nav-shadow"></div> -->
+        <!--a class="toggle-sidebar-btn btn btn-primary" href="#" ng-click="toggleSidebar()"><i class="fa fa-bars"></i></a-->
+
+        <h3>
+            <span>需求</span>
+            <small>
+                <span>——目标式的管理您的项目，将复杂的产品分解成清晰明确的一步步来进行。</span>
+            </small>
+        </h3>
+        <ul class="second-nav-bar">
+            <li class="second-nav-item" ui-sref-active="active"><a ui-sref="company.project.stories.open">未满足的需求</a></li>
+            <li class="second-nav-item" ui-sref-active="active"><a ui-sref="company.project.stories.archived">所有需求</a></li>
+        </ul>
+
+        <!--<div class="pull-right">-->
+            <!--<button type="button" class="btn btn-primary btn-sm" ng-click="addStory()">-->
+                <!--<i class="fa fa-plus"></i> 新建需求-->
+            <!--</button>-->
+            <!--<button type="button" class="btn btn-default btn-sm" ng-click="closeHistory()">-->
+                <!--查看进行中的需求-->
+            <!--</button>-->
+            <!--<button type="button" class="btn btn-primary btn-sm" ng-click="showHistory()">-->
+                <!--查看已完成需求-->
+            <!--</button>-->
+        <!--</div>-->
+    </div>
+    <div class="gray-bg center-panel-content">
+
+
+            <div ui-view=""></div>
+
+
+    </div>
+</div>
+<div th:fragment="openStories" id="openStories">
+    <div style="padding: 10px 30px 10px 10px;" ng-init="storyFilter={completed: false}">
+        <div stories-tree="stories" completed="false"></div>
+    </div>
+    <div ng-show="noStory" class="popover fade right in" style="top: 14px; left: 38px; display: block;">
+        <div class="arrow" style="top: 50%;"></div>
+        <h3 class="popover-title" style="display: none;"></h3>
+        <div class="popover-content">点击此处添加需求</div>
+    </div>
+</div>
+<div th:fragment="archivedStories" id="archivedStories">
+    <div style="padding: 10px 30px 10px 10px;" ng-init="storyFilter={completed: null}">
+        <div stories-tree="allStories"></div>
+    </div>
+</div>
+
+</body>
+
+</html>

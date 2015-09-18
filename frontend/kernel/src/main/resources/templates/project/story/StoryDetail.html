@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div th:fragment="storyDetail" ng-controller="storyCtrl" id="storyDetail" data-placement="right">
+    <div class="modal-dialog" id="story-detail">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 name="storyForm" class="modal-title"><input type="text" name="name" ng-model="story.description"
+                                                                required="required"
+                                                                class="input-invisible"
+                                                                ng-blur="updateTitle()" resize="" ng-maxlength="200"/>
+
+                    <div ng-show="storyForm.content.$error.required &amp;&amp; storyForm.content.$dirty"
+                         class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="drawer"><span
+                                aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        名称不能为空
+                    </div>
+                    <div ng-show="storyForm.content.$error.maxlength &amp;&amp; storyForm.content.$dirty"
+                         class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="drawer"><span
+                                aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        最大长度不能超过200
+                    </div>
+                </h4>
+
+                <div class="pull-right doIt">
+                    <div class="btn-group">
+                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"
+                                aria-expanded="false">
+                            <span ng-show="!story.completed">未满足</span>
+                            <span ng-show="story.completed">已满足</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li ng-show="story.completed">
+                                <a ng-click="setComplete(story,false)">未满足</a>
+                            </li>
+                            <li ng-show="!story.completed">
+                                <a ng-click="setComplete(story,true)">已满足</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div ng-show="state =='error'" class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+
+                    {{message}}
+                </div>
+
+            </div>
+
+
+            <div class="modal-body">
+                <div class="form-horizontal row">
+
+                    <!-- 优先级 -->
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-priority col-sm-3 text-muted col-sm-offset-1">优先级：</label>
+
+                            <div class="col-sm-5 btn-group">
+                                    <span data-toggle="dropdown" class="pointer">
+                                        <span ng-class="{
+                                            'text-danger'   : story.priority ==1,
+                                            'text-warning'  : story.priority ==2,
+                                            'text-primary'  : story.priority ==3,
+                                            'text-info'     : story.priority ==4,
+                                            'text-muted'    : story.priority ==5}">
+                                             <i class="fa fa-circle-o"></i> {{priorities[story.priority-1].desc}}
+                                             <span class="caret"></span>
+                                        </span>
+                                    </span>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li ng-repeat="priority in priorities" ng-click="setPriority(priority)">
+                                        <a ng-class="{
+                                        'text-danger' : priority.value ==1,
+                                        'text-warning' : priority.value ==2,
+                                        'text-primary' : priority.value ==3,
+                                        'text-info' : priority.value ==4,
+                                        'text-muted' : priority.value ==5 }">{{priority.desc}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="panel-body">
+
+                    <form id="detailDescriptionForm" name="detailDescriptionForm" role="form" class="form">
+
+                        <div class="form-group">
+                            <label class="control-label">详细描述：</label>
+
+                            <div class="modal-body story-content" ng-show="!showContent" tooltip="点击更改story描述"
+                                 ng-bind-html="generateHtml(story.pre, story.description, story.post)"
+                                 ng-click="editContent()"></div>
+                            <div ng-show="showContent">
+                                <div><span>作为</span><input name="pre" ng-show="showContent" id="pre" ng-model="story.pre"/></div>
+                                <div><span>我需要能{{story.description}}</span></div>
+                                <div><span>这样我就可以</span><input name="pre" ng-show="showContent" id="post" ng-model="story.post"/></div>
+                            </div>
+                            <!--<textarea name="content" ng-show="showContent" id="detailDescription"-->
+                                      <!--ng-model="story.content" ng-bind-html="storyHtml(story.content)"></textarea>-->
+                        </div>
+
+                        <div class="form-group">
+                            <button ng-show="showContent" type="button" class="btn btn-primary"
+                                    ng-click="saveStoryForm('detailDescription')">
+                                保存
+                            </button>
+                            <button ng-show="showContent" type="button" class="btn btn-default"
+                                    ng-click="cancelEditContent()">取消
+                            </button>
+                            <div ng-show="contentState =='error'" class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert">
+                                    <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                                </button>
+                                {{contentMessage}}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-body">
+                    <form id="checkRuleForm" name="checkRuleForm" role="form" class="form">
+                        <div class="form-group">
+                            <label class="control-label">验收标准：</label>
+
+                            <div class="modal-body story-acceptanceLevel" ng-show="!showAcceptanceLevel"
+                                 tooltip="点击更改story验收标准"
+                                 ng-bind-html="storyHtml(story.acceptanceLevel)"
+                                 ng-click="editAcceptanceLevel()"></div>
+                            <textarea name="acceptanceLevel" ng-show="showAcceptanceLevel" id="checkRule"
+                                      ng-model="story.acceptanceLevel"
+                                      ng-bind-html="storyHtml(story.acceptanceLevel)"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <button ng-show="showAcceptanceLevel" type="button" class="btn btn-primary"
+                                    ng-click="saveStoryForm('checkRule')">保存
+                            </button>
+                            <button ng-show="showAcceptanceLevel" type="button" class="btn btn-default"
+                                    ng-click="cancelEditAcceptanceLevel()">取消
+                            </button>
+                            <div ng-show="acceptRulestate =='error'" class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert">
+                                    <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                                </button>
+                                {{ruleMessage}}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <div class="tabset"
+                     th:replace="tab/TabSet :: tabset('storyTabs')">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- /.modal-content -->
+    </div>
+</div>
+</body>
+
+</html>

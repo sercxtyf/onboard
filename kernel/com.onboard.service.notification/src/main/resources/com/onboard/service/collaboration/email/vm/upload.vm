@@ -1,0 +1,3 @@
+#foreach ($attachment in $attachmentList)
+    ${attachment.name}
+#end

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title></title>
+</head>
+<body>
+<div th:fragment="todolistModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="select-linkedtodo-view modal-body">
+                <ul class="todolists col-md-2">
+                    <li class="todoliss-title">任务分组</li>
+                    <li ng-repeat="linkingTodolist in linkingTodolists" ng-mouseover="selectTodolist($event, linkingTodolist)"
+                        class="todolist-item click-link" >{{linkingTodolist.name}}</li>
+                </ul>
+                <ul class="todos col-md-10">
+                    <li ng-repeat="todo in seletedLinkingTodolist.todos" class="link-todo-item click-link" ng-click="linkTodo($event, todo)"
+                        ng-class="{disable: todo.disable, active: todo.active}" ng-show="todo.status != 'closed'">{{todo.content}}</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="commitChanges()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

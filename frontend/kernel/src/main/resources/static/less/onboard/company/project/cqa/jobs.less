@@ -1,0 +1,229 @@
+// Created by 胡天翔 at 2015/07/08
+
+@job-cqa-A: green;
+@job-cqa-B: #ffa60e;
+@job-cqa-C: red;
+
+.cqa-single-job-panel {
+  margin: 15px 20px;
+  border: solid 1px;
+  border-color: lightgray;
+  background-color: white;
+  .panel-title {
+    font-family: "Courier New", Courier, monospace;
+    vertical-align: middle;
+    margin: 10px 15px;
+    .panel-title-tag {
+      vertical-align: inherit;
+      margin-right: 10px;
+      font-size: 10px;
+      color: white;
+      border-radius: 3px;
+      border: solid 1px;
+      padding: 3px 5px;
+    }
+    .panel-title-button {
+      vertical-align: inherit;
+      margin-left: 15px;
+      font-size: 20px;
+      border-radius: 3px;
+      //border: solid 1px;
+      i {
+        vertical-align: middle;
+      }
+    }
+    .panel-title-tag-blue {
+      .panel-title-tag;
+      background-color: #2a6496;
+      border-color: #2a6496;
+    }
+    .panel-title-tag-green {
+      .panel-title-tag;
+      background-color: darkseagreen;
+      border-color: darkseagreen;
+    }
+    .panel-title-tag-yellow {
+      .panel-title-tag;
+      background-color: orange;
+      border-color: orange;
+    }
+    .panel-title-tag-red {
+      .panel-title-tag;
+      background-color: palevioletred;
+      border-color: palevioletred;
+    }
+    .panel-title-part {
+      font-size: 15px;
+      //font-weight: bold;
+    }
+  }
+  .panel-separator {
+    border-color: #e3e3e3;
+    margin: 0px 10px;
+  }
+  .key-value-row {
+    .key-value-group {
+      display: inline-block;
+      margin: 10px 0px 10px 20px;
+      padding: 10px 0px 10px 20px;
+      border-left: solid 1px #e3e3e3;
+    }
+    .key-value-group-3 {
+      .key-value-group;
+      width: 30%;
+    }
+    .key-value-group-2 {
+      .key-value-group;
+      width: 45%;
+    }
+    .row-separator {
+      width: 1px;
+      height: 100px;
+      display: inline-block;
+      border-right: solid 1px;
+    }
+    .key-value-pair {
+      vertical-align: top;
+      display: inline-block;
+      .key {
+        font-family: "Courier New", Courier, monospace;
+        margin-bottom: 5px;
+        font-size: 13px;
+      }
+      .key-bold {
+        .key;
+        font-weight: bold;
+        font-size: 15px;
+      }
+      .value {
+        font-family: "Courier New", Courier, monospace;
+        white-space: nowrap;
+        margin-top: 5px;
+        font-size: 15px;
+        color: #2a6496;
+        span {
+          border-bottom: solid 1px;
+          border-color: lightblue;
+        }
+      }
+      .value-bold {
+        .value;
+        font-weight: 500;
+        font-size: 17px;
+      }
+      .rating {
+        margin-top: 5px;
+        width: 23px;
+        font-size: 23px;
+        text-align: center;
+        color: white;
+      }
+      .rating-red {
+        background-color: red;
+      }
+      .rating-green {
+        background-color: green;
+      }
+    }
+    .key-value-pair-1 {
+      .key-value-pair;
+      width: 10%;
+      min-width: 60px;
+    }
+    .key-value-pair-2 {
+      .key-value-pair;
+      width: 14%;
+      min-width: 80px;
+    }
+    .key-value-pair-3 {
+      .key-value-pair;
+    }
+    .key-value-pair-4 {
+      .key-value-pair;
+      width: 40%;
+    }
+  }
+}
+
+@gasp: 15px;
+.cqa-waiting-jobs-panel {
+  overflow: auto;
+  font-family: "Courier New", Courier, monospace;
+  padding-right: @gasp;
+  margin: 15px 20px;
+  border: solid 1px;
+  border-color: lightgray;
+  background-color: white;
+}
+
+.cqa-finished-jobs-panel {
+  overflow: auto;
+  font-family: "Courier New", Courier, monospace;
+  padding-right: @gasp;
+  margin: 15px 20px;
+  border: solid 1px;
+  border-color: lightgray;
+  background-color: white;
+}
+
+.single-job-card {
+  position: relative;
+  border-radius: 3px;
+  float: left;
+  margin: 15px 0px 15px @gasp;
+  min-width: 10%;
+  min-height: 40px;
+  color: white;
+  padding: 10px;
+  .delete-button {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+  }
+  &:hover .delete-button {
+    display: block;
+  }
+}
+.single-job-card-running {
+  .single-job-card;
+  background-color: #597c96;
+}
+.single-job-card-waiting {
+  .single-job-card;
+  background-color: #778996;
+}
+.single-job-card-A {
+  .single-job-card;
+  background-color: @job-cqa-A;
+}
+.single-job-card-B {
+  .single-job-card;
+  background-color: @job-cqa-B;
+}
+.single-job-card-C {
+  .single-job-card;
+  background-color: @job-cqa-C;
+}
+
+.single-job-card-load {
+  .single-job-card;
+  cursor: pointer;
+  height: 110px;
+  text-align: center;
+  vertical-align: top;
+  border: dashed 1px;
+  color: black;
+  p {
+    margin-top: 36px;
+  }
+}
+
+.cqa-single-panel {
+  margin: 15px 20px;
+  height: 200px;
+  border: dashed 1px;
+  text-align: center;
+  vertical-align: middle;
+}

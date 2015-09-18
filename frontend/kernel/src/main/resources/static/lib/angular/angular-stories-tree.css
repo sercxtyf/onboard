@@ -1,0 +1,235 @@
+.stories-tree-value {
+	position: relative;
+	border: 1px solid #ADADAD;
+	z-index: 2;
+	height: 39px;
+	margin-top: 4px;
+	padding: 10px 0;
+	color: #333333;
+	background-color: #fff;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.stories-tree-value .stories-tree-switch{
+	position: absolute;
+	cursor: pointer;
+	top: 8px;
+	left:11px;
+	font-size: 17px;
+}
+
+.stories-tree-value p{
+	position: absolute;
+	margin: 0 0 0 20px;
+	padding-left: 2px;
+	left: 10px;
+	right: 70px;
+}
+
+.stories-tree-value input{
+	height: 18px;
+	width: 60%;
+}
+
+.stories-tree-value .stories-tree-detail {
+	display: none;
+	position: absolute;
+	cursor: pointer;
+	top: 8px;
+	right:11px;
+	font-size: 17px;
+}
+
+.stories-tree-value .stories-progress {
+    cursor: default;
+	display: inline-block;
+	position: absolute;
+	left: 33px;
+	top: 9px;
+    font-size: 10px;
+    background-color: lightgrey;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+.stories-tree-value .stories-content {
+	margin-right: 70px;
+	margin-left: 35px;
+}
+
+.story-tab-story .stories-progress {
+	cursor: default;
+	position: absolute;
+	left: 5px;
+	top: 9px;
+	font-size: 10px;
+	color: white;
+	background-color: lightgrey;
+	padding: 2px 6px;
+	border-radius: 4px;
+}
+
+.story-tab-story .story-content {
+    cursor: pointer;
+    margin-left: 70px;
+}
+.stories-tree-value:hover .stories-tree-detail {
+	display: block;
+}
+
+.stories-tree-nodes {
+	position: relative;
+	margin-left: 39px;
+}
+
+.stories-tree-node {
+	position: relative;
+	min-height: 39px;
+	margin-top: 4px;
+}
+
+.stories-tree-node input {
+	border: none;
+	background-color: transparent;
+	padding-left: 2px;
+	margin-left: 45px;
+}
+
+.stories-tree-value p:hover {
+	background-color: #d5e6ff;
+}
+.stories-tree-node input:hover {
+	background-color: #f0f0f0;
+}
+.stories-tree-node input:focus{
+	outline: none;
+	background-color: #f0f0f0;
+}
+
+.stories-add-node {
+	position: relative;
+	color: #333333;
+	min-height: 39px;
+	text-align: center;
+	line-height: 39px;
+	margin-top: 4px;
+	z-index: 3;
+}
+
+.stories-add-node .add-button {
+	cursor: pointer;
+	position: absolute;
+	width: 39px;
+	left: 0px;
+	top: 12px;
+	font-size: 17px;
+}
+
+.stories-add-node .new-story {
+	display: none;
+	position: relative;
+	padding-left: 30px;
+	padding-right: 70px;
+	border: 1px solid #ADADAD;
+	height: 39px;
+	margin: 4px 0px 0px 39px;
+	color: #333333;
+	text-align: left;
+	background-color: #fff;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.stories-add-node .new-story input{
+	line-height: normal;
+	height: 18px;
+	width: 100%;
+}
+
+.stories-add-node .new-story .add-new-story {
+	cursor: pointer;
+	position: absolute;
+	top: 11px;
+	left:10px;
+	font-size: 17px;
+}
+.stories-tree-nodes .stories-tree-node:before {
+	display: inline-block;
+	content: "";
+	position: absolute;
+	top: 19px;
+	left: -19px;
+	height: 0;
+	width: 19px;
+	border-top: 1px dotted #67b2dd;
+	z-index: 1;
+}
+
+.stories-tree-nodes:before {
+	display: inline-block;
+	content: "";
+	position: absolute;
+	z-index: 1;
+	top: -4px;
+	bottom: -16px;
+	left: -20px;
+	border: 1px dotted #67b2dd;
+	border-width: 0 0 0 1px;
+}
+
+.root-value {
+	display: none;
+}
+
+.root-nodes:before {
+	display: inline-block;
+	content: "";
+	position: absolute;
+	z-index: 1;
+	top: -14px;
+	bottom: -16px;
+	left: -20px;
+	border: 1px dotted #67b2dd;
+	border-width: 0 0 0 1px;
+}
+
+.stop-add:before {
+	display: inline-block;
+	content: "";
+	position: absolute;
+	z-index: 1;
+	top: -14px;
+	bottom: 0px;
+	left: -20px;
+	border: 1px dotted #67b2dd;
+	border-width: 0 0 0 1px;
+}
+
+.stop-add .stories-tree-node:last-child:after {
+	display: inline-block;
+	content: "";
+	position: absolute;
+	z-index: 1;
+	top: 20px;
+	bottom: 0;
+	left: -20px;
+	border-left: 1px solid #F3F3F4;
+}
+
+/*
+.stories-tree-nodes .stories-tree-node:last-child:after {
+	display: inline-block;
+	content: "";
+	position: absolute;
+	z-index: 1;
+	top: 20px;
+	bottom: 0;
+	left: -19px;
+	border-left: 1px solid #FFF;
+}
+*/
+
+.not-show {
+	display: none;
+}
+

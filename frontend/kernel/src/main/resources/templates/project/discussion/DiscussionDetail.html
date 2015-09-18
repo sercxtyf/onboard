@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+  <div class="" data-placement="right" id="discussionDetail" th:fragment="discussionDetail"  ng-controller="discussionShowCtrl">
+     <div class="modal-dialog">
+       <div class="modal-content">
+        <div class="modal-header">
+          <!--<button type="button" class="close" data-dismiss="drawer"><span aria-hidden="true">
+              <i class="fa fa-close"></i>
+            </span><span class="sr-only">Close</span>
+          </button>-->
+          <div class="tool">
+            <a ng-click="toDelete()" ng-disabled="recovering">删除</a>&nbsp;
+            <a ng-click="toEdit()" ng-disabled="recovering">编辑</a>
+            <button type="button" class="close" data-dismiss="drawer"><span aria-hidden="true">&times;</span><span
+                    class="sr-only">Close</span>
+            </button>
+          </div>
+          <div>
+            <h3>{{ discussion.subject }}</h3>
+          </div>
+
+          <!--<div class="pull-right form-group" ng-hide="deleted">
+            <button type="button" class="btn btn-danger btn-sm operation" ng-click="toDelete()" ng-disabled="recovering">删除</button>
+            <button type="button" class="btn btn-success btn-sm operation" ng-click="toEdit()" ng-disabled="recovering">编辑</button>
+          </div>-->
+          <div>
+            <a class="media-left"><img ng-src="{{ discussion.creatorAvatarUrl }}" class="img-circle speaker pointer" ng-click="gotoMePage(discussion.creatorId)"/></a>              
+            <div class="media-body">
+              <p><strong>{{ discussion.creatorName }}</strong></p>
+              <p class="text-info">更新于{{ discussion.updated | date:'yyyy-MM-dd HH:mm' }}</p>
+            </div>            
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="modal-body">
+
+          <div class="warning form-group" ng-show="deleted">
+            <p>
+              <h3>该讨论已被删除。</h3>
+              <button type="button" class="btn btn-default" ng-click="recover()" ng-disabled="recovering">恢复</button>
+            </p>
+          </div>
+
+          <div class="panel-body" ng-bind-html="wikiTrustDangerousSnippet(discussion.content)"></div>
+
+          <div class="form-group uploads" ng-show="!deleted">
+            <label ng-show="discussion.attachments.length!==0">附件</label>
+            <div class="media" ng-repeat="attachment in discussion.attachments">
+              <a class="media-left" ng-href="{{attachmentDownloadLink(attachment.id)}}"  target="_blank" ng-switch="attachment.contentType">
+                <img class="avatar" ng-src='/static/img/attachment-icon/word.png' ng-switch-when="application/msword"/>
+                <img class="avatar" ng-src='/static/img/attachment-icon/word.png' ng-switch-when="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+                <img class="avatar" ng-src='/static/img/attachment-icon/file_extension_rar.png' ng-switch-when="application/x-rar-compressed"/>
+                <img class="avatar" ng-src='/static/img/attachment-icon/zip.png' ng-switch-when="application/zip"/>
+                <img class="avatar" ng-src='/static/img/attachment-icon/file_extension_txt.png' ng-switch-when='text/plain'/>
+                <img class="avatar" ng-src='/static/img/attachment-icon/css.png' ng-switch-when="text/css"/>
+                <img class="avatar" ng-src='/static/img/attachment-icon/html.png' ng-switch-when="text/html"/>
+                <img class="avatar" ng-src='/static/img/attachment-icon/txt.png' ng-switch-when="text/xml"/>
+                <img class="avatar" ng-src='/static/img/attachment-icon/excel.png' ng-switch-when="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                <img class="avatar" ng-src='/static/img/attachment-icon/ppt.png' ng-switch-when="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
+                <img class="avatar" ng-src='/static/img/attachment-icon/file_extension_js.png' ng-switch-when="application/javascript"/>
+                <img class="avatar" ng-src='/static/img/attachment-icon/ppt.png' ng-switch-when="application/vnd.ms-powerpoint" />
+                <img class="avatar" ng-src='/static/img/attachment-icon/excel.png' ng-switch-when="application/vnd.ms-excel" />
+                <img class="avatar" ng-src='/static/img/attachment-icon/pdf.png' ng-switch-when="application/pdf"/>
+                <img class="avatar" ng-src="{{getProjectUri + 'attachments/image'}}/{{attachment.id}}" ng-switch-when="image" />
+                <img class="avatar" ng-src='/static/img/attachment-icon/file_extension_others.png' ng-switch-default="" />
+              </a>
+              <div class="media-body">
+                <a class="media-left" ng-href="{{attachmentDownloadLink(attachment.id)}}" target="_blank">
+                  {{ attachment.name }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <div class="tabset" th:replace="tab/TabSet :: tabset('tabs')">
+            </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+</body>
+
+</html>

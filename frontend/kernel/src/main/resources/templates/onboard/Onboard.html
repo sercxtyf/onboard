@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="${headTemplateName} :: headTag('项目')"></head>
+
+<body id="onboard" data-libs="onboard" ng-controller="onboardCtrl">
+
+<!-- navigation bar -->
+<div id="main-nav" >
+  <div ui-view="nav"></div>
+</div>
+
+<!-- static data -->
+<input id="upyunProtocol" type="hidden" th:value="${@webConfigurationBean.getUpyunProtocol()}"/>
+<input id="upyunHost" type="hidden" th:value="${@webConfigurationBean.getUpyunHost()}"/>
+
+<!-- view wrapper -->
+<div id="main-content">
+  <div ui-view="content"></div>
+</div>
+<!-- drawer -->
+<div drawer="" id="drawer" class="modal drawer">
+  <div class="colle_label" ng-hide="type == 'commit' || id == undefined">
+    <div class="colle_label_body">
+      <i ng-hide="isCollected" class="fa fa-star-o colle_star" title="收藏" ng-click="collect()"></i>
+      <i ng-show="isCollected" class="fa fa-star colle_star" title="取消收藏" ng-click="collect()"></i>
+    </div>
+    <div class="colle_label_fold"></div>
+  </div>
+  <div class="toggle" data-dismiss="drawer"><i class="fa fa-caret-right"></i></div>
+  <div class="drawer-wrapper"></div>
+</div>
+
+<div th:replace="fragments/Footer :: footer"></div>
+
+<!-- onboard ng templates -->
+<script type="text/ng-template" id="project.html">
+  <div th:replace="project/Project :: Project"></div>
+</script>
+<script type="text/ng-template" id="onboard-header.html">
+  <nav th:replace="onboard/Header :: header"></nav>
+</script>
+<script type="text/ng-template" id="company-header.html">
+  <nav th:replace="company/Header :: header('project')"></nav>
+</script>
+<script type="text/ng-template" id="profile.html">
+  <div th:replace="onboard/account/Profile :: profile"></div>
+</script>
+<script type="text/ng-template" id="password.html">
+  <div th:replace="onboard/account/Password :: password"></div>
+</script>
+<script type="text/ng-template" id="companies.html">
+  <div th:replace="company/Index :: selectCompany"></div>
+</script>
+
+<!-- company ng templates -->
+<script type="text/ng-template" id="project-edit.html">
+  <div th:replace="company/ProjectEdit :: projectEdit"></div>
+</script>
+<script type="text/ng-template" id="me.html">
+  <div th:replace="company/me/Me :: me"></div>
+</script>
+<script type="text/ng-template" id="me-activities.html">
+  <div th:replace="company/me/MeActivities :: meActivities"></div>
+</script>
+<script type="text/ng-template" id="me-uncompleted-todos.html">
+  <div th:replace="company/me/MeUncompletedTodos :: meUncompletedTodos"></div>
+</script>
+<script type="text/ng-template" id="me-completed-todos.html">
+  <div th:replace="company/me/MeCompletedTodos :: meCompletedTodos"></div>
+</script>
+<script type="text/ng-template" id="me-attachments.html">
+  <div th:replace="company/me/MeAttachments :: meAttachments"></div>
+</script>
+<script type="text/ng-template" id="me-work-time.html">
+  <div th:replace="company/me/MeWorkTime :: meWorkTime"></div>
+</script>
+<script type="text/ng-template" id="me-uncompleted-bugs.html">
+    <div th:replace="company/me/MeUncompletedBugs :: meUncompletedBugs"></div>
+</script>
+<script type="text/ng-template" id="me-completed-bugs.html">
+  <div th:replace="company/me/MeCompletedBugs :: meCompletedBugs"></div>
+</script>
+<script type="text/ng-template" id="me-uncompleted-steps.html">
+  <div th:replace="company/me/MeUncompletedSteps :: meUncompletedSteps"></div>
+</script>
+<script type="text/ng-template" id="me-completed-steps.html">
+  <div th:replace="company/me/MeCompletedSteps :: meCompletedSteps"></div>
+</script>
+<script type="text/ng-template" id="users.html">
+  <div th:replace="company/Users :: users"></div>
+</script>
+<script type="text/ng-template" id="search.html">
+  <div th:replace="company/Search :: search"></div>
+</script>
+<script type="text/ng-template" id="collection.html">
+  <div th:replace="company/Collection :: collection"></div>
+</script>
+<script type="text/ng-template" id="projects.html">
+  <div th:replace="company/Projects :: projects"></div>
+</script>
+<script type="text/ng-template" id="activities.html">
+  <div th:replace="company/Activities :: activities"></div>
+</script>
+<script type="text/ng-template" id="retrospect.html">
+  <div th:replace="company/Retrospect :: retrospect"></div>
+</script>
+<script type="text/ng-template" id="status.html">
+  <div th:replace="company/Status :: status"></div>
+</script>
+<script type="text/ng-template" id="notifications.html">
+  <div th:replace="company/Notifications :: notifications"></div>
+</script>
+
+<!-- statistics ng templates -->
+<script type="text/ng-template" id="iteration-todoStats.html">
+  <div th:replace="project/iteration/IterationTodoStats :: iterationTodoStats"></div>
+</script>
+<script type="text/ng-template" id="iteration-edit.html">
+  <div th:replace="project/iteration/IterationEdit :: iterationEdit"></div>
+</script>
+<script type="text/ng-template" id="statistics.html">
+  <div th:replace="project/statistics/Statistics :: statistics"></div>
+</script>
+<script type="text/ng-template" id="statistics-group.html">
+  <div th:replace="project/statistics/StatisticsGroup :: statisticsGroup"></div>
+</script>
+<script type="text/ng-template" id="statistics-todo.html">
+  <div th:replace="project/statistics/StatisticsTodo :: statisticsTodo"></div>
+</script>
+<script type="text/ng-template" id="user-menu.html">
+  <div th:replace="project/statistics/UserMenu :: userMenu"></div>
+</script>
+<script type="text/ng-template" id="user-menu-with-all-users.html">
+  <div th:replace="project/statistics/UserMenuWithAllUsers :: userMenuWithAllUsers"></div>
+</script>
+
+<!-- todo ng templates -->
+<script type="text/ng-template" id="todolists.html">
+  <div th:replace="project/todo/Todolists :: todolists"></div>
+</script>
+<script type="text/ng-template" id="opentodolists.html">
+  <div th:replace="project/todo/Todolists :: opentodolists"></div>
+</script>
+<script type="text/ng-template" id="archivedtodolists.html">
+  <div th:replace="project/todo/Todolists :: archivedtodolists"></div>
+</script>
+<script type="text/ng-template" id="todolist.html">
+  <div th:replace="project/todo/TodolistDetail :: todolistDetail"></div>
+</script>
+<script type="text/ng-template" id="newTodo.html">
+  <div th:replace="project/todo/NewTodo :: newTodo"></div>
+</script>
+<script type="text/ng-template" id="todo.html">
+  <div th:replace="project/todo/TodoDetail :: todoDetail"></div>
+</script>
+<script type="text/ng-template" id="todlistCopy.html">
+  <div th:replace="project/todo/TodolistCopyModal :: todolistCopyModal"></div>
+</script>
+<div th:replace="project/todo/LinkTodo :: linkTodo"></div>
+
+<!-- story ng templates -->
+<script type="text/ng-template" id="stories.html">
+  <div th:replace="project/story/Stories :: stories"></div>
+</script>
+<script type="text/ng-template" id="openStories.html">
+  <div th:replace="project/story/Stories :: openStories"></div>
+</script>
+<script type="text/ng-template" id="archivedStories.html">
+  <div th:replace="project/story/Stories :: archivedStories"></div>
+</script>
+<script type="text/ng-template" id="storyDetail.html">
+  <div th:replace="project/story/StoryDetail :: storyDetail"></div>
+</script>
+<script type="text/ng-template" id="storyRenderer.html">
+  <div th:replace="project/story/StoryRenderer :: storyRenderer"></div>
+</script>
+<script type="text/ng-template" id="stepDetail.html">
+  <div th:replace="project/story/StepDetail :: StepDetail"></div>
+</script>
+
+<!-- iteration ng templates -->
+<script type="text/ng-template" id="iterations.html">
+  <div th:replace="project/iteration/Iterations :: iterations"></div>
+</script>
+<script type="text/ng-template" id="created-iterations.html">
+  <div th:replace="project/iteration/CreatedIterations :: createdIterations"></div>
+</script>
+<script type="text/ng-template" id="completed-iterations.html">
+  <div th:replace="project/iteration/CompletedIterations :: completedIterations"></div>
+</script>
+<script type="text/ng-template" id="active-iteration.html">
+  <div th:replace="project/iteration/ActiveIteration :: activeIteration"></div>
+</script>
+<script type="text/ng-template" id="completing-iteration.html">
+  <div th:replace="project/iteration/CompletingIteration :: completingIteration"></div>
+</script>
+<script type="text/ng-template" id="iteration-empty.html">
+  <div th:replace="project/iteration/ActiveIteration :: activeIterationEmpty"></div>
+</script>
+<script type="text/ng-template" id="active-iteration-todos.html">
+  <div th:replace="project/iteration/ActiveIterationTodos :: activeIterationTodos"></div>
+</script>
+<script type="text/ng-template" id="active-iteration-statistics.html">
+  <div th:replace="project/iteration/ActiveIterationStatistics :: activeIterationStatistics"></div>
+</script>
+<script type="text/ng-template" id="completed-iteration.html">
+  <div th:replace="project/iteration/CompletedIteration :: completedIteration"></div>
+</script>
+<script type="text/ng-template" id="completed-iteration-todos.html">
+  <div th:replace="project/iteration/CompletedIteration :: todos"></div>
+</script>
+<script type="text/ng-template" id="completed-iteration-statistics.html">
+  <div th:replace="project/iteration/CompletedIteration :: statistics"></div>
+</script>
+<div th:replace="project/iteration/LinkIteration :: linkIteration"></div>
+
+<!-- version ng templates -->
+<script type="text/ng-template" id="versions.html">
+  <div th:replace="project/version/Versions :: versions"></div>
+</script>
+
+<!-- discussion ng templates -->
+<script type="text/ng-template" id="discussions.html">
+  <div th:replace="project/discussion/Discussions :: discussions"></div>
+</script>
+<script type="text/ng-template" id="discussion-edit-drawer.html">
+  <div th:replace="project/discussion/NewDiscussion :: newDiscussion"></div>
+</script>
+<script type="text/ng-template" id="discussion-show-drawer.html">
+  <div th:replace="project/discussion/DiscussionDetail :: discussionDetail"></div>
+</script>
+
+<!-- upload ng templates -->
+<script type="text/ng-template" id="uploads.html">
+  <div th:replace="project/upload/Uploads :: uploads"></div>
+</script>
+<script type="text/ng-template" id="uploadDetail.html">
+  <div th:replace="project/upload/UploadDetail :: uploadDetail"></div>
+</script>
+<script type="text/ng-template" id="fileDropZone.html">
+  <div th:replace="project/upload/FileDropZone :: fileDropZone"></div>
+</script>
+<script type="text/ng-template" id="attachmentList.html">
+  <div th:replace="project/upload/AttachmentList :: attachmentList"></div>
+</script>
+<script type="text/ng-template" id="attachmentDetail.html">
+  <div th:replace="project/upload/AttachmentDetail :: attachmentDetail"></div>
+</script>
+<!--tag -->
+<script type="text/ng-template" id="tagAndAttachments.html">
+  <div th:replace="project/upload/TagAndAttachments :: tagAndAttachments"></div>
+</script>
+
+<!-- common ng templates -->
+<script type="text/ng-template" id="preview.html">
+  <div th:replace="project/common/Preview :: preview"></div>
+</script>
+<script type="text/ng-template" id="commentImageModal.html">
+  <div th:replace="project/common/CommentImageModal :: commentImageModal"></div>
+</script>
+<script type="text/ng-template" id="newCommentDirective.html">
+  <div th:replace="project/common/NewCommentDirective :: newCommentDirective"></div>
+</script>
+<script type="text/ng-template" id="onboardCommentDirective.html">
+  <div th:replace="project/common/OnboardCommentDirective :: onboardCommentDirective"></div>
+</script>
+
+<!-- bugs ng templates -->
+<script type="text/ng-template" id="bugs.html">
+  <div th:replace="project/bugs/Bugs :: bugs"></div>
+</script>
+<script type="text/ng-template" id="bugsOpened.html">
+  <div th:replace="project/bugs/BugsOpened :: bugsOpened"></div>
+</script>
+<script type="text/ng-template" id="bugsFinished.html">
+  <div th:replace="project/bugs/BugsFinished :: bugsFinished"></div>
+</script>
+<script type="text/ng-template" id="newBug.html">
+  <div th:replace="project/bugs/NewBug :: newBug"></div>
+</script>
+<script type="text/ng-template" id="viewBug.html">
+  <div th:replace="project/bugs/ViewBug :: viewBug"></div>
+</script>
+<script type="text/ng-template" id="bugsStats.html">
+  <div th:replace="project/bugs/BugsStats :: bugsStats"></div>
+</script>
+
+<!-- tabs -->
+<script type="text/ng-template" id="/tab/activity">
+  <div th:replace="tab/Activity :: activity"></div>
+</script>
+<script type="text/ng-template" id="/tab/linktask">
+  <div th:replace="tab/Task :: task"></div>
+</script>
+<script type="text/ng-template" id="/tab/linkstory">
+  <div th:replace="tab/Story :: story"></div>
+</script>
+<script type="text/ng-template" id="/tab/linkbug">
+  <div th:replace="tab/Bug :: bug"></div>
+</script>
+<script type="text/ng-template" id="/tab/comment">
+  <div th:replace="tab/Comment :: comment"></div>
+</script>
+<script type="text/ng-template" id="/tab/duration">
+  <div th:replace="tab/Duration :: duration"></div>
+</script>
+
+
+<!--plugin-->
+<div th:each="templatePluginFile : ${templatePluginFiles}">
+  <div th:replace="${templatePluginFile} :: plugin"></div>
+</div>
+
+<!--  
+<script type="text/ng-template" id="tabSample.html">
+  <div th:replace="plugin/TabSample :: tabSample"></div>
+</script>
+<script type="text/ng-template" id="drawerSample.html">
+  <div th:replace="plugin/DrawerSample :: drawerSample"></div>
+</script>
+<script type="text/ng-template" id="feedback.html">
+  <div th:replace="plugin/Feedback :: feedback"></div>
+</script>
+-->
+
+<spinner name="globalSpinner" global="true"></spinner>
+</body>
+
+</html>

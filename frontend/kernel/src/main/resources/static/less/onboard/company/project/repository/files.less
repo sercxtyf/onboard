@@ -1,0 +1,71 @@
+// 仓库页面代码子页
+// imported by ./repository
+
+  .table tr {
+    td.icon{
+      width:20px;
+      padding-right: 0;
+    }
+    td.name {
+      max-width: 140px;
+    }
+    td.msg {
+      max-width: 442px;
+    }
+    td.age {
+      max-width: 140px;
+      text-align: right;
+    }
+  }
+  #folder{
+    table{
+      td{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+  #source pre {
+    padding: 0;
+    background: #fff;
+    border: 0;
+    border-radius: 0;
+
+    code {
+      background: #fff;
+      padding: 0;
+    }
+  }
+  #cloneUrl {
+    margin: 20px 0;
+    input.url {
+      &:hover {
+        cursor: text;
+      }
+      &.copied {
+        border: 2px solid #47a447;
+      }
+    }
+    #copy-url {
+      color: black;
+      &:hover, &:active, &:visited {
+        color: black;
+      }
+    }
+  }
+  #repositoriesList{
+    margin-bottom: 20px;
+    .repositoryRecord{
+      margin: 5px 0;
+    }
+  }
+  #branches{
+    float:left;
+    margin-right:15px;
+    margin-bottom:15px;
+  }
+  #path-nav{
+    float: left;
+    margin-bottom:15px;
+  }

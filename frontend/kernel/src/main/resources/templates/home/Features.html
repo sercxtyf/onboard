@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>发现 | Onboard</title>
+
+<link rel="stylesheet" href="/static/lib/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/static/lib/fontawesome/css/font-awesome.min.css" />
+<link rel="stylesheet" href="/static/lib/homepage/css/styles.css" />
+<link rel="stylesheet" href="/static/lib/homepage/css/features.css" />
+
+<script src="/static/lib/jquery/jquery.min.js"></script>
+<script src="/static/lib/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+  <div id="navbar-main">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
+            <!-- logo mobile -->
+            <span class="ob ob-logo" style="font-size: 30px; color: #3498db;"></span>
+          </button>
+
+          <a class="navbar-brand hidden-xs hidden-sm" href="/"> <!-- <span class="icon icon-shield" style="font-size:18px; color:#3498db;"></span> --> <span class="ob ob-logo" style="font-size: 18px; color: #3498db;"></span>
+          </a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">首页</a></li>
+            <li class="active"><a href="#">发现</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <a href="/account/signin" class="btn btn-primary"> 登录</a> <a href="/account/signup" class="btn btn-success">注册</a>
+          </form>
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+    </div>
+
+
+    <div class="feature-body">
+
+      <div class="container">
+        <div class="module marketing">
+
+          <div class="row">
+            <div class="col-md-3">
+              <i class="fa fa-tasks fa-2"></i>
+
+              <h3>任务管理</h3>
+
+              <p>通过清晰的任务分解进行敏捷项目管理</p>
+            </div>
+            <div class="col-md-3">
+              <i class="fa fa-calendar fa-2"></i>
+
+              <h3>团队日历</h3>
+
+              <p>有效地组织里程碑节点，灵活地安排团队重要事件</p>
+            </div>
+            <div class="col-md-3">
+              <i class="fa fa-comments fa-2"></i>
+
+              <h3>在线讨论</h3>
+
+              <p>沟通从Onboard开始，随时随地参与团队讨论</p>
+            </div>
+            <div class="col-md-3">
+              <i class="fa fa-files-o fa-2"></i>
+
+              <h3>文件管理</h3>
+
+              <p>文件共享只需一次拖动，文件分类只需一个标签</p>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3">
+                <i class="fa fa-file-text fa-2"></i>
+
+                <h3>在线文档</h3>
+
+                <p>通过支持多人编辑和版本管理的线文档， 建立团队知识库</p>
+              </div>
+              <div class="col-md-3">
+                <i class="fa fa-code fa-2"></i>
+
+                <h3>代码协作</h3>
+
+                <p>基于Git的Code Branching/Merging和 Code Review从未如此惬意</p>
+              </div>
+              <div class="col-md-3">
+                <i class="fa fa-code-fork fa-2"></i>
+
+                <h3>代码托管</h3>
+
+                <p>一次点击就能够建立自己的代码仓库</p>
+              </div>
+              <div class="col-md-3">
+                <i class="fa fa-group fa-2"></i>
+
+                <h3>团队管理</h3>
+
+                <p>简单的权限管理和方便的团队分组</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped" style="width: 35%"></div>
+        <div class="progress-bar progress-bar-info progress-bar-striped" style="width: 5%"></div>
+        <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 30%"></div>
+        <div class="progress-bar progress-bar-primary progress-bar-striped" style="width: 15%"></div>
+        <div class="progress-bar progress-bar-danger progress-bar-striped" style="width: 15%"></div>
+      </div>
+
+      <div class="module container-fluid" style="margin-bottom: 0;">
+        <div class="feature-band-dark row bg-stone">
+          <div class="col-sm-4 left-text">
+            <div class="page-header">
+              <h1>
+                <i class="fa fa-clock-o"></i> 自动提醒
+              </h1>
+            </div>
+            <p class="lead">通过站内消息和邮件把任何和你相关的状态变化第一时间推送给你，你随时随地和你的团队在一起。</p>
+          </div>
+          <div class="col-sm-8">
+            <img class="right-figure" src="/static/img/feature/remind.jpg" />
+          </div>
+        </div>
+        <div class="feature-band row bg-info">
+          <div class="col-sm-8">
+            <img class="left-figure" src="/static/img/feature/search.jpg" />
+          </div>
+          <div class="col-sm-4 right-text">
+            <div class="page-header">
+              <h1>
+                <i class="fa fa-search"></i> 搜索无处不在
+              </h1>
+            </div>
+            <p class="lead">我们会为项目的所有关键信息建立全文索引，找不到东西了？ No problem，你只需要一个关键字。</p>
+          </div>
+        </div>
+
+
+        <div class="feature-band-dark row bg-stone">
+          <div class="col-sm-4 left-text">
+            <div class="page-header">
+              <h1>
+                <i class="fa fa-code"></i> 任务与代码有机关联
+              </h1>
+            </div>
+            <p class="lead">不知道任务的进展？ 看一看特定任务相关的Branch、Commit和Pull Request信息，还有可视化的Diff吧。</p>
+          </div>
+          <div class="col-sm-8">
+            <img class="right-figure" src="/static/img/feature/commits.jpg" />
+          </div>
+        </div>
+        <div class="feature-band row bg-warning">
+          <div class="col-sm-8">
+            <img class="left-figure" src="/static/img/feature/process.jpg" />
+          </div>
+          <div class="col-sm-4 right-text">
+            <div class="page-header">
+              <h1>
+                <i class="fa fa-pencil-square-o"></i> 过程信息全记录
+              </h1>
+            </div>
+            <p class="lead">项目中发生的任何活动都会在Onboard中留下永久的痕迹，每天的项目进展也可以随时回顾。</p>
+          </div>
+        </div>
+
+
+        <div class="feature-band row bg-success">
+          <div class="col-sm-8">
+            <img class="left-figure" src="/static/img/feature/repository.jpg" />
+          </div>
+          <div class="col-sm-4 right-text">
+            <div class="page-header">
+              <h1>
+                <i class="fa fa-code-fork"></i> 超级方便的代码管理和协作
+              </h1>
+            </div>
+            <p class="lead">轻轻松松完成代码仓库操作，代码Review，代码分支与合并，还能和任务和讨论无缝集成在一起。</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div th:replace="home/Index :: footer"></div>
+</body>
+</html>

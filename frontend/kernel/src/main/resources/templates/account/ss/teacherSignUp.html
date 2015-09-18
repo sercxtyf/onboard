@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('登录 | Onboard')">
+</head>
+
+
+<body class="account" id="sign">
+
+  <div class="container">
+
+    <form class="form-sign" method="POST" th:object="${newCommand}">
+      <div th:replace="fragments/Header :: header"></div>
+      <div class="input-group input-group-lg" >
+        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <input type="text" readonly="true" id="username" name="username" class="form-control" th:value="${username}"  required="required"  autofocus="autofocus"/>
+      </div>
+      <div class="input-group input-group-lg" >
+        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <input type="text" readonly="true" id="name" name="name" class="form-control" th:value="${name}"  required="required"  autofocus="autofocus"/>
+      </div>
+      <div class="input-group input-group-lg" >
+        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+        <input type="password" class="form-control" id="password" name="password" th:value="${password}" readonly="true" required="required"/>
+      </div>
+      <div th:class="${#fields.hasErrors('email')} ? 'input-group input-group-lg has-error' : 'input-group input-group-lg'" >
+        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+        <input type="email" class="form-control" th:field="*{email}" placeholder="邮箱地址" required="required"/>
+      </div>
+      <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('email')}">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>邮箱不合法：</strong> <span th:each="err : ${#fields.errors('email')}" th:text="${err}"></span>
+      </div>
+      
+      <div th:class="${#fields.hasErrors('companyName')} ? 'input-group input-group-lg has-error' : 'input-group input-group-lg'" >
+        <span class="input-group-addon"><i class="fa fa-users"></i></span>
+        <input type="text" class="form-control" th:field="*{companyName}" placeholder="团队名称" required="required"/>
+      </div>
+      <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('companyName')}">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>团队名不合法：</strong> <span th:each="err : ${#fields.errors('companyName')}" th:text="${err}"></span>
+      </div>
+      
+      <button class="btn btn-lg btn-primary btn-block" type="submit">填充信息完成注册</button>
+    </form>
+  </div>
+</body>
+</html>

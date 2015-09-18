@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
+  xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/osgi-compendium http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+  <context:component-scan base-package="com.onboard.domain.mapper" />
+  <osgix:cm-properties id="osgiProps" persistent-id="onboard" />
+  <context:property-placeholder properties-ref="osgiProps" />
+
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName" value="${mysql.driver}" />
+    <property name="url" value="#{'jdbc:mysql://${mysql.host}:${mysql.port}/${mysql.name}?userUnicode=true&amp;characterEncoding=utf8'}" />
+    <property name="username" value="${mysql.username}" />
+    <property name="password" value="${mysql.password}" />
+    <property name="initialSize" value="10" />
+    <property name="maxActive" value="50" />
+    <property name="timeBetweenEvictionRunsMillis" value="14400" />
+    <property name="testOnBorrow" value="true" />
+    <property name="testWhileIdle" value="true" />
+    <property name="validationQuery" value="SELECT 1" />
+  </bean>
+
+  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource" />
+  </bean>
+
+  <tx:annotation-driven transaction-manager="transactionManager" />
+
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+  </bean>
+
+  <bean id="activityMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.ActivityMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="attachmentMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.AttachmentMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="commentMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.CommentMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="companyMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.CompanyMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="collectionMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.CollectionMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="discussionMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.DiscussionMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="projectMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.ProjectMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="subscriberMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.SubscriberMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="todolistMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.TodolistMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="todoMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.TodoMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="topicMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.TopicMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="userCompanyMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.UserCompanyMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="userMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.UserMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="userProjectMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.UserProjectMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="invitationMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.InvitationMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="invitationProjectsMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.InvitationProjectsMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="departmentMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.DepartmentMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="projectPrivilegeMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.ProjectPrivilegeMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="companyPrivilegeMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.CompanyPrivilegeMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="notificationMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.NotificationMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="tagMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.TagMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="tagAttachMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.TagAttachMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="iterationMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.IterationMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="projectTodoIdMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.ProjectTodoIdMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="attachTodoMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.AttachTodoMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="projectTodoStatusMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.ProjectTodoStatusMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="companyApplicationMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.CompanyApplicationMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="storyMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.StoryMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="iterationAttachMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.IterationAttachMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="stepMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.StepMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="bugMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.BugMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="keywordMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.KeywordMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="uploadMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.UploadMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+
+  <bean id="trashMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.TrashMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+  <bean id="helpTipMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.onboard.domain.mapper.HelpTipMapper" />
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+</beans>

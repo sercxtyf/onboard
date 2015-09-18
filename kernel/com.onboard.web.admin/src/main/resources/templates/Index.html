@@ -1,0 +1,90 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Admin Console | Onboard</title>
+  <link rel="stylesheet"
+        href="/static/lib/bootstrap/css/bootstrap.min.css"
+        th:href="@{/static/lib/bootstrap/css/bootstrap.min.css}"/>
+  <link rel="stylesheet"
+        href="/static/css/admin.css"
+        th:href="@{/static/css/admin.css}"/>
+  <script src="/static/lib/jquery/jquery.min.js"
+          th:src="@{/static/lib/jquery/jquery.min.js}"></script>
+  <script src="/static/lib/bootstrap/js/bootstrap.min.js"
+          th:src="@{/static/lib/bootstrap/js/bootstrap.min.js}"></script>
+  <script src="/static/lib/angularjs/angular.min.js"
+          th:src="@{/static/lib/angularjs/angular.min.js}"></script>
+  <script src="/static/lib/angularjs/angular-route.min.js"
+          th:src="@{/static/lib/angularjs/angular-route.min.js}"></script>
+  <script src="/static/js/app.js"
+          th:src="@{/static/js/app.js}"></script>
+  <script type="text/javascript">
+    /*<![CDATA[*/
+    angular.element(document.getElementsByTagName('head'))
+            .append(angular.element('<base href="' + window.location.pathname + '" />'));
+    /*]]>*/
+  </script>
+</head>
+<body ng-app="adminApp">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Onboard Admin</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" th:text="${session.currentUser.name}"></a></li>
+        <li><a href="#">退出登录</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid" ng-controller="appCtrl">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li ng-class="navClass('dashboard')" ng-click="loadDashboard()"><a>概览</a></li>
+        <li ng-class="navClass('application')" ng-click="loadApplication()"><a>内测申请</a></li>
+        <li ng-class="navClass('feedback')" ng-click="loadFeedback()"><a>反馈意见</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view="">
+    </div>
+  </div>
+</div>
+
+<script type="text/ng-template" id="dashboard.html">
+  <div>Dashboard Panel</div>
+</script>
+<script type="text/ng-template" id="application.html">
+  <div ng-controller="applicationCtrl">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>团队</th>
+          <th>联系人</th>
+          <th>联系邮件</th>
+          <th>状态</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="trial in trials">
+          <td>{{ trial.id }}</td>
+          <td>{{ trial.teamName }}</td>
+          <td>{{ trial.contactName }}</td>
+          <td>{{ trial.contactEmail }}</td>
+          <td>{{ trial.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</script>
+<script type="text/ng-template" id="feedback.html">
+  <div>Feedback Panel</div>
+</script>
+</body>
+</html>
+

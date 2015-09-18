@@ -1,0 +1,55 @@
+.link-todolist{
+  .select-linkedtodo-view{
+    height: 500px;
+    padding: 0;
+    li{
+      list-style: none;
+      padding: 10px 15px;
+    }
+    .todoliss-title{
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .todolists{
+      height: 100%;
+      float: left;
+      padding: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      border-right: 1px solid #ebebeb;
+      .todolist-item{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .todolist-item.active{
+        background-color: #ddd;
+      }
+    }
+    .todos{
+      height: 100%;
+      float: left;
+      padding: 5px 0 0 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      .link-todo-item{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: 1px 0 1px 0;
+      }
+      .link-todo-item.active{
+        background-color: #D8EEFF;
+      }
+      .link-todo-item.disable{
+        background-color: #eee;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+.link-todolist.modal.center{
+  .modal-content{
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+}

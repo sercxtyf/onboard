@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+<body>
+
+<div th:fragment="meCompletedBugs" id="meCompletedBugs">
+    <div infinite-scroll='loadMoreItems()'
+         infinite-scroll-disabled='busy || !hasNext'
+         infinite-scroll-distance='0'>
+        <div class="panel panel-me" ng-repeat="dateKey in completedBugsKeys">
+
+            <div class="panel-heading">{{ dateKey }}</div>
+            <div class="panel-body">
+                <div class="completedBug" ng-repeat="(projectId,bugs) in completedBugs[dateKey]">
+                    <span class="projectName uncompletedHref">
+                      <a ui-sref="company.project.todolists({projectId: projectId, companyId:companyId})">
+                          {{projectsName[projectId]}}
+                      </a>
+                    </span>
+                    <br/>
+
+                    <div ng-repeat="bug in bugs" data-id="{{bug.id}}">
+                        <div class="bugInfo">
+                            <span><i class="fa fa-check"></i>
+                                <a class="bugName" open-drawer="bug" open-drawer-params="{id: bug.id}"
+                                   open-drawer-type="'bug'"
+                                   open-drawer-data="{projectId: bug.projectId, companyId: bug.companyId}">
+                                    #{{ bug.idInProject }}&nbsp; {{bug.title}}
+                                </a>
+                            </span>
+                            <span class="bugDone">&nbsp;完成于&nbsp;{{bug.completedTime  | date:'yyyy-MM-dd' }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-hide='hasNext' class="text-center text-danger"><strong>没有更多的信息了...</strong></div>
+
+</div>
+</body>
+</html>

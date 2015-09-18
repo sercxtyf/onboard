@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('项目')"></head>
+<body>
+  <div th:fragment="Project" data-libs="sidebar" id="project">
+    <div class="wrap-all transition-on mini-sidebar">
+      <nav id="sidebar-wrapper" class="sidebar-default sidebar-fixed" ng-mouseenter="toggleSidebar()" ng-mouseleave="toggleSidebar()">
+        <div class="sidebar-shadow"></div>
+        <div class="side-menu-wrapper">
+          <ul class="nav" id="side-menu">
+            <li ui-sref-active="active">
+              <a ui-sref=".todolists.open" title="待办事项">
+                <i class="fa fa-list-ul fa-fw"></i>
+                <span class="nav-label">待办事项</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref=".stories">
+                <i class="fa fa-book fa-fw"></i>
+                <span class="nav-label">需求</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref=".bugs">
+                <i class="fa fa-bug fa-fw"></i>
+                <span class="nav-label">缺陷</span>
+              </a>
+            </li>
+            <li ng-class="{active: $state.includes('company.project.iteration')}">
+              <a ui-sref=".iteration.activeIteration.todos" title="迭代">
+                <i class="fa fa-line-chart fa-fw"></i>
+                <span class="nav-label">迭代</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref=".discussions" title="话题">
+                <i class="fa fa-comments-o fa-fw"></i>
+                <span class="nav-label">话题</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref=".uploads" title="文件">
+                <i class="fa fa-folder fa-fw"></i>
+                <span class="nav-label">文件</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref=".statistics.group" title="统计">
+                <i class="fa fa-bar-chart fa-fw"></i>
+                <span class="nav-label">统计</span>
+              </a>
+            </li>
+            <li ng-show="sidePlugins.length > 0" ui-sref-active="active" ng-repeat="plugin in sidePlugins">
+              <a ui-sref="{{plugin['ui-sref']}}" title="{{plugin.title}}">
+                <i class="fa fa-fw" ng-class="plugin.icon"></i>
+                <span class="nav-label">{{plugin.title}}</span>
+              </a>
+            </li>
+<!--        <li ng-class="{active: $state.includes('company.project.ciProjects')}"><a ui-sref=".ciProjects" title="持续集成"> <i class="fa fa-anchor fa-fw"></i> <span class="nav-label">持续集成</span>
+            </a></li> -->
+          </ul>
+        </div>
+
+        <li class="setting">
+        	<a href="/help" target="_blank" class="setting" ng-class="{'admin': project.isCurrentUserAdmin}" title="帮助中心"><i class="fa fa-question fa-2x s"></i></a>
+            <a ng-repeat="plugin in footerPlugins" ui-sref="{{plugin['ui-sref']}}" class="setting" title="{{plugin.title}}"><i class="fa" ng-class="plugin.icon"></i></a>
+        	<!--<a href="" class="create_suggestion setting" ng-class="{'admin': project.isCurrentUserAdmin}" data-toggle="modal" data-target="#suggestion-form" title="反馈意见"><i class="fa fa-envelope-o fa-2x"></i></a>-->
+        	<a ng-show="project.isCurrentUserAdmin" ui-sref="company.projectEdit({projectId: project.id})" class="setting admin" title="项目设置"> <i class="fa fa-cog fa-2x s"></i>
+          </a>
+        </li>
+      </nav>
+      <!-- .nav-panel -->
+      <div id="subview-wrapper" class="content-wrapper gray-bg">
+        <div id="subview" ui-view=""></div>
+      </div>
+    </div>
+  </div>
+  <div drawer=""></div>
+
+
+</body>
+
+</html>

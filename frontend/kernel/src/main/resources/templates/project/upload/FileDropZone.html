@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:c="http://www.w3.org/1999/XSL/Transform">
+
+<head></head>
+
+<body>
+
+<div th:fragment="fileDropZone"  id="fileDropZone"  ng-controller="fileDropZoneCtrl" >
+
+    <div class="attachment-list well well-lg" ng-file-drop="selectfile($files)" ng-file-drag-over-class="file-upload-area-on">
+        <span><img ng-src="/static/img/attachment-icon/paperclip.png"/>请将附件拖动到此区域或</span>
+        <span data-multiple="true" class="click btn btn-default btn-xs" ng-file-select="selectfile($files)">点击上传</span>
+
+        <div ng-repeat="file in files">
+            <div ng-show="stat=='error'"
+                 class="alert alert-danger alert-dismissible fade in"
+                 role="alert">
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                </button>
+                {{msg}}
+            </div>
+            <span ng-show="file != null">
+             <i class="fa fa-times" ng-click="remove(file)"></i>
+             {{file.name}}
+            </span>
+        <div id="attach-Progress" style="display: none;">
+            <small><em>upload progressbar</em></small>
+            <div class="col-sm-5" ><progressbar class="progress-striped active" value="dynamic" type="success"/></div>
+        </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+</html>

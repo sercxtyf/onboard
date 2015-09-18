@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="comment" ng-controller="commentTabCtrl" id="comment-tab" class="comment-tab" ng-cloak="">
+  <div ng-show="stat =='error'" class="alert alert-danger" role="alert">{{msg}}</div>
+  <div class="media comment" ng-repeat="comment in comments">
+    <!--ng-mouseover="showCommentOpers(comment,$event)"-->
+    <!--ng-mouseleave="hideCommentOpers($event)"-->
+    <a class="media-left">
+      <img class="avatar img-circle" ng-src="{{avatarUrlInComment(comment.creatorDTO.avatar)}}"> </img>
+    </a>
+
+    <div class="media-body">
+      <h5 class="media-heading">
+        <a ui-sref="company.me({userId:comment.creatorId})">{{ comment.creatorName}}</a>
+        &nbsp;<span am-time-ago="comment.created/1000"></span>
+        <span class="comment-operations" ng-if="checkCommentAccess(comment)">
+          <a href="" ng-click="editComment(comment,$event)">修改</a>
+          <a href="" ng-click="deleteComment(comment,$event)">删除</a>
+        </span>
+      </h5>
+
+      <div ng-bind-html="wikiTrustDangerousSnippet(comment.content)"></div>
+      <div class="media" ng-repeat="attachment in comment.attachmentDTOs" ng-switch="attachment.contentType">
+        <a class="media-left" href="" ng-switch-when="image" data-toggle="tooltip" data-placement="top" title="点击预览">
+          <img class="avatar"
+               ng-src="/api/{{attachment.companyId}}/projects/{{attachment.projectId}}/attachments/image/{{attachment.id}}"
+               ng-click="displayCommentImage(attachment,$event)"/>
+        </a>
+        <a class="media-left"
+           ng-href="/api/{{attachment.companyId}}/projects/{{attachment.projectId}}/attachments/{{attachment.id}}/download"
+           data-toggle="tooltip" data-placement="top" title="点击下载"
+           ng-switch-default="" ng-switch="attachment.contentType" target="_blank">
+          <img class="avatar" ng-src='/static/img/attachment-icon/word.png' ng-switch-when="application/msword"/>
+          <img class="avatar" ng-src='/static/img/attachment-icon/word.png'
+               ng-switch-when="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+          <img class="avatar" ng-src='/static/img/attachment-icon/file_extension_rar.png'
+               ng-switch-when="application/x-rar-compressed"/>
+          <img class="avatar" ng-src='/static/img/attachment-icon/zip.png' ng-switch-when="application/zip"/>
+          <img class="avatar" ng-src='/static/img/attachment-icon/file_extension_txt.png'
+               ng-switch-when='text/plain'/>
+          <img class="avatar" ng-src='/static/img/attachment-icon/css.png' ng-switch-when="text/css"/>
+          <img class="avatar" ng-src='/static/img/attachment-icon/html.png' ng-switch-when="text/html"/>
+          <img class="avatar" ng-src='/static/img/attachment-icon/txt.png' ng-switch-when="text/xml"/>
+          <img class="avatar" ng-src='/static/img/attachment-icon/excel.png'
+               ng-switch-when="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+          <img class="avatar" ng-src='/static/img/attachment-icon/ppt.png'
+               ng-switch-when="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
+          <img class="avatar" ng-src='/static/img/attachment-icon/file_extension_js.png'
+               ng-switch-when="application/javascript"/>
+          <img class="avatar" ng-src='/static/img/attachment-icon/ppt.png'
+               ng-switch-when="application/vnd.ms-powerpoint"/>
+          <img class="avatar" ng-src='/static/img/attachment-icon/excel.png'
+               ng-switch-when="application/vnd.ms-excel"/>
+          <img class="avatar" ng-src='/static/img/attachment-icon/pdf.png' ng-switch-when="application/pdf"/>
+          <img class="avatar" ng-src='/static/img/attachment-icon/file_extension_others.png' ng-switch-default=""/>
+        </a>
+
+        <div class="media-body" ng-switch="attachment.contentType">
+          <a class="media-left" href="" data-toggle="tooltip" data-placement="top" title="点击预览"
+             ng-click="displayCommentImage(attachment,$event)" ng-switch-when="image">
+            {{ attachment.name }}
+          </a>
+          <a class="media-left" data-toggle="tooltip" data-placement="top" title="点击下载"
+             ng-href="/api/{{attachment.companyId}}/projects/{{attachment.projectId}}/attachments/{{attachment.id}}/download"
+             ng-switch-default="" target="_blank">
+            {{ attachment.name }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="media edit-comment" ng-model="commentToBeEdit" style="display: none;">
+    <a class="media-left">
+      <img class="avatar" ng-src="{{avatarUrlInComment(currentUser.avatar)}}"> </img>
+    </a>
+
+    <div class="media-body" style="width:100%">
+      <form class="editCommentForm" role="form">
+        <div class="form-group">
+          <input type="text" class="form-control fake-input-content" name="content"> </input>
+        </div>
+
+        <div class="attachments-buttons">
+
+          <p class="description">
+            <i class="fa fa-paperclip"></i>将附件拖动到以下区域或
+            <span data-multiple="true" class="btn btn-default btn-xs" ng-file-select="onFileSelect($files)">
+              点此上传
+            </span>
+          </p>
+
+          <div class="comment-attachments file-upload-area" ng-file-drop="onFileSelect($files)"
+               ng-file-drag-over-class="file-upload-area-on">
+
+            <div ng-repeat="file in uploadedFiles" ng-show="file != null" class="attachment-item">
+              <input class="hidden" data-id="{{file.id}}"> </input>
+              <preview content-type="file.contentType" class="preview"></preview>
+              <span class="name">{{file.name}}</span>
+              <span class="size">{{file.size | fileSize}}</span>
+              <i class="fa fa-times-circle pull-right delete pointer" ng-click="remove(file)"></i>
+
+              <div class="attach-Progress" style="display: none">
+                <progressbar class="progress-striped active" value="dynamic" type="success"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="buttons pull-right">
+            <button type="submit save" class="btn btn-primary" ng-click="saveCommentEdit($event,commentToBeEdit)">修改评论
+            </button>
+            <button type="button cancel" class="btn btn-default" ng-click="cancelCommentEdit($event)">取消</button>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+
+  <div class="media new-comment">
+    <a class="media-left" href="#">
+      <img class="avatar" ng-src="{{avatarUrlInComment(currentUser.avatar)}}"> </img>
+    </a>
+
+    <div class="media-body" style="width:100%">
+      <form class="newCommentForm" role="form">
+        <div class="form-group">
+          <input type="text" class="form-control fake-input-content" name="content" placeholder="点击发表评论"
+                 ng-click="showCommentEditor($event)"> </input>
+        </div>
+
+        <div class="attachments-buttons" style="display: none;">
+
+          <p class="description">
+            <i class="fa fa-paperclip"></i>将附件拖动到以下区域或
+            <span data-multiple="true" class="btn btn-default btn-xs" ng-file-select="onFileSelect($files)">
+              点此上传
+            </span>
+          </p>
+
+          <div class="comment-attachments file-upload-area" ng-file-drop="onFileSelect($files)"
+               ng-file-drag-over-class="file-upload-area-on">
+
+            <div ng-repeat="file in uploadedFiles" ng-show="file != null" class="attachment-item">
+              <input class="hidden" data-id="{{file.id}}"> </input>
+
+              <preview content-type="file.contentType" class="preview"></preview>
+
+              <span class="name">{{file.name}}</span>
+
+              <span class="size">{{file.size | fileSize}}</span>
+
+              <i class="fa fa-times-circle pull-right delete pointer" ng-click="remove(file)"></i>
+
+              <div class="attach-Progress" style="display: none">
+                <progressbar class="progress-striped active" value="dynamic" type="success"/>
+              </div>
+            </div>
+          </div>
+
+          <i class="fa fa-at"></i>发送通知给：
+          <button type="button" class="btn btn-default btn-xs" ng-click="toggleCommentSubscribers($event)">选择用户</button>
+          <div id="commentSubscribers" class="hide">
+            <memberselector memberselector-user-list="projectUsers" memberselector-option="memberselectorOptions"
+                            memberselector-return="selectedUsers"></memberselector>
+          </div>
+
+          <div class="buttons pull-right">
+            <button type="submit save" class="btn btn-primary" ng-click="saveComment($event)"> 发表评论</button>
+            <button type="button cancel" class="btn btn-default" ng-click="cancelCommentCreate($event)">取消</button>
+          </div>
+
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+
+</div>
+
+</body>
+
+</html>

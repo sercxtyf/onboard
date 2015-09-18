@@ -1,0 +1,216 @@
+// imported by project.less
+@import "variables.less";
+// styles for subview #iterations 
+
+.newIteration {
+  margin-left: 10px;
+  margin-top: 5px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.newIterationForm {
+  width: 350px;
+}
+
+#createdIterations {
+  // imported by project.less
+  // styles for subview #tasks
+  .content {
+    margin-top: 20px;
+    .panel {
+      .panel-body {
+        padding: 0;
+        .list-group {
+          margin-bottom: 0;
+          .list-group-item {
+            input {
+              margin-right: 15px;
+            }
+          }
+        }
+      }
+    }
+    .one-iteration {
+      .iteration_name {
+        overflow-y: hidden;
+        width: 100%;
+        min-height: 28px;
+        padding: 0;
+      }
+      .iteration_name {
+        width: 90%;
+      }
+      .iteration-operation {
+        float: right;
+        display: none;
+        cursor: pointer;
+      }
+      .one-todo {
+        .todo-operation {
+          float: right;
+          display: none;
+        }
+      }
+      .one-todo:hover {
+        .todo-operation {
+          display: block;
+        }
+      }
+    }
+    .one-iteration:hover {
+      .todolist-operation {
+        display: block;
+      }
+    }
+  }
+  .search-todo {
+    margin-left: 10px;
+    width: 200px;
+    float: left;
+  }
+  .subnav {
+    height: 50px;
+  }
+}
+
+//end of #createdIterations
+#activeIteration {
+  .active-iteration-operation {
+    margin: 5px;
+  }
+  .setStatusForm {
+    margin-left: 100px;
+  }
+  .iteration-time{
+    font-size: 16px;
+  }
+  #iterations-tab {
+    -ms-flex-align: start;
+    -moz-box-align: start;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+    display: flex;
+    -moz-box-orient: horizontal;
+    -webkit-box-orient: horizontal;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    margin-bottom: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 10px;
+    .one-status {
+      border-radius: 3px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      display: flex;
+      -moz-box-orient: vertical;
+      -webkit-box-orient: vertical;
+      -ms-flex-direction: column;
+      -webkit-flex-direction: column;
+      flex-direction: column;
+      -moz-box-flex: 0;
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 260px;
+      -webkit-flex: 0 0 260px;
+      flex: 0 0 260px;
+      margin: 0 5px;
+      max-height: 100%;
+      padding: 4px 3px 3px;
+      position: relative;
+      -webkit-transform: translate3d(0, 0, 0);
+      width: 300px;
+      ul.list-group {
+        max-height: 800px;
+      }
+    }
+  }
+
+}
+
+//end of #activeIteration
+#completedIterations {
+  .panel {
+    .iteration-time{
+      float: right;
+    }
+    .panel-body {
+      padding: 0;
+      .list-group {
+        margin-bottom: 0;
+        .list-group-item {
+          input {
+            margin-right: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.iteartion-head {
+  position: relative;
+  height: 130px;
+  background-color: white;
+  padding: 10px 0 0 20px;
+  .iteration-info{
+    width:  300px;
+    float: left;
+    .iteration-name{
+      width: 300px;
+      font-size: 30px;
+      float: left;
+    }
+  }
+  .iteration-operation{
+    position: absolute;
+    right: 15px;
+  }
+  .iteration-tab {
+    position: absolute;
+    bottom: 0;
+    .nav>li>a{
+      border-radius: 0px;
+      &:hover, &:focus{
+        color: @bright-blue;
+        text-decoration: none;
+        background: none;
+        border-bottom: 4px solid @bright-blue;
+      }
+    }
+
+    .nav-pills>li>a {
+      border-radius: 0px;
+    }
+
+    .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
+      color: @bright-blue;
+      border-bottom: 4px solid @bright-blue;
+      // border-radius: 0px;
+      background: none;
+    }
+  }
+}
+.completed-iteration-container{
+  padding: 0;
+}
+
+.tab-content {
+  height: 100%;
+  padding-top: 15px;
+}
+
+
+
+//temp
+li{
+list-style: none;
+}
+
+.edit-name{
+  min-height: 20px
+}

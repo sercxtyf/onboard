@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head lang="en"></head>
+<body>
+  <div th:fragment="story" ng-controller="storyTabCtrl" class="task-tab" ng-init="initTodoTab('story')">
+    <div>
+      <!-- 
+      <ul class="list-group todo-list" ng-controller="todoItemCtrl">
+        <li th:replace="project/common/Todos :: todos('todolist.todos', 'searchTodo')"></li>
+      </ul> -->
+      <!--       <div class="stories-tree-node ng-scope" ng-repeat="story in story.childStoryDTOs | filter: {completed:false}">
+        <div class="stories-tree-value" ng-class="{true: 'root-value'}[story.id < 1]">
+          <div class="stories-tree-switch">
+            <i class="fa fa-plus-square-o ng-hide" ng-show="story.childStoryDTOs.length > 0 &amp;&amp; !story.show &amp;&amp; story.show != undefined" ng-click="changeStatus($event, story)" title="展开子需求"></i> <i class="fa fa-minus-square-o ng-hide" ng-show="story.childStoryDTOs.length > 0 &amp;&amp; (story.show || story.show == undefined)" ng-click="changeStatus($event, story)" title="收起子需求"></i> <i class="fa fa-plus-circle" ng-show="story.childStoryDTOs.length < 1 &amp;&amp; !story.completed"
+              ng-click="addChild($event, story, 'title')" title="添加子需求"></i>
+          </div>
+          <div class="stories-progress ng-binding" title="已完成0个子需求/共0个子需求">0 / 0</div>
+          <div style="margin-right: 70px; margin-left: 73px;">
+            <input type="text" ng-model="story.description" ng-focus="saveOld(story)" ng-blur="modifyIt(story)" ng-keyup="keyup($event, story, 'edit')" class="ng-pristine ng-valid ng-touched" style="">
+          </div>
+          <div class="stories-tree-detail">
+            <i class="fa fa-pencil-square-o fa-fw ng-isolate-scope" title="编辑详情" open-drawer="story" open-drawer-type="'story'" open-drawer-params="{id:story.id}" open-drawer-data="{projectId:story.projectId,companyId:story.companyId}"></i> <i class="fa fa-trash fa-fw" ng-click="delStory($event, story)" ng-show="story.childStoryDTOs.length < 1" title="删除故事"></i> <i class="fa fa-trash fa-fw ng-hide" ng-click="" ng-hide="story.childStoryDTOs.length < 1" title="子需求尚未完成"
+              style="cursor: no-drop; color: #cecece;"></i>
+          </div>
+        </div>
+        <div ng-show="story.childStoryDTOs.length > 0 || story.addChild || story.id < 1" class="stories-tree-nodes ng-hide" ng-class="{'root-nodes':(story.id < 1), 'stop-add':story.completed, 'not-show':checkShow(story)}" stories-node="story.childStoryDTOs">
+          ngRepeat: story in story.childStoryDTOs | filter: {completed:false}
+        </div>
+        <div ng-show="(story.childStoryDTOs.length > 0 || story.addChild || story.id < 1) &amp;&amp; !story.completed" class="stories-add-node ng-hide" ng-class="{'not-show':checkShow(story)}">
+          <i title="添加子需求" ng-show="story.addChild == undefined || story.addChild == false" class="fa fa-plus-circle fa-fw add-button" ng-click="addChild($event, story, 'button')"></i> <i title="放弃添加" ng-show="story.addChild != undefined &amp;&amp; story.addChild" class="fa fa-times-circle fa-fw fa-2x add-button ng-hide" ng-click="cancelAddChild($event, story)"></i>
+          <div class="new-story">
+            <i title="确认添加" class="fa fa-check add-new-story" ng-click="addNewStory($event, story)"></i> <input type="text" ng-model="newStoryDescription" ng-keyup="keyup($event, story, 'new')" placeholder="输入需求标题" class="ng-pristine ng-untouched ng-valid">
+            <div></div>
+          </div>
+        </div>
+      </div>
+ -->
+      <ul class="list-group todo-list">
+        <li ng-repeat="story in linkedTodolists" class="todo-item mini-todo todo-active">
+          <div class="story-tab-story">
+            <span  title="子需求" class="child-story stories-progress ">&nbsp;&nbsp;({{story.uncompletedChildStoryCount}}/{{story.uncompletedChildStoryCount + story.completedChildStoryCount}})&nbsp;&nbsp;</span>
+            <span class="story-content" open-drawer="story" open-drawer-type="'story'" open-drawer-params="{id:story.id}" ng-bind-html="story.description" open-drawer-data="{projectId:story.projectId,companyId:story.companyId}"></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

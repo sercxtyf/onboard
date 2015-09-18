@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('重设密码成功')"></head>
+
+
+<body class="account" id="sign">
+
+  <div class="container">
+    <div th:replace="fragments/Header :: header"></div>
+    
+    <div class="well">
+      <h3 class="page-header">重设密码</h3>
+      <div class="page-content">
+        <p>密码重置成功！请重新<a href="/account/signin">登录</a></p>
+    </div>
+  </div>
+</div>
+
+<div th:replace="fragments/Footer :: footer"></div>
+</body>
+</html>

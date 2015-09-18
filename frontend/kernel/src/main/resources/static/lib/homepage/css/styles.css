@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'onboard-logo';
+  src: url('../fonts/onboard-logo/onboard-logo.eot');
+  src: url('../fonts/onboard-logo/onboard-logo.eot') format('embedded-opentype'), url('../fonts/onboard-logo/onboard-logo.woff') format('woff'), url('../fonts/onboard-logo/onboard-logo.ttf') format('truetype'), url('../fonts/onboard-logo/onboard-logo.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="ob-"],
+[class*=" ob-"] {
+  font-family: 'onboard-logo';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+}
+.ob-logo:before {
+  content: "\e600";
+}
+.learn-more {
+  padding-bottom: 40px;
+}
+.learn-more a {
+  font-size: 18px;
+  padding: 10px 40px;
+}
+.mobile-qr {
+  padding-bottom: 40px;
+}
+.mobile-qr img {
+  margin: auto;
+}
+.nav > li > a {
+  text-align: center;
+}

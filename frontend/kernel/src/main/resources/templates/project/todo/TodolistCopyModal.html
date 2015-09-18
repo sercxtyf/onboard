@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en">
+    <title></title>
+</head>
+
+<body>
+    <div th:fragment="todolistCopyModal" id="todolistCopyModal">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <button type="button" class="close" aria-label="Close" ng-click="cancel()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="panel-title">复制任务列表: {{ todolist.name }}</h3>
+            </div>
+            <div class="panel-body">
+                <div ng-show="status === 'begin'">
+                    <h3>请选择目标项目</h3>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item" ng-repeat="project in projects" ng-click="select(project)" ng-class="{'list-group-item-info': project === selected,
+                          'heading-default': themes[project.colorId%6].name === 'default',
+                          'heading-primary': themes[project.colorId%6].name === 'primary', 
+                          'heading-warning': themes[project.colorId%6].name === 'warning',
+                          'heading-danger': themes[project.colorId%6].name === 'danger',
+                          'heading-success': themes[project.colorId%6].name === 'success',
+                          'heading-info': themes[project.colorId%6].name === 'info'}">
+                            <h4 class="list-group-item-heading">{{ project.name }}</h4>
+                        </a>
+                    </div>
+                </div>
+                <div ng-show="status === 'copying'" class="message">
+                    <h3 class="text-info">正在复制，请稍后...</h3>
+                    <span><i class="fa fa-spinner fa-spin fa-4x"></i></span>
+                </div>
+                <div ng-show="status === 'done'" class="message">
+                    <h3 class="text-success">复制成功！</h3>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" ng-click="gotoProject(targetId)">前往目标项目</button>
+                        <button type="button" class="btn btn-primary" ng-click="gotoProject()">留在当前项目</button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="form-group">
+                    <button type="button" class="btn btn-default pull-right" ng-click="cancel()">取消</button>
+                    <button type="button" class="btn btn-primary pull-right confirm" ng-click="copy(selected)" ng-disabled="selected === undefined" ng-show="status === 'begin'">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

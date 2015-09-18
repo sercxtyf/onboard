@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+                           http://www.springframework.org/schema/osgi-compendium http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
+
+  <context:component-scan
+      base-package="com.onboard.service.file, com.onboard.service.email, com.onboard.service.common"/>
+
+  <osgix:cm-properties id="osgiProps" persistent-id="onboard"/>
+  <context:property-placeholder properties-ref="osgiProps"/>
+
+  <tx:annotation-driven transaction-manager="transactionManager" order="2"/>
+
+  <bean id="emailTemplateResolver" class="org.thymeleaf.templateresolver.ClassLoaderTemplateResolver">
+    <property name="templateMode" value="HTML5"/>
+    <property name="characterEncoding" value="UTF-8"/>
+  </bean>
+
+  <bean id="emailTemplateEngineBean" class="com.onboard.service.email.impl.OSGiTemplateEngine">
+    <property name="templateResolver" ref="emailTemplateResolver"/>
+  </bean>
+  
+    <bean id="connectionFactory"
+        class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+        p:hostName="${redis.host}" p:port="${redis.port}" />
+  
+  <bean id="osgiJdkSerializationRedisSerializer" class="com.onboard.service.common.cache.impl.OsgiJdkSerializationRedisSerializer" />
+  
+  <bean id="redisStringTemplateBean"
+        class="org.springframework.data.redis.core.StringRedisTemplate"
+        p:connectionFactory-ref="connectionFactory"/>
+  
+  <bean id="redisTemplateBean"
+        class="org.springframework.data.redis.core.RedisTemplate"
+        p:valueSerializer-ref="osgiJdkSerializationRedisSerializer"
+        p:connectionFactory-ref="connectionFactory"/>
+  
+  <bean id="cacheManagerBean" class="com.onboard.service.common.cache.impl.OnboardCacheManagerImpl" c:template-ref="redisTemplateBean"/>
+</beans>

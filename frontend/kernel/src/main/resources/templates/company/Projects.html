@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head></head>
+
+<body>
+
+<div th:fragment="projects" id="projects">
+  <div class="content container">
+
+    <div class="projects-heading">
+      <h2>项目列表</h2>
+      <a class="btn btn-primary pull-right" ng-click="createNewProject()">新建项目</a>
+    </div>
+
+    <hr/>
+
+    <div class="row" ui-sortable="sortableOptions" ng-model="projects">
+      <div ng-repeat="project in projects | filter:projectFilter"  data-id="project.id" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="panel panel-default project-panel" ng-init="initTooltip();">
+
+          <div class="panel-heading" 
+               ng-class="{'heading-default': themes[project.colorId%6].name == 'default',
+                          'heading-primary': themes[project.colorId%6].name == 'primary', 
+                          'heading-warning': themes[project.colorId%6].name == 'warning',
+                          'heading-danger': themes[project.colorId%6].name == 'danger',
+                          'heading-success': themes[project.colorId%6].name == 'success',
+                          'heading-info': themes[project.colorId%6].name == 'info'}">
+            <h3 class="panel-title">
+              <a ng-bind="project.name" ui-sref="company.project.todolists({projectId: project.id})"></a>
+
+              <div class="pull-right operation" ng-show="project.isCurrentUserAdmin">
+                <a ui-sref="company.projectEdit({projectId: project.id})">
+                  <i class="fa fa-pencil"></i>
+                </a>
+              </div>
+            </h3>
+          </div>
+
+          <div class="panel-body">
+            <pre class="project-description" ng-bind="project.description"></pre>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="uploads" id="uploads">
+
+  <div class="center-panel-nav">
+    <!-- <div class="center-panel-nav-shadow"></div> -->
+    <!--a class="toggle-sidebar-btn btn btn-primary" href="#" ng-click="toggleSidebar()"><i class="fa fa-bars"></i></a-->
+
+    <h3>
+      <span>文件</span>
+      <small>
+        <span>——将项目用到的素材、PPT、成品存放于此，方便转阅与使用。</span>
+      </small>
+    </h3>
+    <ul class="second-nav-bar">
+      <li class="second-nav-button" ng-file-select="uploadFile($files)"><i class="fa fa-plus"></i> 上传文件</li>
+    </ul>
+
+  </div>
+
+  <div class="center-panel-content upload-list-panel">
+
+    <div ng-show="attachments.length == 0" class="no-item-exists-create-new-item">
+      还没有人上传文件<br/>
+      赶快上传自己的第一个文件，与小伙伴们分享它吧！！！<br/>
+      <button type="submit" class="btn btn-primary btn-sm" data-multiple="true" ng-file-select="uploadFile($files)">
+        <i class="fa fa-plus"></i> 上传文件
+      </button>
+    </div>
+
+    <div ng-hide="attachments.length == 0">
+
+      <div ng-show="stat=='error'"
+           class="alert alert-danger alert-dismissible fade in"
+           role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+        </button>
+        {{msg}}
+      </div>
+
+      <table class="table file-content-header " infinite-scroll='pager.nextPage()'
+             infinite-scroll-disabled='pager.busy' infinite-scroll-distance='1'
+             infinite-scroll-container=".center-panel-content" ng-show="pager.items.length != 0">
+        <thead>
+        <tr>
+          <th class="col-sm-6">名称</th>
+          <th>大小</th>
+          <th class="col-sm-2">创建者</th>
+          <th>上传时间</th>
+          <th class="col-sm-2"></th>
+        </tr>
+        </thead>
+        <tbody class="row">
+        <tr id="uploadProgress" style="display: none;">
+          <!-- 显示进度条 -->
+          <td>
+            <small class="uploadFont"><em>uploading</em></small>
+            <!--<div class="col-sm-6">-->
+            <!--<progressbar class="progress-striped active" value="dynamic" type="success"/>-->
+            <!--</div>-->
+            <!--<i class="fa fa-remove uploading-operation" ng-click="quitUpload(upload)"></i>-->
+            <img ng-src='/static/img/attachment-icon/processbar.gif'/>
+          </td>
+        </tr>
+
+        <tr ng-repeat="upload in uploads" class="col-sm-12 uploading">
+          <td ng-show="upload!=null">
+            <a><i class="fa fa-times uploading-operation" ng-click="quitUpload(upload)"></i></a>
+            {{upload.name}}
+          </td>
+        </tr>
+
+        <tr ng-repeat="attachment in attachments" class="attachment">
+
+          <td class="col-sm-6 hover-stress" ng-switch="attachment.contentType">
+            <img ng-src='/static/img/attachment-icon/word.png' ng-switch-when="application/msword"/>
+            <img ng-src='/static/img/attachment-icon/word.png'
+                 ng-switch-when="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+            <img ng-src='/static/img/attachment-icon/file_extension_rar.png'
+                 ng-switch-when="application/x-rar-compressed"/>
+            <img ng-src='/static/img/attachment-icon/zip.png' ng-switch-when="application/zip"/>
+            <img ng-src='/static/img/attachment-icon/file_extension_txt.png' ng-switch-when='text/plain'/>
+            <img ng-src='/static/img/attachment-icon/css.png' ng-switch-when="text/css"/>
+            <img ng-src='/static/img/attachment-icon/html.png' ng-switch-when="text/html"/>
+            <img ng-src='/static/img/attachment-icon/txt.png' ng-switch-when="text/xml"/>
+            <img ng-src='/static/img/attachment-icon/excel.png'
+                 ng-switch-when="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+            <img ng-src='/static/img/attachment-icon/ppt.png'
+                 ng-switch-when="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
+            <img ng-src='/static/img/attachment-icon/file_extension_js.png' ng-switch-when="application/javascript"/>
+            <img ng-src='/static/img/attachment-icon/ppt.png' ng-switch-when="application/vnd.ms-powerpoint"/>
+            <img ng-src='/static/img/attachment-icon/excel.png' ng-switch-when="application/vnd.ms-excel"/>
+            <img ng-src='/static/img/attachment-icon/pdf.png' ng-switch-when="application/pdf"/>
+            <img ng-src="{{attachmentImageUrl}}/{{attachment.id}}" ng-switch-when="image"/>
+            <img ng-src='/static/img/attachment-icon/file_extension_others.png' ng-switch-default=""/>
+            <a class="pointer" ng-click="showAttachmentDetail(attachment)">{{attachment.name}}</a>
+          </td>
+          <td class="col-sm-1">{{attachment.size | fileSize}}</td>
+          <td class="col-sm-2">{{attachment.creatorName}}</td>
+          <td class="col-sm-1">{{attachment.created | date:'yyyy-MM-dd HH:mm '}}</td>
+          <td class="operation col-sm-2">
+            <a ng-show="attachment.targetType" href=""
+               open-drawer="" open-drawer-type="attachment.targetType"
+               open-drawer-params="{id:attachment.targetId}"
+               open-drawer-data="{projectId:attachment.projectId,companyId:attachment.companyId}"
+                >评论</a>
+            <a ng-href="{{downloadLink(attachment.id)}}" target="_blank">下载</a>
+            <a ng-click="deleteAttachment(attachment)">删除</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div ng-show="displayNoMorePage()" class="text-danger text-center"><strong>没有更多了...</strong></div>
+    </div>
+
+
+  </div>
+
+</div>
+
+</body>
+
+</html>

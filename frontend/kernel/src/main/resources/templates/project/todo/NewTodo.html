@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div class="todo_body" data-placement="right" id="todo-detail" th:fragment="newTodo"
+     ng-controller="newTodoCtrl">
+  <form name="newTodoForm" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--<button type="button" class="close" data-dismiss="drawer"><span aria-hidden="true">&times;</span><span-->
+            <!--class="sr-only">Close</span>-->
+        <!--</button>-->
+        <h4>新建任务</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <input type="text" name="content" ng-model="todo.content" class="form-control" placeholder="任务内容"
+                 ng-maxlength="200" required="" id="todo-content"/>
+        </div>
+
+        <hr/>
+          <div th:replace="project/todo/TodoDetailFileds :: todoDetailFileds"></div>
+        <hr/>
+
+        <div id="footer">
+          <button type="submit" class="btn btn-primary footer"  ng-disabled="newTodoForm.$invalid || submitBtn.disable" ng-click="createTodo()">{{submitBtn.name}}</button>
+          <button type="button" class="btn btn-default footer" data-dismiss="drawer">取消</button>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </form>
+  <!-- /.modal-dialog -->
+</div>
+</body>
+
+</html>

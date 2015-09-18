@@ -1,0 +1,23 @@
+<table id="teamforge_email" style="background:#ffffff;margin:0;padding:0;border:0;width:100%;text-align:left;border-collapse:collapse;border-spacing:0" id="msg">
+	<tbody>
+		<tr>
+			<td> 
+				<p style="font-size:16px;line-height:40px;font-family:'Helvetica Neue',helvetica,sans-serif;color:#822e14">
+					您的下列任务今天将过期：
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td> 
+				#foreach ($todo in $todos)
+					<span style="font-size:12px;line-height:18px;font-family:'Helvetica Neue',helvetica,sans-serif;color:#999999">
+						${todo.getBelongtos()}
+				    </span>
+					<p style="font-size:20px;color:#000000;font-weight:bold;font-family:'Helvetica Neue',helvetica,sans-serif;border-bottom:1px solid #ccc;">
+						<a href="http://${todo.getUrl()}" target="_blank">${todo.getContent()}</a>
+					</p>
+				#end
+			</td>
+		</tr>
+	</tbody>
+</table>

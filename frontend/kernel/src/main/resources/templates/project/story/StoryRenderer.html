@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div th:fragment="storyRenderer" id="storyRenderer" controller="storiesCtrl">
+    <!--tree-node tree-node-content-->
+    <div data-drag-enabled="false" class="tree-node tree-node-content story-renderer ui-tree-handle">
+        <a class="btn btn-success btn-xs " ng-click="toggle(this)"><span class="glyphicon" ng-class="{
+          'glyphicon-plus': collapsed,
+          'glyphicon-minus': !collapsed
+        }"></span></a>
+        <span ng-show="$state.is('company.project.stories.open')" title="子需求" class="child-story">&nbsp;&nbsp;({{story.uncompletedChildStoryCount}}/{{story.uncompletedChildStoryCount + story.completedChildStoryCount}})&nbsp;&nbsp;</span>
+        <span ng-show="$state.is('company.project.stories.archived')" title="子需求" class="child-story">&nbsp;&nbsp;({{story.completedChildStoryCount}}/{{story.uncompletedChildStoryCount + story.completedChildStoryCount}})&nbsp;&nbsp;</span>
+        <span class="content">
+           <input ng-hide="story.completed" class="storyContent" ng-blur="change($event,story)"
+                     ng-model="story.description"
+                     placeholder="点击输入需求描述"
+                     maxlength="200" onchange="this.value=this.value.substring(0, 200)"
+                     onkeydown="this.value=this.value.substring(0, 200)"
+                     onkeyup="this.value=this.value.substring(0, 200)"/>
+           <span ng-show="story.completed">{{story.description}}</span>
+        </span>
+        <a ng-hide="story.completed" class="pull-right btn btn-danger btn-xs" data-drag-enabled="false" ng-click="delete(this,story)">
+            <span class="glyphicon glyphicon-remove"></span>
+        </a>
+        <a class="pull-right btn btn-info btn-xs" data-drag-enabled="false" style="margin-right: 10px;">
+            <span class="glyphicon glyphicon-wrench" open-drawer="story" open-drawer-type="'story'"
+                open-drawer-params="{id:story.id}"
+                open-drawer-data="{projectId:story.projectId,companyId:story.companyId}"></span>
+        </a>
+        <a ng-hide="story.completed" class="pull-right btn btn-primary btn-xs" data-drag-enabled="false" ng-click="newSubItem(story)"
+           style="margin-right: 12px;" title="添加子需求">
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>
+    </div>
+    <ol class="child-stories" ui-tree-nodes="" ng-model="story.childStoryDTOs" ng-class="{hidden: collapsed}">
+        <li ng-repeat="story in story.childStoryDTOs | filter: storyFilter" ui-tree-node="" ng-include="'storyRenderer.html'">
+        </li>
+    </ol>
+
+</div>
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="createdIterations" id="createdIterations" ng-controller="createdIterationsCtrl">
+
+  <div class="iterations-container"  th:fragment="iterations">
+    <!-- iteration-item start -->
+    <div class="iteration-item" ng-repeat="iteration in iterations | filter:filterIteration">
+      
+      <div class="iteration-panel">
+
+        <!-- iteration-operation start -->
+        <div class="iteration-operation pull-right">
+          <a class="btn btn-default" ng-click="linkTodoToIteration(iteration)" 
+             ng-show="iteration.status==='created'"><i class="fa fa-plus"></i>添加任务</a>
+          <a class="btn btn-default" ng-show="iteration.status==='created' &amp;&amp; canActive($first)"
+             ng-click="doActiveIteration(iteration)"><i class="fa fa-play"></i>开始迭代</a>
+          <!-- 添加disabled class, 在已完成迭代使用 -->
+          <a class="btn btn-default" ng-show="iteration.status==='completed'"><i class="fa fa-circle"></i>已完成</a>
+
+        </div>  
+        <!-- iteration-operation end -->
+
+        <!-- iteration-header start -->
+        <div class="iteration-header">
+
+          <div class="iteration-title click-link" ng-click="edit_name = true" ng-show="!edit_name &amp;&amp; iteration.status==='created'">
+            {{iteration.name}}
+            <span class="fa fa-pencil"></span>
+          </div>
+
+          <div class="iteration-title click-link" ng-click="edit_name = true" ng-show="iteration.status==='completed'">
+            <a ui-sref="company.project.iteration.completedIteration.statistics({iterationId: iteration.id })">{{iteration.name}}</a>
+          </div>
+
+          <input type="text" name="name" class="iteration-title input-invisible form-control edit-name" 
+            ng-model="iteration.name" ng-show="edit_name" required="" ng-maxlength="50" ng-blur="updateIterationName(iteration);edit_name = false"
+          />   
+          
+          <div class="iteration-date">
+            <a class="click-link active-iteration-operation" ng-click="iteration.timeForm=!iteration.timeForm" dropdown-form-toggle="" 
+              ng-show="iteration.endTime &amp;&amp; iteration.startTime &amp;&amp; iteration.status==='created'">
+                {{iteration.startTime | date:'yyyy.MM.dd'}} - {{iteration.endTime | date:'yyyy.MM.dd'}}
+                <span class="fa fa-pencil"> </span>
+            </a>
+            <a class="click-link active-iteration-operation" ng-click="iteration.timeForm=!iteration.timeForm" dropdown-form-toggle="" 
+            ng-show="(!iteration.endTime || !iteration.startTime) &amp;&amp; iteration.status==='created'">
+                选择起止时间
+                <span class="fa fa-pencil"> </span>
+            </a>
+            <a class="click-link active-iteration-operation" dropdown-form-toggle="" ng-show="iteration.status==='completed'">
+                {{iteration.startTime | date:'yyyy.MM.dd'}} - {{iteration.endTime | date:'yyyy.MM.dd'}}
+            </a>
+
+            <form class="ballon updateIterationForm dropdown-form" name="updateIterationForm" id="updateIterationForm" dropdown-form="" is-open="iteration.timeForm">
+              <p class="input-group ob-date">
+                <input type="text" class="form-control click-link" datepicker-popup="yyyy-MM-dd"
+                       ng-click="iteration.startTimeCanlendar = !iteration.startTimeCanlendar "
+                       ng-model="iteration.startTime" 
+                       is-open="iteration.startTimeCanlendar" 
+                       close-text="关闭" clear-text="清除" current-text="今天" readonly="" placeholder="开始时间"/>
+              </p>
+
+              <p class="input-group ob-date">
+                <input type="text" class="form-control click-link" datepicker-popup="yyyy-MM-dd"
+                       ng-click="iteration.endTimeCanlendar = !iteration.endTimeCanlendar"
+                       ng-model="iteration.endTime" 
+                       is-open="iteration.endTimeCanlendar" 
+                       close-text="关闭" clear-text="清除" current-text="今天" readonly="" placeholder="截止时间"/>
+              </p>
+
+              <div class="submit">
+                <button type="button" class="btn btn-primary"
+                        ng-click="updateIterationTime(iteration);">修改</button>
+                <a class="btn btn-default btn-cancel click-link" ng-click="iteration.reset();iteration.timeForm = !iteration.timeForm">取消</a>
+              </div>
+            </form>   
+
+          </div>
+
+            <div class="iteration-description">
+                <a class="click-link" ng-click="showDesc=true" ng-show="!showDesc &amp;&amp; !iteration.description">添加描述</a>
+                <p ng-show="!showDesc &amp;&amp; iteration.description">
+                    <span ng-bind-html="transDescription(iteration.description)" class="description-span"></span>
+                    <span class="fa fa-pencil click-link" ng-click="showDesc=true"></span>
+                </p>
+
+                <div ng-show="showDesc">
+                  <textarea type="text" name="description" placeholder="备注"
+                            ng-model="iteration.description">
+                  </textarea>
+                    <a class="click-link" ng-click="showDesc=false;iteration.updateByAttrs(['description']);">保存</a>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+          <!-- iteration-info start 在已完成迭代使用 -->
+          <div class="iteration-info alert alert-info" ng-show="iteration.status==='created'">
+            <span class="fa fa-flash"></span>
+            共{{iteration.todos.length}}个任务
+          </div>
+          <div class="iteration-info alert alert-info" ng-show="iteration.status==='completed'">
+            <span class="fa fa-flash"></span>
+            {{iteration.completedTodos.length}}个任务已完成，{{iteration.todos.length - iteration.completedTodos.length}}个任务延误了
+          </div><!-- iteration-info end -->
+
+        </div><!-- iteration-header end -->
+      </div><!-- iteration-panel end -->
+
+      <!-- iteration-body start -->
+      <div class="iteration-body">
+
+        <ul class="todo-list list-group-dropBody" ui-sortable="sortableOptions" ng-model="iteration.todos" data-id="{{iteration.id}}"  ng-controller="todoItemCtrl">
+            <!-- insert todo item here -->
+            <li th:replace="project/common/TodosMini :: todos('iteration.todos', 'searchTodo')"></li>
+        </ul>
+
+      </div><!-- iteration-body end -->
+
+    </div><!-- iteration-item end -->
+
+
+    <!-- Tab panes -->
+<!--     <div class="tab-content">
+      <div class="tab-pane fade active in" id="iterations-tab">
+        <div class="row">
+        cutted from here
+        </div>
+      </div>
+    </div> -->
+    <!-- .tab-content -->
+
+  </div>
+  <!-- .content -->
+
+</div>
+
+</body>
+
+</html>

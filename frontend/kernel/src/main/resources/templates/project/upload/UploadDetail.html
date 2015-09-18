@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div  th:fragment="uploadDetail"  id="uploadDetail" data-placement="right"  ng-controller="uploadDetailsCtrl">
+    <div class=" modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="h3-align">{{uploadMapAttach.name}}
+                    <a class="btn btn-sm btn-danger pull-right" ng-click="delete(upload,uploadMapAttach.size)">删除</a>
+                </h3>
+                <span class="upload-name">{{upload.creatorName}}&nbsp;
+                  {{upload.created | date: 'yyyy-MM-dd HH:mm'}}</span>
+            </div>
+
+            <div class="modal-body">
+
+            <div class="comment-item row">
+                <div class="col-sm-1">
+                    <!-- TODO : how to fix here to avoid err(uploader.avatar == null) when document.ready-->
+                    <!--<img class="img-circle creator-up" ng-src="{{ imageStore + uploader.avatar + '!avatar110'}}" alt="avatar"/>-->
+                </div>
+                <div class="item-image" ng-switch="uploadContentType">
+                    <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/word.png' ng-switch-when="application/msword"/>
+                    <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/word.png' ng-switch-when="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+                    <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/file_extension_rar.png' ng-switch-when="application/x-rar-compressed"/>
+                    <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/zip.png' ng-switch-when="application/zip"/>
+                    <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/file_extension_txt.png' ng-switch-when='text/plain'/>
+                    <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/css.png' ng-switch-when="text/css"/>
+                    <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/html.png' ng-switch-when="text/html"/>
+                    <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/txt.png' ng-switch-when="text/xml"/>
+                    <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/excel.png' ng-switch-when="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                    <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/ppt.png' ng-switch-when="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
+                    <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/file_extension_js.png' ng-switch-when="application/javascript"/>
+                    <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/ppt.png' ng-switch-when="application/vnd.ms-powerpoint" />
+                    <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/excel.png' ng-switch-when="application/vnd.ms-excel" />
+                    <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/pdf.png' ng-switch-when="application/pdf"/>
+                    <img class="col-sm-2 img-set" ng-src="{{attachmentImageUrl}}/{{uploadMapAttach.id}}" ng-switch-when="image" />
+                    <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/file_extension_others.png' ng-switch-default="" />
+                </div>
+                <div class="showUploadName">
+                    <a ng-href="{{attachmentDownloadLink(uploadMapAttach.id)}}" target="_blank"> {{uploadMapAttach.name}}</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="tabset"
+                     th:replace="tab/TabSet :: tabset('uploadTabs')">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

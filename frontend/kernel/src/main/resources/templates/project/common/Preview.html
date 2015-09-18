@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+
+<div th:fragment="preview" ng-switch="contentType" style="display: inline-block;">
+
+    <img ng-src='/static/img/attachment-icon/word.png' ng-switch-when="application/msword"/>
+    <img ng-src='/static/img/attachment-icon/word.png'
+         ng-switch-when="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+    <img ng-src='/static/img/attachment-icon/file_extension_rar.png'
+         ng-switch-when="application/x-rar-compressed"/>
+    <img ng-src='/static/img/attachment-icon/zip.png' ng-switch-when="application/zip"/>
+    <img ng-src='/static/img/attachment-icon/file_extension_txt.png'
+         ng-switch-when='text/plain'/>
+    <img ng-src='/static/img/attachment-icon/css.png' ng-switch-when="text/css"/>
+    <img ng-src='/static/img/attachment-icon/html.png' ng-switch-when="text/html"/>
+    <img ng-src='/static/img/attachment-icon/txt.png' ng-switch-when="text/xml"/>
+    <img ng-src='/static/img/attachment-icon/excel.png'
+         ng-switch-when="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+    <img ng-src='/static/img/attachment-icon/ppt.png'
+         ng-switch-when="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
+    <img ng-src='/static/img/attachment-icon/file_extension_js.png'
+         ng-switch-when="application/javascript"/>
+    <img ng-src='/static/img/attachment-icon/ppt.png'
+         ng-switch-when="application/vnd.ms-powerpoint"/>
+    <img ng-src='/static/img/attachment-icon/excel.png'
+         ng-switch-when="application/vnd.ms-excel"/>
+    <img ng-src='/static/img/attachment-icon/pdf.png' ng-switch-when="application/pdf"/>
+    <img ng-src='/static/img/attachment-icon/file_extension_others.png' ng-switch-default=""/>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="meActivities" id="meActivities">
+  <div infinite-scroll='loadMoreItems()'
+       infinite-scroll-disabled='busy || !hasNext'
+       infinite-scroll-distance='0'>
+
+    <div class="panel panel-me" ng-repeat="dateKey in activitiesKeys">
+      <div class="panel-heading">{{ dateKey }}</div>
+      <div class="panel-body">
+        <p ng-repeat="oneActivity in activities[dateKey]">
+
+          <span class="text-muted">{{ oneActivity.created | date:'MM-dd HH:mm' }}</span>
+          在
+          <a ui-sref="company.project.todolists({projectId: oneActivity.projectId})">{{ oneActivity.projectName }}</a>
+          {{oneActivity.subject}}
+
+          <a href="" open-drawer="" open-drawer-type="oneActivity.attachType"
+             open-drawer-params="{id:oneActivity.attachId}"
+             open-drawer-data="{projectId:oneActivity.projectId,companyId:oneActivity.companyId}">
+            {{ oneActivity.target }}</a>
+
+        </p>
+      </div>
+    </div>
+
+    <div ng-hide='hasNext' class="text-center text-danger"><strong>没有更多的信息了...</strong></div>
+
+
+  </div>
+
+
+</div>
+
+
+</body>
+
+</html>

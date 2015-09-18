@@ -1,0 +1,76 @@
+// styles for subview #uploads
+
+@upload-width: 1170px;
+
+.upload-list-panel{
+  // padding: 20px;
+  table{
+    background: white;
+  }
+}
+
+thead > tr,tbody > tr {
+  height: 45px;
+}
+
+
+th, td {
+  vertical-align: middle;
+  border-bottom: 1px solid #ddd;
+  padding:0px;
+}
+
+td {
+  border-top: none;
+  border-bottom: 1px solid #ddd;
+}
+th:first-child, td:first-child {
+  padding-left: 25px;
+}
+
+tr.attachment {
+  td {
+    img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+  }
+  td.operation {
+    a {
+      cursor: pointer;
+      display: none;
+      margin-left: 10px;
+    }
+  }
+}
+
+tr.attachment:hover {
+  td.operation {
+    a {
+      display: inline-block;
+    }
+  }
+}
+
+i.uploading-operation {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+td.hover-stress:hover {
+  color: #03A9F4;
+  cursor: pointer;
+}
+#uploadProgress{
+  .uploadFont{
+    font-size: medium;
+    color:#777;
+  }
+}
+#progress-height{
+  height: 15px;
+}
+
+
+

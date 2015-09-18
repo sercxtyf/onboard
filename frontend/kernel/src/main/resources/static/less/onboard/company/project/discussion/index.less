@@ -1,0 +1,128 @@
+// imported by project.less
+// styles for subview #discussions 
+table#topics {
+    background: #ffffff;
+    thead > tr {
+        height: 45px;
+    }
+    tbody > tr {
+        height: 84px;
+    }
+    th, td {
+        vertical-align: middle;
+        border-bottom: 1px solid #ddd;
+        padding: 0px;
+    }
+    td.creator-time {
+        min-width: 120px;
+    }
+    td.title-excerpt {
+        padding-left: 5px;
+        padding-right: 5px;
+        .excerpt {
+            // width: 50px;
+            // height: 18px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+    }
+    th:first-child, td:first-child {
+        padding-left: 25px;
+        padding-right: 25px;
+        width: 82px;
+    }
+    td {
+        border-top: none;
+        .avatar {
+            width: 32px;
+            height: 32px;
+        }
+        .title {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .comment-count {
+            font-size: 20px;
+            margin: 10px 0 0;
+        }
+        .title-date, .comment-date {
+            color: #888;
+            font-size: 13px;
+        }
+        .title-date {
+            line-height: 15px;
+            span {
+                display: inline-block;
+                line-height: 15px;
+                svg {
+                    height: 15px;
+                    width: 15px;
+                    line-height: 15px;
+                    vertical-align: bottom;
+                }
+            }
+        }
+    }
+    th:last-child, td:last-child {
+        text-align: right;
+        padding-right: 50px;
+        min-width: 135px;
+    }
+    td:last-child.stick {
+        &:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 50px solid #f40d14;
+            border-left: 50px solid transparent;
+            top: 0;
+            right: 0;
+        }
+        &:after {
+            content: '置顶';
+            position: absolute;
+            font-weight: bold;
+            color: white;
+            top: 7px;
+            right: 3px;
+            .transform(rotate(45deg));
+        }
+    }
+    td:last-child {
+        position: relative;
+        span.stick-op {
+            display: none;
+            position: absolute;
+            right: 10px;
+            &.down {
+                bottom: 10px;
+            }
+            &.up {
+                top: 10px;
+            }
+            font-size: 1.5em;
+            a {
+                color: #f40d14;
+                &:visited, &:hover {
+                    color: #dd0a11;
+                }
+            }
+            i.fa-arrow-up {
+                text-decoration: overline;
+            }
+            i.fa-arrow-down {
+                text-decoration: underline;
+            }
+        }
+        &:hover {
+            span.stick-op {
+                display: inline-block;
+            }
+        }
+    }
+}

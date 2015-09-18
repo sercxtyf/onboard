@@ -1,0 +1,19 @@
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Private-Package: com.onboard.web.admin.controller;version=${project.version},\
+ com.onboard.web.admin.interceptor;version=${project.version}
+Import-Bundle:org.springframework.context;version="[3.0.5.RELEASE,3.1.0.RELEASE]",\
+ org.springframework.beans;version="[3.0.5.RELEASE,3.1.0.RELEASE]",\
+ org.springframework.web;version="[3.0.5.RELEASE,3.1.0.RELEASE]",\
+ org.springframework.web.servlet;version="[3.0.5.RELEASE,3.1.0.RELEASE]",\
+ org.eclipse.virgo.web.dm;version="[3.0.2.RELEASE,4)",\
+ org.elevenframework.web.api
+Import-Package: net.kencochrane.raven.servlet,\
+ org.thymeleaf.templateresolver,\
+ org.thymeleaf.spring3,\
+ org.thymeleaf.spring3.processor.attr,\
+ org.thymeleaf.spring3.requestdata,\
+ org.thymeleaf.spring3.view,\
+ javax.servlet;version="[2.5.0,4)",\
+ javax.servlet.http;version="[2.5.0,4)",\
+ *
+Web-ContextPath: /serc

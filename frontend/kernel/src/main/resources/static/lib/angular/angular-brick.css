@@ -1,0 +1,28 @@
+.angular-brick {
+}
+
+.brick-line:before, .angular-brick:before {
+    content: ' ';
+    display: block;
+}
+
+.brick-line:after, .angular-brick:after {
+    content: ' ';
+    display: block;
+    clear:both;
+}
+
+.label-text {
+    float: left;
+    margin-right: 10px;
+    color: #7f7f7f;
+    font-weight: bold;
+}
+
+.brick {
+    float: left;
+    height: 22px;
+    width: 22px;
+    background: #205123;
+    border: 1px solid #111;
+}

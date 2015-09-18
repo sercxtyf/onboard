@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+  <div th:fragment="tabset(tabsName)"  class="tab-set" ng-controller="tabSetCtrl" >
+    <tabset>
+      <tab th:attr="ng-repeat=${'tab in ' + tabsName + ' | filter: {exist: true} '},select='updateTab()'" heading="{{tab.title}}" active="tab.active">
+        <div ng-include="" src="tab.templateUrl"></div>
+      </tab>
+    </tabset>
+  </div>
+</body>
+</html>

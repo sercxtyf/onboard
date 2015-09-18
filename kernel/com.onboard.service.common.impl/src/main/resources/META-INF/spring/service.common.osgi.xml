@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/osgi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+  <reference id="transactionManager" interface="org.springframework.transaction.PlatformTransactionManager"/>
+
+  <reference id="subsriberMapper" interface="com.onboard.domain.mapper.SubscriberMapper"/>
+  <reference id="userMapper" interface="com.onboard.domain.mapper.UserMapper"/>
+
+  <service id="emailTemplateEngine" interface="com.onboard.service.email.TemplateEngineService"
+           ref="emailTemplateEngineBean"/>
+  <service id="emailService" interface="com.onboard.service.email.EmailService" ref="emailServiceBean"/>
+  <service id="imageService" interface="com.onboard.service.file.ImageService" ref="upyunImageServiceBean"/>
+  <service id="fileService" interface="com.onboard.service.file.FileService" ref="fileServiceBean"/>
+  <!-- IdentifiableManager服务 -->
+  <service id="identifiableManager" interface="com.onboard.service.common.identifiable.IdentifiableManager"
+           ref="identifiableManagerBean"/>
+  <service id="subscriberService" interface="com.onboard.service.common.subscrible.SubscriberService"
+           ref="subscriberServiceBean"/>
+  <service id="identifiableAttachManager" interface="com.onboard.service.common.attach.IdentifiableAttachManager"
+           ref="identifiableAttachManagerBean"/>
+           
+  <service id="redisStringTemplate"
+           interface="org.springframework.data.redis.core.StringRedisTemplate"
+           ref="redisStringTemplateBean"/>
+           
+  <service id="redisTemplate"
+           interface="org.springframework.data.redis.core.RedisTemplate"
+           ref="redisTemplateBean"/>
+           
+  <service id="onboardCacheManager" 
+           interface="org.springframework.cache.CacheManager"
+           ref="cacheManagerBean" />
+           
+  <!-- IdentifiableManager对identifiableServices的监听 -->
+  <list id="identifiableServices" cardinality="0..N" interface="com.onboard.service.base.BaseService">
+    <listener bind-method="addIdentifiableService" unbind-method="removeIdentifiableService" ref="identifiableManagerBean"/>
+  </list>
+  <!-- IdentifiableAttachManager对IdentifiableAttachService的监听 -->
+  <list id="identifiableAttachServices" cardinality="0..N"
+        interface="com.onboard.service.common.attach.IdentifiableAttachService">
+    <listener bind-method="addIdentifiablAttacheService" unbind-method="removeIdentifiableService"
+              ref="identifiableAttachManagerBean"/>
+  </list>
+  
+  <!-- email service -->
+  <list id="internalEmailServices" cardinality="0..N" interface="com.onboard.service.email.InternalEmailService">
+    <listener bind-method="addInternalEmailService" unbind-method="removeInternalEmailService" ref="emailServiceBean"/>
+  </list>
+  
+</beans:beans>

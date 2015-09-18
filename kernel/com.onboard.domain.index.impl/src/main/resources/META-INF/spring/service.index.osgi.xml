@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/osgi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                                 http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+  <service id="indexAspect" interface="com.onboard.service.index.IndexAspect" ref="indexAspectBean"/>
+  <service id="searchService" interface="com.onboard.service.index.SearchService" ref="searchServiceBean" />
+  <service id="indexableServices" interface="com.onboard.service.index.custom.IndexableServices" ref="indexableServicesBean" />
+
+  <list id="indexableServicesListen" cardinality="0..N" interface="com.onboard.service.index.custom.IndexableService">
+    <listener bind-method="addIndexableService" unbind-method="removeIndexableService" ref="indexableServicesBean"/>
+  </list>
+  
+  <list id="indexServicesListen" cardinality="0..N" interface="com.onboard.service.index.custom.IndexService">
+    <listener bind-method="addIndexService" unbind-method="removeIndexService" ref="indexServicesBean"/>
+  </list>
+  
+</beans:beans>

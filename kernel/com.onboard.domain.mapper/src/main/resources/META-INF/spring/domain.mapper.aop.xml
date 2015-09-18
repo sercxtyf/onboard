@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+  <config>
+    <pointcut id="insert"
+      expression="execution(* com.onboard.domain.mapper.*.insert(com.onboard.domain..*.Indexable+)) and args(item)" />
+    <pointcut id="insertSelective"
+      expression="execution(* com.onboard.domain.mapper.*.insertSelective(com.onboard.domain..*.Indexable+)) and args(item) " />
+    <pointcut id="updateByPrimaryKey"
+      expression="execution(* com.onboard.domain.mapper.*.updateByPrimaryKey(com.onboard.domain..*.Indexable+)) and args(item) " />
+    <pointcut id="updateByPrimaryKeySelective"
+      expression="execution(* com.onboard.domain.mapper.*.updateByPrimaryKeySelective(com.onboard.domain..*.Indexable+)) and args(item) " />
+    <pointcut id="updateByExample"
+      expression="execution(* com.onboard.domain.mapper.*.updateByExample(com.onboard.domain..*.Indexable+,..)) and args(item, itemExample)" />
+    <pointcut id="updateByExampleSelective"
+      expression="execution(* com.onboard.domain.mapper.*.updateByExampleSelective(com.onboard.domain..*.Indexable+,..)) and args(item, itemExample)" />
+    <pointcut id="deleteByPrimaryKey" expression="execution(* com.onboard.domain.mapper.*.deleteByPrimaryKey(..))" />
+    <pointcut id="deleteByExample" expression="execution(* com.onboard.domain.mapper.*.deleteByExample(..))" />
+
+    <aspect ref="indexWriterAspect">
+      <after pointcut-ref="insert" method="insert" arg-names="item" />
+      <after pointcut-ref="insertSelective" method="insertSelective" arg-names="item" />
+      <after pointcut-ref="updateByPrimaryKey" method="updateByPrimaryKey" arg-names="item" />
+      <after pointcut-ref="updateByPrimaryKeySelective" method="updateByPrimaryKeySelective" arg-names="item" />
+      <after pointcut-ref="updateByExample" method="updateByExample" arg-names="item,itemExample" />
+      <after pointcut-ref="updateByExampleSelective" method="updateByExampleSelective" arg-names="item,itemExample" />
+      <around pointcut-ref="deleteByPrimaryKey" method="deleteByPrimaryKey" />
+      <around pointcut-ref="deleteByExample" method="deleteByExample" />
+    </aspect>
+  </config>
+</beans:beans>

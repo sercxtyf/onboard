@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="meWorkTime" id="meWorkTime">
+    <div class="panel panel-me" ng-show="canAdd">
+        <div class="panel-heading">添加工作时间</div>
+        <div class="panel-body">
+            <table>
+                <tr >
+                    <td class="name">工作日</td>
+                    <td class="value">{{newDateText}}</td>
+                    <td>
+                        <div id="dateSlider"></div>
+                    </td>
+                </tr>
+                <tr >
+                    <td class="name">时间段</td>
+                    <td class="value">{{newStartText}}-{{newEndText}}</td>
+                    <td>
+                        <div id="timeSlider"></div>
+                    </td>
+                </tr>
+            </table>
+            <div class="row">
+                <button id="addTime" class="btn btn-primary" ng-click="addWorkTime()">添加时间</button>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-me">
+        <div class="panel-heading">工作记录</div>
+        <div class="panel-body">
+            <table id="workBoard">
+                <tr class="date-tag">
+                    <td class="time-tag"></td>
+                    <td ng-repeat="date in dateList">{{date}}</td>
+                </tr>
+                <tr ng-repeat="line in workRec">
+                    <td class="time-tag">{{show($index)}}</td>
+                    <td ng-repeat="col in line track by $index" ng-class="{true: 'worked'}[col.worked]" ng-click="modify(col.id)">{{col.info}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modifyWorkRec" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">修改工作时间</h4>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tr >
+                            <td class="name">工作日</td>
+                            <td class="value">{{myModal.dText}}</td>
+                            <td>
+                                <div id="dateSlider_modal"></div>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td class="name">时间段</td>
+                            <td class="value">{{myModal.sText}}-{{myModal.eText}}</td>
+                            <td>
+                                <div id="timeSlider_modal"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" ng-click="deleteRec()">删除该条记录</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" ng-click="updateRec()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+</html>

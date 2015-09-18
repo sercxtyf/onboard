@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="completedIterations"  id="completedIterations" ng-controller="completedIterationsCtrl">
+    <div class="iterations-container"  th:fragment="iterations">
+    <!-- iteration-item start -->
+    <div class="iteration-item" ng-repeat="iteration in iterations">
+      
+      <div class="iteration-panel">
+
+        <!-- iteration-operation start -->
+        <div class="iteration-operation pull-right">
+          <a class="btn btn-default disabled" ng-show="iteration.iterationComleted===true"><i class="fa fa-circle"></i>已完成</a>
+
+        </div>  
+        <!-- iteration-operation end -->
+
+        <!-- iteration-header start -->
+        <div class="iteration-header">
+
+            <div class="iteration-date">
+                <a class="active-iteration-operation" dropdown-form-toggle="" ng-show="iteration.status==='completed'"
+                   ui-sref="company.project.iteration.completingIteration({iterationId: iteration.id })"
+                   title="查看详细">
+                    {{iteration.startTime | date:'yyyy.MM.dd'}} - {{iteration.endTime | date:'yyyy.MM.dd'}}
+                </a>
+            </div>
+
+            <div class="iteration-description">
+                <p><span ng-bind-html="transDescription(iteration.description)"></span></p>
+            </div>
+          <!-- iteration-info start 在已完成迭代使用 -->
+          <div class="iteration-info alert alert-info" ng-show="iteration.status==='completed'">
+            <span class="fa fa-flash"></span>
+            <span ng-bind="getComptetedCount(iteration, true)"></span>个任务已完成，
+            <span ng-bind="getComptetedCount(iteration, false)"></span>个任务延误了
+          </div><!-- iteration-info end -->
+
+        </div><!-- iteration-header end -->
+      </div><!-- iteration-panel end -->
+
+      <!-- iteration-body start -->
+      <div class="iteration-body">
+
+        <ul class="todo-list list-group-dropBody">
+            <!-- insert todo item here -->
+            <li ng-repeat="boardable in iteration.iterables" class="todo-item mini-todo todo-active" ng-if="boardable.type == 'bug'"
+                ng-class="{'todo-completed todo-disabled' : boardable.iterationCompleted == true, 'todo-active' : boardable.iterationCompleted == false}"
+                open-drawer="bug" open-drawer-type="'bug'" open-drawer-params="{id: boardable.id}">
+                <div class="todo-description pointer" >
+                    <span class="project-todo-id text-muted">#{{boardable.id}}</span>
+                    <div class="todo-type-icons">
+                        <i class="fa fa-bug"></i>
+                    </div>
+
+                    <span class="label label-primary" ng-show="boardable.assignee">{{boardable.assignee.name}}</span>
+                    <span class="label label-warning" ng-show="boardable.dueDate">{{ boardable.dueDate | date: 'yyyy-MM-dd'}}</span>
+                    <div class="todo-title" title="{{boardable.content}}" ng-bind-html="boardable.content" ng-if="boardable.type=='bug'"></div>
+                    
+                </div>
+
+                    <span class="todo-item-options">
+                        <i class="fa fa-close pointer" ng-click="deleteTodo(todo)"></i>
+                    </span>
+            </li>
+            <li ng-repeat="boardable in iteration.iterables" class="todo-item mini-todo todo-active" ng-if="boardable.type == 'story'"
+                ng-class="{'todo-completed todo-disabled' : boardable.iterationCompleted == true, 'todo-active' : boardable.iterationCompleted == false}"
+                open-drawer="story" open-drawer-type="'story'"
+                open-drawer-params="{id:boardable.id}"
+                open-drawer-data="{projectId:boardable.projectId,companyId:boardable.companyId}">
+                <div class="todo-description pointer" >
+                    <span class="project-todo-id text-muted">#{{boardable.id}}</span>
+                    <div class="todo-type-icons">
+                        <i class="fa fa-bookmark"></i>
+                    </div>
+
+                    <span class="label label-primary" ng-show="boardable.assignee">{{boardable.assignee.name}}</span>
+                    <span class="label label-warning" ng-show="boardable.dueDate">{{ boardable.dueDate | date: 'yyyy-MM-dd'}}</span>
+
+                    <div class="todo-title" title="{{boardable.description}}" ng-bind-html="boardable.description">
+
+                    </div>
+                </div>
+
+                    <span class="todo-item-options">
+                        <i class="fa fa-close pointer" ng-click="deleteTodo(todo)"></i>
+                    </span>
+            </li>
+        </ul>
+
+      </div><!-- iteration-body end -->
+
+    </div><!-- iteration-item end -->
+
+
+    <!-- Tab panes -->
+<!--     <div class="tab-content">
+      <div class="tab-pane fade active in" id="iterations-tab">
+        <div class="row">
+        cutted from here
+        </div>
+      </div>
+    </div> -->
+    <!-- .tab-content -->
+
+  </div>
+  <!-- .content -->
+</div>
+
+</body>
+
+</html>

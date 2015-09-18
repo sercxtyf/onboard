@@ -1,0 +1,37 @@
+<table id="teamforge_email" style="background:#ffffff;margin:0;padding:0;border:0;width:100%;text-align:left;border-collapse:collapse;border-spacing:0" id="msg">
+    <tbody>
+        <tr>
+            <td> 
+                <p style="font-family:&quot;Helvetica Neue&quot;,helvetica,arial,sans-serif;margin:0 0 19px;color:grey;font-size:12px;line-height:16px">
+                   请在此行上方进行回复
+                </p>
+                <p style="font-size:16px;line-height:40px;font-family:'Helvetica Neue',helvetica,sans-serif;color:#822e14">
+                    ${currentUser.name}完成了您创建的一个任务：
+                </p>
+                <p style="font-family:&quot;Helvetica Neue&quot;,helvetica,arial,sans-serif;line-height:16px;color:grey;font-size:12px;margin:10px 0">
+                    所属项目：${project.name}<br>
+                    所属任务列表： ${todolist.name}
+                </p>
+                <div style="margin:19px 0;padding:15px 0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;background:#ffffff;width:100%">
+                    <table style="background:#ffffff;margin:0;padding:0;border:0;width:100%;text-align:left;border-collapse:collapse;border-spacing:0">
+                        <tbody>
+                            <tr>
+                                <td style="padding-left:10px;vertical-align:top;line-height:19px;text-align:left;width:20px;font-size:14px;background:#ffffff;font-family:&quot;Helvetica Neue&quot;,helvetica,arial,sans-serif">
+                                    <h3 style="font-weight:normal;font-family:&quot;Helvetica Neue&quot;,helvetica,arial,sans-serif;font-size:16px;line-height:19px;margin:6px 0 9px">✔</h3>
+                                </td>
+                                <td style="vertical-align:top;line-height:19px;text-align:left;font-size:14px;background:#ffffff;font-family:&quot;Helvetica Neue&quot;,helvetica,arial,sans-serif">
+                                    <h3 style="font-weight:normal;font-family:&quot;Helvetica Neue&quot;,helvetica,arial,sans-serif;font-size:16px;line-height:19px;margin:6px 0 9px">
+                                      <b><del>${todo.content}</del></b>
+                                    </h3>
+                                    <p style="line-height:19px;font-size:14px;margin:19px 0 9px;font-family:&quot;Helvetica Neue&quot;,helvetica,arial,sans-serif">
+                                      <a href="http://${host}/${url}" target="_blank">在OnBoard上查看该任务</a>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

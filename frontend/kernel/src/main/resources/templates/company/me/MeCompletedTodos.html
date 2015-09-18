@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="meCompletedTodos" id="meCompletedTodos">
+
+  <div infinite-scroll='loadMoreItems()'
+       infinite-scroll-disabled='busy || !hasNext'
+       infinite-scroll-distance='0'>
+    <div class="panel panel-me" ng-repeat="dateKey in completedTodosKeys">
+
+      <div class="panel-heading">{{ dateKey }}</div>
+      <div class="panel-body">
+        <div class="uncompletedTodo" ng-repeat="todoList in completedTodos[dateKey]">
+        <span class="projectName uncompletedHref">
+          <a
+             ui-sref="company.project.todolists({projectId: todoList.projectId, companyId:todoList.companyId})">
+            {{projectsName[todoList.projectId]}}
+          </a>
+          <span class="line">&nbsp;——&nbsp;</span>
+          <a class="uncompletedHref" open-drawer="todolist" open-drawer-params="{id: todoList.id}"
+             open-drawer-data="{projectId: todoList.projectId, companyId: todoList.companyId}">
+            {{todoList.name}}
+          </a>
+        </span>
+          <br/>
+
+          <div ng-repeat="todo in todoList.todos" data-id="{{todo.id}}">
+            <div class="untodoInfo">
+              <span><i class="fa fa-check"></i>
+
+                <a class="todoName" open-drawer="todo" open-drawer-params="{id: todo.id}"
+                   open-drawer-data="{projectId: todo.projectId, companyId: todo.companyId}">
+                  #{{ todo.projectTodoId }} &nbsp;{{todo.content}}
+                </a>
+              </span>
+              <span class="todoDone">&nbsp;完成于&nbsp;{{todo.updated | date:'yyyy-MM-dd' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-hide='hasNext' class="text-center text-danger"><strong>没有更多的信息了...</strong></div>
+
+
+</div>
+
+
+</body>
+
+</html>

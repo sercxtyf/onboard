@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('添加新成员')">
+<title>添加新成员</title>
+</head>
+
+<body class="company" id="invite">
+
+  <nav th:replace="fragments/AuthedCompanyHeader :: header('everyone')"></nav>
+
+  <div class="container" ng-app="inviteApp" ng-controller="inviteCtrl">
+
+    <!-- Active User & Invitations -->
+    <div class="page-header">
+      <h2>
+        添加新成员 <a class="btn btn-danger pull-right"
+          href="javascript:history.back();">返回</a>
+      </h2>
+    </div>
+
+    <form name="mainForm" id="mainForm">
+      <div class="row">
+        <div class="col-sm-5" id="emails">
+          <p class="lead">通过邮箱邀请新成员</p>
+
+          <div ng-repeat="item in newuser.emails track by $index">
+            <ng-form name="itemForm">
+            <div class="form-inline"
+              ng-class="{'has-error': itemForm.email.$invalid}">
+
+              <div class='input-group'>
+                <span class="input-group-addon"> <i
+                  class="fa fa-envelope"></i>
+                </span> <input type="email" name="email" class="form-control"
+                  required="" ng-model="item.email"
+                  placeholder="输入新成员的邮箱" />
+              </div>
+              <button class="btn btn-warning remove-email"
+                ng-click="newuser.emails.splice($index,1)">移除</button>
+            </div>
+            </ng-form>
+
+          </div>
+          <button class="btn btn-primary"
+            ng-click="newuser.emails.push({email:''})">添加一个</button>
+        </div>
+
+        <div class="col-sm-5 col-md-offset-2 form" id="projects">
+          <p class="lead">新成员参与的项目</p>
+          <div class="form-inline">
+            <button class="btn btn-default form-controll btn-sm option"
+              ng-click="checkAll();">全选</button>
+            <button class="btn btn-default form-controll btn-sm option"
+              ng-click="uncheckAll();">全不选</button>
+          </div>
+
+          <div class="checkbox" ng-repeat="candidate in candidates" >
+            <label >
+              <input type="checkbox" checklist-model="newuser.projects"
+              checklist-value="candidate.id" /> {{candidate.name}}
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <button class="btn btn-success" ng-click="send();"
+        ng-disabled="mainForm.$invalid">发送邀请</button>
+    </form>
+
+  </div>
+
+</body>
+</html>

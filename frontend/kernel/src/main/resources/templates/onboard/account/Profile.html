@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('账户')"></head>
+<body>
+
+<form name="userForm" role="form" th:fragment="profile" id="profile">
+
+  <div ng-show="stat=='error'"
+       class="alert alert-danger alert-dismissible fade in"
+       role="alert">
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+    </button>
+    {{msg}}
+  </div>
+
+  <div ng-show="stat=='success'"
+       class="alert alert-success alert-dismissible fade in"
+       role="alert">
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+    </button>
+    {{msg}}
+  </div>
+
+  <div id="avatar-upload">
+    <a class="thumbnail"> <img ng-src="{{user.avatarUrl}}"
+                               alt="avatar"/>
+    </a>
+
+    <div id="upload-btn">
+      <input type="file" class="filestyle" name="avatar"
+             ng-file-select="chavatar($files)" accept="image/*"
+             ng-model="user.avatar"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">邮箱账户</label> <input type="email"
+                                           class="form-control" id="email" ng-model="user.email"
+                                           readonly=""/>
+  </div>
+  <div class="form-group">
+    <label for="username">用户名</label> <input type="text"
+                                             class="form-control" id="username" name="username"
+                                             ng-model="newUsername" required=""
+                                             ng-disabled=" user.username.length > 0 "
+                                             ng-pattern="/^[\w ]{3,16}$/"/>
+
+    <div ng-show="userForm.username.$error.required"
+         class="alert alert-danger" role="alert">用户名不能为空
+    </div>
+    <div
+        ng-show="!userForm.username.$error.required &amp;&amp; userForm.username.$error.pattern"
+        class="alert alert-danger" role="alert">用户名只能包含字母和下划线，且长度必须在3-16之间
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="nickname">昵称</label> <input type="text"
+                                            class="form-control" id="nickname" name="nickname"
+                                            ng-model="user.name" required=""
+                                            ng-pattern="/^.{1,20}$/"/>
+
+    <div ng-show="userForm.nickname.$error.required"
+         class="alert alert-danger" role="alert">昵称不能为空
+    </div>
+    <div
+        ng-show="!userForm.nickname.$error.required &amp;&amp; userForm.nickname.$error.pattern"
+        class="alert alert-danger" role="alert">昵称必须在1-20之间
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description">描述</label>
+    <textarea class="form-control" id="description" name="description" ng-model="user.description" required=""
+              ng-pattern="/^.{0,200}$/"/>
+
+    <div ng-show="userForm.description.$error.required"
+         class="alert alert-danger" role="alert">描述不能为空
+    </div>
+    <div
+        ng-show="!userForm.description.$error.required &amp;&amp; userForm.description.$error.pattern"
+        class="alert alert-danger" role="alert">描述不能超过200
+    </div>
+  </div>
+
+  <button ng-disabled="userForm.$invalid"
+          class="btn btn-success" ng-click="save()">保存
+  </button>
+</form>
+
+
+</body>
+</html>

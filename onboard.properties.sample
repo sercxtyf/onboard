@@ -1,0 +1,42 @@
+mysql.driver=com.mysql.jdbc.Driver
+mysql.host=localhost
+mysql.port=3306
+mysql.name=onboard
+mysql.username=root
+mysql.password=password
+
+redis.host=127.0.0.1
+redis.port=6379
+redis.database=0
+
+solr.url=http://localhost:8089/solr/mysqlDB
+solr.username=admin
+solr.password=password
+
+mailgun.url={Your URL}
+mailgun.apikey={Your key}
+mailgun.defaultFromName={Your Name}
+mailgun.defaultFromAddress={YourEmail@youremail.com}
+mailgun.domain={Your Domain}
+
+upyun.bucketName=
+upyun.username=yourname
+upyun.password=password
+upyun.separator=!
+
+file.rootPathVariable=user.home
+file.folderName=.teamforge_files
+
+account.tokenExpired=259200
+account.rememberMeExpired=2592000
+
+/*需要每次自动获取IP时修改*/
+site.host=localhost:8000
+site.protocol=http://
+site.static.host=localhost:8080
+site.static.protocol=http://
+
+sshserver.port=22
+
+data.host=${site.protocol}${site.host}
+user.defaultUser=-1

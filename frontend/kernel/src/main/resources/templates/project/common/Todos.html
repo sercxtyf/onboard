@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+</head>
+<body>
+<li th:fragment="todos(todosName, filterName)" class="todo-item todo-active" th:attr="ng-repeat=${'todo in ' + todosName + ' | filter:' + filterName}"
+    ng-class="{'todo-completed todo-disabled' : todo.status == 'closed', 'todo-active' : todo.status != 'closed'}" ng-show="todo.id">
+
+    <button class="todo-checkbox ob-checkbox" ng-click="todo.closeOrOpen();"
+       ng-class="{'ob-checkbox-normal': todo.status != 'closed', 'ob-checkbox-checked': todo.status == 'closed'}" >
+    </button>
+
+    <div class="todo-info">
+        <div class="todo-description pointer" open-drawer="todo" open-drawer-params="{id: todo.id}" title="{{todo.content}}">
+            <span class="project-todo-id text-muted">#{{todo.projectTodoId}}</span>
+            {{todo.content}}
+        </div>
+        <div class="todo-labels">
+            <div class="todo-type-icons">
+                <i class="fa" ng-class="{'fa-bars': todo.todoType == 'task',
+                    'fa-bookmark': todo.todoType == 'story',
+                    'fa-bug': todo.todoType == 'bug' }"></i>
+            </div>
+            <div class="btn-group">
+                <input th:if = "${ filterName != 'filterTodo' }" ng-if="todo.detailDTP" type="hidden" class="form-control" datepicker-popup="yyyy-MM-dd"
+                      ng-change="todo.updateByAttrs(['assigneeId', 'dueDate'], false)"
+                      ng-model="todo.dueDate" is-open="todo.detailDTP" close-text="关闭" clear-text="不指定" current-text="今天"
+                      min-date="todoDueDateMin"/>
+                <span th:if = "${ filterName != 'filterTodo' }"
+                      class="label dropdown-toggle pointer"
+                      ng-click="openDTP(todo, $event, false)"
+                      ng-class="{'label-inactive': todoUtilService.getDiffDays(todo)=='inactive',
+                                  'label-warning': todoUtilService.getDiffDays(todo)=='warning',
+                                  'label-danger': todoUtilService.getDiffDays(todo)=='danger',
+                                  'label-default': todoUtilService.getDiffDays(todo)=='default'}">
+                                  
+                    <i class="fa fa-clock-o"></i>
+                    {{ todo.dueDate ? (todo.dueDate | date: 'yyyy-MM-dd') : "未设置"}}
+                                  
+                </span>
+                <input th:if = "${ filterName == 'filterTodo' }" ng-if="todo.listDTP" type="hidden" class="form-control" datepicker-popup="yyyy-MM-dd"
+                      ng-change="todo.updateByAttrs(['assigneeId', 'dueDate'], false)"
+                      ng-model="todo.dueDate" is-open="todo.listDTP" close-text="关闭" clear-text="不指定" current-text="今天"
+                      min-date="todoDueDateMin"/>
+                <span th:if = "${ filterName == 'filterTodo' }"
+                      class="label dropdown-toggle pointer"
+                      ng-click="openDTP(todo, $event, true)"
+                      ng-class="{'label-inactive': todoUtilService.getDiffDays(todo)=='inactive',
+                                  'label-warning': todoUtilService.getDiffDays(todo)=='warning',
+                                  'label-danger': todoUtilService.getDiffDays(todo)=='danger',
+                                  'label-default': todoUtilService.getDiffDays(todo)=='default'}">
+                                  
+
+                    <i class="fa fa-clock-o"></i>
+                    {{ todo.dueDate ? (todo.dueDate | date: 'yyyy-MM-dd') : "未设置"}}
+                    
+                </span>
+                
+                
+            </div>
+            
+            <div class="btn-group">
+                <span class="label dropdown-toggle pointer" data-toggle="dropdown" 
+                      ng-click="getTodoStatus(todo)"
+                      ng-class="{'label-inactive': todoUtilService.getStatus(todo).name == '未开始', 
+                                  'label-success': todoUtilService.getStatus(todo).name != '未开始' &amp;&amp; todoUtilService.getStatus(todo).name != '已完成',
+                                  'label-default': todoUtilService.getStatus(todo).name == '已完成'}">
+                    {{todoUtilService.getStatus(todo).name}}
+                </span>
+                <ul class="dropdown-menu" role="menu">
+                    <li ng-repeat="status in todoStatuses | filter:statusFilter">
+                        <a class="pointer" ng-click="todo.setStatus(status.value)">
+                            {{status.name}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="btn-group todo-user">
+                <span class="label dropdown-toggle pointer" data-toggle="dropdown" 
+                      ng-click="getProjectUsers(false, todo.projectId, todo.companyId)"
+                      ng-class="{'label-inactive': todo.user.name == '未分配' &amp;&amp; todoUtilService.getStatus(todo).name != '已完成', 
+                                  'label-primary': todo.user.name != '未分配' &amp;&amp; todoUtilService.getStatus(todo).name != '已完成',
+                                  'label-default': todoUtilService.getStatus(todo).name == '已完成'}">
+                    <i class="fa fa-user"></i> {{todo.user.name}}
+                </span>
+                <ul class="dropdown-menu users" role="menu">
+                    <li ng-repeat="user in projectUsers">
+                        <a class="pointer" ng-click="todo.assign(user)">
+                            <img ng-src="{{user.avatarUrl}}"/> {{user.name}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <a class="todo-person" ng-show="todo.user">
+        <img alt="image" class="img-circle avatar-md" ng-src="{{todo.user.avatarUrl}}"/>
+    </a>
+
+    <span class="todo-item-options">
+        <i class="fa fa-close pointer" ng-click="deleteTodo(todo)"></i>
+    </span>
+
+</li>
+</body>
+</html>

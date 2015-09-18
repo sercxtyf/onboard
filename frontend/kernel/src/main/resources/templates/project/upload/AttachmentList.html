@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:c="http://www.w3.org/1999/XSL/Transform">
+<head></head>
+
+<body th:fragment="attachmentList" id="attachmentList" >
+
+<div id="attachments"
+     ng-controller="attachmentsCtrl">
+    <ul class="attachments">
+            <table>
+                <tbody>
+                <tr class="att" ng-repeat="attachment in attachments">
+                    <td ng-switch="attachment.contentType">
+                        <i class="i-size col-sm-1 fa fa-file-word-o" ng-switch-when="application/msword" ></i>
+                        <i class="i-size col-sm-1 fa fa-file-word-o" ng-switch-when="application/vnd.openxmlformats-officedocument.wordprocessingml.document"></i>
+                        <img class="col-sm-1" ng-src='/static/img/attachment-icon/file_extension_rar.png' ng-switch-when="application/x-rar-compressed"/>
+                        <i class="i-size col-sm-1 fa fa-file-archive-o" ng-switch-when="application/zip"></i>
+                        <img class="col-sm-1" ng-src='/static/img/attachment-icon/file_extension_txt.png' ng-switch-when='text/plain'/>
+                        <i class="i-size col-sm-1 fa fa-file-code-o" ng-switch-when="text/css"></i>
+                        <i class="i-size col-sm-1 fa fa-file-code-o" ng-switch-when="text/html"></i>
+                        <i class="i-size col-sm-1 fa fa-file-code-o" ng-switch-when="text/xml"></i>
+                        <i class="i-size col-sm-1 fa fa-file-excel-o" ng-switch-when="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></i>
+                        <i class="i-size col-sm-1 fa fa-file-powerpoint-o" ng-switch-when="application/vnd.openxmlformats-officedocument.presentationml.presentation"></i>
+                        <img class="col-sm-1" ng-src='/static/img/attachment-icon/file_extension_js.png' ng-switch-when="application/javascript"/>
+                        <i class="i-size col-sm-1 fa fa-file-powerpoint-o" ng-switch-when="application/vnd.ms-powerpoint" ></i>
+                        <i class="i-size col-sm-1 fa fa-file-excel-o" ng-switch-when="application/vnd.ms-excel" ></i>
+                        <i class="i-size col-sm-1 fa fa-file-pdf-o" ng-switch-when="application/pdf"></i>
+                        <img class="col-sm-1" ng-src='/static/img/attachment-icon/file_extension_others.png' ng-switch-default="" />
+                        {{attachment.name}}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+    </ul>
+
+</div>
+
+</body>
+
+</html>

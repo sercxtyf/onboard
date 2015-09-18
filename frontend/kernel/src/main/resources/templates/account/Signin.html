@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('登录')"></head>
+
+
+<body class="account" id="login">
+
+  <ul class="bg-slideshow">
+    <li>
+      <span>Image 01</span>
+    </li>
+    <li>
+      <span>Image 02</span>
+    </li>
+    <li>
+      <span>Image 03</span>
+    </li>
+    <li>
+      <span>Image 04</span>
+    </li>
+    <li>
+      <span>Image 05</span>
+    </li>
+  </ul>
+
+  <div class="login-modal">
+
+    <div class="login-modal-dialog">
+      <div class="login-onboard">
+          <div class="login-modal-dialog-heading">
+              <a href="/" title="回到主页"><img src="/static/img/login-logo.png" /></a>
+          </div>
+         <div class="login-modal-dialog-form">
+              <form class="form-sign" method="POST">
+
+                  <div class="form-group ob-input-w-icon">
+                      <i class="fa fa-user"></i>
+                      <input type="text" class="form-control" name="email" placeholder="邮箱/用户名" required="required" autofocus="autofocus"/>
+                  </div>
+
+                  <div class="form-group ob-input-w-icon">
+                      <i class="fa fa-lock"></i>
+                      <input type="password" class="form-control" name="password" placeholder="密码" required="required"/>
+                  </div>
+
+                  <div class="form-group">
+                      <label><input class="ob-input-checkbox" name="remember" type="checkbox" value="remember-me"/> 下次自动登录</label>
+                      <a th:href="@{/account/forgetpassword}" href="#" class="pull-right">忘记密码?</a>
+                  </div>
+
+                  <button class="btn btn-primary btn-block" type="submit">登录</button>
+              </form>
+              <div class="alert alert-danger alert-dismissible" th:if="${loginError}">
+                  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                          class="sr-only">Close</span></button>
+                  账号或密码错误，请重试
+              </div>
+          </div>
+      </div>
+
+      <div class="login-third-party">
+
+          <div class="alert alert-danger alert-dismissible" th:if="${githubLoginError}">
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                      class="sr-only">Close</span></button>
+              您还没有注册，请先注册一个账号！
+          </div>
+          <div class="alert alert-danger alert-dismissible" th:if="${signinInfo}">
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                      class="sr-only">Close</span></button>
+              您已经注册，请直接登陆！
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+<!--   <form class="form-sign" method="POST">
+    <div th:replace="fragments/Header :: header"></div>
+
+    <div class='input-group input-group-lg'>
+      <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+      <input type="email" class="form-control" name="email" placeholder="邮箱地址/用户名" required="required"
+             autofocus="autofocus"/>
+    </div>
+
+    <div class='input-group input-group-lg'>
+      <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+      <input type="password" class="form-control" name="password" placeholder="密码" required="required"/>
+    </div>
+
+    <div class="alert alert-danger alert-dismissible" th:if="${loginError}">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+              class="sr-only">Close</span></button>
+      账号或密码错误，请重试。
+    </div>
+
+    <div>
+      <input name="remember" type="checkbox" value="remember-me"/>下次自动登录
+      <a th:href="@{/account/forgetpassword}" href="#" class="pull-right">忘记密码?</a>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+  </form> -->
+
+<div th:replace="fragments/Footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('我的收藏')">
+    <title>我的收藏</title>
+</head>
+
+<body>
+
+<div th:fragment="collection" id="collection">
+    <div class="container">
+        <div class="page-header">
+            <h1>我的收藏</h1>
+            <div class="input-group search-tool pull-right">
+                <input type="text" class="form-control" ng-model="keywords" ng-keyup="filterKeyword($event)" />
+                <div class="input-group-addon"><i class="fa fa-search search-icon" ng-click="filterCollections()"></i></div>
+            </div>
+        </div>
+        <div class="colle-body">
+            <ul class="list-group">
+                <a class="list-group-item" ng-click="clickType('all')" ng-class="{'active': isShow == 'all'}">全部显示</a>
+                <a class="list-group-item" ng-click="clickType('todo')" ng-class="{'active': isShow == 'todo'}">任务</a>
+                <a class="list-group-item" ng-click="clickType('story')" ng-class="{'active': isShow == 'story'}">需求</a>
+                <a class="list-group-item" ng-click="clickType('bug')" ng-class="{'active': isShow == 'bug'}">BUG</a>
+                <a class="list-group-item" ng-click="clickType('discussion')" ng-class="{'active': isShow == 'discussion'}">话题</a>
+                <a class="list-group-item" ng-click="clickType('upload')" ng-class="{'active': isShow == 'upload'}">文件</a>
+            </ul>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th >类型</th>
+                    <th>标题</th>
+                    <th >作者</th>
+                    <th >项目</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="colle in allCollections" ng-show="show(colle)">
+                    <td scope="row">{{colle.id}}</td>
+                    <td><i class="fa" ng-class="{'fa-list-ul':colle.isTodo,'fa-book': colle.isStory,'fa-bug':colle.isBug,'fa-comments-o':colle.isDiscussion, 'fa-folder':colle.isUpload, 'fa-file-text': colle.isDocument}"></i></td>
+                    <td ng-if="colle.type != 'document'">
+                        <span>
+                          <a href="" open-drawer=""
+                             open-drawer-type="colle.attachType"
+                             open-drawer-params="{id:colle.attachId}"
+                             open-drawer-data="{projectId:colle.projectId,companyId:colle.companyId}">
+                          {{colle.title}}</a>
+                        </span>
+                    </td>
+                    <td>{{colle.creatorName}}</td>
+                    <td>{{colle.projectName}}</td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

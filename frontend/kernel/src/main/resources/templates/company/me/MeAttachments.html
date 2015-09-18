@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="meAttachments" id="meAttachments">
+
+  <div infinite-scroll='loadMoreItems()'
+       infinite-scroll-disabled='busy || !hasNext'
+       infinite-scroll-distance='0'>
+
+    <div class="panel panel-me" ng-repeat="dateKey in attachmentsKeys">
+      <div class="panel-heading">{{ dateKey }}</div>
+      <div class="panel-body">
+        <div ng-repeat="attachment in userAtachmentsMap[dateKey]" ng-show="userAtachmentsMap[dateKey]">
+          <div class="attachments row">
+            <div class="item-image" ng-switch="attachment.contentType"
+                 ng-click="showAttachmentDetail(attachment,dateKey)">
+              <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/word.png' ng-switch-when="word"/>
+              <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/file_extension_rar.png'
+                   ng-switch-when="application/x-rar-compressed"/>
+              <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/zip.png'
+                   ng-switch-when="application/zip"/>
+              <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/file_extension_txt.png'
+                   ng-switch-when='text/plain'/>
+              <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/css.png' ng-switch-when="text/css"/>
+              <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/html.png' ng-switch-when="text/html"/>
+              <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/txt.png' ng-switch-when="text/xml"/>
+              <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/excel.png'
+                   ng-switch-when="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+              <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/ppt.png'
+                   ng-switch-when="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
+              <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/file_extension_js.png'
+                   ng-switch-when="application/javascript"/>
+              <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/ppt.png'
+                   ng-switch-when="application/vnd.ms-powerpoint"/>
+              <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/excel.png'
+                   ng-switch-when="application/vnd.ms-excel"/>
+              <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/pdf.png'
+                   ng-switch-when="application/pdf"/>
+              <img class="col-sm-2 img-set"
+                   ng-src="/api/{{attachment.companyId}}/projects/{{attachment.projectId}}/attachments/image/{{attachment.id}}"
+                   ng-switch-when="image"/>
+              <img class="col-sm-2 img-set" ng-src='/static/img/attachment-icon/file_extension_others.png'
+                   ng-switch-default=""/>
+            </div>
+            <div class="showAttachmentName col-sm-10">
+              <h4>{{attachment.name}}</h4>
+              <a ng-href="/api/{{attachment.companyId}}/projects/{{attachment.projectId}}/attachments/{{attachment.id}}/download"
+                 target="_blank"> 下载</a>
+              <a ng-show="attachment.targetType" href=""
+                 open-drawer="" open-drawer-type="attachment.targetType"
+                 open-drawer-params="{id:attachment.targetId}"
+                 open-drawer-data="{projectId:attachment.projectId,companyId:attachment.companyId}"
+                  >评论</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div ng-hide='hasNext' class="text-center text-danger"><strong>没有更多的信息了...</strong></div>
+
+
+</div>
+
+
+</body>
+
+</html>

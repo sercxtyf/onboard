@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="meUncompletedBugs" id="meUncompletedBugs">
+    <div class="panel panel-me">
+        <div class="panel-heading">未完成Bug列表</div>
+        <div class="panel-body">
+            <div class="uncompletedBug" ng-repeat="key in bugKeys">
+
+                <span class="projectName uncompletedHref">
+                  <a ui-sref="company.project.todolists({projectId: key, companyId:companyId})">
+                      {{projectsName[key]}}
+                  </a>
+                </span>
+                <br/>
+
+                <div ng-repeat="bug in uncompletesBugs[key]" data-id="{{bug.id}}">
+                    <div class="bugInfo">
+                        <span>
+                          <a class="bugName pointer" open-drawer="bug" open-drawer-params="{id: bug.id}" open-drawer-type="'bug'"
+                             open-drawer-data="{projectId: bug.projectId, companyId: bug.companyId}">
+                              #{{ bug.idInProject }}&nbsp; {{bug.title}}
+                          </a>
+                        </span>
+                        <span class="assign">{{user.name}}</span><span class="assign">{{bug.dueTime | date:'yyyy-MM-dd'}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+</html>

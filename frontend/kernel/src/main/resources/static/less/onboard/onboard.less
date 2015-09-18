@@ -1,0 +1,38 @@
+// 登录后的主css
+// imported by /onboard.less
+@import "common/index";
+
+#drawer {
+    @import "drawer/index";
+}
+
+#login, #sign {
+    @import "login";
+}
+
+#main-nav {
+    @import "header";
+}
+
+#main-content {
+    margin-top: @nav-height;
+
+    #account {
+        @import "account/index";
+    }
+
+    #company {
+        @import "company/index";
+    }
+
+    #companies {
+        @import "companies";
+    }
+}
+
+@import "spinner";
+
+.commit-item-body{
+  width:100%
+}
+

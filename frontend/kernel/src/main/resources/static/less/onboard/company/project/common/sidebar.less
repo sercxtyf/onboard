@@ -1,0 +1,187 @@
+@import "../../../common/mixins.less";
+
+
+/* --------------------------------------
+   Sidebar & right side layout
+   -------------------------------------- */
+&.transition-on .sidebar-fixed,
+&.transition-on .content-wrapper{
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+&.transition-on #side-menu .fa {
+  .transition(font-size 0.5s);
+}
+
+/*for content to the right of the sidebar*/
+.content-wrapper {
+  position: relative;
+  margin: 0 0 0 150px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.sidebar-default {
+  background-color: @sidebar-bg;
+  // border-color: #354052;
+  .side-menu-wrapper{
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 95%;
+    padding-bottom: 46px; // padding for footer
+  }
+}
+
+.sidebar-fixed {
+  z-index: 111;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+
+  /*sidebar menu*/
+  .nav > li > a {
+    font-size: 14px;
+    color: @sidebar-link-color;
+    padding: 15px 20px 15px 25px; // menu item height 50px
+    width: 300px;
+  }
+
+  .nav > li > a i {
+    margin-right: 12px;
+    font-size: 18px;
+    padding-right: 3px;
+  }
+
+  .nav > li > a span {
+    display: inline;
+  }
+
+  .nav > li > a:hover,
+  .nav > li > a:focus {
+    background-color: @sidebar-link-active-bg;
+    color: @sidebar-link-active-color;
+  }
+
+  .nav > li.active > a {
+    background-color: @sidebar-link-active-bg;
+    color: @sidebar-link-active-color;
+  }
+
+  .nav-label{
+    font-weight: 600;
+  }
+}
+
+
+
+/* sidebar separator */
+hr.hr-sidebar {
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-top: solid 1px @sidebar-link-active-color;
+  // border-bottom: solid 1px #3d495d;
+  /*border-top: medium double #333;*/
+  color: @sidebar-link-active-color;
+  height: 2px;
+  /*text-align: center;*/
+}
+
+/* sidebar footer */
+.sidebar-footer {
+  border-top: 1px solid @sidebar-link-active-color;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: @sidebar-bg;
+  /*background-color: #2e3e4d;*/
+}
+
+.sidebar-footer ul {
+  padding: 0 10px;
+  margin: 0;
+  list-style: none;
+}
+
+.sidebar-footer li {
+  float: left;
+  width: 33%;
+  text-align: center;
+  padding: 2px;
+}
+
+.sidebar-footer li a {
+  /*font-size: 14px;*/
+  display: block;
+  padding: 6px 0 8px 0;
+  margin: 2px;
+  border-radius: 5px;
+  /*color: #a7b1c2;*/
+  color:@sidebar-link-color;
+}
+
+.sidebar-footer li a:hover, .sidebar-footer li a:focus {
+  color: #fff;
+}
+
+/*mini sidebar*/
+&.mini-sidebar .sidebar-fixed {
+  width: 70px;
+}
+
+&.mini-sidebar .content-wrapper {
+  margin: 0 0 0 70px;
+}
+
+&.mini-sidebar .nav-label,
+&.mini-sidebar .sidebar-default .nav li a span {
+  display: none;
+}
+
+&.mini-sidebar .mini-hide {
+  display: none;
+}
+
+&.mini-sidebar .mini-stay {
+  width: 100%;
+}
+
+&.mini-sidebar .mini-stay a i{
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+
+.sidebar-shadow{
+  background-image: url(/static/img/sidebar-shadow.png);
+  width: 14px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 10000;
+}
+li.setting{
+	list-style:none;
+}
+a.setting {
+  //margin-left: 30px;
+  color: #8a94a5;
+  font-size: 9px;
+  display: table-cell;
+  text-align: center;
+  width: 100px;
+  &.admin {
+    width: 66.6666px;
+  }
+}
+.setting a:hover {
+  color: #fff;
+}

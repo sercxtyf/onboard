@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+<div th:fragment="search" id="search" data-spy="scroll">
+  <div class="container" id="search" ng-controller="searchCtrl" ng-init="init(1, '')"
+       th:attr="ng-init=${'init(' + companyId + ', ' + key + ')'}">
+
+    <div class="jumbotron">
+      <div class="media">
+        <h2>搜索关键词: <strong class="text-info"> {{ key }} </strong></h2>
+      </div>
+      <div class="subnav container-fluid" id="search-nav">
+        <form class="form-inline pull-right search-box">
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon"><strong>筛选</strong></div>
+              <input type="text" class="form-control" placeholder="筛选当前页面内容" ng-model="search"></input>
+            </div>
+          </div>
+        </form>
+        <div class="form-inline pull-right search-user">
+          <select class="form-control" ng-options="option.id as option.name for option in userOptions" ng-model="userId" ng-change="changeUser()" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-2" style="margin-top: 49px">
+        <div class="list-group" data-spy="affix" data-offset-top="146">
+          <a ng-click="setType('all')" ng-class="{ active:isSet('all') }" class="list-group-item link"
+             ng-disabled="busy">全部</a>
+          <a ng-click="setType('todo')" ng-class="{ active:isSet('todo') }" class="list-group-item link"
+             ng-disabled="busy">任务</a>
+          <a ng-click="setType('todolist')" ng-class="{ active:isSet('todolist') }" class="list-group-item link"
+             ng-disabled="busy">任务列表</a>
+          <a ng-click="setType('discussion')" ng-class="{ active:isSet('discussion') }" class="list-group-item link"
+             ng-disabled="busy">讨论</a>
+          <a ng-click="setType('document')" ng-class="{ active:isSet('document') }" class="list-group-item link"
+             ng-disabled="busy">文档</a>
+          <a ng-click="setType('comment')" ng-class="{ active:isSet('comment') }" class="list-group-item link"
+             ng-disabled="busy">评论</a>
+          <a ng-click="setType('event')" ng-class="{ active:isSet('event') }" class="list-group-item link"
+             ng-disabled="busy">日历事件</a>
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        
+        <!-- search results -->
+        <div class="table-responsive">
+          <table id="search-result" class="table table-hover table-condensed">
+            <thead>
+            <tr>
+              <th class="col-sm-1"></th>
+              <th class="col-sm-6">内容</th>
+              <th class="col-sm-1">创建者</th>
+              <th class="col-sm-1">责任人</th>
+              <th class="col-sm-1">项目</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in items | filter: search" ng-animate="'slide'">
+              <td ng-if="type == 'all'" class="col-sm-1 text-center" ng-switch="item.modelType">
+                <i class="fa fa-check-square-o fa-2x" ng-switch-when="todo"></i>
+                <i class="fa fa-bars fa-2x" ng-switch-when="todolist"></i>
+                <i class="fa fa-comments-o fa-2x" ng-switch-when="discussion"></i>
+                <i class="fa fa-file-text-o fa-2x" ng-switch-when="document"></i>
+                <i class="fa fa-comment-o fa-2x" ng-switch-when="comment"></i>
+                <i class="fa fa-calendar fa-2x" ng-switch-when="event"></i>
+                <i class="fa fa-file-o fa-2x" ng-switch-default=""></i>
+              </td>
+              <td ng-if="type != 'all'" class="col-sm-1 text-center">
+                <img class="img-circle speaker" ng-src="{{ item.creatorAvatarUrl }}" alt="avatar"/>
+              </td>
+              <td class="col-sm-6 link"><a open-drawer="{{ item.modelType }}" open-drawer-params="{id: item.modelId}"
+                                           open-drawer-data="{projectId: item.projectId}">
+                <h4>
+                  <strong>
+                    <!-- <span class="text-info" ng-bind-html="item.itemName | highlight: key"></span> -->
+                    <span class="text-info" ng-bind-html="item.title"></span>
+                  </strong>
+                </h4>
+                <section>
+                  <!-- <span ng-bind-html="item.content | highlight: key"></span> -->
+                  <span ng-bind-html="item.content" class="item-content"></span>
+                </section>
+              </a>
+              </td>
+              <td class="col-sm-1">
+                <strong> {{ item.creatorName }} </strong>
+                <p> {{ item.createdTime | date:'yyyy/MM/dd'}} </p>
+              </td>
+              <td class="col-sm-1">
+                <strong> {{ item.assigneeName }} </strong>
+              </td>
+              <td class="col-sm-1 link"><a redirect="" data-target-type="project" data-target-id="{{ item.projectId }}"><strong>{{
+                item.projectName }}</strong></a></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div ng-show="hasNext" class="row text-center">
+          <button type="submit" class="btn btn-primary" ng-disabled="busy" ng-click="addMoreResult()">
+            载入更多
+          </button>
+        </div>
+        <div ng-show="!hasNext" class="text-danger text-center"><strong>没有更多的搜索结果了...</strong>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+
+</html>

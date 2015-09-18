@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div id="todo-detail" th:fragment="todoDetail" ng-controller="todoCtrl">
+
+  <div name="todoForm" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 id="title">
+          <div class="row">
+            <a class="todo-recover-link" ng-show="todo.deleted" ng-click="recover(todo)">恢复</a>
+          </div>
+          <div class="row" title="{{todo.content}}">
+            <div class="col-sm-9">
+              <textarea type="text" id="edit_content" name="edit_content" class="form-control" ng-model="todo.content" ng-maxlength="200"
+                     required="" ng-blur="todo.updateByAttrs(['content']);edit_content = false; getRecommend(todo.content);" ng-show="edit_content"/>
+              <p class="click-link" ng-click="editContent()" ng-show="!edit_content"  >{{todo.content}}</p>
+            </div>
+            <span class="project-todo-id text-muted col-sm-3">#{{todo.projectTodoId}}</span>
+
+          </div>
+
+          <div ng-show="todoForm.content.$error.required &amp;&amp; todoForm.content.$dirty"
+               class="alert alert-danger" role="alert">名称不能为空
+          </div>
+          <div ng-show="todoForm.content.$error.maxlength &amp;&amp; todoForm.content.$dirty"
+               class="alert alert-danger" role="alert">最大长度不能超过200
+          </div>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div th:replace="project/todo/TodoDetailFileds :: todoDetailFileds"></div>
+      </div>
+      <div class="tabset" th:replace="tab/TabSet :: tabset('todoTabs')"></div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+</body>
+
+</html>

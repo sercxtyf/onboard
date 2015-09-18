@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="meUncompletedSteps" id="meUncompletedSteps">
+    <div class="panel panel-me">
+        <div class="panel-heading">未完成Step列表</div>
+        <div class="panel-body">
+            <div class="uncompletedStep" ng-repeat="key in stepKeys">
+
+                <span class="projectName uncompletedHref">
+                  <a ui-sref="company.project.todolists({projectId: key, companyId: companyId})">
+                      {{projectsName[key]}}
+                  </a>
+                </span>
+                <br/>
+
+                <div ng-repeat="step in uncompletedSteps[key]" data-id="{{step.id}}">
+                    <div class="stepInfo">
+                        <span>
+                          <a class="stepName pointer" open-drawer="step" open-drawer-params="{id: step.id}" open-drawer-type="'step'"
+                             open-drawer-data="{projectId: step.projectId, companyId: step.companyId}">
+                              #{{ step.idInProject }}&nbsp; {{step.content}}
+                          </a>
+                        </span>
+                        <span class="assign">{{user.name}}</span><span class="assign">{{step.dueDate | date:'yyyy-MM-dd'}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+</html>

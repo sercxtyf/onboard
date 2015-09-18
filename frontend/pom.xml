@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.onboard</groupId>
+  <artifactId>com.onboard.frontend.parent</artifactId>
+  <version>3.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>com.onboard.frontend.parent</name>
+  <description>com.onboard.frontend.parent</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <bundle.symbolicName>${project.artifactId}</bundle.symbolicName>
+    <bundle.namespace>${project.artifactId}</bundle.namespace>
+    <bundle.Export-Package>${bundle.namespace}</bundle.Export-Package>
+    <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+  </properties>
+
+  <modules>
+    <module>kernel</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <!-- Import dependency management from Spring Boot -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>1.2.3.RELEASE</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.2.3.RELEASE</version>
+                 <!-- the class to start -->
+                 <configuration>
+                   <mainClass>com.onboard.frontend.Application</mainClass>
+                   <layout>ZIP</layout>
+                   <addResources>kernel/target</addResources>
+                 </configuration>
+                 
+                 <executions>
+                   <execution>
+                     <goals>
+                       <goal>repackage</goal>
+                     </goals>
+                   </execution>
+                 </executions>
+            </plugin>
+        </plugins>
+  </build>
+
+  <distributionManagement>
+    <repository>
+      <id>internal</id>
+      <name>Internal Release Repository</name>
+      <url>http://dev.elevenframework.org/nexus/content/repositories/releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>snapshot</id>
+      <name>Internal Snapshot Repository</name>
+      <url>http://dev.elevenframework.org/nexus/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+</project>

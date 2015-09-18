@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="iterationEdit" id="iterationEdit">
+    <div class="tools">
+        <ul class="nav nav-pills" id="iterationTab">
+            <li class="active"><a href="#iterationStories" data-toggle="tab">需求</a></li>
+            <li><a href="#iterationBugs" data-toggle="tab">缺陷</a></li>
+        </ul>
+        <button class="btn btn-primary return" ui-sref="company.project.iteration.activeIteration.todos" ui-sref-active="active">返回迭代</button>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane active" id="iterationStories" ng-init="storyFilter={completed: false}">
+            <div iteration-stories-tree="stories" completed="false"></div>
+            <!--<div ng-show="stories.length == 0" class="no-stories"></div>-->
+            <!--<div ng-repeat="story in stories" class="story" ng-class="{true: 'chosen', false: ''}[story.choose]">-->
+                <!--<button class="ob-checkbox iteration-checkbox" ng-class="{true: 'ob-checkbox-checked', false: ''}[story.choose]" ng-model="story.choose" ng-click="changeChecked(story)"></button>-->
+                <!--<div class="story-info">-->
+                    <!--<div class="title" ng-click="showDetail($event)">{{story.description}}</div>-->
+                    <!--<div class="info">-->
+                        <!--<hr />-->
+                        <!--<p class="info-key">详细描述</p>-->
+                        <!--<p class="info-value" ng-bind-html="story.content"></p>-->
+                        <!--<hr />-->
+                        <!--<p class="info-key">验收标准</p>-->
+                        <!--<p class="info-value" ng-bind-html="story.acceptanceLevel"></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="tab-pane" id="iterationBugs">
+            <div ng-show="bugs.length == 0" class="no-bugs"></div>
+            <div ng-repeat="bug in bugs" class="bug" ng-class="{true: 'chosen', false: ''}[bug.choose]">
+                <button class="ob-checkbox iteration-bug-checkbox" ng-class="{true: 'ob-checkbox-checked', false: ''}[bug.choose]" ng-model="bug.choose" ng-click="changeChecked(bug)"></button>
+                <div class="bug-info">
+                    <div class="title" ng-click="showDetail($event)">{{bug.title}}</div>
+                    <div class="info">
+                        <hr />
+                        <p class="info-key">详细描述</p>
+                        <p class="info-value" ng-bind-html="bug.description"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+</html>

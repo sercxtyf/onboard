@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+<body>
+<div th:fragment="bugsOpened" id="bugsOpened">
+
+  <div ng-show="bugList.length===0" class="no-item-exists-create-new-item">
+    当前项目没有进行中的Bug<br/>
+    点击下方新建Bug按钮，创建bug来让程序员尽快修复它吧！！！<br/>
+    <a type="button" class="btn btn-primary" ng-click="openNewBugDrawer($event)">
+      <i class="fa fa-plus"></i> 新建Bug
+    </a>
+  </div>
+
+
+  <div infinite-scroll="loadMoreBugs()"
+       infinite-scroll-disabled='busy || !hasNext'
+       infinite-scroll-distance='0'
+       infinite-scroll-container='.bug-list'>
+    <div ng-hide="bugList.length===0">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th class="col-sm-1">
+              <a href="" ng-click="predicate='idInProject'; reverse=!reverse">BugId
+                <i class="fa fa-sort" ng-show="predicate != 'id'"></i>
+                <i class="fa fa-sort-desc" ng-show="predicate=='id' &amp;&amp; reverse"></i>
+                <i class="fa fa-sort-asc" ng-show="predicate=='id' &amp;&amp; !reverse"></i></a>
+            </th>
+            <th class="col-sm-1">
+              <a href="" ng-click="predicate='priority'; reverse=!reverse">优先级
+                <i class="fa fa-sort" ng-show="predicate != 'priority'"></i>
+                <i class="fa fa-sort-desc" ng-show="predicate=='priority' &amp;&amp; reverse"></i>
+                <i class="fa fa-sort-asc" ng-show="predicate=='priority' &amp;&amp; !reverse"></i></a>
+            </th>
+            <th>
+              <a href="" ng-click="predicate='title'; reverse=!reverse">Bug 标题
+                <i class="fa fa-sort" ng-show="predicate != 'title'"></i>
+                <i class="fa fa-sort-desc" ng-show="predicate=='title' &amp;&amp; reverse"></i>
+                <i class="fa fa-sort-asc" ng-show="predicate=='title' &amp;&amp; !reverse"></i></a>
+            </th>
+            <th class="col-sm-2">
+              <a href="" ng-click="predicate='dueTime'; reverse=!reverse">截止日期
+                <i class="fa fa-sort" ng-show="predicate != 'dueTime'"></i>
+                <i class="fa fa-sort-desc" ng-show="predicate=='dueTime' &amp;&amp; reverse"></i>
+                <i class="fa fa-sort-asc" ng-show="predicate=='dueTime' &amp;&amp; !reverse"></i></a>
+            </th>
+            <th class="col-sm-1">
+              <a href="" ng-click="predicate='bugAssigneeDTO.name'; reverse=!reverse">责任人
+                <i class="fa fa-sort" ng-show="predicate != 'bugAssigneeDTO.name'"></i>
+                <i class="fa fa-sort-desc" ng-show="predicate=='bugAssigneeDTO.name' &amp;&amp; reverse"></i>
+                <i class="fa fa-sort-asc" ng-show="predicate=='bugAssigneeDTO.name' &amp;&amp; !reverse"></i></a>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="bug in bugList | filter: filterUser | orderBy:predicate:reverse" ng-class="{'level-warning': bug.level == 'warning', 'level-alert': bug.level == 'alert'}">
+            <td>{{ bug.idInProject }}</td>
+            <td>{{ priorities[bug.priority-1].desc }}</td>
+            <td class="pointer title" ng-click="viewBugDrawer($event,bug)">
+              <a href="" ng-click="viewBugDrawer($event,bug)">{{ bug.title }}</a></td>
+            <td class="dueTime">
+                {{ bug.dueTime | date:'MM-dd' }}
+                <span ng-if="bug.level == 'warning'" class="level">
+                  <i class="fa fa-exclamation-circle" data-toggle="tooltip" data-placement="right" title="这个bug存在的时间已经超过了最近三个月已修复Bug的平均水平！"></i>
+                </span>
+                <span ng-if="bug.level == 'alert'" class="level">
+                  <i class="fa fa-exclamation-circle" data-toggle="tooltip" data-placement="right" title="这个bug存在的时间已经超过了最近三个月已修复Bug中的75%！"></i>
+                </span>
+            </td>
+            <td>{{ bug.bugAssigneeDTO.name }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div ng-show="busy" class="text-center clearfix"><strong><i
+            class="fa fa-spinner fa-spin"></i> 载入数据 ...</strong>
+        </div>
+        <div ng-show="!hasNext &amp;&amp; displayMoreBugs()" class="text-danger text-center clearfix">
+          <strong>没有更多了...</strong></div>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
+</body>
+
+</html>

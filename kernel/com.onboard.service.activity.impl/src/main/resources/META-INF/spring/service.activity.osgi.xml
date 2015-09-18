@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/osgi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                                 http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+  <!-- 引用的服务 -->
+  <reference id="activityMapper" interface="com.onboard.domain.mapper.ActivityMapper" />
+  <reference id="projectMapper" interface="com.onboard.domain.mapper.ProjectMapper" />
+  <reference id="notificationMapper" interface="com.onboard.domain.mapper.NotificationMapper" />
+  <reference id="userProjectMapper" interface="com.onboard.domain.mapper.UserProjectMapper" />
+  <reference id="userService" interface="com.onboard.service.account.UserService" />
+  <reference id="session" interface="com.onboard.service.web.SessionService" />
+
+  <!-- 开放的服务 -->
+  <service id="activityRecorder" interface="com.onboard.service.activity.ActivityRecorder" ref="activityRecorderBean" />
+  <service id="activityService" interface="com.onboard.service.activity.ActivityService" ref="activityServiceBean" />
+
+  <list id="activityGenerators" cardinality="0..N" interface="com.onboard.service.activity.ActivityGenerator">
+    <listener bind-method="addActivityGenerator" unbind-method="removeActivityGenerator" ref="activityRecorderBean" />
+  </list>
+  <list id="activityHooks" cardinality="0..N" interface="com.onboard.service.activity.ActivityHook">
+    <listener bind-method="addActivityHook" unbind-method="removeActivityHook" ref="activityRecorderBean" />
+  </list>
+  <list id="synchronizedActivityHooks" cardinality="0..N" interface="com.onboard.service.activity.SynchronizedActivityHook">
+    <listener bind-method="addSynchronizedActivityHook" unbind-method="removeSynchronizedActivityHook" ref="activityRecorderBean" />
+  </list>
+</beans:beans>

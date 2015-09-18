@@ -1,0 +1,2 @@
+Private-Package: com.onboard.service.security.impl;version=${project.version}
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

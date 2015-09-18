@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="completedIteration"  id="completedIteration" ng-controller="completedIterationCtrl">
+    <div class="iteration-panel">
+      <div class="iteration-operation pull-right">
+        <!-- choose users menu btn -->
+        <div class="dropdown userMenu" ng-include="'user-menu-with-all-users.html'"></div>
+      </div>
+        
+      <div class="iteration-header">
+        <div class="iteration-title">
+          {{completedIteration.name}}
+        </div>
+        
+        <div class="iteration-date">
+          <a class="active-iteration-operation">
+              {{completedIteration.startTime | date:'yyyy.MM.dd'}} - {{completedIteration.endTime | date:'yyyy.MM.dd'}}
+          </a>
+        </div>
+          <div class="iteration-description">
+              <p><span ng-bind-html="transDescription(completedIteration.description)"></span></p>
+          </div>
+      </div>
+    </div>
+    
+    <div class="iteration-tab">
+      <ul class="nav nav-pills" role="tablist">
+        <li ng-class="{active : isActive('todos')}">
+          <a class="click-link" ui-sref="company.project.iteration.completedIteration.todos({ iterationId: completedIteration.id })">所有任务</a>
+        </li>
+        <li ng-class="{active : isActive('statistics')}">
+          <a class="click-link" ui-sref="company.project.iteration.completedIteration.statistics({ iterationId: completedIteration.id })">燃尽图</a>
+        </li>        
+        <li ng-class="{active : isActive('todoStats')}">
+          <a class="click-link" ui-sref="company.project.iteration.completedIteration.todoStats({ iterationId: completedIteration.id })">任务统计</a>
+        </li>
+        <li ng-class="{active : isActive('codeStats')}">
+          <a class="click-link" ui-sref="company.project.iteration.completedIteration.codeStats({ iterationId: completedIteration.id })">代码统计</a>
+        </li>
+        <li ng-class="{active : isActive('overallStats')}">
+          <a class="click-link" ui-sref="company.project.iteration.completedIteration.overallStats({ iterationId: completedIteration.id })">整体进度</a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="iteration-content">
+      <!-- Tab panes -->
+      <div class="tab-content" ui-view=""></div>
+    </div>
+</div>
+
+<div th:fragment="statistics"  id="completedIterationStatistics" ng-controller="completeIterationStatisticsCtrl">
+    <div class="chart-container">
+      <!-- graph heading -->
+      <!-- <div class="graph-heading">
+   
+        <div class="graph-title">
+          <img ng-src="{{ user.avatarUrl }}" class="img-circle"></img>
+          <h4>
+            {{ user.name }}
+          </h4>
+        </div>
+      </div> -->
+      
+      <div id="burnDownChart" class="d3-chart"></div>
+            
+    </div>
+</div>
+
+
+<div th:fragment="todos" class="one-iteration one-todolist" id="completedIterationTodos" ng-controller="completeIterationTodosCtrl">
+    <div class="panel panel-success">
+        <div class="panel-body">
+            <ul class="todo-list list-group-dropBody">
+                <li class="list-group-item">
+                    {{getTodosWithFilter(completedIteration.completedTodos).length}}个任务已完成，{{getTodosWithFilter(completedIteration.todos).length - getTodosWithFilter(completedIteration.completedTodos).length}}个任务延误了</li>
+                <li th:replace="project/common/TodosMini :: todos('completedIteration.todos', 'filterTodo')"></li>
+            </ul>
+        </div>
+    </div>
+    <!-- .panel -->
+
+</div>
+
+</body>
+
+</html>

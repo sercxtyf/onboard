@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="iterations" id="iterations" ng-controller="defaultIterationsCtrl">
+
+  <div class="center-panel-nav">
+    <!-- <div class="center-panel-nav-shadow"></div> -->
+     <!--a class="toggle-sidebar-btn btn btn-primary" href="#" ng-click="toggleSidebar()"><i class="fa fa-bars"></i></a-->
+     <div>
+       <h3>迭代</h3>
+       <ul class="nav nav-pills iteration-filter" id="filters" role="tablist">
+          <li ng-class="{'active': isActive('active')}">
+            <a ui-sref="company.project.iteration.activeIteration.todos">当前迭代</a>
+          </li>
+          
+          <li ng-class="{'active': isActive('created')}">
+            <a ui-sref="company.project.iteration.createdIterations">未开始迭代</a>
+          </li>
+
+          <li ng-class="{'active': isActive('completed')}">
+            <a ui-sref="company.project.iteration.completedIterations">已完成迭代</a>
+          </li>
+        </ul>
+     </div>
+
+     <div class="pull-right">
+      <button type="button" class="btn btn-primary btn-sm" ng-click="showCreateIteration()" dropdown-form-toggle="newIterationForm">
+        <i class="fa fa-plus"></i> 新建迭代</button>
+      <form class="ballon dropdown-form new-iteration-form" name="newIterationForm" dropdown-form="" is-open="newIterationForm.open">
+          
+          <p class="input-group">
+            <input type="text" name="name" ng-model="newIteration.name" class="form-control" required=""
+                 ng-maxlength="50" placeholder="迭代名称"/>
+          </p>
+
+          <p class="input-group ob-date">
+              <input type="text" class="form-control click-link" datepicker-popup="yyyy-MM-dd" readonly="" placeholder="开始时间"
+                     ng-click="openDTPicker($event, 'newStartTime')" ng-model="newIteration.startTime"
+                     is-open="newStartTime" close-text="关闭" clear-text="清除" current-text="今天"/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default"
+                      ng-click="openDTPicker($event, 'newStartTime')"><i
+                      class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+
+          <p class="input-group ob-date">
+              <input type="text" class="form-control click-link" datepicker-popup="yyyy-MM-dd"
+                     ng-click="openDTPicker($event, 'newEndTime')"
+                     ng-model="newIteration.endTime" is-open="newEndTime" close-text="关闭" clear-text="清除"
+                     current-text="今天"
+                     readonly="" placeholder="截止时间"/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="openDTPicker($event, 'newEndTime')">
+                  <i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+          <div class="submit">
+              <input type="submit" value="确定" class="btn btn-primary" ng-click="createIteration()"/>
+              <a class="btn btn-default btn-cancel click-link" ng-click="showCreateIteration()">取消</a>
+          </div>
+      </form>
+     </div>
+  </div>
+
+
+  <div class="gray-bg center-panel-content">
+<!--     <div class="subnav">
+        <div class="pull-left">
+            <a class="btn btn-primary" ng-click="showCreateIteration()" dropdown-form-toggle=""><i class="fa fa-plus"></i>新建迭代</a>
+            <form class="ballon" name="newIterationForm" dropdown-form="" is-open="newIterationForm.open">
+                <input type="text" name="name" ng-model="newIteration.name" class="form-control" required=""
+                       ng-maxlength="50" placeholder="迭代名称"/>
+
+                <p class="input-group">
+                    <input type="text" class="form-control click-link" datepicker-popup="yyyy-MM-dd" readonly="" placeholder="开始时间"
+                           ng-click="openDTPicker($event, 'newStartTime')" ng-model="newIteration.startTime"
+                           is-open="newStartTime" close-text="关闭" clear-text="清除" current-text="今天"/>
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default"
+                            ng-click="openDTPicker($event, 'newStartTime')"><i
+                            class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p>
+                <p class="input-group">
+                    <input type="text" class="form-control click-link" datepicker-popup="yyyy-MM-dd"
+                           ng-click="openDTPicker($event, 'newEndTime')"
+                           ng-model="newIteration.endTime" is-open="newEndTime" close-text="关闭" clear-text="清除"
+                           current-text="今天"
+                           readonly="" placeholder="截止时间"/>
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="openDTPicker($event, 'newEndTime')">
+                        <i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p>
+                <div class="submit">
+                    <input type="submit" value="确定" class="btn btn-primary" ng-click="createIteration()"/>
+                    <a class="btn-cancle click-link" ng-click="showCreateIteration()">取消</a>
+                </div>
+            </form>
+        </div>
+        <ul class="nav nav-pills iteration-filter" id="filters" role="tablist">
+            <li ng-show="activeIteration.id" ng-class="isActive('active')">
+              <a ui-sref="company.project.iteration.activeIteration.todos">当前迭代</a>
+            </li>
+
+            <li ng-class="isActive('created')">
+              <a ui-sref="company.project.iteration.createdIterations">未开始迭代</a>
+            </li>
+
+            <li ng-class="isActive('completed')">
+              <a ui-sref="company.project.iteration.completedIterations">已完成迭代</a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div> -->
+    <div ui-view=""></div>
+
+  </div>
+  
+  <div th:replace="project/iteration/LinkIteration :: linkIteration"></div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="footer" data-libs="feedback">
+
+  <!--<form id="suggestionForm" method="post" action="/api/suggestion">-->
+    <!--<div class="modal fade" id="suggestion-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"-->
+         <!--aria-hidden="true">-->
+      <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+          <!--<div class="modal-header">-->
+            <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span-->
+                <!--class="sr-only">Close</span></button>-->
+            <!--<h2 class="modal-title">建议与反馈</h2>-->
+          <!--</div>-->
+          <!--<div class="modal-body">-->
+            <!--<div class="form-group">-->
+              <!--<textarea name="content" class="form-control" rows="5" placeholder="请填写您的反馈内容..."></textarea>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="modal-footer">-->
+            <!--<button class="btn btn-primary" id="suggestion-submit-button" type="button">提交</button>-->
+            <!--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</form>-->
+
+  <!--<div class="modal fade" id="suggestion-notification" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"-->
+       <!--aria-hidden="true">-->
+    <!--<div class="modal-dialog">-->
+      <!--<div class="modal-content">-->
+        <!--<div class="modal-body">-->
+          <!--<h4 class="modal-title">感谢您的宝贵建议！我们会尽快处理</h4>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-45012466-1', 'onboard.cn');
+    ga('send', 'pageview');
+  </script>
+
+  <!--<script type="text/javascript">-->
+  <!--require(['init/push-state-with-cache'], function(initlrc){initlrc();});-->
+  <!--require(['init/websocket']);-->
+  <!--</script>-->
+</div>
+</body>
+</html>

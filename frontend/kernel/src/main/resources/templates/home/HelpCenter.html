@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>帮助中心 | Onboard</title>
+
+  <link rel="stylesheet" href="/static/lib/bootstrap/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/static/lib/fontawesome/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/static/lib/homepage/css/styles.css"/>
+  <link rel="stylesheet" href="/static/lib/homepage/css/help.css"/>
+
+  <script src="/static/lib/jquery/jquery.min.js"></script>
+  <script src="/static/lib/jquery/jquery.easing.js"></script>
+  <script src="/static/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/static/lib/smoothscroll.js"></script>
+
+</head>
+
+<body>
+
+<div id="navbar-main">
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
+          <!-- logo mobile -->
+          <span class="ob ob-logo" style="font-size:30px; color:#3498db;"></span>
+        </button>
+
+        <a class="navbar-brand hidden-xs hidden-sm" href="/">
+          <!-- <span class="icon icon-shield" style="font-size:18px; color:#3498db;"></span> -->
+          <span class="ob ob-logo" style="font-size:18px; color:#3498db;"></span>
+        </a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/">首页</a></li>
+          <li class="active"><a href="#">帮助中心</a></li>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </div>
+
+
+  <div class="help-body">
+    <div id="navbar-help" class="navbar affix">
+      <ul class="nav bs-docs-sidenav">
+        <li>
+          <a href="#company">团队与项目</a>
+        </li>
+        <li>
+          <a href="#todolist">待办事项</a>
+        </li>
+        <li>
+          <a href="#iteration">迭代</a>
+        </li>
+        <li>
+          <a href="#file">文件</a>
+        </li>
+        <li>
+          <a href="#document">文档</a>
+        </li>
+        <li>
+          <a href="#me">与我相关</a>
+        </li>
+        <li>
+          <a href="#analysis">统计</a>
+        </li>
+      </ul>
+    </div>
+    <div class="content" data-spy="scroll" data-offset="100" data-target="#navbar-help">
+      <div class="chapter" id="company">
+        <h3>团队与项目</h3>
+        <div class="faq">
+          <div class="question">我能加入多少个团队？一个团队可以有多少成员？</div>
+          <div class="answer">目前我们对一个人可以加入的团队数量并没有做出限制，团队成员数量也没有限制。</div>
+        </div>
+        <div class="faq">
+          <div class="question">我能拥有多少个项目？一个项目可以有多少成员？</div>
+          <div class="answer">现阶段我们允许一个团队最多拥有5个项目，而项目成员数量并没有限制。</div>
+        </div>
+        <div class="faq">
+          <div class="question">我能新建项目么？我该如何新建项目？</div>
+          <div class="answer">对于团队中任何一个成员，都可以在当前团队下新建项目。但是一个团队拥有的项目总数是有限制的。新建项目只需要在项目列表右上角点击“新建项目”即可新建一个项目。</div>
+        </div>
+        <div class="faq">
+          <div class="question">我能否邀请别人加入我的团队？</div>
+          <div class="answer">创建和编辑项目时添加的成员会自动加入我的团队</div>
+        </div>
+        <div class="faq">
+          <div class="question">我能否邀请别人加入我的项目？</div>
+          <div class="answer">邀请他人加入项目，可以在项目编辑页面进行添加，但是只有团队创建人和项目创建人可以添加他人。当需要添加的人不在团队时，可以输入邮箱进行添加，被邀请的人会自动进入当前团队。</div>
+        </div>
+        <div class="faq">
+          <div class="question">我能否编辑/删除项目？我该如何编辑/删除项目</div>
+          <div class="answer">团队创建人和项目创建人可以对项目进行编辑/删除，在“项目列表”页面，选择编辑项目的按钮，即可进入项目编辑页面，此时可以编辑/删除项目。</div>
+        </div>
+      </div>
+      <div class="chapter" id="todolist">
+        <h3>待办事项</h3>
+        <div class="faq">
+          <div class="question">如何完成待办事项？</div>
+          <div class="answer">1. 点击待办事项列表页面每个待办事项前方的checkbox即可完成任务。<br />
+            2. 也可以点击待办事项进入待办事项详情页，点击状态改为已完成即可完成待办事项。</div>
+        </div>
+        <div class="faq">
+          <div class="question"> 如何删除待办事项？</div>
+          <div class="answer">将鼠标放在待办事项上，待办事项会浮出一个叉号，点击叉号，会弹出对话框，点击确认即可删除待办事项。</div>
+        </div>
+        <div class="faq">
+          <div class="question">待办事项前面的数字是干什么用的？</div>
+          <div class="answer">成员提交代码时可以用#数字来表示代码与该待办事项相关联。</div>
+        </div>
+        <div class="faq">
+          <div class="question">待办事项的分类都有什么？</div>
+          <div class="answer">任务、需求、Bug。可以在详情页修改类型。</div>
+        </div>
+        <div class="faq">
+          <div class="question">如何将两个待办事项关联起来？</div>
+          <div class="answer">点击一个待办事项，点击相关任务/需求/Bug，添加关联即可。</div>
+        </div>
+        <div class="faq">
+          <div class="question">如何修改代办事项所属的列表？</div>
+          <div class="answer">直接拖动或点入详情页面修改所属列表。</div>
+        </div>
+        <div class="faq">
+          <div class="question">如何将待办事项列表全部收起？</div>
+          <div class="answer">点击右上角的收起任务列表即可。</div>
+        </div>
+        <div class="faq">
+          <div class="question">如何对待办事项进行筛选？</div>
+          <div class="answer">点击右上角任务筛选处的任务类型、所有人和状态即可按照这几个参数筛选待办事项。</div>
+        </div>
+        <div class="faq">
+          <div class="question">如何归档任务列表？</div>
+          <div class="answer">点击任务列表标题右侧的按钮，在下拉菜单中选择归档任务即可完成归档。</div>
+        </div>
+        <div class="faq">
+          <div class="question">如何复制任务列表？</div>
+          <div class="answer">点击任务列表标题右侧的按钮，在下拉菜单中选择复制任务列表，选择目标项目即可完成复制。</div>
+        </div>
+      </div>
+      <div class="chapter" id="iteration">
+        <h3>迭代</h3>
+        <div class="faq">
+          <div class="question">迭代有哪些状态</div>
+          <div class="answer">
+            迭代的状态分为未开始、当前、已完成三种状态<br />
+            未开始的迭代是预期不久的将来要完成的目标<br />
+            当前迭代表示当前阶段需要完成的目标<br />
+            已完成迭代表示已经完成的目标
+          </div>
+        </div>
+        <div class="faq">
+          <div class="question">如何新建一个迭代</div>
+          <div class="answer">
+            进入迭代页面，点击右上角【新建迭代】按钮，按要求填写即可
+          </div>
+        </div>
+        <div class="faq">
+          <div class="question">如何开始一个迭代</div>
+          <div class="answer">
+            开始的迭代必须是第一个未开始迭代，同时，该迭代必须设置开始时间以及截止时间，设置好后，进入未开始迭代页面，点击【开始迭代】即可
+          </div>
+        </div>
+        <div class="faq">
+          <div class="question">如何给迭代添加任务</div>
+          <div class="answer">
+            1.进入【未开始迭代】页面，点击【添加任务】，选择相应的任务，点击【确定】<br />
+            2.进入【当前迭代】页面，点击【添加】，选择相应的任务，点击【确定】<br />
+            3.对于当前迭代，当开始迭代时，所有截止日期在当前迭代的起止时间内任务会自动进入当前迭代<br />
+            4.设置任务截止时间在当前迭代起止时间内，自动进入当前迭代<br />
+            5.完成任务，如果存在当前迭代，则该任务自动进入当前迭代
+          </div>
+        </div>
+        <div class="faq">
+          <div class="question">如何添加任务状态</div>
+          <div class="answer">
+            onboard任务状态共有：未开始、正在做、已提交、同意完成、复审通过、测试通过、已完成7种状态<br />
+            初始状态下有包含三种状态：未开始、正在做、已完成<br />
+            如果需要增加任务状态，可在【当前迭代】页面，单击【看板设置】，选择需要增加或者删除的状态即可<br />
+            增加状态后，迭代的看板数量同时自动增加
+          </div>
+        </div>
+        <div class="faq">
+
+          <div class="question">如何查看某个成员在该迭代中的信息</div>
+          <div class="answer">
+            右上角点击【全体成员】，选择成员，可以查看某个成员的具体迭代信息
+          </div>
+        </div>
+        <div class="faq">
+
+          <div class="question">什么是燃尽图</div>
+          <div class="answer">
+            燃尽图（burn down chart）是在项目完成之前，对需要完成的工作的一种可视化表示。燃尽图有一个Y轴（任务数量）和X轴（时间）。理想情况下，该图表是一个向下的曲线，随着剩余工作的完成，“烧尽”至零。
+          </div>
+        </div>
+        <div class="faq">
+
+          <div class="question">如何查看迭代任务完成情况</div>
+          <div class="answer">
+            进入当前迭代或者已完成迭代的详情页面（未开始迭代没有详情页面，因为迭代未开始时相关统计数据没有意义），选择【任务统计】，可以看到已完成任务和未完成任务的相关信息，最下方为任务分配情况的饼图。
+          </div>
+        </div>
+        <div class="faq">
+
+          <div class="question">如何查看迭代中的代码情况</div>
+          <div class="answer">
+            进入当前迭代或者已完成迭代的详情页面（未开始迭代没有详情页面，因为迭代未开始时相关统计数据没有意义），选择【代码统计】，onboard针对代码进行了三种统计：<br />
+            PunchCard：开发人员在周一到周日每个整点的提交数<br />
+            代码提交次数：迭代起止时间内每天的提交次数以及成员的提交次数百分比<br />
+            代码影响行数：代码仓库在迭代时间内的增加行数与删除行数、成员的增加行数百分比、删除行数百分比
+          </div>
+        </div>
+        <div class="faq">
+
+          <div class="question">如何查看迭代的整体情况</div>
+          <div class="answer">
+            进入当前迭代或者已完成迭代的详情页面（未开始迭代没有详情页面，因为迭代未开始时相关统计数据没有意义），选择【整体进度】，在整体进度中，Onboard统计了任务、活动、代码提交影响行数，单击【任务】、【活动】、【代码提交】、【代码提交行数】标签，可以显示/隐藏相关统计信息。
+          </div>
+        </div>
+        <div class="faq">
+
+          <div class="question">如何完成迭代</div>
+          <div class="answer">
+            进入【当前迭代】页面，单击【完成迭代】按钮即可。
+          </div>
+        </div>
+        <div class="faq">
+          <div class="question">如何查看已完成迭代的统计信息</div>
+          <div class="answer">
+            进入【已完成迭代】页面，单击已完成迭代的名称，即可进入已完成迭代详情页面。
+          </div>
+        </div>
+      </div>
+      <div class="chapter" id="file">
+        <h3>文件</h3>
+        <div class="faq">
+          <div class="question">如何上传多个文件？</div>
+          <div class="answer">点击上传文件按钮，同时打开多个文件，即可同时上传多个文件。</div>
+        </div>
+        <div class="faq">
+          <div class="question">单个上传文件的大小有要求吗？</div>
+          <div class="answer">单个上传文件最大不能超过32M。</div>
+        </div>
+        <div class="faq">
+          <div class="question">如何查看文件？</div>
+          <div class="answer">鼠标点击文件名字，即可查看文件内容，目前只支持查看图片和PDF文档。</div>
+        </div>
+      </div>
+      <div class="chapter" id="document">
+        <h3>文档</h3>
+        <div class="faq">
+          <div class="question">如何创建新的文档？</div>
+          <div class="answer">点击左侧导航栏里的文档链接，进入文档列表页面，然后点击右侧的新建文档按钮来新建文档。</div>
+        </div>
+        <div class="faq">
+          <div class="question">新建文档是否可以直接粘贴截图到文档？</div>
+          <div class="answer">当然可以，新建文档的时候，可使用截图工具截图，然后直接CTRL+V可以复制到文档内容编辑框，非常方便哦~</div>
+        </div>
+        <div class="faq">
+          <div class="question">如何编辑文档？</div>
+          <div class="answer">从文档列表页面点击某个文档链接，进入文档展示页面，选择右侧工具栏里对应的工具按钮来对文档进行编辑、删除、查看文档历史等操作。</div>
+        </div>
+        <div class="faq">
+          <div class="question">如何对文档进行评论？</div>
+          <div class="answer">打开任意文档，滚动页面至底部，点击下发的发表评论文本框对文档进行评论。发表评论的时候可以上传附件，并选择通知成员，被选中的用户将会接收到邮件通知。</div>
+        </div>
+        <div class="faq">
+          <div class="question">上传文件的大小有没有限制？</div>
+          <div class="answer">Onboard对单个上传文件的大小进行了限制，最大上传文件为32M。</div>
+        </div>
+      </div>
+      <div class="chapter" id="me">
+        <h3>与我相关</h3>
+        <div class="faq">
+          <div class="question">如何查看与自己相关的活动列表、未完成任务列表、已完成任务列表及自己共享的文件？</div>
+          <div class="answer">1.点击项目导航栏右上角的“与我相关”的链接进入与我相关页面<br/>
+            2.这时可以可以根据自己的需要点击左侧的导航栏，分别打开与自己相关的活动页面，未完成任务列表页面，已完成任务列表页面及共享的文件列表页面。
+          </div>
+        </div>
+        <div class="faq">
+          <div class="question">如何在与我相关页面进入相关的项目？</div>
+          <div class="answer">在与我相关页面的任意子页面可以直接点击项目的名称进入相关项目。</div>
+        </div>
+        <div class="faq">
+          <div class="question">如何载入更多活动信息？</div>
+          <div class="answer">与我相关页面里的用户活动页面、未完成任务页面、已完成任务页面及共享的文件页面均实现了自动分页功能，当页面向下滚动至底部时，将自动加载更多信息。</div>
+        </div>
+
+        <div class="faq">
+          <div class="question">如何在与我相关页面打开待办清单与待办事项？</div>
+          <div class="answer">1.用户活动页面可以直接点击任务名称将打开任务详细信息面板<br />
+            2.未完成任务页面，点击待办清单名称，及待办事项名称来分别打开待办清单与待办事项。<br />
+            3.已完成任务页面，点击待办清单名称，及待办事项名称来分别打开待办清单与待办事项。<br />
+          </div>
+        </div>
+
+        <div class="faq">
+          <div class="question">如何对自己共享的文件再次下载，或者添加评论？</div>
+          <div class="answer">打开共享的文件页面，选择相应的图片，点击右侧的“下载”链接下载图片；点击右侧的“评论”链接对文件进行评论。</div>
+        </div>
+      </div>
+      <div class="chapter" id="analysis">
+        <h3>统计</h3>
+        <div class="faq">
+          <div class="question">在哪里可以查看到统计信息？</div>
+          <div class="answer">统计页面和迭代页面都有统计图。切换tab可以查看不同的统计信息。</div>
+        </div>
+        <div class="faq">
+          <div class="question">如何选择统计数据的时间范围？</div>
+          <div class="answer">在迭代中统计的数据时间范围是迭代的时间范围，而在统计页面可以选择数据的时间范围：点击时间会弹出时间选择器；但更便捷的做法是点击时间右侧的箭头，可以按截止日期进行确定时间跨度的回溯，如可以选择截止日期前一个季度的数据。注意的是统计时间范围不能超过半年。</div>
+        </div>
+        <div class="faq">
+          <div class="question">如何查看单个团队成员的统计数据？</div>
+          <div class="answer">可以在统计视图通过位于页面右上方的成员下拉菜单选择查看单个团队成员的统计数据。如果该统计页面有饼图，点击饼图中的扇区，统计图会自动切换显示相对应的单个成员的统计数据。</div>
+        </div>
+        <div class="faq">
+          <div class="question">在代码相关的统计图中有什么使用技巧？</div>
+          <div class="answer">在和代码相关的统计图中，将鼠标悬浮到数据点上方，会呈现出和这个数据点相关的所有commit的列表，点击commit id，会弹出一个抽屉显示该commit的信息。</div>
+        </div>
+        <div class="faq">
+          <div class="question">如何理解任务的统计图？</div>
+          <div class="answer">在任务的统计图中，按照图例的提示，红色长条表示任务从创建到截止日期的时间范围，黄色长条则表示从开始做任务到任务完成的时间范围。点击图例，可以隐藏或显示对应的数据图形。</div>
+        </div>
+        <div class="faq">
+          <div class="question">如何理解整体进度的统计图？</div>
+          <div class="answer">该统计图集中展现了某一时间范围间隔内（通常是一天）产生的活动数目、完成的任务个数、提交的代码次数以及增加的代码行数。其中有两个纵坐标轴，代码行数的纵坐标轴位于右侧，其余对应左边的纵坐标轴。点击图例，可以隐藏或显示对应的数据图形。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div th:replace="home/Index :: footer"></div>
+</body>
+</html>

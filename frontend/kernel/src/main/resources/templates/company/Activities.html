@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head></head>
+
+<body>
+
+<div th:fragment="activities" data-libs="activities" id="activities">
+  <div class="content container">
+
+    <div class="page-header">
+      <h2>水手日记
+        <select class="pull-right form-control" ng-model="selectedUser" ng-disabled="busy">
+          <option value="0">所有人员</option>
+          <option ng-repeat="user in users" ng-value="user.id">{{user.name}}</option>
+        </select>
+        <select class="pull-right form-control" ng-model="selectedProject" ng-disabled="busy">
+          <option value="0">所有项目</option>
+          <option ng-repeat="project in projects" ng-value="project.id">{{project.name}}</option>
+        </select>
+      </h2>
+    </div>
+
+    <ul class="timeline" infinite-scroll='nextPage()'
+        infinite-scroll-disabled='busy || !hasNext'
+        infinite-scroll-distance='0'
+        infinite-scroll-immediate-check="false">
+
+      <li ng-repeat="activity in activities" class="activity" ng-class="{'timeline-inverted': $odd}">
+        <div class="timeline-badge {{getThemeByProjectId(activity.projectId).name}}" data-toggle="tooltip"
+             title="{{activity.created/1000 | amDateFormat:'YYYY-MM-dd H:m'}}">
+          <i class="fa" ng-class="'fa-' + icons[activity.action]"></i>
+        </div>
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <h4 class="timeline-title">
+              <a ui-sref="company.project.todolists({projectId: activity.projectId})">
+                {{ activity.projectName }}
+              </a>
+            </h4>
+
+            <p>
+              <small class="text-muted">
+                <i class="fa fa-clock-o"></i>
+                <span am-time-ago="activity.created/1000"></span>
+              </small>
+            </p>
+          </div>
+          <div class="timeline-body">
+            <div class="media">
+              <a class="pull-left" href="#">
+                <img class="media-object creator" alt="avatar" ng-src="{{getUserById(activity.creatorId).avatarUrl}}"/>
+              </a>
+
+              <div class="media-body">
+                <h5 class="media-heading">
+                  <a ui-sref="company.me({userId: activity.creatorId})">{{activity.creatorName}}</a>
+                  {{ activity.subject }}
+
+                  <span ng-show="checkSubjectContainDeletion(activity.subject)"> {{ activity.target }} </span>
+
+                  <a ng-hide="checkSubjectContainDeletion(activity.subject)"
+                     href="" open-drawer=""
+                     open-drawer-type="activity.attachType"
+                     open-drawer-params="{id:activity.attachId}"
+                     open-drawer-data="{projectId:activity.projectId,companyId:activity.companyId}">
+                    {{ activity.target }}</a>
+                </h5>
+
+                <p>{{activity.content}}</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+    <div ng-hide='hasNext' class="text-center text-danger"><strong>没有更多的信息了...</strong></div>
+  </div>
+</div>
+
+</body>
+</html>

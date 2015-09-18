@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head lang="en"></head>
+<body>
+<div th:fragment="bug" ng-controller="todoTabCtrl" class="task-tab" ng-init="initTodoTab('bug')">
+
+    <div ng-repeat="todolist in linkedTodolists">
+        <h4>{{todolist.name}}</h4>
+        <ul class="list-group todo-list" ng-controller="todoItemCtrl">
+            <li th:replace="project/common/Todos :: todos('todolist.todos', 'searchTodo')"></li>
+        </ul>
+    </div>
+
+    <div class="add-link-scope"><a class="click-link" ng-click="addLinkedTask()">添加关联Bug</a></div>
+</div>
+</body>
+</html>

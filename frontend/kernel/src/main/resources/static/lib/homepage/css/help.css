@@ -1,0 +1,94 @@
+.fa-2 {
+    font-size: 3em;
+}
+.fa-3 {
+    font-size: 5em;
+}
+.fa-4 {
+    font-size: 7em;
+}
+.fa-5 {
+    font-size: 12em;
+}
+.fa-6 {
+    font-size: 20em;
+}
+
+
+.marketing .col-lg-4,
+.marketing .col-md-3 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+.marketing .col-lg-4 p,
+.marketing .col-md-3 p {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.marketing h2,
+.marketing h3 {
+    font-weight: normal;
+}
+.marketing .more {
+    width: 200px;
+}
+
+
+.help-body {
+    position: relative;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.help-body .list {
+    float: left;
+    width: 30%;
+}
+
+.help-body .content {
+    float: right;
+    width: 85%;
+    padding-bottom: 200px;
+}
+
+.help-body .content h3 {
+    font-family: "Microsoft Yahei";
+    font-size: 24px;
+    color: #007fff;
+    border-bottom: 2px solid #007fff;
+    padding-bottom: 10px;
+    width: 300px;
+}
+
+.help-body .content .faq {
+    margin-top: 20px;
+}
+
+.help-body .content .faq .question {
+    font-weight: bold;
+}
+
+.help-body .content .faq .answer {
+    margin-top: 5px;
+}
+
+.help-body .chapter {
+    padding-top: 80px;
+}
+
+.help-body #navbar-help {
+    top: 110px;
+}
+
+.help-body #navbar-help a{
+    padding-left: 18px;
+    font-weight: 700;
+    color: #898989;
+}
+
+.help-body #navbar-help a:hover{
+    padding-left: 16px;
+    color: #007fff;
+    background-color: transparent;
+    border-left: 2px solid #007fff;
+}

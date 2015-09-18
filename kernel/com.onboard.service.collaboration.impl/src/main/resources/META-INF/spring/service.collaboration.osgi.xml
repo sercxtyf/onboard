@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/osgi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                                 http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+  <reference id="uploadMapper" interface="com.onboard.domain.mapper.UploadMapper"/>
+
+  <!-- 事务服务的引用 -->
+  <reference id="transactionManager" interface="org.springframework.transaction.PlatformTransactionManager" />
+
+  <!-- 引入 activityRecorder -->
+  <reference id="activityRecorder" interface="com.onboard.service.activity.ActivityRecorder" />
+
+  <!-- 引入 IdentifiableManager -->
+  <reference id="identifiableManager" interface="com.onboard.service.common.identifiable.IdentifiableManager" />
+  <reference id="activityMapper" interface="com.onboard.domain.mapper.ActivityMapper" />
+  <reference id="projectMapper" interface="com.onboard.domain.mapper.ProjectMapper" />
+  <reference id="todoMapper" interface="com.onboard.domain.mapper.TodoMapper" />
+  <reference id="todolistMapper" interface="com.onboard.domain.mapper.TodolistMapper" />
+  <reference id="discussionMapper" interface="com.onboard.domain.mapper.DiscussionMapper" />
+  <reference id="commentMapper" interface="com.onboard.domain.mapper.CommentMapper" />
+  <reference id="trashMapper" interface="com.onboard.domain.mapper.TrashMapper" />
+  <reference id="topicMapper" interface="com.onboard.domain.mapper.TopicMapper" />
+  <reference id="subsriberMapper" interface="com.onboard.domain.mapper.SubscriberMapper" />
+  <reference id="companyMapper" interface="com.onboard.domain.mapper.CompanyMapper" />
+  <reference id="userMapper" interface="com.onboard.domain.mapper.UserMapper" />
+  <reference id="attachmentMapper" interface="com.onboard.domain.mapper.AttachmentMapper" />
+  <reference id="userCompanyMapper" interface="com.onboard.domain.mapper.UserCompanyMapper" />
+  <reference id="userProjectMapper" interface="com.onboard.domain.mapper.UserProjectMapper" />
+  <reference id="tagMapper" interface="com.onboard.domain.mapper.TagMapper" />
+  <reference id="tagAttachMapper" interface="com.onboard.domain.mapper.TagAttachMapper" />
+  <reference id="IterationMapper" interface="com.onboard.domain.mapper.IterationMapper" />
+  <reference id="projectPrivilegeMapper" interface="com.onboard.domain.mapper.ProjectPrivilegeMapper" />
+  <reference id="projectTodoIdMapper" interface="com.onboard.domain.mapper.ProjectTodoIdMapper" />
+  <reference id="attachTodoMapper" interface="com.onboard.domain.mapper.AttachTodoMapper" />
+  <reference id="projectTodoStatusMapper" interface="com.onboard.domain.mapper.ProjectTodoStatusMapper" />
+  <reference id="companyApplicationMapper" interface="com.onboard.domain.mapper.CompanyApplicationMapper" />
+  <reference id="bugMapper" interface="com.onboard.domain.mapper.BugMapper" />
+  <reference id="storyMapper" interface="com.onboard.domain.mapper.StoryMapper" />
+  <reference id="iterationAttachMapper" interface="com.onboard.domain.mapper.IterationAttachMapper" />
+  <reference id="stepMapper" interface="com.onboard.domain.mapper.StepMapper" />
+  <reference id="keywordMapper" interface="com.onboard.domain.mapper.KeywordMapper" />
+  <reference id="collectionMapper" interface="com.onboard.domain.mapper.CollectionMapper" />
+  
+  <reference id="redisStringTemplate" interface="org.springframework.data.redis.core.StringRedisTemplate" />
+  <reference id="emailTemplateEngine" interface="com.onboard.service.email.TemplateEngineService" />
+
+  <!-- Service层依赖 -->
+  <reference id="sessionService" interface="com.onboard.service.web.SessionService" />
+  <reference id="emailService" interface="com.onboard.service.email.EmailService" />
+  <reference id="subscriberService" interface="com.onboard.service.common.subscrible.SubscriberService" />
+  <reference id="accountService" interface="com.onboard.service.account.AccountService" />
+  <reference id="userService" interface="com.onboard.service.account.UserService" />
+  <reference id="companyService" interface="com.onboard.service.account.CompanyService" />
+  <reference id="fileService" interface="com.onboard.service.file.FileService" />
+  <reference id="imageService" interface="com.onboard.service.file.ImageService" />
+  <reference id="activityService" interface="com.onboard.service.activity.ActivityService" />
+  
+  <!-- cache -->
+  <reference id="redisTemplate" interface="org.springframework.data.redis.core.RedisTemplate" />
+  
+  
+  <!-- com.onboard.service.collaboration.ProjectItemService的监听 -->
+  <!-- <list id="projectItemServices" cardinality="0..N"
+        interface="com.onboard.service.collaboration.ProjectItemService">
+    <listener bind-method="addProjectItemService" unbind-method="removeProjectItemService"
+              ref="idInProjectServiceImplBean"/>
+  </list> -->
+  
+  <!-- Identifiable服务 -->
+  <service id="discussionService" interface="com.onboard.service.collaboration.DiscussionService, com.onboard.service.base.BaseService" ref="discussionServiceBean" />
+  <service id="todoService" interface="com.onboard.service.collaboration.TodoService, com.onboard.service.collaboration.ProjectItemService, com.onboard.service.base.BaseService" ref="todoServiceBean" />
+  <service id="todolistService" interface="com.onboard.service.collaboration.TodolistService, com.onboard.service.base.BaseService" ref="todolistServiceBean" />
+  <service id="commentService" interface="com.onboard.service.collaboration.CommentService, com.onboard.service.base.BaseService" ref="commentServiceBean" />
+  <service id="attachmentService" interface="com.onboard.service.collaboration.AttachmentService, com.onboard.service.base.BaseService" ref="attachmentServiceBean" />
+  <service id="projectService" interface="com.onboard.service.collaboration.ProjectService, com.onboard.service.base.BaseService" ref="projectServiceBean" />
+  <service id="IterationService" interface="com.onboard.service.collaboration.IterationService, com.onboard.service.base.BaseService" ref="iterationServiceBean" />
+  <service id="companyApplicationService" interface="com.onboard.service.collaboration.CompanyApplicationService" ref="companyApplicationServiceBean" />
+  <service id="bugService" interface="com.onboard.service.collaboration.BugService, com.onboard.service.collaboration.ProjectItemService, com.onboard.service.base.BaseService" ref="bugServiceBean" />
+  <service id="storyService" interface="com.onboard.service.collaboration.StoryService, com.onboard.service.base.BaseService" ref="storyServiceBean" />
+  <service id="stepService" interface="com.onboard.service.collaboration.StepService, com.onboard.service.collaboration.ProjectItemService, com.onboard.service.base.BaseService" ref="stepServiceBean" />
+  <service id="keywordService" interface="com.onboard.service.collaboration.KeywordService" ref="keywordServiceBean" />
+  <service id="collectionService" interface="com.onboard.service.collaboration.CollectionService" ref="collectionServiceBean" />
+  
+
+  <!-- TopicWatcher服务 -->
+  <service id="topicWatcher" interface="com.onboard.service.activity.SynchronizedActivityHook" ref="topicWatcherBean" />
+  <service id="trashWatcher" interface="com.onboard.service.activity.ActivityHook" ref="trashWatcherBean" />
+
+  <!-- 开放的服务 -->
+  <service id="topicService" interface="com.onboard.service.collaboration.TopicService" ref="topicServiceBean" />
+  <service id="tagService" interface="com.onboard.service.collaboration.TagService" ref="tagServiceBean" />
+  <service id="trashService" interface="com.onboard.service.collaboration.TrashService" ref="trashServiceBean" />
+  <service id="iterationService" interface="com.onboard.service.collaboration.IterationService" ref="iterationServiceBean" />
+  <service id="idInProjectService" interface="com.onboard.service.collaboration.IdInProjectService" ref="idInProjectServiceImplBean" />
+
+  <!-- ActivityGenerator服务 -->
+  <service id="commentActivityGenerator" interface="com.onboard.service.activity.ActivityGenerator" ref="commentActivityGeneratorBean" />
+  <service id="discussionActivityGenerator" interface="com.onboard.service.activity.ActivityGenerator" ref="discussionActivityGeneratorBean" />
+  <service id="projectActivityGenerator" interface="com.onboard.service.activity.ActivityGenerator" ref="projectActivityGeneratorBean" />
+  <service id="todoActivityGenerator" interface="com.onboard.service.activity.ActivityGenerator" ref="todoActivityGeneratorBean" />
+  <service id="todolistActivityGenerator" interface="com.onboard.service.activity.ActivityGenerator" ref="todolistActivityGeneratorBean" />
+  <service id="iterationActivityGenerator" interface="com.onboard.service.activity.ActivityGenerator" ref="iterationActivityGeneratorBean" />
+  <service id="storyActivityGenerator" interface="com.onboard.service.activity.ActivityGenerator" ref="storyActivityGeneratorBean" />
+  <service id="bugActivityGenerator" interface="com.onboard.service.activity.ActivityGenerator" ref="bugActivityGeneratorBean" />
+  <service id="stepActivityGenerator" interface="com.onboard.service.activity.ActivityGenerator" ref="stepActivityGeneratorBean" />
+
+  <!-- NotificationMethod服务 -->
+  <service id="commentEmailNotification" interface=" com.onboard.service.notification.NotificationMethod" ref="commentEmailNotificationBean" />
+  <service id="discussionEmailNotification" interface=" com.onboard.service.notification.NotificationMethod" ref="discussionEmailNotificationBean" />
+  <service id="todoEmailNotification" interface=" com.onboard.service.notification.NotificationMethod" ref="todoEmailNotificationBean" />
+  <service id="completedTodoEmailNotification" interface=" com.onboard.service.notification.NotificationMethod" ref="completedTodoEmailNotificationBean" />
+
+  <!-- NotificationRule服务 -->
+  <service id="commentNotificationRule" interface=" com.onboard.service.notification.NotificationRule" ref="commentNotificationRuleBean" />
+  <service id="discussionNotificationRule" interface=" com.onboard.service.notification.NotificationRule" ref="discussionNotificationRuleBean" />
+  <service id="todoNotificationRule" interface=" com.onboard.service.notification.NotificationRule" ref="todoNotificationRuleBean" />
+  <service id="completedTodoNotificationRule" interface=" com.onboard.service.notification.NotificationRule" ref="completedTodoNotificationRuleBean" />
+
+  <!-- IndexableService服务 -->
+  <service id="discussionIndexableService" interface="com.onboard.service.index.custom.IndexableService" ref="discussionIndexableServiceBean" />
+  <service id="todoIndexableService" interface="com.onboard.service.index.custom.IndexableService" ref="todoIndexableServiceBean" />
+  <service id="todolistIndexableService" interface="com.onboard.service.index.custom.IndexableService" ref="todolistIndexableServiceBean" />
+  <service id="commentIndexableService" interface="com.onboard.service.index.custom.IndexableService" ref="commentIndexableServiceBean" />
+
+  <!-- IdentifiableAttach服务 -->
+  <service id="activityAttachService" interface="com.onboard.service.common.attach.IdentifiableAttachService" ref="activityAttachServiceBean" />
+  <service id="commentAttachService" interface="com.onboard.service.common.attach.IdentifiableAttachService" ref="commentAttachServiceBean" />
+  <service id="todoActivityAttachService" interface="com.onboard.service.common.attach.IdentifiableAttachService" ref="todoActivityAttachServiceBean" />
+
+</beans:beans>

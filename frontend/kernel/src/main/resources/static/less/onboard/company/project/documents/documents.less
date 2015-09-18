@@ -1,0 +1,145 @@
+// imported by project.less
+// styles for subview #documents
+
+& {
+    background-color: white;
+}
+
+.subnav {
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.new-document-div {
+    width: 120px;
+
+    .dropdown-menu {
+        width: 120px;
+        min-width: 0px;
+    }
+}
+
+div.doc-thumbnail {
+    height: 325px;
+    background-color: #ffc;
+    word-wrap: break-word;
+    word-break: break-all;
+    padding: 10px 10px;
+
+    &:hover {
+        -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    a {
+        text-decoration: none;
+    }
+
+    .doc-info {
+        text-align: right;
+        font-size: 12px;
+        height: 15px;
+        color: #666;
+    }
+    .doc-title {
+        font-size: 16px;
+        line-height: 1.2;
+        font-weight: bold;
+        color: #000;
+    }
+    .doc-content {
+        margin: 12px 0 0 0;
+        font-size: 12px;
+        line-height: 1.4;
+        color: #444;
+        height: 265px;
+        overflow: hidden;
+    }
+
+    .doc-truncated {
+        width: 100%;
+        height: 50px;
+        position: absolute;
+        bottom: 15px;
+        left: 0;
+        background-color: rgba(255, 255, 255, 0);
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fffef4), to(rgba(255, 255, 255, 0)));
+        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), #fffef4);
+        background: -moz-linear-gradient(top, rgba(255, 255, 255, 0), #fffef4);
+        background: -ms-linear-gradient(top, rgba(255, 255, 255, 0), #fffef4);
+        background: -o-linear-gradient(top, rgba(255, 255, 255, 0), #fffef4);
+        background: linear-gradient(top, rgba(255, 255, 255, 0), #fffef4);
+    }
+}
+
+.modal {
+    height: 100%;
+    width: 75%;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+
+    #summernotearea {
+        margin: 0;
+        min-height: 500px;
+    }
+    .modal-dialog {
+        width: 100%;
+        height: 90%;
+    }
+    .modal-content {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+
+    .modal-footer {
+        padding: 15px;
+        text-align: left;
+        border-top: 1px solid #e5e5e5;
+        bottom: 0px;
+        width: 100%;
+    }
+}
+
+.document-list {
+    background: white;
+
+    .document-content-wrapper {
+        padding: 20px;
+    }
+}
+
+#documentDetails {
+    .full-width {
+        width: 100%;
+    }
+    .panel-title {
+        font-size: large;
+        font-weight: bold;
+    }
+    .author-info {
+        font-size: small;
+        color: #555555;
+    }
+    img {
+        max-width: 100%;
+    }
+}
+
+#newMarkdownDocument {
+    .doc-type-button {
+        width: 65px;
+        cursor: default
+    }
+}
+
+#newMarkdownWikiContent, .md-preview, #wikiDetailsContentEdit {
+    padding: 10px;
+}
+
+.markdown-img {
+    height: 25px;
+}
+

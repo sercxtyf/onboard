@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+<div th:fragment="iterations" id="iterations" >
+<div class="center-panel-nav">
+  <h3>
+    <span>迭代</span>
+    <small>
+      <span>——按时间跨度规划任务，定时检查工作进展，确保工作顺利的按时按量完成。</span>
+    </small>
+  </h3>
+  <ul class="second-nav-bar">
+    <li class="second-nav-item" ui-sref-active="active"><a ui-sref="company.project.iteration.activeIteration.todos">当前迭代</a></li>
+    <li class="second-nav-item" ui-sref-active="active"><a ui-sref="company.project.iteration.complecoedIterations">已完成的迭代</a></li>
+  </ul>
+</div>
+
+
+  <div class="gray-bg center-panel-content">
+    <div ui-view="">
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>

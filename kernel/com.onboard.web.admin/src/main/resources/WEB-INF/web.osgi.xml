@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+  <osgi:reference id="sessionService" interface="com.onboard.service.web.SessionService"/>
+  <osgi:reference id="companyApplicationService" interface="com.onboard.service.collaboration.CompanyApplicationService"/>
+  <!--<osgi:reference id="userService" interface="com.onboard.service.account.UserService" />-->
+  <!--<osgi:reference id="accountService" interface="com.onboard.service.account.AccountService" />-->
+  <!--<osgi:reference id="companyService" interface="com.onboard.service.account.CompanyService" />-->
+  <!--<osgi:reference id="projectService" interface="com.onboard.service.collaboration.ProjectService" />-->
+  <!--<osgi:reference id="topicService" interface="com.onboard.service.collaboration.TopicService" />-->
+  <!--<osgi:reference id="todoService" interface="com.onboard.service.collaboration.TodoService" />-->
+  <!--<osgi:reference id="todolistService" interface="com.onboard.service.collaboration.TodolistService" />-->
+  <!--<osgi:reference id="discussionService" interface="com.onboard.service.collaboration.DiscussionService" />-->
+  <!--<osgi:reference id="commentService" interface="com.onboard.service.collaboration.CommentService" />-->
+  <!--<osgi:reference id="attachmentService" interface="com.onboard.service.collaboration.AttachmentService" />-->
+  <!--<osgi:reference id="subscriberService" interface="com.onboard.service.common.subscrible.SubscriberService" />-->
+  <!--<osgi:reference id="tagService" interface="com.onboard.service.collaboration.TagService" />-->
+  <!--<osgi:reference id="departmentService" interface="com.onboard.service.account.DepartmentService" />-->
+  <!--<osgi:reference id="projectPrivilegeService" interface="com.onboard.service.security.ProjectPrivilegeService" />-->
+  <!--<osgi:reference id="companyPrivilegeService" interface="com.onboard.service.security.CompanyPrivilegeService" />-->
+  <!--<osgi:reference id="roleService" interface="com.onboard.service.security.RoleService" />-->
+  <!--<osgi:reference id="identifiableManager" interface="com.onboard.service.common.identifiable.IdentifiableManager" />-->
+  <!--<osgi:reference id="identifiableAttachManager" interface="com.onboard.service.common.attach.IdentifiableAttachManager" />-->
+  <!--<osgi:reference id="suggestionService" interface="com.onboard.plugin.suggestion.SuggestionService" />-->
+  <!--<osgi:reference id="trashService" interface="com.onboard.service.collaboration.TrashService" />-->
+  <!--<osgi:reference id="iterationService" interface="com.onboard.service.collaboration.IterationService" />-->
+
+</beans>

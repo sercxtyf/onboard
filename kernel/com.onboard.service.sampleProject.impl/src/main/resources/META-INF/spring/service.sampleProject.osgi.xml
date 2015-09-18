@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:osgi="http://www.springframework.org/schema/osgi" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+  <!-- 事务服务的引用 -->
+  <osgi:reference id="transactionManager" interface="org.springframework.transaction.PlatformTransactionManager" />
+
+  <!-- Service层依赖 -->
+  <osgi:reference id="attachmentService" interface="com.onboard.service.collaboration.AttachmentService"/>
+  <osgi:reference id="todolistService" interface="com.onboard.service.collaboration.TodolistService"/>
+  <osgi:reference id="projectService" interface="com.onboard.service.collaboration.ProjectService"/>
+  <osgi:reference id="todoService" interface="com.onboard.service.collaboration.TodoService"/>
+  <osgi:reference id="discussionService" interface="com.onboard.service.collaboration.DiscussionService"/>
+  <osgi:reference id="uploadService" interface="com.onboard.service.upload.UploadService"/>
+
+  <!-- 开放的服务 -->
+  <osgi:service id="sampleProjectService" interface="com.onboard.service.sampleProject.SampleProjectService"
+           ref="sampleProjectServiceBean"/>
+
+</beans>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+  <div th:fragment="activeIteration" id="activeIteration"
+    ng-controller="activeIterationCtrl" ng-init="initActiveIteration()">
+    <div ng-show="activeIteration.id">
+      <div class="iteration-panel">
+        <div class="iteration-operation pull-right">
+            <!-- choose users menu btn -->
+            <div class="dropdown userMenu pull-right" ng-include="'user-menu-with-all-users.html'"></div>
+            <a class="btn btn-default newIteration click-link active-iteration-operation"
+              ng-click="setStatusForm.open = !setStatusForm.open" dropdown-form-toggle=""><i class="fa fa-gear"></i>看板设置</a>
+              <form class="ballon setStatusForm" name="setStatusForm" dropdown-form="" is-open="setStatusForm.open">
+                <p class="input-group click-link" ng-repeat="status in allTodoStatus" ng-show="canDelete(status)"
+                   ng-click="updateStatusSettings(status)">
+                  <i ng-class="{'fa-check-square' : status.active, 'fa-square-o' : !status.active}" class="fa"></i>{{status.name}}
+                </p>
+              </form>
+            <a class="btn btn-default newIteration click-link active-iteration-operation"
+               ui-sref="company.project.iteration.editIterations({iterationId: activeIteration.id })">
+                <i class="fa fa-check"></i>编辑迭代</a>
+            <a class="btn btn-default newIteration click-link active-iteration-operation"
+               ui-sref="company.project.iteration.completingIteration({iterationId: activeIteration.id })">
+                <i class="fa fa-check"></i>完成迭代</a>
+            
+        </div>
+
+        <div class="iteration-header">
+
+          <input type="text" name="name"
+            class="iteration-title input-invisible form-control edit-name"
+            ng-model="activeIteration.name" ng-show="edit_name"
+            required="" ng-maxlength="50"
+            ng-blur="updateIterationName(activeIteration);edit_name = false" />
+
+          <div class="iteration-date">
+            <a class="click-link active-iteration-operation"
+              ng-click="updateIterationForm.open = !updateIterationForm.open"
+              dropdown-form-toggle=""> {{activeIteration.startTime |
+              date:'yyyy-MM-dd'}} - {{activeIteration.endTime |
+              date:'yyyy-MM-dd'}} <span class="fa fa-pencil"> </span>
+            </a>
+
+            <form class="ballon updateIterationForm dropdown-form"
+              name="updateIterationForm" id="updateIterationForm"
+              dropdown-form="" is-open="updateIterationForm.open">
+              <p class="input-group ob-date">
+                <input type="text" class="form-control click-link"
+                  datepicker-popup="yyyy-MM-dd" readonly=""
+                  ng-click="activeIteration.startTimeCanlendar = !activeIteration.startTimeCanlendar"
+                  ng-model="activeIteration.startTime"
+                  is-open="activeIteration.startTimeCanlendar"
+                  show-button-bar="false" />
+              </p>
+
+              <p class="input-group ob-date">
+                <input type="text" class="form-control click-link"
+                  datepicker-popup="yyyy-MM-dd"
+                  ng-click="activeIteration.endTimeCanlendar = !activeIteration.endTimeCanlendar"
+                  ng-model="activeIteration.endTime"
+                  is-open="activeIteration.endTimeCanlendar"
+                  show-button-bar="false" readonly=""/>
+              </p>
+
+              <div class="submit">
+                <input type="submit" value="确定" class="btn btn-primary"
+                  ng-click="updateActiveIterationTime();hideTimeForm();" />
+                <a class="btn btn-default btn-cancel click-link"
+                  ng-click="hideTimeForm()">取消</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="active-iteration-info">
+        <div class="stories" ng-switch="" on="isStoryEmpty()">
+          <h5 class="head-info" ng-switch-default="">点击中间的箭头，或按<i class="fa fa-arrow-down"></i>键展开迭代中包含的需求列表</h5>
+          <h5 class="head-info" ng-switch-when="false">当前迭代中需求为空，请点击右侧编辑迭代按钮添加需求</h5>
+        </div>
+      </div>
+      <div class="active-iteration-info hiding">
+        <div class="stories">
+          <h5 class="head-info">本次迭代需要完成的需求有：</h5>
+          <ul class="story-list">
+            <li class="story-item " ng-repeat="story in activeIteration.iterables  | filter: {type : 'story'}"
+              ng-class="{'todo-completed' : story.completed}">
+              <span class="badge badge-danger" ng-show="story.uncompletedChildStoryCount > 0" title="还有{{story.uncompletedChildStoryCount}}个子需求未完成">
+                  <span>{{story.uncompletedChildStoryCount}}</span>
+              </span>
+              <div ng-hide="story.uncompletedChildStoryCount > 0" style="display:inline-block;">
+                  <span class="badge badge-warning" ng-show="getSteps(story).length > getCompletedSteps(story).length" title="还有{{getSteps(story).length - getCompletedSteps(story).length}}个任务未完成">
+                      <span>{{getSteps(story).length - getCompletedSteps(story).length}}</span>
+                  </span>
+                  <div ng-show="getSteps(story).length == getCompletedSteps(story).length" style="display:inline-block;margin-right:0px;">
+                      <span class="badge badge-default" ng-show="story.completed" title="该需求已完成">
+                          <span><i class="fa fa-check"></i></span>
+                      </span>
+                      <span class="badge badge-success" ng-hide="story.completed" title="完成该需求" ng-click="completeStory(story)">
+                          <span><i class="fa fa-check"></i></span>
+                      </span>
+                  </div>
+              </div>
+              <!--</span>-->
+              <span class="text-muted"  ng-class="{
+                                            'text-danger'   : story.priority ==1,
+                                            'text-warning'  : story.priority ==2,
+                                            'text-primary'  : story.priority ==3,
+                                            'text-info'     : story.priority ==4,
+                                            'text-muted'    : story.priority ==5}"></span>
+              <span class="story-content click-link" ng-bind="story.description"
+                open-drawer="story" open-drawer-type="'story'"
+                open-drawer-params="{id:story.id}"
+                open-drawer-data="{projectId:story.projectId,companyId:story.companyId}">
+              </span>
+              <span class="badge"><span ng-bind="getCompletedSteps(story).length"></span>/<span ng-bind="getSteps(story).length"></span></span>
+              <span ng-repeat="assignee in getAssigneeSet(story)" class="label label-primary" 
+                style="margin-left:5px" >{{assignee.name}}</span>
+              <i class="fa fa-plus pointer" ng-if="!story.completed" ng-click="addStepPre(story)"></i>
+            </li>
+          </ul>
+        </div>
+        <!--<div id="burnDownChart" class="d3-chart"></div>-->
+      </div>
+
+      <div class="expand" ng-click="infoToggle()">
+        <i class="fa" ng-class="{'fa-chevron-up': !isInfoExpand, 'fa-chevron-down': isInfoExpand === true}"></i>
+      </div>
+
+        <div class="modal fade" id="add-step-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                        <h4 class="modal-title">添加任务</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" ng-model="newStep.content" placeholder="任务描述"
+                                  style="width: 50%"></input>
+                            </div>
+                              <!-- 截止日期 -->
+                              <div class="form-group">
+                                <span class="text-muted">截止日期：</span>
+                        
+                                <div class="btn-group">
+                                  <input type="text" class="form-control date" datepicker-popup="yyyy-MM-dd"
+                                    ng-model="newStep.dueDate" is-open="newStep.timeSelect" readonly=""
+                                    min-date="newStepDueDateMin" show-button-bar="false"
+                                    ng-click="newStep.timeSelect=!newStep.timeSelect"/> 
+                                </div>
+                              </div>
+                          
+                              <!-- 执行人 -->
+                              <div class="form-group">
+                                <span class="text-muted">执行人：</span>
+                        
+                                <div class="btn-group">
+                                  <span class="pointer todo-user" data-toggle="dropdown" ng-click="getProjectUsers(false, newStep.projectId, newStep.companyId)">
+                                    <img ng-src="{{newStep.assignee.avatarUrl}}"/>
+                                    <span class="username">{{newStep.assignee.name}}</span>
+                                  </span>
+                        
+                                  <ul class="dropdown-menu users" role="menu">
+                                    <li ng-repeat="user in projectUsers">
+                                      <a class="pointer" ng-click="newStep.assignee=user;newStep.assigneeId=user.id">
+                                        <img ng-src="{{user.avatarUrl}}"/> {{user.name}}
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" id="save-last-lesson" ng-click="addStep()">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+      <div class="iteration-content">
+        <div class="tab-content">
+        <!-- Tab panes -->
+        <div id="activeIterationTodos">
+
+          <div class="todo-panel panel-s panel-fluid-height"
+            ng-repeat="todoStatus in allTodoStatus"
+            ng-show="todoStatus.active">
+            <div class="todo-panel-heading">
+              <h5 class="heading-inline" ng-bind="todoStatus.name"></h5>
+              <strong class="text-muted pull-right"><span ng-bind="statusTodos[todoStatus.value].length"></span>
+                个任务</strong>
+            </div>
+
+            <div class="todo-panel-body">
+              <ul class="todo-list todo-drag-body"
+                ui-sortable="sortableOptions"
+                ng-controller="todoItemCtrl"
+                ng-model="statusTodos[todoStatus.value]"
+                data-status="{{todoStatus.value}}">
+                <!-- insert todo item here -->
+                  <li ng-repeat="boardable in statusTodos[todoStatus.value]" class="todo-item mini-todo todo-active"
+                      ng-class="{'todo-completed todo-disabled' : boardable.iterationStatus == 'closed', 'todo-active' : boardable.iterationStatus != 'closed'}" >
+<!--                       <ul>
+                        <li ng-repeat="(key, value) in boardable">
+                          {{key}} has value {{value}}
+                        </li>
+                      </ul> -->
+                      <div class="todo-description" >
+                          <span class="project-todo-id text-muted">#{{boardable.idInProject}}</span>
+                          <div class="todo-type-icons">
+                            <i class="fa" ng-class="{'fa-bars':     boardable.type == 'step',
+                                                     'fa-bookmark': boardable.type == 'story',
+                                                     'fa-bug':      boardable.type == 'bug' }"></i>
+                          </div>
+
+                          <span class="label label-primary" ng-show="boardable.assignee">{{boardable.assignee.name}}</span>
+                          <span class="label label-warning" ng-show="boardable.dueDate">{{ boardable.dueDate | date: 'yyyy-MM-dd'}}</span>
+                          
+                          <!-- assignee and duedate -->
+                          <div ng-if="boardable.type == 'bug'" class="todo-title pointer" title="{{boardable.content}}" ng-bind-html="boardable.content"
+                           open-drawer="bug" open-drawer-type="'bug'" open-drawer-params="{id: boardable.id}"></div>
+                          <div ng-if="boardable.type == 'step'" class="todo-title pointer" title="{{boardable.content}}" ng-bind-html="boardable.content"
+                           open-drawer="step" open-drawer-type="'step'" open-drawer-params="{id: boardable.id}">
+                          </div>
+                      </div>
+
+                    <span class="toNext" ng-click="toNextStatus(boardable)"
+                          ng-class="{'toNext': boardable.iterationStatus != 'closed', 'hidden': boardable.iterationStatus == 'closed'}">
+                        <i class="fa fa-chevron-right pointer"></i>
+                    </span>
+                  </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</body>
+
+</html>

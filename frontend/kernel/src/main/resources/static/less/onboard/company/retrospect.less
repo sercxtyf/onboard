@@ -1,0 +1,148 @@
+// 团队回顾
+// imported by ./company
+@import "../common/variables";
+.content {
+    .page-header {
+        select {
+            width: 200px;
+            cursor: pointer;
+            display: inline-block;
+        }
+    }
+    .user-filter-wrapper {
+        padding-right: 15px;
+        //border-right: 2px solid black;
+        margin-left: -15px;
+    }
+    ul#user-filter {
+        list-style: none;
+        background-color: white;
+        padding: 0;
+        li {
+            font-size: 14px;
+            padding: 5px 10px 5px 15px;
+            display: block;
+            &:hover {
+                cursor: pointer;
+            }
+            &.disabled:hover {
+                cursor: not-allowed;
+            }
+            &.selected {
+                font-size: 16px;
+                font-weight: bold;
+                background-color: lightblue;
+            }
+            &:not(:first-child) {
+                // border-top: 3px solid darken(@gray-bg, 10%);
+            }
+            &:not(.disabled):hover {
+                font-size: 16px;
+                font-weight: bold;
+            }
+            .avatar {
+                height: 24px;
+                width: 24px;
+                border-radius: 50%;
+            }
+            .media-body {
+                vertical-align: middle;
+                padding-left: 5px;
+            }
+        }
+    }
+    .timeline {
+        font-size: 14px;
+        &:hover {
+            cursor: default;
+        }
+        .activity {
+            margin-bottom: 10px;
+            .time {
+                padding: 5px;
+                border-bottom: 1px solid black;
+                margin-bottom: 5px;
+                color: #777;
+            }
+            .users-image {
+                text-align: center;
+                .avatar {
+                    height: 32px;
+                    width: 32px;
+                    border-radius: 50%;
+                }
+                &>span {
+                    display: inline-block;
+                    margin: 5px;
+                }
+            }
+            p {
+                margin: 0;
+            }
+            .users-name, .project {
+                a {
+                    font-weight: bold;
+                    color: #777;
+                }
+                a:visited {
+                    //color: @bright-blue;
+                }
+                a:hover, a:active {
+                    color: @bright-blue;
+                }
+            }
+            .users-name {
+                a {
+                    margin-right: 5px;
+                    color: black;
+                }
+                a:not(:last-child):after {
+                    content: ',';
+                }
+            }
+            .project {
+                a {
+                    font-weight: normal;
+                }
+            }
+            .content {
+                font-size: 13px;
+                min-height: 48px;
+                background-color: white;
+                border: 1px solid #d4d4d4;
+                border-radius: 2px;
+                padding: 15px 20px 10px 20px;
+                position: relative;
+                -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+                box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+                &:before, &:after {
+                    content: "";
+                    position: absolute;
+                    top: 7px;
+                    left: -15px;
+                    display: inline-block;
+                    border-top: 15px solid transparent;
+                    border-left: 0 solid #ccc;
+                    border-right: 15px solid #ccc;
+                    border-bottom: 15px solid transparent;
+                }
+                &:after {
+                    top: 8px;
+                    left: -14px;
+                    border-top: 14px solid transparent;
+                    border-left: 0 solid #fff;
+                    border-right: 14px solid #fff;
+                    border-bottom: 14px solid transparent;
+                }
+            }
+            .record {
+                .record-title {
+                    text-indent: 2em;
+                }
+                .record-content {
+                    text-indent: 2em;
+                }
+            }
+        }
+    }
+}

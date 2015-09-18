@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headTag(title)">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta name="description" content="项目管理和团队协作工具"/>
+  <meta name="keywords" content="项目管理,团队协作"/>
+  <base href="/"/>
+
+  <title th:text="${title}+' | Onboard'">OSGi China Header</title>
+
+  <link rel="icon" type="image/x-icon" href="/static/img/favicon.png"/>
+
+  <!-- build:css(.) /static/css/application.css -->
+  <link href="/static/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/lib/fontawesome/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="/static/lib/glyphicons-pro/glyphicons/css/glyphicons.css"/>
+  <link rel="stylesheet" href="/static/lib/glyphicons-pro/glyphicons_halflings/css/halflings.css"/>
+  <link rel="stylesheet" href="/static/lib/glyphicons-pro/glyphicons_social/css/social.css"/>
+  <link rel="stylesheet" href="/static/lib/glyphicons-pro/glyphicons_filetypes/css/filetypes.css"/>
+
+  <link rel="stylesheet" href="/static/lib/bootstrap/bootstrap-colorselector/css/bootstrap-colorselector.css"/>
+  <link rel="stylesheet" href="/static/lib/bootstrap/bootstrap-popover-x/css/bootstrap-popover-x.min.css"/>
+  <link rel="stylesheet" href="/static/lib/bootstrap/bootstrap-drawer/css/bootstrap-drawer.css"/>
+  <link rel="stylesheet" href="/static/lib/bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
+  <link rel="stylesheet" href="/static/lib/jquery-ui/jquery-ui.min.css"/>
+  <link rel="stylesheet" href="/static/lib/fullcalendar/fullcalendar.min.css"/>
+  <link rel="stylesheet" href="/static/lib/highlight/default.min.css"/>
+  <link rel="stylesheet" href="/static/lib/bootstrap/bootstrap-imgSelector/css/bootstrap-imgSelector.css"/>
+  <link rel="stylesheet" href="/static/lib/bootstrap/bootstrap-memberselector/css/bootstrap-memberselector.css"/>
+  <link rel="stylesheet" href="/static/lib/bootstrap/bootstrap-switch/css/bootstrap-switch.min.css"/>
+  <link rel="stylesheet" href="/static/lib/angular/angular-treeview.css"/>
+  <link rel="stylesheet" href="/static/lib/angular/angular-memberselector.css"/>
+  <link rel="stylesheet" href="/static/lib/xcharts/xcharts.css" />
+  <link rel="stylesheet" href="/static/lib/summernote/summernote.css"/>
+  <link rel="stylesheet" href="/static/lib/icheck/skins/all.css"/>
+  <!-- endbuild -->
+
+  <!-- build:js(.) /static/js/application.js -->
+  <script src="/static/lib/jquery/jquery.min.js"></script>
+  <script src="/static/lib/jquery-ui/jquery-ui.min.js"></script>
+  <script src="/static/lib/bootstrap/js/bootstrap.js"></script>
+  <script src="/static/lib/bootstrap/bootstrap-colorselector/js/bootstrap-colorselector.js"></script>
+  <script src="/static/lib/bootstrap/bootstrap-filestyle.min.js"></script>
+  <script src="/static/lib/bootstrap/bootstrap3-typeahead.min.js"></script>
+  <script src="/static/lib/bootstrap/bootstrap-popover-x/js/bootstrap-popover-x.js"></script>
+  <script src="/static/lib/bootstrap/bootstrap-drawer/js/bootstrap-drawer.js"></script>
+  <script src="/static/lib/bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+  <script src="/static/lib/bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+  <script src="/static/lib/bootstrap/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+  <script src="/static/lib/jquery/jquery-ias.min.js"></script>
+  <script src="/static/lib/moment/moment.min.js"></script>
+  <script src="/static/lib/moment/locale/zh-cn.js"></script>
+  <script src="/static/lib/angular/angular-file-upload-shim.min.js"></script>
+  <script src="/static/lib/angular/angular.min.js"></script>
+  <script src="/static/lib/angular/ui-bootstrap-tpls-0.12.0.min.js"></script>
+  <script src="/static/lib/angular/angular-resource.min.js"></script>
+  <script src="/static/lib/angular/angular-route.min.js"></script>
+  <script src="/static/lib/angular/angular-confirm-field.min.js"></script>
+  <script src="/static/lib/angular/angular-file-upload.min.js"></script>
+  <script src="/static/lib/angular/angular-ui-calendar.js"></script>
+  <script src="/static/lib/angular/angular-ui-router.min.js"></script>
+  <script src="/static/lib/angular/checklist-model.js"></script>
+  <script src="/static/lib/angular/angular-highlightjs.min.js"></script>
+  <script src="/static/lib/angular/angular-sanitize.min.js"></script>
+  <script src="/static/lib/fullcalendar/fullcalendar.min.js"></script>
+  <script src="/static/lib/fullcalendar/lang/zh-cn.js"></script>
+  <script src="/static/lib/fullcalendar/gcal.js"></script>
+  <script src="/static/lib/angular/angular-ui-sortable.js"></script>
+  <script src="/static/lib/bootstrap/ui-bootstrap-tpls-0.11.2.js"></script>
+  <script src="/static/lib/angular/angular-moment.min.js"></script>
+  <script src="/static/lib/angular/angular-bootstrap-switch.min.js"></script>
+  <script src="/static/lib/angular/angular-treeview.js"></script>
+  <script src="/static/lib/angular/angular-memberselector.js"></script>
+  <script src="/static/lib/bootstrap/bootstrap-imgSelector/js/bootstrap-imgSelector.js"></script>
+  <script src="/static/lib/angular/angular-infinite-scroll.js"></script>
+  <script src="/static/lib/bootstrap/bootstrap-memberselector/js/bootstrap-memberselector.js"></script>
+  <script src="/static/lib/highlight/highlight.min.js"></script>
+  <script src="/static/lib/underscore/underscore-min.js"></script>
+  <script src="/static/lib/d3/d3.min.js"></script>
+  <script src="/static/lib/xcharts/xcharts.js"></script>
+  <script src="/static/lib/pdfobj/pdfobject.js"></script>
+  <script src="/static/lib/angular/angular-animate.min.js"></script>
+  <script src="/static/lib/summernote/summernote.min.js"></script>
+  <script src="/static/lib/summernote/summernote-zh-CN.js"></script>
+  <script src="/static/lib/highcharts/highcharts.js"></script>
+  <script src="/static/lib/highcharts/highcharts-more.js"></script>
+  <script src="/static/lib/highcharts/modules/no-data-to-display.js"></script>   
+  <script src="/static/lib/icheck/icheck.min.js"></script>
+
+  <!-- Js Modules -->
+  <script src="/static/js/common-init.js"></script>
+  <script src="/static/js/modules/common.js"></script>
+  <script src="/static/js/modules/feedback.js"></script>
+  <script src="/static/js/modules/onboard.js"></script>
+
+  <!-- onboard ng module -->
+  <script src="/static/js/ng-modules/onboard/index.js"></script>
+  <script src="/static/js/ng-modules/onboard/onboard-ctrl.js"></script>
+  <script src="/static/js/ng-modules/onboard/companies-ctrl.js"></script>
+  <script src="/static/js/ng-modules/onboard/account-ctrl.js"></script>
+
+  <!-- util ng module-->
+  <script src="/static/js/ng-modules/util/index.js"></script>
+  <script src="/static/js/ng-modules/util/resize-directive.js"></script>
+  <script src="/static/js/ng-modules/util/drawer-service.js"></script>
+  <script src="/static/js/ng-modules/util/richtexteditor-service.js"></script>
+  <script src="/static/js/ng-modules/util/ias-pager-factory.js"></script>
+  <script src="/static/js/ng-modules/util/drawer-directive.js"></script>
+  <script src="/static/js/ng-modules/util/file-size-filter.js"></script>
+  <script src="/static/js/ng-modules/util/theme-service.js"></script>
+  <script src="/static/js/ng-modules/util/activity-list-directive.js"></script>
+  <script src="/static/js/ng-modules/util/dropdown-form-directive.js"></script>
+  <script src="/static/js/ng-modules/util/burndown-chart-service.js"></script>
+  <script src="/static/js/ng-modules/util/redirect-directive.js"></script>
+  <script src="/static/js/ng-modules/util/open-drawer-directive.js"></script>
+  <script src="/static/js/ng-modules/util/new-comment-directive.js"></script>
+  <script src="/static/js/ng-modules/util/preview-directive.js"></script>
+  <script src="/static/js/ng-modules/util/comment-directive.js"></script>
+
+  <!-- data ng module -->
+  <script src="/static/js/ng-modules/data/index.js"></script>
+  <script src="/static/js/ng-modules/data/company-service.js"></script>
+  <script src="/static/js/ng-modules/data/user-service.js"></script>
+  <script src="/static/js/ng-modules/data/url-service.js"></script>
+  <script src="/static/js/ng-modules/data/project-service.js"></script>
+  <script src="/static/js/ng-modules/data/todo-data-service.js"></script>
+  <script src="/static/js/ng-modules/data/todo-service.js"></script>
+  <script src="/static/js/ng-modules/data/todo-util-service.js"></script>
+  <script src="/static/js/ng-modules/data/todolist-data-service.js"></script>
+  <script src="/static/js/ng-modules/data/todolist-service.js"></script>
+  <script src="/static/js/ng-modules/data/iteration-data-service.js"></script>
+  <script src="/static/js/ng-modules/data/iteration-service.js"></script>
+  <script src="/static/js/ng-modules/data/iteration-websocket-service.js"></script>
+  <script src="/static/js/ng-modules/data/commit-stats-service.js"></script>
+  <script src="/static/js/ng-modules/data/todo-stats-service.js"></script>
+  <script src="/static/js/ng-modules/data/activity-stats-service.js"></script>
+  <script src="/static/js/ng-modules/data/discussion-service.js"></script>
+  <script src="/static/js/ng-modules/data/discussion-websocket-service.js"></script>
+  <script src="/static/js/ng-modules/data/todo-websocket-service.js"></script>
+  <script src="/static/js/ng-modules/data/todolist-websocket-service.js"></script>
+  <script src="/static/js/ng-modules/data/web-socket-service.js"></script>
+  <script src="/static/js/ng-modules/data/comment-service.js"></script>
+  <script src="/static/js/ng-modules/data/comment-websocket-service.js"></script>
+  <script src="/static/js/ng-modules/data/document-service.js"></script>
+  <script src="/static/js/ng-modules/data/document-websocket-service.js"></script>
+  <script src="/static/js/ng-modules/data/data-proxy-factory.js"></script>
+
+  <!-- company ng module -->
+  <script src="/static/js/ng-modules/company/index.js"></script>
+  <script src="/static/js/ng-modules/company/company-ctrl.js"></script>
+  <script src="/static/js/ng-modules/company/calendar-ctrl.js"></script>
+  <script src="/static/js/ng-modules/company/users-ctrl.js"></script>
+  <script src="/static/js/ng-modules/company/activities-ctrl.js"></script>
+  <script src="/static/js/ng-modules/company/me-ctrl.js"></script>
+  <script src="/static/js/ng-modules/company/project-edit-ctrl.js"></script>
+  <script src="/static/js/ng-modules/company/search-ctrl.js"></script>
+  <script src="/static/js/ng-modules/company/projects-ctrl.js"></script>
+
+  <!-- project ng module -->
+  <script src="/static/js/ng-modules/project/index.js"></script>
+  <script src="/static/js/ng-modules/project/project-ctrl.js"></script>
+
+  <!-- todo ng module -->
+  <script src="/static/js/ng-modules/todo/index.js"></script>
+  <script src="/static/js/ng-modules/todo/todo-ctrl.js"></script>
+  <script src="/static/js/ng-modules/todo/todo-item-ctrl.js"></script>
+  <script src="/static/js/ng-modules/todo/todolist-ctrl.js"></script>
+  <script src="/static/js/ng-modules/todo/todolists-ctrl.js"></script>
+  <script src="/static/js/ng-modules/todo/acrive-todolists-ctrl.js"></script>
+  <script src="/static/js/ng-modules/todo/open-todolists-ctrl.js"></script>
+  <script src="/static/js/ng-modules/todo/link-todo-ctrl.js"></script>
+  <script src="/static/js/ng-modules/todo/new-todo-ctrl.js"></script>
+
+  <!-- iteration ng module -->
+  <script src="/static/js/ng-modules/iteration/index.js"></script>
+  <script src="/static/js/ng-modules/iteration/active-iteration-ctrl.js"></script>
+  <script src="/static/js/ng-modules/iteration/active-iteration-statistics-ctrl.js"></script>
+  <script src="/static/js/ng-modules/iteration/active-iteration-todos-ctrl.js"></script>
+  <script src="/static/js/ng-modules/iteration/completed-iteration-ctrl.js"></script>
+  <script src="/static/js/ng-modules/iteration/completed-iterations-ctrl.js"></script>
+  <script src="/static/js/ng-modules/iteration/created-ierations-ctrl.js"></script>
+  <script src="/static/js/ng-modules/iteration/iterations-ctrl.js"></script>
+  <script src="/static/js/ng-modules/iteration/link-iteration-ctrl.js"></script>
+  <script src="/static/js/ng-modules/iteration/iteration-codeStats-ctrl.js"></script>
+  <script src="/static/js/ng-modules/iteration/iteration-todoStats-ctrl.js"></script>
+  <script src="/static/js/ng-modules/iteration/iteration-overallStats-ctrl.js"></script>
+
+  <!-- repository ng module -->
+  <script src="/static/js/ng-modules/repository/index.js"></script>
+  <script src="/static/js/ng-modules/repository/repository-ctrl.js"></script>
+  <script src="/static/js/ng-modules/repository/repository-create-ctrl.js"></script>
+  <script src="/static/js/ng-modules/repository/repository-migrate-ctrl.js"></script>
+  <script src="/static/js/ng-modules/repository/repository-init-ctrl.js"></script>
+  <script src="/static/js/ng-modules/repository/repository-files-ctrl.js"></script>
+  <script src="/static/js/ng-modules/repository/repository-branches-ctrl.js"></script>
+  <script src="/static/js/ng-modules/repository/repository-commits-ctrl.js"></script>
+  <script src="/static/js/ng-modules/repository/repository-pullrequests-ctrl.js"></script>
+  <script src="/static/js/ng-modules/repository/pullrequest-ctrl.js"></script>
+  <script src="/static/js/ng-modules/repository/branch-acl-drawer-ctrl.js"></script>
+  <script src="/static/js/ng-modules/repository/commit-drawer-ctrl.js"></script>
+  <script src="/static/js/ng-modules/repository/create-pullrequest-drawer-ctrl.js"></script>
+  <script src="/static/js/ng-modules/data/repository-service.js"></script>
+  <script src="/static/js/ng-modules/repository/diff-directive.js"></script>
+  <script src="/static/js/ng-modules/repository/commit-list-directive.js"></script>
+
+  <!-- statistic ng module -->
+  <script src="/static/js/ng-modules/statistics/index.js"></script>
+  <script src="/static/js/ng-modules/statistics/settings-factory.js"></script>
+  <script src="/static/js/ng-modules/statistics/trend-factory.js"></script>
+  <script src="/static/js/ng-modules/statistics/punch-card-factory.js"></script>
+  <script src="/static/js/ng-modules/statistics/commits-trend-factory.js"></script>
+  <script src="/static/js/ng-modules/statistics/commits-punch-card-factory.js"></script>
+  <script src="/static/js/ng-modules/statistics/activity-punch-card-factory.js"></script>
+  <script src="/static/js/ng-modules/statistics/commits-chart-ctrl.js"></script>
+  <script src="/static/js/ng-modules/statistics/chart-loc-ctrl.js"></script>
+  <script src="/static/js/ng-modules/statistics/commits-punch-card-ctrl.js"></script>
+  <script src="/static/js/ng-modules/statistics/statistics-ctrl.js"></script>
+  <script src="/static/js/ng-modules/statistics/statistics-group-ctrl.js"></script>
+  <script src="/static/js/ng-modules/statistics/statistics-code-ctrl.js"></script>
+  <script src="/static/js/ng-modules/statistics/statistics-todo-ctrl.js"></script>
+  <script src="/static/js/ng-modules/statistics/statistics-overall-ctrl.js"></script>
+  <script src="/static/js/ng-modules/statistics/pie-chart-factory.js"></script>
+  <script src="/static/js/ng-modules/statistics/column-range-factory.js"></script>
+  <script src="/static/js/ng-modules/statistics/stacked-bar-factory.js"></script>
+  <script src="/static/js/ng-modules/statistics/user-menu-ctrl.js"></script>
+
+  <!-- discussions ng module-->
+  <script src="/static/js/ng-modules/discussions/index.js"></script>
+  <script src="/static/js/ng-modules/discussions/discussions-ctrl.js"></script>
+  <script src="/static/js/ng-modules/discussions/discussion-edit-ctrl.js"></script>
+  <script src="/static/js/ng-modules/discussions/discussion-show-ctrl.js"></script>
+
+  <!-- upload ng module -->
+  <script src="/static/js/ng-modules/upload/index.js"></script>
+  <script src="/static/js/ng-modules/upload/upload-detail.js"></script>
+  <script src="/static/js/ng-modules/upload/uploads-ctrl.js"></script>
+  <script src="/static/js/ng-modules/upload/fileDropZone-ctrl.js"></script>
+  <script src="/static/js/ng-modules/upload/attachment-ctrl.js"></script>
+  <script src="/static/js/ng-modules/data/uploads-service.js"></script>
+
+  <!-- tab ng module -->
+  <script src="/static/js/ng-modules/tab/index.js"></script>
+  <script src="/static/js/ng-modules/tab/tab-service.js"></script>
+  <script src="/static/js/ng-modules/tab/tab-set-ctrl.js"></script>
+  <script src="/static/js/ng-modules/tab/activity-tab-ctrl.js"></script>
+  <script src="/static/js/ng-modules/tab/todo-tab-ctrl.js"></script>
+  <script src="/static/js/ng-modules/tab/comment-tab-ctrl.js"></script>
+  <script src="/static/js/ng-modules/tab/comment-image-modal-ctrl.js"></script>
+
+  <!-- document ng module -->
+  <script src="/static/js/ng-modules/document/index.js"></script>
+  <script src="/static/js/ng-modules/document/documents-ctrl.js"></script>
+
+  <!-- websocket ng module -->
+  <script src="/static/js/ng-modules/websocket/index.js"></script>
+  <script src="/static/js/ng-modules/websocket/websocket-service.js"></script>
+  <!-- endbuild -->
+</head>
+<body>
+</body>
+</html>

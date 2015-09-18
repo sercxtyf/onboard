@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head><title>编辑项目</title></head>
+
+<body>
+
+<div id="project-edit" th:fragment="projectEdit">
+  <div class="container" >
+  <div class="well">
+    <form name="mainForm">
+
+      <div class="form-group" ng-show="!isNew">
+        <a ng-click="delete()" class="pull-right click-link">删除项目</a>
+      </div>
+
+      <div class="form-group">
+        <label for="name">项目名称</label>
+        <input type="text" id="name" name="name" class="form-control" autofocus="autofocus" placeholder="请输入项目名称" ng-model="project.name" required="required" ng-maxlength="50" />
+        <div ng-show="mainForm.name.$error.required"
+                    class="alert alert-danger" role="alert">名称不能为空</div>
+        <div ng-show="mainForm.name.$error.maxlength"
+                    class="alert alert-danger" role="alert">最大长度不能超过50</div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">项目描述</label>
+        <textarea class="form-control" rows="3" id="description" name="description" placeholder="项目描述" ng-model="project.description" ng-maxlength="500"></textarea>
+        <div ng-show="mainForm.description.$error.maxlength"
+                    class="alert alert-danger" role="alert">最大长度不能超过500</div>
+      </div>
+
+      <div class="form-group">
+        <label>项目显示颜色:</label>
+        <select class="colorselector">
+          <option ng-repeat="theme in themes" data-color="{{theme.color}}" ng-value="$index"></option>
+        </select>
+        <input type="hidden" id="colorId" name="colorId" ng-model="project.colorId"/>
+      </div>
+
+      <div class="form-group" id="add-members">
+        <label><i class="fa fa-plus-circle"></i>
+          添加项目成员</label>
+        <memberselector memberselector-user-list="userList" memberselector-option="msoption" memberselector-return="userSelected" memberselector-list="list"></memberselector>
+      </div>
+      <div class="form-group" id="emails">
+        <label><i class="fa fa-plus-circle"></i> 通过邮箱添加</label>
+
+        <div ng-repeat="emailAddr in emailAddrs track by $index">
+          <ng-form name="itemForm">
+
+            <div class="input-group add-by-email" ng-class="{'has-error': itemForm.email.$invalid}">
+          <span class="input-group-addon">
+            <i class="fa fa-envelope"></i>
+          </span>
+              <input type="email" data-provide="typeahead" autocomplete="off" ng-model="emailAddr.email" class="form-control email" placeholder="邮箱" />
+          <span class="input-group-btn">
+            <button class="btn btn-warning" type="button" ng-click="emailAddrs.splice($index,1)">移除</button>
+          </span>
+
+            </div>
+          </ng-form>
+        </div>
+        <a id="add-email" href="javascript:;" class="pull-right" ng-click="addEmail()">
+          <i class="fa fa-plus-circle"></i>
+          添加更多
+        </a>
+        <div class="clearfix"></div>
+
+      </div>
+
+      <button type="submit" id="save" ng-disabled="mainForm.$invalid" class="btn btn-primary form-result" ng-click="updateObject()">保存</button>
+      <a id="cancel" class="btn btn-default form-result" ui-sref="company.projects">取消</a>
+    </form>
+  </div>
+</div>
+</div>
+
+</body>
+</html>

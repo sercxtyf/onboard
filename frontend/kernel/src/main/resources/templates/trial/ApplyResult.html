@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="${headTemplateName} :: headTag('申请试用')"></head>
+<body id="trial">
+
+
+<div id="trialBody" class="container">
+  <div th:replace="fragments/Header :: header"></div>
+
+  <div class="trial-form">
+    <h2>感谢您关注Onboard</h2>
+    <p>我们会即时与您联系。如有任何问题，请<a href="mailto:admin@onboard.cn">联系我们</a></p>
+  </div>
+</div>
+</body>
+</html>

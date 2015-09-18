@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+  <div th:fragment="statisticsTodo" id="todo" class="stats-tab-content fade active in">
+
+    <div class="graph-filter">
+      <!-- start date -->
+      <div class="input-group ob-date">
+          <input type="text" class="form-control date" datepicker-popup="yyyy-MM-dd" ng-click="openDTPicker($event, 1)" ng-model="start" is-open="started" close-text="关闭" clear-text="不指定" current-text="今天" readonly="" title="选择开始日期"/>
+      </div>
+      –&nbsp;
+      <!-- end date -->
+      <div class="input-group ob-date">
+          <input type="text" class="form-control date" datepicker-popup="yyyy-MM-dd" ng-click="openDTPicker($event, 2)" ng-model="end" is-open="ended" close-text="关闭" clear-text="不指定" current-text="今天" readonly="" title="选择结束日期"/>
+      </div>  
+
+      <!-- 按截止日期回溯 -->
+      <div class="btn-group time-span">
+        <button class="btn btn-default dropdown-toggle stepback-btn" data-toggle="dropdown" title="按截止日期回溯"><span class="fa fa-reply"></span></button>
+        <ul class="dropdown-menu" role="menu">
+          <li role="menuitem" ><a href="#" ng-click="selectTimeSpan(1)">一周</a></li>
+          <li role="menuitem" ><a href="#" ng-click="selectTimeSpan(2)">两周</a></li>
+          <li role="menuitem" ><a href="#" ng-click="selectTimeSpan(3)">一个月</a></li>
+          <li role="menuitem" ><a href="#" ng-click="selectTimeSpan(4)">一季度</a></li>
+          <li role="menuitem" ><a href="#" ng-click="selectTimeSpan(5)">半年</a></li>
+        </ul>
+      </div>   
+
+      <!-- refresh btn -->
+      <button class="btn btn-default refresh-btn" type="button" id="refresh" ng-disabled="busy" ng-click="refresh()" title="按新日期区间刷新图表">
+        <i class="fa fa-refresh"></i>
+      </button>
+
+      <p class="info">
+        {{graphInfo()}}
+        <!-- 解释一下该图表 -->
+      </p>
+    </div>
+
+    <div >
+      <div class="chart-container">
+        <!-- graph heading -->
+        <div class="graph-heading">
+
+          <!-- choose users menu btn -->
+          <div class="dropdown userMenu pull-right" ng-include="'user-menu.html'"></div>
+
+          <div class="graph-title">
+            <img ng-src="{{ user.avatarUrl }}" class="img-circle"></img>
+            <h4>
+              {{ user.name }}
+            </h4>
+          </div>
+
+        </div>
+
+        <div id="todoChart" class="todo-chart"></div>
+        <p> </p>
+        <p> </p>
+        <!-- pie chart -->
+        <div id="pie-todo" class="svg-chart" ng-show="hasData" style="height: 600px;"></div>
+
+      </div>
+    </div>
+    
+    <div class="graph-loading-mask" ng-show="busy"></div>
+  </div>
+
+</body>
+
+</html>

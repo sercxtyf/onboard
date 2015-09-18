@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/osgi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                                 http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+  <reference id="companyPrivilegeMapper" interface="com.onboard.domain.mapper.CompanyPrivilegeMapper" />
+  <reference id="projectPrivilegeMapper" interface="com.onboard.domain.mapper.ProjectPrivilegeMapper" />
+
+  <reference id="sessionService" interface="com.onboard.service.web.SessionService" />
+  <reference id="userService" interface="com.onboard.service.account.UserService" />
+  <reference id="companyService" interface="com.onboard.service.account.CompanyService" />
+  <reference id="projectService" interface="com.onboard.service.collaboration.ProjectService" />
+  <reference id="identifiableManager" interface="com.onboard.service.common.identifiable.IdentifiableManager" />
+
+  <service id="companyPrivilegeService" interface="com.onboard.service.security.CompanyPrivilegeService"
+    ref="companyPrivilegeServiceBean" />
+  <service id="projectPrivilegeService" interface="com.onboard.service.security.ProjectPrivilegeService"
+    ref="projectPrivilegeServiceBean" />
+  <service id="roleService" interface="com.onboard.service.security.RoleService"
+    ref="roleServiceBean" />
+  <!-- interceptors -->
+  <service id="attachmentCreatorRequired" interface="com.onboard.service.security.interceptors.AttachmentCreatorRequired"
+    ref="attachmentCreatorRequiredBean" />
+  
+  <service id="commentCreatorRequired" interface="com.onboard.service.security.interceptors.CommentCreatorRequired"
+    ref="commentCreatorRequiredBean" />
+  
+  <service id="companyAdminInSpecificProjectRequired" interface="com.onboard.service.security.interceptors.CompanyAdminInSpecificProjectRequired"
+    ref="companyAdminInSpecificProjectRequiredBean" />
+  
+  <service id="companyAdminRequired" interface="com.onboard.service.security.interceptors.CompanyAdminRequired"
+    ref="companyAdminRequiredBean" />
+    
+  <service id="companyChecking" interface="com.onboard.service.security.interceptors.CompanyChecking"
+    ref="companyCheckingBean" />
+    
+  <service id="companyMemberRequired" interface="com.onboard.service.security.interceptors.CompanyMemberRequired"
+    ref="companyMemberRequiredBean" />
+    
+  <service id="companyOwnerRequired" interface="com.onboard.service.security.interceptors.CompanyOwnerRequired"
+    ref="companyOwnerRequiredBean" />
+    
+  <service id="discussionCreatorRequired" interface="com.onboard.service.security.interceptors.DiscussionCreatorRequired"
+    ref="discussionCreatorRequiredBean" />
+    
+  <service id="eventCreatorRequired" interface="com.onboard.service.security.interceptors.EventCreatorRequired"
+    ref="eventCreatorRequiredBean" />
+    
+  <service id="invitationPermissionRequired" interface="com.onboard.service.security.interceptors.InvitationPermissionRequired"
+    ref="invitationPermissionRequiredBean" />
+    
+  <service id="loginRequired" interface="com.onboard.service.security.interceptors.LoginRequired"
+    ref="loginRequiredBean" />
+    
+  <service id="managerRequired" interface="com.onboard.service.security.interceptors.ManagerRequired"
+    ref="managerRequiredBean" />
+    
+  <service id="projectAdminRequired" interface="com.onboard.service.security.interceptors.ProjectAdminRequired"
+    ref="projectAdminRequiredBean" />
+    
+  <service id="projectChecking" interface="com.onboard.service.security.interceptors.ProjectChecking"
+    ref="projectCheckingBean" />
+    
+  <service id="projectCreationPrivilegeRequired" interface="com.onboard.service.security.interceptors.ProjectCreationPrivilegeRequired"
+    ref="projectCreationPrivilegeRequiredBean" />
+    
+  <service id="projectMemberRequired" interface="com.onboard.service.security.interceptors.ProjectMemberRequired"
+    ref="projectMemberRequiredBean" />
+    
+  <service id="projectNotArchivedRequired" interface="com.onboard.service.security.interceptors.ProjectNotArchivedRequired"
+    ref="projectNotArchivedRequiredBean" />
+    
+  <service id="uploadCreatorRequired" interface="com.onboard.service.security.interceptors.UploadCreatorRequired"
+    ref="uploadCreatorRequiredBean" />
+    
+  <service id="userChecking" interface="com.onboard.service.security.interceptors.UserChecking"
+    ref="userCheckingBean" />
+  
+</beans:beans>

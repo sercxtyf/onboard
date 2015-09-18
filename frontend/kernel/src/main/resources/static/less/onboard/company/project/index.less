@@ -1,0 +1,48 @@
+// overall css for project work panel
+// imported by company/company
+
+.wrap-all {
+  @nav-height: 50px;
+  position: absolute;
+  top: @nav-height;
+  bottom: 0;
+  width: 100%;
+
+  @import "common/index";
+
+  .content-wrapper {
+
+    #todolists {
+      @import "todo/index.less";
+    }
+    #iterations {
+      @import "iteration/index";
+    }
+    #repository {
+      @import "repository/index";
+    }
+    #uploads {
+      @import "uploads/index";
+    }
+    #discussions {
+      @import "discussion/index";
+    }
+    #documents {
+      @import "documents/documents";
+    }
+    #bugs {
+      @import "bugs/bugs";
+    }
+    #stories {
+      @import "story/index";
+    }
+    #versions {
+      @import "version/index";
+    }
+    #statistics, #iterations {
+      @import "statistics.less";
+    }
+    @import "ci/index";
+
+  }
+}
