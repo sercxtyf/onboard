@@ -1,4 +1,4 @@
-### Onboard 敏捷软件开发协同工具
+﻿### Onboard 敏捷软件开发协同工具
 
 Onboard是用于软件开发团队在开发过程中对生产过程进行协同的工具，其开源版本包含如下基本功能：
 
@@ -38,8 +38,8 @@ Path里需要添加Mybatis Migration的路径，如“%MIGRATION_HOME%\bin”
 #### 搭建Onboard开发环境
 
 1. 使用git克隆源代码 git clone https://github.com/sercxtyf/onboard.git
-1. 将../database/environments/ddevelopment.properties.sample重命名为development.properties，并修改此数据库相关配置，此为数据库的基本设置
-1. 将../frontend/kernel/src/main/resources/application.examples.properties重命名为application.properties，此为前端的基本设置
+1. 将../database/environments/development.properties.sample重命名为development.properties，并修改此数据库相关配置，此为数据库的基本设置
+1. 将../frontend/kernel/src/main/resources/application.examples重命名为application.properties，此为前端的基本设置
 1. 将../onboard.properties.sample重命名为onboard.properties，并复制到 Virgo安装目录/repository/usr中，此为后端的基本设置
 1. git 克隆相关依赖jar包到本地 git clone https://github.com/sercxtyf/onboardDependency.git
 1. 将Maven依赖的第三方库文件复制到 {user.home}/.m2/repository 目录
