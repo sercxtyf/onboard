@@ -42,9 +42,6 @@ public class LoginController {
     @Value("${site.domain}")
     private String domain;
 
-    @Value("${data.github.state}")
-    private String githubState;
-
     @Autowired
     private AccountService accountService;
 
@@ -63,17 +60,8 @@ public class LoginController {
         user.setPassword(password);
 
         User returnedUser = null;
-        // 绑定已有的账户
-        int thirdpartUserId = sessionService.getCurrentThirdpartUserId();
-        if (thirdpartUserId != -1) {
-            returnedUser = accountService.authenticateUserAndBandTheThirdpardUser(user, thirdpartUserId);
-            if (returnedUser == null) {
-                model.addAttribute("loginError", true);
-                return BIND_EMAIL_SIGNUP_VIEM;
-            }
-        } else {
-            returnedUser = accountService.authenticateUser(user);
-        }
+        
+        returnedUser = accountService.authenticateUser(user);
 
         if (returnedUser == null) {
             model.addAttribute("loginError", true);

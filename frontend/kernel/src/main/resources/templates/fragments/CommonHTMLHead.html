@@ -192,8 +192,8 @@
   <script src="/static/js/ng-modules/data/web-socket-service.js"></script>
   <script src="/static/js/ng-modules/data/comment-service.js"></script>
   <script src="/static/js/ng-modules/data/comment-websocket-service.js"></script>
-  <script src="/static/js/ng-modules/data/document-service.js"></script>
-  <script src="/static/js/ng-modules/data/document-websocket-service.js"></script>
+  <!--  <script src="/static/js/ng-modules/data/document-service.js"></script> -->
+  <!-- <script src="/static/js/ng-modules/data/document-websocket-service.js"></script> -->
   <script src="/static/js/ng-modules/data/data-proxy-factory.js"></script>
   <script src="/static/js/ng-modules/data/uploads-service.js"></script>
   <script src="/static/js/ng-modules/data/uploads-websocket-service.js"></script>
@@ -313,10 +313,7 @@
   <!-- websocket ng module -->
   <script src="/static/js/ng-modules/websocket/index.js"></script>
   <script src="/static/js/ng-modules/websocket/websocket-service.js"></script>
-  
-  <!-- plugin less -->
-  <script th:if="${not #lists.isEmpty(jsPluginFiles)}" th:each="jsPluginFile : ${jsPluginFiles}" th:src="${jsPluginFile}" ></script>
-  
+    
   <link rel="stylesheet" th:if="${not #lists.isEmpty(lessPluginFiles)}" th:each="lessPluginFile : ${ lessPluginFiles }" th:href="${lessPluginFile}"/>
   <!-- endbuild -->
   

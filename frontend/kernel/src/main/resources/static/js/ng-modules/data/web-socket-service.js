@@ -4,9 +4,9 @@
 
 angular.module('data')
     .service('webSocketService', ['$rootScope', 'todoWebsocketService', 'todolistWebsocketService', 'commentWebSocketService',
-        'documentWebSocketService', 'discussionWebSocketService', 'uploadsWebsocketService', 'bugWebsocketService','storyWebsocketService',
+        'discussionWebSocketService', 'uploadsWebsocketService', 'bugWebsocketService','storyWebsocketService',
         'iterationWebsocketService',
-        function($rootScope, todoWebsocketService, todolistWebsocketService, commentWebSocketService, documentWebSocketService,
+        function($rootScope, todoWebsocketService, todolistWebsocketService, commentWebSocketService,
                  discussionWebSocketService, uploadsWebsocketService, bugWebsocketService,storyWebsocketService, iterationWebsocketService) {
 
             // service mapping，映射 attachType 到数据 service
@@ -14,7 +14,7 @@ angular.module('data')
                 'todo'      : todoWebsocketService,
                 'todolist'  : todolistWebsocketService,
                 'comment'   : commentWebSocketService,
-                'document'  : documentWebSocketService,
+               // 'document'  : documentWebSocketService,
                 'discussion': discussionWebSocketService,
                 'upload'    : uploadsWebsocketService,
                 'bug'       : bugWebsocketService,
